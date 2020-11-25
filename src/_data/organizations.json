@@ -1,0 +1,21 @@
+[
+	{
+		"_id": "5fb3014737353926f43a72c0",
+		"name": "Planters Mar",
+		"political_division": "Comunidad",
+		"address": "123 Mills Lane Madison WI 53704",
+		"email": "123test@gmail.com",
+		"telephone": "123-456-7890",
+		"social": {
+			"facebook": "123tester"
+		}
+	},
+	{
+		"_id": "5fb2e7285c7bcf254f251f03",
+		"name": "Farmers Commune",
+		"political_division": "Comunidad",
+		"address": "432 Bryerson Lane Madison WI 53704",
+		"email": "123tester@gmail.com",
+		"telephone": "123-456-7890"
+	}
+]
