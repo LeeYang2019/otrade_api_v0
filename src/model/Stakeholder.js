@@ -49,10 +49,10 @@ const StakeholderSchema = new mongoose.Schema(
 				type: String,
 			},
 		},
-		project: {
-			type: mongoose.Schema.ObjectId,
-			ref: 'Project',
-		},
+		// project: {
+		// 	type: mongoose.Schema.ObjectId,
+		// 	ref: 'Project',
+		// },
 	},
 	{
 		toJSON: { virtuals: true },
@@ -69,12 +69,12 @@ StakeholderSchema.pre('remove', async function (next) {
 });
 
 // populate stakeholders with activities, comments, organization
-StakeholderSchema.virtual('comments', {
-	ref: 'Comment',
-	localField: '_id',
-	foreignField: 'stakeholder',
-	justOne: false,
-});
+// StakeholderSchema.virtual('comments', {
+// 	ref: 'Comment',
+// 	localField: '_id',
+// 	foreignField: 'stakeholder',
+// 	justOne: false,
+// });
 
 //export schema as model
 module.exports = mongoose.model('Stakeholder', StakeholderSchema);

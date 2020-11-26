@@ -28,12 +28,12 @@ ProjectSchema.pre('remove', async function (next) {
 });
 
 // include stakeholders as a field in project
-ProjectSchema.virtual('stakeholders', {
-	ref: 'Stakeholder',
-	localField: '_id',
-	foreignField: 'project',
-	justOne: false,
-});
+// ProjectSchema.virtual('stakeholders', {
+// 	ref: 'Stakeholder',
+// 	localField: '_id',
+// 	foreignField: 'project',
+// 	justOne: false,
+// });
 
 // Exports
 module.exports = mongoose.model('Project', ProjectSchema);

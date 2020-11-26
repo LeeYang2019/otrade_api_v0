@@ -15,9 +15,7 @@ const comments = require('./routes/comments');
 // const auth;
 
 //load env vars
-// dotenv.config({ path: './config/config.env' });
 dotenv.config();
-// dotenv.config({ path: __dirname + 'src/config/config.env' });
 
 //connect to db
 connectDB();

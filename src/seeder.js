@@ -2,22 +2,20 @@ const fs = require('fs');
 const mongoose = require('mongoose');
 const colors = require('colors');
 const dotenv = require('dotenv');
+const connectDB = require('./config/db');
 
 // load environment variables
-dotenv.config({ path: './config/config.env' });
+dotenv.config();
 
 // load models
 const Project = require('./model/Project');
 const User = require('./model/User');
 const Organization = require('./model/Organization');
 
+console.log(process.env.MONGO_URI);
+
 // connect to db
-mongoose.connect(process.env.MONGO_URI, {
-	useNewUrlParser: true,
-	useCreateIndex: true,
-	useFindAndModify: false,
-	useUnifiedTopology: true,
-});
+connectDB();
 
 // read json files
 const users = JSON.parse(
