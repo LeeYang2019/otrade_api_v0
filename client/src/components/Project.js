@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Project = (props) => {
-	return <div>{console.log(props.projectName)}</div>;
+const Project = ({ project }) => {
+	return <div>{project.projectName}</div>;
 };
 
 export default Project;

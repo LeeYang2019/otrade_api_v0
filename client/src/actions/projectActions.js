@@ -8,8 +8,9 @@ import {
 export const listProjects = () => async (dispatch) => {
 	try {
 		dispatch({ type: PROJECT_LIST_REQUEST });
-		const { data } = await axios.get('/api/v1/projects');
-		console.log(data);
+		const {
+			data: { data },
+		} = await axios.get('/api/v1/projects');
 		dispatch({ type: PROJECT_LIST_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({

@@ -12,9 +12,11 @@ const App = () => {
 		<Router>
 			<Header />
 			<main className="py-3">
-				<Route path="/login" component={Login} exact />
-				<Route path="/" component={HomeScreen} exact />
-				<Route path="/logout" component={Logout} exact />
+				<Container>
+					<Route path="/login" component={Login} exact />
+					<Route path="/" component={HomeScreen} exact />
+					<Route path="/logout" component={Logout} exact />
+				</Container>
 			</main>
 			<Footer />
 		</Router>

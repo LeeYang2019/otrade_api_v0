@@ -10,14 +10,12 @@ const HomeScreen = () => {
 	const dispatch = useDispatch();
 
 	const projectList = useSelector((state) => state.projectList);
-	const {
-		projects: { data },
-	} = projectList;
+	const { projects } = projectList;
 
 	useEffect(() => {
 		dispatch(listProjects());
 	}, [dispatch]);
-
+	console.log(projects);
 	return (
 		<Row>
 			<Col md={3}>User</Col>
@@ -26,7 +24,11 @@ const HomeScreen = () => {
 					<tr>
 						<th>Name</th>
 					</tr>
-					<tbody>{console.log('something')}</tbody>
+					<tbody>
+						{projects.map((project) => (
+							<Project project={project} id={project._id} />
+						))}
+					</tbody>
 				</Table>
 			</Col>
 		</Row>

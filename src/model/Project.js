@@ -14,7 +14,7 @@ const ProjectSchema = new mongoose.Schema(
 		coordinates: {
 			type: String,
 		},
-		surveyors: [UserSchema],
+		// surveyors: [UserSchema],
 	}
 	// {
 	// 	timestamps: true,
