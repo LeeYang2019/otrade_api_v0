@@ -26,7 +26,7 @@ const HomeScreen = () => {
 					<tr>
 						<th>Name</th>
 					</tr>
-					<tbody>something here</tbody>
+					<tbody>{console.log('something')}</tbody>
 				</Table>
 			</Col>
 		</Row>

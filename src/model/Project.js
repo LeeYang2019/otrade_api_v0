@@ -14,11 +14,11 @@ const ProjectSchema = new mongoose.Schema(
 		coordinates: {
 			type: String,
 		},
-	},
-	{
-		toJSON: { virtuals: true },
-		toObject: { virtuals: true },
+		surveyors: [UserSchema],
 	}
+	// {
+	// 	timestamps: true,
+	// }
 );
 
 // delete all stakeholders before deleting the project
