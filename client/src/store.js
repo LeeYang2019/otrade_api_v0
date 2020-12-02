@@ -4,10 +4,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 // import reducers
 import { projectListReducer } from './reducers/projectReducers';
+import { userListReducer } from './reducers/userReducer';
 
 // useSelector calls
 const reducer = combineReducers({
 	projectList: projectListReducer,
+	userList: userListReducer,
 });
 
 // localStorages
