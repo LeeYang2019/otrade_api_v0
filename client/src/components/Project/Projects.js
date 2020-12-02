@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table } from 'react-bootstrap';
-import { listProjects } from '../actions/projectActions';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
-import Project from '../components/Project';
+import { listProjects } from '../../actions/projectActions';
+import Loader from '../../components/Loader';
+import Message from '../../components/Message';
+import Project from '../Project/Project';
 
 const Projects = () => {
 	const dispatch = useDispatch();
