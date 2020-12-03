@@ -4,18 +4,24 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 // import reducers
 import { projectListReducer } from './reducers/projectReducers';
-import { userListReducer } from './reducers/userReducer';
+import { userListReducer, userLoginReducer } from './reducers/userReducer';
 
 // useSelector calls
 const reducer = combineReducers({
 	projectList: projectListReducer,
 	userList: userListReducer,
+	userLogin: userLoginReducer,
 });
 
 // localStorages
+const uesrInfoFromStorage = localStorage.getItem('userInfo')
+	? JSON.parse(localStorage.getItem('userInfo'))
+	: null;
 
 // initialState
-const initialState = {};
+const initialState = {
+	userLogin: { userInfo: uesrInfoFromStorage },
+};
 
 const middleware = [thunk];
 
