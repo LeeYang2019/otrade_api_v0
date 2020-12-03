@@ -1,5 +1,5 @@
 const ErrorResponse = require('../utils/errorResponse');
-const asyncHandler = require('../middleware/async');
+const asyncHandler = require('express-async-handler');
 
 //import project model
 const User = require('../model/User');
@@ -24,6 +24,15 @@ exports.getUser = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/admin/users
 // @access  Private
 exports.addUser = asyncHandler(async (req, res, next) => {
+	const { email } = req.body;
+
+	const userExists = await User.findOne({ email });
+
+	if (userExists) {
+		res.status(400);
+		throw new Error('User already exists');
+	}
+
 	const user = await User.create(req.body);
 	res.status(200).json({ success: true, data: user });
 });

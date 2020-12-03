@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
 const connectDB = require('./config/db');
+const { notFound, errorHandler } = require('./middleware/error');
 
 //route files
 const projects = require('./routes/projects');
@@ -38,6 +39,8 @@ app.use('/api/v1/organizations', organizations);
 app.use('/api/v1/comments', comments);
 // app.use('/api/v1/activities', activities);
 // app.use('/api/v1/auth', auth);
+
+app.use(notFound, errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
