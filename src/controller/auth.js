@@ -61,7 +61,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
 exports.getUserProfile = asyncHandler(async (req, res) => {
 	//auth middleware passes user here
 	const user = await User.findById(req.user._id);
-
+	console.log(user);
 	//matches enteredPassword with db user password
 	if (user) {
 		res.json({

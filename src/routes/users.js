@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { protect, isAdmin } = require('../middleware/auth');
 
 //import user controller methods
 const {
@@ -17,7 +18,10 @@ const {
 } = require('../controller/auth');
 
 router.route('/login').post(authUser);
-router.route('/profile').get(getUserProfile).put(updateUserProfile);
+router
+	.route('/profile')
+	.get(protect, getUserProfile)
+	.put(protect, updateUserProfile);
 
 //define general user route
 router.route('/').get(getUsers).post(registerUser);

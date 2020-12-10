@@ -20,18 +20,12 @@ const ProfileScreen = ({ location, history }) => {
 	const userDetails = useSelector((state) => state.userDetails);
 	const { loading, error, user } = userDetails;
 
-	console.log(user);
-
 	//call the userLogin reducer in the store
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
-	console.log(userInfo);
-
 	const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
 	const { success } = userUpdateProfile;
-
-	console.log(success);
 
 	useEffect(() => {
 		if (!userInfo) {
@@ -40,10 +34,8 @@ const ProfileScreen = ({ location, history }) => {
 			//if user.name does not exist, fetch data
 			if (!user.firstName) {
 				dispatch(getUserDetails('profile'));
-				console.log('fetching user details');
 			} else {
 				//after fetching, set name & email
-				console.log('setting name and email');
 				setFirstName(user.firstName);
 				setLastName(user.email);
 			}

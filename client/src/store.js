@@ -3,7 +3,11 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 // import reducers
-import { projectListReducer } from './reducers/projectReducers';
+import {
+	projectListReducer,
+	projectDetailsReducer,
+	projectUpdateReducer,
+} from './reducers/projectReducers';
 import {
 	userListReducer,
 	userLoginReducer,
@@ -13,11 +17,13 @@ import {
 
 // useSelector calls
 const reducer = combineReducers({
-	projectList: projectListReducer,
 	userList: userListReducer,
 	userLogin: userLoginReducer,
 	userDetails: userDetailsReducer,
 	userUpdateProfile: userUpdateProfileReducer,
+	projectList: projectListReducer,
+	projectDetails: projectDetailsReducer,
+	projectUpdate: projectUpdateReducer,
 });
 
 // localStorages

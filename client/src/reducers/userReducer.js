@@ -65,6 +65,7 @@ export const userUpdateProfileReducer = (state = { user: {} }, action) => {
 
 //returns a list of users
 export const userListReducer = (state = { users: [] }, action) => {
+	console.log(state);
 	switch (action.type) {
 		case USER_LIST_REQUEST:
 			return { loading: true, users: [] };

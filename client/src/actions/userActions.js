@@ -16,6 +16,7 @@ import {
 	USER_UPDATE_PROFILE_RESET,
 } from '../constants/userConstants';
 
+//logs in the user
 export const login = (email, password) => async (dispatch) => {
 	console.log('inside action');
 	try {
@@ -52,6 +53,14 @@ export const login = (email, password) => async (dispatch) => {
 	}
 };
 
+//logs out the user
+export const logout = () => (dispatch) => {
+	//remove userInfo from storage
+	localStorage.removeItem('userInfo');
+	//dispatch user logout reducer case
+	dispatch({ type: USER_LOGOUT });
+};
+
 export const getUserDetails = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -62,8 +71,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 		const {
 			userLogin: { userInfo },
 		} = getState();
-
-		console.log('actions a');
 
 		//define headers
 		const config = {
@@ -76,6 +83,8 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 		console.log('actions b');
 		//pass name, email, password, and config to api
 		const { data } = await axios.get(`/api/v1/users/${id}`, config);
+
+		console.log('actions c');
 
 		//dispatch
 		dispatch({

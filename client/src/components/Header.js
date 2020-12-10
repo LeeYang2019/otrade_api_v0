@@ -2,9 +2,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
-// import { logout } from '../actions/userActions';
+import { logout } from '../actions/userActions';
 
-const Header = () => {
+const Header = ({ history }) => {
 	const dispatch = useDispatch();
 
 	const userLogin = useSelector((state) => state.userLogin);
@@ -13,7 +13,8 @@ const Header = () => {
 	console.log(userInfo);
 
 	const logoutHandler = () => {
-		// dispatch(logout());
+		dispatch(logout());
+		history.push('/login');
 	};
 
 	return (
