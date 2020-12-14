@@ -4,7 +4,7 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
-		"server": "NODE_ENV=production nodemon src/index",
+		"server": "nodemon src/index",
 		"client": "yarn --cwd client start",
 		"dev": "concurrently \"yarn client\" \"yarn server\""
 	},

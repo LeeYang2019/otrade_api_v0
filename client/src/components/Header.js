@@ -10,11 +10,8 @@ const Header = ({ history }) => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
-	console.log(userInfo);
-
 	const logoutHandler = () => {
 		dispatch(logout());
-		history.push('/login');
 	};
 
 	return (
@@ -29,7 +26,7 @@ const Header = ({ history }) => {
 						<Nav className="ml-auto">
 							{userInfo ? (
 								<NavDropdown title={userInfo.firstName} id="username">
-									<LinkContainer to="/profile">
+									<LinkContainer to={`/profile`}>
 										<NavDropdown.Item>Profile</NavDropdown.Item>
 									</LinkContainer>
 									<NavDropdown.Item onClick={logoutHandler}>

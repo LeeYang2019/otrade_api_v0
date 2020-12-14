@@ -56,16 +56,9 @@ const ListUserScreen = ({ history }) => {
 								<td>
 									<a href={`mailto:${user.email}`}>{user.email}</a>{' '}
 								</td>
+								<td>{user.role}</td>
 								<td>
-									{/* {user.role === 'admin' ? (
-										<i className="fas fa-check" style={{ color: 'green' }}></i>
-									) : (
-										<i className="fas fa-times" style={{ color: 'red' }}></i>
-									)} */}{' '}
-									{user.role}
-								</td>
-								<td>
-									<LinkContainer to={`/admin/user/${user._id}/edit`}>
+									<LinkContainer to={`/profile`}>
 										<Button variant="light" className="btn-sm">
 											<i className="fas fa-edit"></i>
 										</Button>

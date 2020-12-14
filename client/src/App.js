@@ -4,12 +4,13 @@ import { Container } from 'react-bootstrap';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import LoginScreen from './screens/LoginScreen';
-import ProfileScreen from './screens/ProfileScreen';
+// import ProfileScreen from './screens/ProfileScreen';
 import LogoutScreen from './screens/LogoutScreen';
 import HomeScreen from './screens/HomeScreen';
 import ListUserScreen from './screens/ListUserScreen';
 import ListProjectScreen from './screens/ListProjectScreen';
 import ProjectEditScreen from './screens/ProjectEditScreen';
+import UserProfileScreen from './screens/UserProfileScreen';
 
 const App = () => {
 	return (
@@ -18,7 +19,6 @@ const App = () => {
 			<main className="py-3">
 				<Container>
 					<Route exact path="/login" component={LoginScreen} />
-					{/* <Route path="/profile" component={ProfileScreen} exact /> */}
 					<Route exact path="/" component={HomeScreen} />
 					<Route exact path="/admin/userlist" component={ListUserScreen} />
 					<Route exact path="/admin/projects" component={ListProjectScreen} />
@@ -27,6 +27,7 @@ const App = () => {
 						path="/admin/project/:id/edit"
 						component={ProjectEditScreen}
 					/>
+					<Route exact path="/profile" component={UserProfileScreen}></Route>
 					<Route exact path="/logout" component={LogoutScreen} />
 				</Container>
 			</main>

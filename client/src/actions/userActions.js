@@ -61,7 +61,9 @@ export const logout = () => (dispatch) => {
 	dispatch({ type: USER_LOGOUT });
 };
 
+//gets the user details
 export const getUserDetails = (id) => async (dispatch, getState) => {
+	console.log('insider user details');
 	try {
 		dispatch({
 			type: USER_DETAILS_REQUEST,
@@ -72,6 +74,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 			userLogin: { userInfo },
 		} = getState();
 
+		console.log(userInfo);
 		//define headers
 		const config = {
 			headers: {

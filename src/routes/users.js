@@ -4,30 +4,32 @@ const { protect, isAdmin } = require('../middleware/auth');
 
 //import user controller methods
 const {
+	authMe,
+	getMyUserProfile,
+	updateMyUserProfile,
 	getUsers,
 	getUser,
+	registerUser,
 	updateUser,
 	deleteUser,
 } = require('../controller/users');
 
-const {
-	authUser,
-	getUserProfile,
-	registerUser,
-	updateUserProfile,
-} = require('../controller/auth');
+//define general user route
+router.route('/').get(protect, isAdmin, getUsers).post(registerUser);
+router.route('/login').post(authMe);
 
-router.route('/login').post(authUser);
+//protected profile routes
 router
 	.route('/profile')
-	.get(protect, getUserProfile)
-	.put(protect, updateUserProfile);
+	.get(protect, getMyUserProfile)
+	.put(protect, updateMyUserProfile);
 
-//define general user route
-router.route('/').get(getUsers).post(registerUser);
-
-//define specific user route
-router.route('/:id').get(getUser).put(updateUser).delete(deleteUser);
+//admin protected routes
+router
+	.route('/:id')
+	.get(protect, isAdmin, getUser)
+	.put(protect, isAdmin, updateUser)
+	.delete(protect, isAdmin, deleteUser);
 
 //export router
 module.exports = router;
