@@ -91,15 +91,15 @@ exports.updateMyUserProfile = asyncHandler(async (req, res) => {
 // @desc    Get all users
 // @route   GET /api/v1/users
 // @access  Private/admin
-exports.getUsers = asyncHandler(async (req, res, next) => {
-	const users = await User.find();
+exports.getUsers = asyncHandler(async (req, res) => {
+	const users = await User.find().select('-password');
 	res.status(200).json({ success: true, data: users });
 });
 
 // @desc    Get a user
 // @route   GET /api/v1/users/:id
 // @access  Private/admin
-exports.getUser = asyncHandler(async (req, res, next) => {
+exports.getUser = asyncHandler(async (req, res) => {
 	const user = await User.findById(req.params.id);
 	res.status(200).json({ success: true, data: user });
 });
@@ -137,7 +137,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
 // @desc    Update a user
 // @route   PUT /api/v1/admin/users/:id
 // @access  Private/admin
-exports.updateUser = asyncHandler(async (req, res, next) => {
+exports.updateUser = asyncHandler(async (req, res) => {
 	let user = await User.findById(req.params.id);
 	user = await User.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,
@@ -149,7 +149,7 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
 // @desc    Delete a user
 // @route   DELETE /api/v1/users/:id
 // @access  Private/admin
-exports.deleteUser = asyncHandler(async (req, res, next) => {
+exports.deleteUser = asyncHandler(async (req, res) => {
 	await User.findByIdAndDelete(req.params.id);
 	res.status(200).json({ success: true, data: {} });
 });

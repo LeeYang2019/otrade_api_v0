@@ -11,10 +11,21 @@ import {
 	PROJECT_UPDATE_FAIL,
 } from '../constants/projectConstants';
 
-export const listProjects = () => async (dispatch) => {
+export const listProjects = () => async (dispatch, getState) => {
 	try {
 		dispatch({ type: PROJECT_LIST_REQUEST });
-		const { data } = await axios.get('/api/v1/projects');
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const { data } = await axios.get('/api/v1/projects', config);
 		dispatch({ type: PROJECT_LIST_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
@@ -33,8 +44,6 @@ export const listProjectDetails = (id) => async (dispatch) => {
 		dispatch({ type: PROJECT_DETAILS_REQUEST });
 		const { data } = await axios.get(`/api/v1/projects/${id}`);
 
-		console.log(data);
-
 		dispatch({ type: PROJECT_DETAILS_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
@@ -52,19 +61,20 @@ export const updateProject = (project) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: PROJECT_UPDATE_REQUEST });
 
-		console.log(getState());
-		console.log(project);
+		const {
+			userLogin: { userInfo },
+		} = getState();
 
 		const config = {
-			// headers: {
-			// 	'Content-Type': 'application/json',
-			// 	Authorization: `Bearer ${userInfo.token}`,
-			// }
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${userInfo.token}`,
+			},
 		};
 
 		//pass id, project, and config file to api
 		const { data } = await axios.put(
-			`/api/projects/${project._id}`,
+			`/api/v1/projects/${project._id}`,
 			project,
 			config
 		);

@@ -35,16 +35,12 @@ export const userLoginReducer = (state = {}, action) => {
 export const userDetailsReducer = (state = { user: {} }, action) => {
 	switch (action.type) {
 		case USER_DETAILS_REQUEST:
-			console.log('reducer request');
 			return { ...state, loading: true };
 		case USER_DETAILS_SUCCESS:
-			console.log('reducer success');
 			return { loading: false, user: action.payload };
 		case USER_DETAILS_FAIL:
-			console.log('reducer fail');
 			return { loading: false, error: action.payload };
 		default:
-			console.log('reducer default');
 			return state;
 	}
 };
@@ -65,7 +61,6 @@ export const userUpdateProfileReducer = (state = { user: {} }, action) => {
 
 //returns a list of users
 export const userListReducer = (state = { users: [] }, action) => {
-	console.log(state);
 	switch (action.type) {
 		case USER_LIST_REQUEST:
 			return { loading: true, users: [] };

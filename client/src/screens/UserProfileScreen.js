@@ -31,7 +31,7 @@ const UserProfileScreen = ({ location, history }) => {
 			dispatch(getUserDetails('profile'));
 			// }
 		}
-	}, [dispatch, history, userInfo, user]);
+	}, []);
 
 	return <div>User Profile</div>;
 };

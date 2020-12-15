@@ -6,6 +6,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { listProjectDetails, updateProject } from '../actions/projectActions';
+import { PROJECT_UPDATE_RESET } from '../constants/projectConstants';
 
 const ProjectEditScreen = ({ match, history }) => {
 	const projectId = match.params.id;
@@ -22,20 +23,42 @@ const ProjectEditScreen = ({ match, history }) => {
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { loading, error, project } = projectDetails;
 
+	console.log('projectName is ', project.projectName);
+
 	//get projectUpdate from reducer
 	const projectUpdate = useSelector((state) => state.projectUpdate);
+	const {
+		success: successUpdate,
+		loading: loadingUpdate,
+		error: errorUpdate,
+	} = projectUpdate;
+
+	console.log('projectName: ', project.projectName);
+	console.log('project._id: ', project._id);
+	console.log('projectId: ', projectId);
+	console.log('project._id === projectId', project._id === projectId);
 
 	//useEffect
 	useEffect(() => {
-		//if name is empty or ids do not match
-		if (!project.projectName || projectId !== project._id) {
-			dispatch(listProjectDetails(projectId));
+		if (successUpdate) {
+			console.log('successful');
+			dispatch({ type: PROJECT_UPDATE_RESET });
+			history.push('/admin/projects');
 		} else {
-			setProjectName(project.projectName);
-			setProjectClient(project.projectClient);
+			if (!project.projectName || project._id !== projectId) {
+				console.log(!project.projectName);
+				console.log('project._id === projectId', project._id === projectId);
+				console.log('dispatching');
+				dispatch(listProjectDetails(projectId));
+			} else {
+				console.log('setting values');
+				setProjectName(project.projectName);
+				setProjectClient(project.projectClient);
+			}
 		}
-	}, []);
+	}, [dispatch, history, projectId, project, successUpdate]);
 
+	//dispatch, history, projectId, project, successUpdate
 	const submitHandler = (e) => {
 		e.preventDefault();
 		dispatch(
@@ -52,8 +75,11 @@ const ProjectEditScreen = ({ match, history }) => {
 			<Link to="/admin/projects" className="btn btn-dark my-3">
 				Back to Project List
 			</Link>
+			{console.log('render')}
 			<FormContainer>
 				<h1>Edit Project</h1>
+				{loadingUpdate && <Loader />}
+				{errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
 				{loading ? (
 					<Loader />
 				) : error ? (

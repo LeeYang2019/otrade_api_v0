@@ -13,7 +13,7 @@ const ListUserScreen = ({ history }) => {
 
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
-
+	console.log(userInfo);
 	console.log(users);
 
 	useEffect(() => {
