@@ -10,20 +10,26 @@ import { listProjects } from '../actions/projectActions';
 const ListProjectScreen = ({ history }) => {
 	const dispatch = useDispatch();
 
+	//list of projects
 	const projectList = useSelector((state) => state.projectList);
 	const { loading, projects, error } = projectList;
 
+	//get current user information
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
 	useEffect(() => {
+		//if logged in user exists and role is admin
 		if (userInfo && userInfo.role === 'admin') {
+			//get list of projects
 			dispatch(listProjects());
 		} else {
+			//if no logged in user and role not admin
 			history.push('/login');
 		}
 	}, [dispatch, history, userInfo]);
 
+	//delete project
 	const deleteHandler = (id) => {};
 
 	return (
@@ -50,7 +56,7 @@ const ListProjectScreen = ({ history }) => {
 								<td>{project._id}</td>
 								<td>{project.projectName}</td>
 								<td>{project.projectClient}</td>
-								<td>In Development</td>
+								<td>{project.assignees.map((assignee) => assignee).join()}</td>
 								<td>
 									<LinkContainer to={`/admin/project/${project._id}/edit`}>
 										<Button variant="light" className="btn-sm">

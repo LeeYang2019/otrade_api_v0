@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const generateToken = require('../utils/generateToken');
 const User = require('../model/User');
+const Project = require('../model/Project');
 
 /**
  * USER Routes
@@ -153,3 +154,56 @@ exports.deleteUser = asyncHandler(async (req, res) => {
 	await User.findByIdAndDelete(req.params.id);
 	res.status(200).json({ success: true, data: {} });
 });
+
+/**
+ * USER Assignment Routes
+ */
+
+// @desc	Assign user to project
+// @route	/api/v1/users/:id/projects/:projectId/assign
+// @access	Private/admin
+exports.assignUserToProject = async (req, res) => {
+	//find user and project
+	const user = await User.findById(req.params.id);
+	const project = await Project.findById(req.params.projectId);
+
+	//if neither are found
+	if (!user || !project) {
+		res.status(401);
+		throw new Error('No Resources Found');
+	}
+
+	// if empty, just push
+	if (project.assignees.length === 0) {
+		project.assignees.push(req.params.id);
+		await project.save();
+		res.status(200).json({ success: true, data: project });
+	} else {
+		// if user not already assigned
+		if (!project.assignees.includes(req.params.id)) {
+			project.assignees.push(req.params.id);
+			await project.save();
+			res.status(200).json({ success: true });
+		} else {
+			res.status(401);
+			throw new Error(
+				`${user.firstName} has already been assigned to this project`
+			);
+		}
+	}
+};
+
+// @desc	Remove user from project
+// @route	/api/v1/users/:id/projects/:projectId/remove
+// @access	private/admin
+exports.removeUserFromProject = async (req, res) => {
+	//find user and project
+	const user = await User.findById(req.params.id);
+	const project = await Project.findById(req.params.projectId);
+
+	//if neither are found
+	if (!user || !project) {
+		res.status(401);
+		throw new Error('No Resources Found');
+	}
+};

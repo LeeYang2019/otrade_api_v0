@@ -11,14 +11,11 @@ const ProjectSchema = new mongoose.Schema(
 			type: String,
 			required: [true, 'Please add a project client'],
 		},
-		coordinates: {
-			type: String,
-		},
-		// surveyors: [UserSchema],
+		assignees: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+	},
+	{
+		timestamps: true,
 	}
-	// {
-	// 	timestamps: true,
-	// }
 );
 
 // delete all stakeholders before deleting the project

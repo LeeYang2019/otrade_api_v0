@@ -1,16 +1,26 @@
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
+const mongoose = require('mongoose');
 
 //import project model
 const Project = require('../model/Project');
 
 // @desc    GET all projects
 // @route   GET /api/v1/projects
-// @access  Public
+// @access  private
 exports.getProjects = asyncHandler(async (req, res) => {
 	const projects = await Project.find();
 	res.status(200).json(projects);
-	// res.status(200).json(res.advancedResults);
+});
+
+// @desc    GET all projects for a user
+// @route   GET /api/v1/projects/user/:id
+// @access  private
+exports.getUserProjects = asyncHandler(async (req, res) => {
+	const projects = await Project.find({
+		assignees: mongoose.Types.ObjectId(req.params.id),
+	});
+	res.status(200).json(projects);
 });
 
 // @desc    GET a project

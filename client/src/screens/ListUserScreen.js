@@ -8,15 +8,17 @@ import { listUsers } from '../actions/userActions';
 
 const ListUserScreen = ({ history }) => {
 	const dispatch = useDispatch();
+
+	//get list of users
 	const userList = useSelector((state) => state.userList);
 	const { loading, error, users } = userList;
 
+	//get logged in user
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
-	console.log(userInfo);
-	console.log(users);
 
 	useEffect(() => {
+		// if logged in user exists and role is admin
 		if (userInfo && userInfo.role === 'admin') {
 			dispatch(listUsers());
 		} else {

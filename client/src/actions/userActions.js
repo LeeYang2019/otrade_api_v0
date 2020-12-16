@@ -74,7 +74,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 			userLogin: { userInfo },
 		} = getState();
 
-		console.log(userInfo);
 		//define headers
 		const config = {
 			headers: {
@@ -83,11 +82,10 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 			},
 		};
 
-		console.log('actions b');
 		//pass name, email, password, and config to api
-		const { data } = await axios.get(`/api/v1/users/${id}`, config);
-
-		console.log('actions c');
+		const {
+			data: { data },
+		} = await axios.get(`/api/v1/users/${id}`, config);
 
 		//dispatch
 		dispatch({

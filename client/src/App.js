@@ -10,7 +10,7 @@ import HomeScreen from './screens/HomeScreen';
 import ListUserScreen from './screens/ListUserScreen';
 import ListProjectScreen from './screens/ListProjectScreen';
 import ProjectEditScreen from './screens/ProjectEditScreen';
-import UserProfileScreen from './screens/UserProfileScreen';
+import LoggedInUserProfileScreen from './screens/LoggedInUserProfileScreen';
 
 const App = () => {
 	return (
@@ -27,7 +27,11 @@ const App = () => {
 						path="/admin/project/:id/edit"
 						component={ProjectEditScreen}
 					/>
-					<Route exact path="/profile" component={UserProfileScreen}></Route>
+					<Route
+						exact
+						path="/profile"
+						component={LoggedInUserProfileScreen}
+					></Route>
 					<Route exact path="/logout" component={LogoutScreen} />
 				</Container>
 			</main>

@@ -4,6 +4,7 @@ const router = express.Router();
 // import project controller methods
 const {
 	getProjects,
+	getUserProjects,
 	getProject,
 	addProject,
 	updateProject,
@@ -19,16 +20,13 @@ const stakeholderRouter = require('./stakeholders');
 
 router.use('/:projectId/stakeholders', stakeholderRouter);
 
-// define select parameters to include in project results
-// const stakeHolderParams = advancedResults(Project, {
-// 	path: 'stakeholders',
-// 	select: '_id firstName lastName gender birthdate telephone',
-// });
-
 // define general route
 router.route('/').get(protect, isAdmin, getProjects).post(addProject);
 
 // define specific route
 router.route('/:id').get(getProject).put(updateProject).delete(deleteProject);
+
+//
+router.route('/user/:id').get(getUserProjects);
 
 module.exports = router;

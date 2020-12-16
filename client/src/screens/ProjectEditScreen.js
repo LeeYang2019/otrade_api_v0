@@ -6,12 +6,15 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { listProjectDetails, updateProject } from '../actions/projectActions';
+import { listUsers } from '../actions/userActions';
 import { PROJECT_UPDATE_RESET } from '../constants/projectConstants';
 
 const ProjectEditScreen = ({ match, history }) => {
 	const projectId = match.params.id;
 
 	console.log(projectId);
+
+	const [assignee, setAssignee] = useState('');
 
 	const [projectName, setProjectName] = useState('');
 	const [projectClient, setProjectClient] = useState('');
@@ -23,7 +26,8 @@ const ProjectEditScreen = ({ match, history }) => {
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { loading, error, project } = projectDetails;
 
-	console.log('projectName is ', project.projectName);
+	const userList = useSelector((state) => state.userList);
+	const { users } = userList;
 
 	//get projectUpdate from reducer
 	const projectUpdate = useSelector((state) => state.projectUpdate);
@@ -32,11 +36,6 @@ const ProjectEditScreen = ({ match, history }) => {
 		loading: loadingUpdate,
 		error: errorUpdate,
 	} = projectUpdate;
-
-	console.log('projectName: ', project.projectName);
-	console.log('project._id: ', project._id);
-	console.log('projectId: ', projectId);
-	console.log('project._id === projectId', project._id === projectId);
 
 	//useEffect
 	useEffect(() => {
@@ -50,6 +49,7 @@ const ProjectEditScreen = ({ match, history }) => {
 				console.log('project._id === projectId', project._id === projectId);
 				console.log('dispatching');
 				dispatch(listProjectDetails(projectId));
+				dispatch(listUsers());
 			} else {
 				console.log('setting values');
 				setProjectName(project.projectName);
@@ -58,9 +58,9 @@ const ProjectEditScreen = ({ match, history }) => {
 		}
 	}, [dispatch, history, projectId, project, successUpdate]);
 
-	//dispatch, history, projectId, project, successUpdate
 	const submitHandler = (e) => {
 		e.preventDefault();
+		console.log(assignee);
 		dispatch(
 			updateProject({
 				_id: projectId,
@@ -75,7 +75,6 @@ const ProjectEditScreen = ({ match, history }) => {
 			<Link to="/admin/projects" className="btn btn-dark my-3">
 				Back to Project List
 			</Link>
-			{console.log('render')}
 			<FormContainer>
 				<h1>Edit Project</h1>
 				{loadingUpdate && <Loader />}
@@ -103,6 +102,20 @@ const ProjectEditScreen = ({ match, history }) => {
 								value={projectClient}
 								onChange={(e) => setProjectClient(e.target.value)}
 							></Form.Control>
+						</Form.Group>
+						<Form.Group className="my-5">
+							<Form.Label>Assign to</Form.Label>
+							<Form.Control
+								as="select"
+								value={assignee}
+								onChange={(e) => setAssignee(e.target.value)}
+							>
+								{users.map((user) => (
+									<option key={user._id} value={user._id}>
+										{user.firstName} {user.lastName}
+									</option>
+								))}
+							</Form.Control>
 						</Form.Group>
 						<Button type="submit" variant="primary">
 							Update

@@ -12,6 +12,7 @@ const {
 	registerUser,
 	updateUser,
 	deleteUser,
+	assignUserToProject,
 } = require('../controller/users');
 
 //define general user route
@@ -27,9 +28,12 @@ router
 //admin protected routes
 router
 	.route('/:id')
-	.get(protect, isAdmin, getUser)
+	.get(protect, getUser)
 	.put(protect, isAdmin, updateUser)
 	.delete(protect, isAdmin, deleteUser);
+
+//assignment user routes
+router.route('/:id/projects/:projectId/assign').put(assignUserToProject);
 
 //export router
 module.exports = router;
