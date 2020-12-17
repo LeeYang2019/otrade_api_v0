@@ -10,6 +10,10 @@ import {
 	PROJECT_UPDATE_SUCCESS,
 	PROJECT_UPDATE_FAIL,
 	PROJECT_UPDATE_RESET,
+	PROJECT_USER_REQUEST,
+	PROJECT_USER_SUCCESS,
+	PROJECT_USER_FAIL,
+	PROJECT_USER_RESET,
 } from '../constants/projectConstants';
 
 //project list
@@ -51,6 +55,20 @@ export const projectUpdateReducer = (state = { project: {} }, action) => {
 			return { loading: false, error: action.payload };
 		case PROJECT_UPDATE_RESET:
 			return { project: {} };
+		default:
+			return state;
+	}
+};
+
+//user projects
+export const projectUserReducer = (state = { projects: [] }, action) => {
+	switch (action.type) {
+		case PROJECT_USER_REQUEST:
+			return { loading: true, projects: [] };
+		case PROJECT_USER_SUCCESS:
+			return { loading: false, projects: action.payload };
+		case PROJECT_USER_FAIL:
+			return { loading: false, error: action.payload };
 		default:
 			return state;
 	}

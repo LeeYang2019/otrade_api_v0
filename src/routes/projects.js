@@ -21,12 +21,15 @@ const stakeholderRouter = require('./stakeholders');
 router.use('/:projectId/stakeholders', stakeholderRouter);
 
 // define general route
-router.route('/').get(protect, isAdmin, getProjects).post(addProject);
+router
+	.route('/')
+	.get(protect, isAdmin, getProjects)
+	.post(protect, isAdmin, addProject);
 
 // define specific route
 router.route('/:id').get(getProject).put(updateProject).delete(deleteProject);
 
 //
-router.route('/user/:id').get(getUserProjects);
+router.route('/user/:id').get(protect, getUserProjects);
 
 module.exports = router;

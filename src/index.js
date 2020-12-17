@@ -8,7 +8,7 @@ const { notFound, errorHandler } = require('./middleware/error');
 //route files
 const projects = require('./routes/projects');
 const users = require('./routes/users');
-// const stakeholders = require('./routes/stakeholders');
+const stakeholders = require('./routes/stakeholders');
 // const organizations = require('./routes/organization');
 // const activities = require('./routes/activities');
 // const comments = require('./routes/comments');
@@ -34,7 +34,7 @@ if (process.env.NODE_ENV === 'development') {
 // mount routers
 app.use('/api/v1/projects', projects);
 app.use('/api/v1/users', users);
-// app.use('/api/v1/stakeholders', stakeholders);
+app.use('/api/v1/stakeholders', stakeholders);
 // app.use('/api/v1/organizations', organizations);
 // app.use('/api/v1/comments', comments);
 // app.use('/api/v1/activities', activities);

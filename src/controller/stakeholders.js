@@ -1,5 +1,4 @@
-const ErrorResponse = require('../utils/errorResponse');
-const asyncHandler = require('../middleware/async');
+const asyncHandler = require('express-async-handler');
 
 // import stakeholder model
 const Stakeholder = require('../model/Stakeholder');
@@ -8,21 +7,14 @@ const Stakeholder = require('../model/Stakeholder');
 // @route   GET /api/v1/projects/:projectId/stakeholders
 // @access  Private
 exports.getStakeholders = asyncHandler(async (req, res, next) => {
-	// if a projectId is provided
-	if (req.params.projectId) {
-		let stakeholders = await Stakeholder.find({
-			project: req.params.projectId,
-		});
-		res
-			.status(200)
-			.json({ success: true, count: stakeholders.length, data: stakeholders });
-		// .json({ success: true, count: stakeholders.length, data: stakeholders });
-	} else {
-		// return all stakeholders
-		// not wrapping in else statement causes the following error
-		// Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
-		res.status(200).json(res.advancedResults);
+	const stakeholders = await Stakeholder.findById(req.params.projectId);
+
+	if (!stakehoders) {
+		res.status(401);
+		throw new Error('No resources found');
 	}
+
+	res.status(200).json({ success: true, data: stakeholders });
 });
 
 // @desc    Get a stakeholder

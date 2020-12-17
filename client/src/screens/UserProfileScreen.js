@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Route } from 'react-router-dom';
 import { Form, Button, Row, Col, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import ProjectsScreen from './ProjectsScreen';
@@ -6,7 +7,9 @@ import Message from '../components/Message.js';
 import Loader from '../components/Loader.js';
 import { getUserDetails } from '../actions/userActions';
 
-const LoggedInUserProfileScreen = ({ location, history }) => {
+const UserProfileScreen = ({ location, history, match }) => {
+	let userId = match.params.id;
+
 	const dispatch = useDispatch();
 
 	// get user
@@ -17,13 +20,17 @@ const LoggedInUserProfileScreen = ({ location, history }) => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
+	if (!userId) {
+		userId = userInfo._id;
+	}
+
 	useEffect(() => {
 		if (!userInfo) {
 			history.push('/login');
 		} else {
-			dispatch(getUserDetails(userInfo._id));
+			dispatch(getUserDetails(userId));
 		}
-	}, [history, dispatch, userInfo]);
+	}, [history, dispatch, userInfo, userId]);
 
 	return (
 		<Row>
@@ -39,15 +46,20 @@ const LoggedInUserProfileScreen = ({ location, history }) => {
 							Name: {user.firstName} {user.lastName}
 						</p>
 						<p>Email: {user.email}</p>
+						<p>Role: {user.role}</p>
 					</>
 				)}
 			</Col>
 			<Col md={8}>
 				<h2>Projects</h2>
-				<ProjectsScreen userId={user._id} />
+				<Route
+					render={({ history }) => (
+						<ProjectsScreen history={history} userId={user._id} />
+					)}
+				/>
 			</Col>
 		</Row>
 	);
 };
 
-export default LoggedInUserProfileScreen;
+export default UserProfileScreen;

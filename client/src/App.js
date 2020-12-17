@@ -9,8 +9,9 @@ import LogoutScreen from './screens/LogoutScreen';
 import HomeScreen from './screens/HomeScreen';
 import ListUserScreen from './screens/ListUserScreen';
 import ListProjectScreen from './screens/ListProjectScreen';
+import ProjectScreen from './screens/ProjectScreen';
 import ProjectEditScreen from './screens/ProjectEditScreen';
-import LoggedInUserProfileScreen from './screens/LoggedInUserProfileScreen';
+import UserProfileScreen from './screens/UserProfileScreen';
 
 const App = () => {
 	return (
@@ -20,6 +21,8 @@ const App = () => {
 				<Container>
 					<Route exact path="/login" component={LoginScreen} />
 					<Route exact path="/" component={HomeScreen} />
+					<Route exact path="/profile/:id" component={UserProfileScreen} />
+					<Route exact path="/project/:id" component={ProjectScreen} />
 					<Route exact path="/admin/userlist" component={ListUserScreen} />
 					<Route exact path="/admin/projects" component={ListProjectScreen} />
 					<Route
@@ -27,11 +30,6 @@ const App = () => {
 						path="/admin/project/:id/edit"
 						component={ProjectEditScreen}
 					/>
-					<Route
-						exact
-						path="/profile"
-						component={LoggedInUserProfileScreen}
-					></Route>
 					<Route exact path="/logout" component={LogoutScreen} />
 				</Container>
 			</main>

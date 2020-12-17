@@ -9,6 +9,10 @@ import {
 	PROJECT_UPDATE_REQUEST,
 	PROJECT_UPDATE_SUCCESS,
 	PROJECT_UPDATE_FAIL,
+	PROJECT_USER_REQUEST,
+	PROJECT_USER_SUCCESS,
+	PROJECT_USER_FAIL,
+	PROJECT_USER_RESET,
 } from '../constants/projectConstants';
 
 export const listProjects = () => async (dispatch, getState) => {
@@ -89,6 +93,35 @@ export const updateProject = (project) => async (dispatch, getState) => {
 		dispatch({
 			type: PROJECT_UPDATE_FAIL,
 			payload: message,
+		});
+	}
+};
+
+export const listUserProjects = (id) => async (dispatch, getState) => {
+	console.log('projectUser');
+	try {
+		dispatch({ type: PROJECT_USER_REQUEST });
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const { data } = await axios.get(`/api/v1/projects/user/${id}`, config);
+		console.log(data);
+		dispatch({ type: PROJECT_USER_SUCCESS, payload: data });
+	} catch (error) {
+		dispatch({
+			type: PROJECT_USER_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.messsage,
 		});
 	}
 };

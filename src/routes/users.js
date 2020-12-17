@@ -13,6 +13,7 @@ const {
 	updateUser,
 	deleteUser,
 	assignUserToProject,
+	removeUserFromProject,
 } = require('../controller/users');
 
 //define general user route
@@ -34,6 +35,7 @@ router
 
 //assignment user routes
 router.route('/:id/projects/:projectId/assign').put(assignUserToProject);
+router.route('/:id/projects/:projectId/remove').put(removeUserFromProject);
 
 //export router
 module.exports = router;

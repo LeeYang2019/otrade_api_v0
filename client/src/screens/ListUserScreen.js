@@ -60,7 +60,7 @@ const ListUserScreen = ({ history }) => {
 								</td>
 								<td>{user.role}</td>
 								<td>
-									<LinkContainer to={`/profile`}>
+									<LinkContainer to={`/profile/${user._id}`}>
 										<Button variant="light" className="btn-sm">
 											<i className="fas fa-edit"></i>
 										</Button>

@@ -20,6 +20,12 @@ exports.getUserProjects = asyncHandler(async (req, res) => {
 	const projects = await Project.find({
 		assignees: mongoose.Types.ObjectId(req.params.id),
 	});
+
+	if (projects.length === 0) {
+		res.status(404);
+		throw new Error('Projects not found');
+	}
+
 	res.status(200).json(projects);
 });
 
@@ -27,14 +33,13 @@ exports.getUserProjects = asyncHandler(async (req, res) => {
 // @route   GET /api/v1/project/:id
 // @access  Private
 exports.getProject = asyncHandler(async (req, res) => {
-	console.log('entered get project route');
-	console.log(req.params.id);
 	const project = await Project.findById(req.params.id);
+
 	if (!project) {
 		res.status(404);
 		throw new Error('Project not found');
 	}
-	console.log(project);
+
 	res.json(project);
 });
 

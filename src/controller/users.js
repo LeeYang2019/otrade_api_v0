@@ -206,4 +206,26 @@ exports.removeUserFromProject = async (req, res) => {
 		res.status(401);
 		throw new Error('No Resources Found');
 	}
+
+	//check to see if user is assigned
+	if (project.assignees.includes(req.params.id)) {
+		//if length of array is 1, set to empty array
+		if (project.assignees.length === 1) {
+			project.assignees = [];
+		} else {
+			// filter out user from array
+			const newUpdate = project.assignees.filter(
+				(item) => item != req.params.id
+			);
+			// set array
+			project.assignees = newUpdate;
+		}
+	} else {
+		res.status(401);
+		throw new Error(`There are no assignments for ${user.firstName}`);
+	}
+
+	//save project
+	await project.save();
+	res.status(200).json({ success: true });
 };

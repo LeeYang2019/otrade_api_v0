@@ -49,15 +49,18 @@ const StakeholderSchema = new mongoose.Schema(
 				type: String,
 			},
 		},
-		// project: {
-		// 	type: mongoose.Schema.ObjectId,
-		// 	ref: 'Project',
-		// },
+		project: {
+			type: mongoose.Schema.ObjectId,
+			ref: 'Project',
+		},
 	},
 	{
-		toJSON: { virtuals: true },
-		toObject: { virtuals: true },
+		timestamps: true,
 	}
+	// {
+	// 	toJSON: { virtuals: true },
+	// 	toObject: { virtuals: true },
+	// }
 );
 
 // delete all associated coments before deleting the stakeholder
