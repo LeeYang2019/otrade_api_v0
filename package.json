@@ -6,7 +6,9 @@
 	"scripts": {
 		"server": "nodemon src/index",
 		"client": "yarn --cwd client start",
-		"dev": "concurrently \"yarn client\" \"yarn server\""
+		"dev": "concurrently \"yarn client\" \"yarn server\"",
+		"data:import": "node src/seeder -i",
+		"data:destroy": "node src/seeder -d"
 	},
 	"dependencies": {
 		"bcryptjs": "^2.4.3",

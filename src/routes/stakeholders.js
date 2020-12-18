@@ -18,14 +18,8 @@ const commentRouter = require('./comments');
 
 router.use('/:stakeholderId/comments', commentRouter);
 
-//define commentParams to include in stakeholder results
-const commentParams = advancedResults(Stakeholder, {
-	path: 'comments',
-	select: '_id comment date',
-});
-
 // define general route
-router.route('/').get(commentParams, getStakeholders).post(addStakeholder);
+router.route('/').get(getStakeholders).post(addStakeholder);
 
 // define specific route
 router

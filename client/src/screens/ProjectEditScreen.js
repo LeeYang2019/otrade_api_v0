@@ -40,23 +40,20 @@ const ProjectEditScreen = ({ match, history }) => {
 	//useEffect
 	useEffect(() => {
 		if (successUpdate) {
-			console.log('successful');
 			dispatch({ type: PROJECT_UPDATE_RESET });
 			history.push('/admin/projects');
 		} else {
 			if (!project.projectName || project._id !== projectId) {
-				console.log(!project.projectName);
-				console.log('project._id === projectId', project._id === projectId);
-				console.log('dispatching');
 				dispatch(listProjectDetails(projectId));
-				dispatch(listUsers());
+				//dispatch(listUsers());
 			} else {
-				console.log('setting values');
 				setProjectName(project.projectName);
 				setProjectClient(project.projectClient);
 			}
 		}
 	}, [dispatch, history, projectId, project, successUpdate]);
+
+	//dispatch, history, projectId, project, successUpdate
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -103,7 +100,7 @@ const ProjectEditScreen = ({ match, history }) => {
 								onChange={(e) => setProjectClient(e.target.value)}
 							></Form.Control>
 						</Form.Group>
-						<Form.Group className="my-5">
+						{/* <Form.Group className="my-5">
 							<Form.Label>Assign to</Form.Label>
 							<Form.Control
 								as="select"
@@ -116,7 +113,7 @@ const ProjectEditScreen = ({ match, history }) => {
 									</option>
 								))}
 							</Form.Control>
-						</Form.Group>
+						</Form.Group> */}
 						<Button type="submit" variant="primary">
 							Update
 						</Button>

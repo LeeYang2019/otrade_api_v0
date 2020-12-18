@@ -34,7 +34,7 @@ export const projectListReducer = (state = { projects: [] }, action) => {
 export const projectDetailsReducer = (state = { project: {} }, action) => {
 	switch (action.type) {
 		case PROJECT_DETAILS_REQUEST:
-			return { loading: true, project: {} };
+			return { loading: true, ...state };
 		case PROJECT_DETAILS_SUCCESS:
 			return { loading: false, project: action.payload };
 		case PROJECT_DETAILS_FAIL:

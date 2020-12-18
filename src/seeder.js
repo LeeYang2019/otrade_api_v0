@@ -11,8 +11,7 @@ dotenv.config();
 const Project = require('./model/Project');
 const User = require('./model/User');
 const Organization = require('./model/Organization');
-
-console.log(process.env.MONGO_URI);
+const Stakeholder = require('./model/Stakeholder');
 
 // connect to db
 connectDB();
@@ -53,6 +52,7 @@ const deleteData = async () => {
 		await Project.deleteMany();
 		await User.deleteMany();
 		await Organization.deleteMany();
+		//await Stakeholder.deleteMany();
 		console.log('Data deleted...'.red.inverse);
 		process.exit();
 	} catch (error) {

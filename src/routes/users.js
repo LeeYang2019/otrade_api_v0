@@ -17,7 +17,10 @@ const {
 } = require('../controller/users');
 
 //define general user route
-router.route('/').get(protect, isAdmin, getUsers).post(registerUser);
+router
+	.route('/')
+	.get(protect, isAdmin, getUsers)
+	.post(protect, isAdmin, registerUser);
 router.route('/login').post(authMe);
 
 //protected profile routes

@@ -7,9 +7,11 @@ const Stakeholder = require('../model/Stakeholder');
 // @route   GET /api/v1/projects/:projectId/stakeholders
 // @access  Private
 exports.getStakeholders = asyncHandler(async (req, res, next) => {
-	const stakeholders = await Stakeholder.findById(req.params.projectId);
+	const stakeholders = await Stakeholder.find({
+		project: req.params.projectId,
+	});
 
-	if (!stakehoders) {
+	if (!stakeholders) {
 		res.status(401);
 		throw new Error('No resources found');
 	}

@@ -14,5 +14,21 @@
 		"email": "fpoester@gmail.com",
 		"password": "123test",
 		"role": "admin"
+	},
+	{
+		"_id": "5fdbc22731a0da2b24a1b826",
+		"firstName": "Lee",
+		"lastName": "Yang",
+		"email": "leeyang@gmail.com",
+		"password": "123test",
+		"role": "surveyor"
+	},
+	{
+		"_id": "5fdbc1d5ec45442ae4138321",
+		"firstName": "James",
+		"lastName": "Conner",
+		"email": "jc@gmail.com",
+		"password": "123test",
+		"role": "client"
 	}
 ]
