@@ -8,6 +8,7 @@ import {
 	projectDetailsReducer,
 	projectUpdateReducer,
 	projectUserReducer,
+	projectUserAssignmentReducer,
 } from './reducers/projectReducers';
 import {
 	userListReducer,
@@ -26,6 +27,7 @@ const reducer = combineReducers({
 	projectDetails: projectDetailsReducer,
 	projectUpdate: projectUpdateReducer,
 	projectUser: projectUserReducer,
+	projectUserAssignment: projectUserAssignmentReducer,
 });
 
 // localStorages

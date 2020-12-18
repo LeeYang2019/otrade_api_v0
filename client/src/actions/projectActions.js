@@ -12,7 +12,9 @@ import {
 	PROJECT_USER_REQUEST,
 	PROJECT_USER_SUCCESS,
 	PROJECT_USER_FAIL,
-	PROJECT_USER_RESET,
+	PROJECT_ASSIGNMENT_REQUEST,
+	PROJECT_ASSIGNMENT_SUCCESS,
+	PROJECT_ASSIGNMENT_FAIL,
 } from '../constants/projectConstants';
 
 export const listProjects = () => async (dispatch, getState) => {
@@ -122,6 +124,45 @@ export const listUserProjects = (id) => async (dispatch, getState) => {
 				error.response && error.response.data.message
 					? error.response.data.message
 					: error.messsage,
+		});
+	}
+};
+
+//assign user to project
+export const assignProjectUser = (projectId, userId) => async (
+	dispatch,
+	getState
+) => {
+	try {
+		dispatch({ type: PROJECT_ASSIGNMENT_REQUEST });
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		//pass id, project, and config file to api
+		const { data } = await axios.put(
+			`/api/v1/users/${userId}/projects/${projectId}/assign`,
+			config
+		);
+
+		dispatch({ type: PROJECT_ASSIGNMENT_SUCCESS, payload: data });
+	} catch (error) {
+		const message =
+			error.response && error.response.data.message
+				? error.response.data.message
+				: error.message;
+
+		dispatch({
+			type: PROJECT_ASSIGNMENT_FAIL,
+			payload: message,
 		});
 	}
 };

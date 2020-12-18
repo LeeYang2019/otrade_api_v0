@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message.js';
 import Loader from '../components/Loader.js';
@@ -29,12 +29,24 @@ const ListProjectScreen = ({ history }) => {
 		}
 	}, [dispatch, history, userInfo]);
 
+	//create a new project
+	const createProjectHandler = () => {};
+
 	//delete project
 	const deleteHandler = (id) => {};
 
 	return (
 		<>
-			<h1>Projects</h1>
+			<Row className="align-items-center">
+				<Col>
+					<h1>Projects</h1>
+				</Col>
+				<Col className="text-right">
+					<Button className="my-3" onClick={createProjectHandler}>
+						<i className="fas fa-plus"></i> Create Project
+					</Button>
+				</Col>
+			</Row>
 			{loading ? (
 				<Loader />
 			) : error ? (
@@ -56,7 +68,9 @@ const ListProjectScreen = ({ history }) => {
 								<td>{project._id}</td>
 								<td>{project.projectName}</td>
 								<td>{project.projectClient}</td>
-								<td>{project.assignees.map((assignee) => assignee).join()}</td>
+								<td>
+									{project.assignees.map((assignee) => assignee).join(', ')}
+								</td>
 								<td>
 									<LinkContainer to={`/admin/project/${project._id}/edit`}>
 										<Button variant="light" className="btn-sm">

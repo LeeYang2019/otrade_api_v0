@@ -6,15 +6,12 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { listProjectDetails, updateProject } from '../actions/projectActions';
-import { listUsers } from '../actions/userActions';
+
 import { PROJECT_UPDATE_RESET } from '../constants/projectConstants';
+import Assignment from '../components/Assignment';
 
 const ProjectEditScreen = ({ match, history }) => {
 	const projectId = match.params.id;
-
-	console.log(projectId);
-
-	const [assignee, setAssignee] = useState('');
 
 	const [projectName, setProjectName] = useState('');
 	const [projectClient, setProjectClient] = useState('');
@@ -25,9 +22,6 @@ const ProjectEditScreen = ({ match, history }) => {
 	//get projectDetails from reducer
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { loading, error, project } = projectDetails;
-
-	const userList = useSelector((state) => state.userList);
-	const { users } = userList;
 
 	//get projectUpdate from reducer
 	const projectUpdate = useSelector((state) => state.projectUpdate);
@@ -57,7 +51,6 @@ const ProjectEditScreen = ({ match, history }) => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		console.log(assignee);
 		dispatch(
 			updateProject({
 				_id: projectId,
@@ -100,25 +93,12 @@ const ProjectEditScreen = ({ match, history }) => {
 								onChange={(e) => setProjectClient(e.target.value)}
 							></Form.Control>
 						</Form.Group>
-						{/* <Form.Group className="my-5">
-							<Form.Label>Assign to</Form.Label>
-							<Form.Control
-								as="select"
-								value={assignee}
-								onChange={(e) => setAssignee(e.target.value)}
-							>
-								{users.map((user) => (
-									<option key={user._id} value={user._id}>
-										{user.firstName} {user.lastName}
-									</option>
-								))}
-							</Form.Control>
-						</Form.Group> */}
-						<Button type="submit" variant="primary">
+						<Button type="submit" variant="primary" className=" px-5">
 							Update
 						</Button>
 					</Form>
 				)}
+				<Assignment projectId={projectId} />
 			</FormContainer>
 		</>
 	);

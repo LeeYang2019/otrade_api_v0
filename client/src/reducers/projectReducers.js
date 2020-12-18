@@ -13,7 +13,10 @@ import {
 	PROJECT_USER_REQUEST,
 	PROJECT_USER_SUCCESS,
 	PROJECT_USER_FAIL,
-	PROJECT_USER_RESET,
+	PROJECT_ASSIGNMENT_REQUEST,
+	PROJECT_ASSIGNMENT_SUCCESS,
+	PROJECT_ASSIGNMENT_FAIL,
+	PROJECT_ASSIGNMENT_RESET,
 } from '../constants/projectConstants';
 
 //project list
@@ -69,6 +72,25 @@ export const projectUserReducer = (state = { projects: [] }, action) => {
 			return { loading: false, projects: action.payload };
 		case PROJECT_USER_FAIL:
 			return { loading: false, error: action.payload };
+		default:
+			return state;
+	}
+};
+
+//project assignments
+export const projectUserAssignmentReducer = (
+	state = { project: {} },
+	action
+) => {
+	switch (action.type) {
+		case PROJECT_ASSIGNMENT_REQUEST:
+			return { loading: true };
+		case PROJECT_ASSIGNMENT_SUCCESS:
+			return { loading: false, success: true, project: action.payload };
+		case PROJECT_ASSIGNMENT_FAIL:
+			return { loading: false, error: action.payload };
+		case PROJECT_ASSIGNMENT_RESET:
+			return { project: {} };
 		default:
 			return state;
 	}
