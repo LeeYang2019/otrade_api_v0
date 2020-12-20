@@ -100,7 +100,6 @@ export const updateProject = (project) => async (dispatch, getState) => {
 };
 
 export const listUserProjects = (id) => async (dispatch, getState) => {
-	console.log('projectUser');
 	try {
 		dispatch({ type: PROJECT_USER_REQUEST });
 
@@ -115,7 +114,7 @@ export const listUserProjects = (id) => async (dispatch, getState) => {
 		};
 
 		const { data } = await axios.get(`/api/v1/projects/user/${id}`, config);
-		console.log(data);
+
 		dispatch({ type: PROJECT_USER_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({

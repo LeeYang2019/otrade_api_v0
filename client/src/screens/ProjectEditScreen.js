@@ -34,20 +34,18 @@ const ProjectEditScreen = ({ match, history }) => {
 	//useEffect
 	useEffect(() => {
 		if (successUpdate) {
+			dispatch(listProjectDetails(projectId));
 			dispatch({ type: PROJECT_UPDATE_RESET });
 			history.push('/admin/projects');
 		} else {
 			if (!project.projectName || project._id !== projectId) {
 				dispatch(listProjectDetails(projectId));
-				//dispatch(listUsers());
 			} else {
 				setProjectName(project.projectName);
 				setProjectClient(project.projectClient);
 			}
 		}
 	}, [dispatch, history, projectId, project, successUpdate]);
-
-	//dispatch, history, projectId, project, successUpdate
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -69,6 +67,7 @@ const ProjectEditScreen = ({ match, history }) => {
 				<h1>Edit Project</h1>
 				{loadingUpdate && <Loader />}
 				{errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
+				{successUpdate && <Message variant="success">Profile Updated</Message>}
 				{loading ? (
 					<Loader />
 				) : error ? (
@@ -98,7 +97,7 @@ const ProjectEditScreen = ({ match, history }) => {
 						</Button>
 					</Form>
 				)}
-				<Assignment projectId={projectId} />
+				{/* <Assignment projectId={projectId} /> */}
 			</FormContainer>
 		</>
 	);

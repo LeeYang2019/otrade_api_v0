@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Row } from 'react-bootstrap';
 import { listUsers } from '../actions/userActions';
-import { assignProjectUser } from '../actions/projectActions';
+import {
+	assignProjectUser,
+	listProjectDetails,
+} from '../actions/projectActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
@@ -19,18 +22,27 @@ const Assignment = ({ projectId }) => {
 	const projectUserAssignment = useSelector(
 		(state) => state.projectUserAssignment
 	);
-	const { project } = projectUserAssignment;
+	const { success } = projectUserAssignment;
 
-	console.log(project);
+	//get projectDetails from reducer
+	const projectDetails = useSelector((state) => state.projectDetails);
+	const { loading: projectLoading, project } = projectDetails;
 
 	useEffect(() => {
-		dispatch(listUsers());
-	}, [dispatch]);
+		if (success) {
+			dispatch(listProjectDetails(projectId));
+		} else {
+			if (!project.projectName || success !== true) {
+				dispatch(listUsers());
+				dispatch(listProjectDetails(projectId));
+			}
+		}
+	}, [dispatch, project, projectId, success]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
 		console.log(assignee);
-		//dispatch(assignProjectUser(projectId, assignee));
+		dispatch(assignProjectUser(projectId, assignee));
 	};
 
 	return (
@@ -70,11 +82,15 @@ const Assignment = ({ projectId }) => {
 							</Button>
 						</Form.Group>
 					</Form>
-					<p>
-						<em>Assignees: </em>
-						{/* {project &&
-							project.assignees.map((assignee) => assignee).join(', ')} */}
-					</p>
+					{projectLoading ? (
+						<Loader />
+					) : (
+						<p>
+							<em>Assignees: </em>
+							{project &&
+								project.assignees.map((assignee) => assignee).join(', ')}
+						</p>
+					)}
 				</>
 			)}
 		</>

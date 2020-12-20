@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
+import { Route, Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message.js';
 import Loader from '../components/Loader.js';
 import { listUsers } from '../actions/userActions';
+import SearchBox from '../components/SearchBox';
 
 const ListUserScreen = ({ history }) => {
 	const dispatch = useDispatch();
@@ -26,25 +28,42 @@ const ListUserScreen = ({ history }) => {
 		}
 	}, [dispatch, history, userInfo]);
 
+	const createUserHandler = () => {};
+
 	const deleteHandler = (id) => {
 		console.log('delete');
 	};
 
 	return (
 		<>
-			<h1>Users</h1>
+			<Row className="align-items-center">
+				<Col>
+					<h1>Users</h1>
+				</Col>
+				<Col>
+					<Route
+						render={({ history }) => (
+							<SearchBox history={history} searchWord={'Users'} />
+						)}
+					/>
+				</Col>
+				<Col className="text-right">
+					<Button className="my-3" onClick={createUserHandler}>
+						<i className="fas fa-plus"></i> Add User
+					</Button>
+				</Col>
+			</Row>
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<Table striped bordered hover responsive className="table-sm">
-					<thead>
+				<Table striped hover responsive className="table-sm">
+					<thead className="table table-dark">
 						<tr>
-							<th>ID</th>
-							<th>FirstName</th>
-							<th>LastName</th>
+							<th>Full Name</th>
 							<th>Email</th>
+							<th>Telephone</th>
 							<th>Role</th>
 							<th></th>
 						</tr>
@@ -52,22 +71,25 @@ const ListUserScreen = ({ history }) => {
 					<tbody>
 						{users.map((user) => (
 							<tr key={user._id}>
-								<td>{user._id}</td>
-								<td>{user.firstName}</td>
-								<td>{user.lastName}</td>
+								<td>
+									<Link to={`/profile/${user._id}`}>
+										{user.firstName} {user.lastName}
+									</Link>
+								</td>
 								<td>
 									<a href={`mailto:${user.email}`}>{user.email}</a>{' '}
 								</td>
+								<td></td>
 								<td>{user.role}</td>
 								<td>
 									<LinkContainer to={`/profile/${user._id}`}>
-										<Button variant="light" className="btn-sm">
+										<Button variant="light" className="btn-sm ml-3">
 											<i className="fas fa-edit"></i>
 										</Button>
 									</LinkContainer>
 									<Button
 										variant="danger"
-										className="btn-sm"
+										className="btn-sm ml-3"
 										onClick={() => deleteHandler(user._id)}
 									>
 										<i className="fas fa-trash"></i>

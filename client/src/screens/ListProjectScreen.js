@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,6 +7,7 @@ import Message from '../components/Message.js';
 import Loader from '../components/Loader.js';
 // import { listUsers } from '../actions/userActions';
 import { listProjects } from '../actions/projectActions';
+import SearchBox from '../components/SearchBox';
 
 const ListProjectScreen = ({ history }) => {
 	const dispatch = useDispatch();
@@ -41,6 +43,13 @@ const ListProjectScreen = ({ history }) => {
 				<Col>
 					<h1>Projects</h1>
 				</Col>
+				<Col>
+					<Route
+						render={({ history }) => (
+							<SearchBox history={history} searchWord={'Projects'} />
+						)}
+					/>
+				</Col>
 				<Col className="text-right">
 					<Button className="my-3" onClick={createProjectHandler}>
 						<i className="fas fa-plus"></i> Create Project
@@ -52,10 +61,9 @@ const ListProjectScreen = ({ history }) => {
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<Table striped bordered hover responsive className="table-sm">
-					<thead>
+				<Table striped hover responsive className="table-sm">
+					<thead className="table table-dark">
 						<tr>
-							<th>ID</th>
 							<th>Project</th>
 							<th>Client</th>
 							<th>Assigned</th>
@@ -65,7 +73,6 @@ const ListProjectScreen = ({ history }) => {
 					<tbody>
 						{projects.map((project) => (
 							<tr key={project._id}>
-								<td>{project._id}</td>
 								<td>{project.projectName}</td>
 								<td>{project.projectClient}</td>
 								<td>
@@ -73,13 +80,13 @@ const ListProjectScreen = ({ history }) => {
 								</td>
 								<td>
 									<LinkContainer to={`/admin/project/${project._id}/edit`}>
-										<Button variant="light" className="btn-sm">
+										<Button variant="light" className="btn-sm ml-3">
 											<i className="fas fa-edit"></i>
 										</Button>
 									</LinkContainer>
 									<Button
 										variant="danger"
-										className="btn-sm"
+										className="btn-sm ml-3"
 										onClick={() => deleteHandler(project._id)}
 									>
 										<i className="fas fa-trash"></i>

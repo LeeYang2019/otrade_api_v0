@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message.js';
 import Loader from '../components/Loader.js';
 import { listUserProjects } from '../actions/projectActions';
+import { Link } from 'react-router-dom';
 
 const ProjectsScreen = (props) => {
 	const dispatch = useDispatch();
@@ -32,28 +33,24 @@ const ProjectsScreen = (props) => {
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
-				<Table striped bordered hover responsive className="table-sm">
-					<thead>
+				<Table striped hover responsive className="table-sm">
+					<thead className="table table-dark">
 						<tr>
 							<th>Project</th>
 							<th>Client</th>
-							<th>CreateAt</th>
-							<th></th>
+							<th>Date Created</th>
 						</tr>
 					</thead>
 					<tbody>
 						{projects.map((project) => (
 							<tr key={project._id}>
-								<td>{project.projectName}</td>
+								<td>
+									<Link to={`/project/${project._id}`}>
+										{project.projectName}
+									</Link>
+								</td>
 								<td>{project.projectClient}</td>
 								<td>{project.createdAt}</td>
-								<td>
-									<LinkContainer to={`/project/${project._id}`}>
-										<Button variant="light" className="btn-lg">
-											<i className="fas fa-folder-open"></i>
-										</Button>
-									</LinkContainer>
-								</td>
 							</tr>
 						))}
 					</tbody>

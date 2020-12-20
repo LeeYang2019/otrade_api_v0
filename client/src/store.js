@@ -16,6 +16,7 @@ import {
 	userDetailsReducer,
 	userUpdateProfileReducer,
 } from './reducers/userReducer';
+import { stakeholderListReducer } from './reducers/stakeholderReducer';
 
 // useSelector calls
 const reducer = combineReducers({
@@ -28,6 +29,7 @@ const reducer = combineReducers({
 	projectUpdate: projectUpdateReducer,
 	projectUser: projectUserReducer,
 	projectUserAssignment: projectUserAssignmentReducer,
+	stakeholderList: stakeholderListReducer,
 });
 
 // localStorages
