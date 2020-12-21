@@ -3,10 +3,10 @@ import { Route, Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message.js';
-import Loader from '../components/Loader.js';
-import { listUsers } from '../actions/userActions';
-import SearchBox from '../components/SearchBox';
+import Message from '../../components/Message.js';
+import Loader from '../../components/Loader.js';
+import { listUsers } from '../../actions/userActions';
+import SearchBox from '../../components/SearchBox';
 
 const ListUserScreen = ({ history }) => {
 	const dispatch = useDispatch();
@@ -37,20 +37,20 @@ const ListUserScreen = ({ history }) => {
 	return (
 		<>
 			<Row className="align-items-center">
-				<Col>
+				<Col md={3}>
 					<h1>Users</h1>
 				</Col>
-				<Col>
+				<Col md={7}>
 					<Route
 						render={({ history }) => (
-							<SearchBox history={history} searchWord={'Users'} />
+							<SearchBox history={history} searchWord={'User'} />
 						)}
 					/>
 				</Col>
-				<Col className="text-right">
-					<Button className="my-3" onClick={createUserHandler}>
-						<i className="fas fa-plus"></i> Add User
-					</Button>
+				<Col className="text-right" md={2}>
+					<Link to="/admin/projects" className="btn btn-primary my-3">
+						<i className="fas fa-plus"></i> Register User
+					</Link>
 				</Col>
 			</Row>
 			{loading ? (
@@ -58,7 +58,7 @@ const ListUserScreen = ({ history }) => {
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<Table striped hover responsive className="table-sm">
+				<Table striped bordered hover responsive className="table-sm mt-2">
 					<thead className="table table-dark">
 						<tr>
 							<th>Full Name</th>

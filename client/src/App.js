@@ -4,14 +4,14 @@ import { Container } from 'react-bootstrap';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import LoginScreen from './screens/LoginScreen';
-// import ProfileScreen from './screens/ProfileScreen';
 import LogoutScreen from './screens/LogoutScreen';
 import HomeScreen from './screens/HomeScreen';
-import ListUserScreen from './screens/ListUserScreen';
-import ListProjectScreen from './screens/ListProjectScreen';
-import ProjectScreen from './screens/ProjectScreen';
-import ProjectEditScreen from './screens/ProjectEditScreen';
-import UserProfileScreen from './screens/UserProfileScreen';
+import UserProfileScreen from './screens/user/UserProfileScreen';
+import ListUserScreen from './screens/user/ListUserScreen';
+import ListProjectScreen from './screens/project/ListProjectScreen';
+import ProjectScreen from './screens/project/ProjectScreen';
+import StakeholderScreen from './screens/stakeholder/StakeholderScreen';
+import ProjectUpdateScreen from './screens/project/ProjectUpdateScreen';
 
 const App = () => {
 	return (
@@ -21,14 +21,19 @@ const App = () => {
 				<Container>
 					<Route exact path="/login" component={LoginScreen} />
 					<Route exact path="/" component={HomeScreen} />
+
 					<Route exact path="/profile/:id" component={UserProfileScreen} />
 					<Route exact path="/project/:id" component={ProjectScreen} />
+					<Route exact path="/stakeholder/:id" component={StakeholderScreen} />
+					<Route exact path="/organization/:id" component={StakeholderScreen} />
+					<Route exact path="/activity/:id" component={StakeholderScreen} />
+
 					<Route exact path="/admin/userlist" component={ListUserScreen} />
 					<Route exact path="/admin/projects" component={ListProjectScreen} />
 					<Route
 						exact
 						path="/admin/project/:id/edit"
-						component={ProjectEditScreen}
+						component={ProjectUpdateScreen}
 					/>
 					<Route exact path="/logout" component={LogoutScreen} />
 				</Container>

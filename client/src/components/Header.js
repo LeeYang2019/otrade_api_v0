@@ -17,7 +17,13 @@ const Header = ({ history }) => {
 
 	return (
 		<header>
-			<Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
+			<Navbar
+				bg="primary"
+				variant="dark"
+				expand="lg"
+				collapseOnSelect
+				className="py-3"
+			>
 				<Container>
 					<LinkContainer to="/">
 						<Navbar.Brand>Otrade</Navbar.Brand>

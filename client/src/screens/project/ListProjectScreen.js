@@ -3,11 +3,11 @@ import { Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message.js';
-import Loader from '../components/Loader.js';
+import Message from '../../components/Message.js';
+import Loader from '../../components/Loader.js';
 // import { listUsers } from '../actions/userActions';
-import { listProjects } from '../actions/projectActions';
-import SearchBox from '../components/SearchBox';
+import { listProjects } from '../../actions/projectActions';
+import SearchBox from '../../components/SearchBox';
 
 const ListProjectScreen = ({ history }) => {
 	const dispatch = useDispatch();
@@ -21,12 +21,9 @@ const ListProjectScreen = ({ history }) => {
 	const { userInfo } = userLogin;
 
 	useEffect(() => {
-		//if logged in user exists and role is admin
 		if (userInfo && userInfo.role === 'admin') {
-			//get list of projects
 			dispatch(listProjects());
 		} else {
-			//if no logged in user and role not admin
 			history.push('/login');
 		}
 	}, [dispatch, history, userInfo]);
@@ -40,19 +37,19 @@ const ListProjectScreen = ({ history }) => {
 	return (
 		<>
 			<Row className="align-items-center">
-				<Col>
-					<h1>Projects</h1>
+				<Col md={3}>
+					<h1>Users</h1>
 				</Col>
-				<Col>
+				<Col md={7}>
 					<Route
 						render={({ history }) => (
-							<SearchBox history={history} searchWord={'Projects'} />
+							<SearchBox history={history} searchWord={'Project...'} />
 						)}
 					/>
 				</Col>
-				<Col className="text-right">
+				<Col className="text-right" md={2}>
 					<Button className="my-3" onClick={createProjectHandler}>
-						<i className="fas fa-plus"></i> Create Project
+						<i className="fas fa-plus"></i> Add User
 					</Button>
 				</Col>
 			</Row>
@@ -61,8 +58,8 @@ const ListProjectScreen = ({ history }) => {
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<Table striped hover responsive className="table-sm">
-					<thead className="table table-dark">
+				<Table striped responsive className="table-sm">
+					<thead>
 						<tr>
 							<th>Project</th>
 							<th>Client</th>

@@ -6,10 +6,12 @@ import {
 	assignProjectUser,
 	listProjectDetails,
 } from '../actions/projectActions';
+import FormContainer from '../components/FormContainer';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
-const Assignment = ({ projectId }) => {
+const Assignment = ({ match }) => {
+	const projectId = match.params.id;
 	const [assignee, setAssignee] = useState('');
 
 	const dispatch = useDispatch();
@@ -37,7 +39,9 @@ const Assignment = ({ projectId }) => {
 				dispatch(listProjectDetails(projectId));
 			}
 		}
-	}, [dispatch, project, projectId, success]);
+	}, []);
+
+	//dispatch, project, projectId, success
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -52,7 +56,7 @@ const Assignment = ({ projectId }) => {
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<>
+				<FormContainer>
 					<Form onSubmit={submitHandler} className="my-5">
 						<Form.Group>
 							<Row className="pl-3">
@@ -87,11 +91,11 @@ const Assignment = ({ projectId }) => {
 					) : (
 						<p>
 							<em>Assignees: </em>
-							{project &&
-								project.assignees.map((assignee) => assignee).join(', ')}
+							{/* {project &&
+								project.assignees.map((assignee) => assignee).join(', ')} */}
 						</p>
 					)}
-				</>
+				</FormContainer>
 			)}
 		</>
 	);

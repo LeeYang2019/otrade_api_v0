@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
-import Loader from '../components/Loader';
-import FormContainer from '../components/FormContainer';
-import { listProjectDetails, updateProject } from '../actions/projectActions';
-
-import { PROJECT_UPDATE_RESET } from '../constants/projectConstants';
-import Assignment from '../components/Assignment';
+import Message from '../../components/Message';
+import Loader from '../../components/Loader';
+import FormContainer from '../../components/FormContainer';
+import {
+	listProjectDetails,
+	updateProject,
+} from '../../actions/projectActions';
+import { PROJECT_UPDATE_RESET } from '../../constants/projectConstants';
 
 const ProjectEditScreen = ({ match, history }) => {
 	const projectId = match.params.id;
@@ -36,7 +37,7 @@ const ProjectEditScreen = ({ match, history }) => {
 		if (successUpdate) {
 			dispatch(listProjectDetails(projectId));
 			dispatch({ type: PROJECT_UPDATE_RESET });
-			history.push('/admin/projects');
+			//history.push('/admin/projects');
 		} else {
 			if (!project.projectName || project._id !== projectId) {
 				dispatch(listProjectDetails(projectId));
@@ -60,11 +61,8 @@ const ProjectEditScreen = ({ match, history }) => {
 
 	return (
 		<>
-			<Link to="/admin/projects" className="btn btn-dark my-3">
-				Back to Project List
-			</Link>
 			<FormContainer>
-				<h1>Edit Project</h1>
+				<h1 className="mt-3">Edit Project</h1>
 				{loadingUpdate && <Loader />}
 				{errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
 				{successUpdate && <Message variant="success">Profile Updated</Message>}
@@ -92,12 +90,11 @@ const ProjectEditScreen = ({ match, history }) => {
 								onChange={(e) => setProjectClient(e.target.value)}
 							></Form.Control>
 						</Form.Group>
-						<Button type="submit" variant="primary" className=" px-5">
+						<Button type="submit" variant="primary" className="px-5 mt-3">
 							Update
 						</Button>
 					</Form>
 				)}
-				{/* <Assignment projectId={projectId} /> */}
 			</FormContainer>
 		</>
 	);
