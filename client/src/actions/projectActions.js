@@ -151,7 +151,9 @@ export const assignProjectUser = (projectId, userId) => async (
 		};
 
 		//pass id, project, and config file to api
-		const { data } = await axios.put(
+		const {
+			data: { data },
+		} = await axios.put(
 			`/api/v1/users/${userId}/projects/${projectId}/assign`,
 			config
 		);

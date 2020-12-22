@@ -194,7 +194,7 @@ exports.assignUserToProject = async (req, res) => {
 		if (!project.assignees.includes(req.params.id)) {
 			project.assignees.push(req.params.id);
 			await project.save();
-			res.status(200).json({ success: true });
+			res.status(200).json({ success: true, data: project });
 		} else {
 			res.status(401);
 			throw new Error(
