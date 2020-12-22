@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import { Tabs, Tab, Row, Col } from 'react-bootstrap';
 import ProjectEditScreen from './ProjectEditScreen';
 import Assigment from '../../components/Assignment';
@@ -17,7 +17,11 @@ const ProjectUpdateScreen = ({ match, history }) => {
 							<ProjectEditScreen match={match} history={history} />
 						</Tab>
 						<Tab eventKey="assignments" title="Project Assignments">
-							<Assigment match={match} />
+							<Route
+								render={({ history }) => (
+									<Assigment history={history} match={match} />
+								)}
+							/>
 						</Tab>
 					</Tabs>
 				</Col>

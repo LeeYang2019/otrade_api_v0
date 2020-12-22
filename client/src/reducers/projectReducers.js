@@ -25,7 +25,12 @@ export const projectListReducer = (state = { projects: [] }, action) => {
 		case PROJECT_LIST_REQUEST:
 			return { loading: true, projects: [] };
 		case PROJECT_LIST_SUCCESS:
-			return { loading: false, projects: action.payload };
+			return {
+				loading: false,
+				projects: action.payload.projects,
+				pages: action.payload.pages,
+				page: action.payload.page,
+			};
 		case PROJECT_LIST_FAIL:
 			return { loading: false, error: action.payload };
 		default:
@@ -39,7 +44,11 @@ export const projectDetailsReducer = (state = { project: {} }, action) => {
 		case PROJECT_DETAILS_REQUEST:
 			return { loading: true, ...state };
 		case PROJECT_DETAILS_SUCCESS:
-			return { loading: false, project: action.payload };
+			return {
+				loading: false,
+				project: action.payload,
+				assignees: action.payload.assignees,
+			};
 		case PROJECT_DETAILS_FAIL:
 			return { loading: false, error: action.payload };
 		default:
@@ -86,7 +95,11 @@ export const projectUserAssignmentReducer = (
 		case PROJECT_ASSIGNMENT_REQUEST:
 			return { loading: true };
 		case PROJECT_ASSIGNMENT_SUCCESS:
-			return { loading: false, success: true, project: action.payload };
+			return {
+				loading: false,
+				success: true,
+				project: action.payload,
+			};
 		case PROJECT_ASSIGNMENT_FAIL:
 			return { loading: false, error: action.payload };
 		case PROJECT_ASSIGNMENT_RESET:

@@ -7,39 +7,63 @@ import Loader from '../../components/Loader.js';
 import SearchBox from '../../components/SearchBox';
 
 const ListActivitiesScreen = ({ projectId }) => {
-	const createProjectHandler = () => {};
+	const dispatch = useDispatch();
+
+	//get organizations
+
+	useEffect(() => {
+		//dispatch(listStakeholders(projectId));
+	}, [dispatch, projectId]);
+
 	return (
 		<>
 			<Row className="align-items-center mt-3">
 				<Col className="text-left" md={8}>
 					<Route
 						render={({ history }) => (
-							<SearchBox history={history} searchWord={'Activity'} />
+							<SearchBox history={history} searchWord={'Stakeholder'} />
 						)}
 					/>
 				</Col>
 				<Col className="text-right" md={4}>
 					<Link to="/admin/projects" className="btn btn-primary my-3">
-						<i className="fas fa-plus"></i> Register Activity
+						<i className="fas fa-plus"></i> Register Stakeholder
 					</Link>
 				</Col>
 			</Row>
-			<Table striped hover responsive className="table-sm mt-3">
-				<thead className="table table-dark">
-					<tr>
-						<th>Full Name</th>
-						<th>Email</th>
-						<th>Telephone</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>{projectId}</td>
-						<td>{projectId}</td>
-						<td>{projectId}</td>
-					</tr>
-				</tbody>
-			</Table>
+			{/* {loading ? (
+				<Loader />
+			) : error ? (
+				<Message>{error}</Message>
+			) : (
+				<Table hover responsive className="table-sm mt-3">
+					<tbody>
+						{stakeholders.map((person) => (
+							<tr key={person._id}>
+								<td>
+									<p className="mr-3">
+										<strong>Stakeholder: </strong>
+										<Link to={`/stakeholder/${person._id}`}>
+											{person.lastName}, {person.firstName}
+										</Link>
+										<br />
+										Email: <em> {person.email}</em>
+										<br />
+										Telephone: {person.telephone}
+										<br />
+										Registered Date:{' '}
+										<strong>
+											{' '}
+											{person.createdAt &&
+												person.createdAt.substring(0, 10)}{' '}
+										</strong>
+									</p>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</Table>
+			)} */}
 		</>
 	);
 };

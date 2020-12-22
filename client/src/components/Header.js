@@ -17,7 +17,7 @@ const Header = ({ history }) => {
 	return (
 		<header>
 			<Navbar
-				bg="warning"
+				bg="primary"
 				variant="dark"
 				expand="lg"
 				collapseOnSelect

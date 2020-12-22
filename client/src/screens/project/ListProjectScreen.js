@@ -7,36 +7,35 @@ import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import { listProjects } from '../../actions/projectActions';
 import SearchBox from '../../components/SearchBox';
+import Paginate from '../../components/Paginate';
 
 const ListProjectScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
+	const pageNumber = match.params.pageNumber || 1;
 
 	const dispatch = useDispatch();
 
-	//list of projects
 	const projectList = useSelector((state) => state.projectList);
-	const { loading, projects, error } = projectList;
+	const { loading, error, projects, page, pages } = projectList;
 
-	//get current user information
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
 	useEffect(() => {
-		if (userInfo && userInfo.role === 'admin') {
-			dispatch(listProjects(keyword));
-		} else {
+		if (userInfo && userInfo.role !== 'admin') {
 			history.push('/login');
+		} else {
+			dispatch(listProjects(keyword, pageNumber));
 		}
-	}, [dispatch, history, userInfo, keyword]);
+	}, [dispatch, history, userInfo, keyword, pageNumber]);
 
-	//delete project
 	const deleteHandler = (id) => {
 		console.log('delete');
 	};
 
 	return (
 		<>
-			<Row className="align-items-center">
+			<Row className="align-items-center ">
 				<Col md={3}>
 					<h1>Projects</h1>
 				</Col>
@@ -63,48 +62,73 @@ const ListProjectScreen = ({ history, match }) => {
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<Table hover responsive className="table-sm mt-3">
-					<tbody>
-						{projects.map((project) => (
-							<tr key={project._id}>
-								<td>
-									<p>
-										<strong>Project: </strong>
-										<Link to={`/project/${project._id}`}>
-											{project.projectName}
-										</Link>
-										<br />
-										Client: <em>{project.projectClient}</em>
-										<br />
-										Created Date:{' '}
-										<strong>{project.createdAt.substring(0, 10)}</strong>
-										<br />
-										Assigned:{' '}
-										{project.assignees.length === 0 ? (
-											<strong>No Assignment</strong>
-										) : (
-											project.assignees.map((a) => a).join(', ')
-										)}
-									</p>
-								</td>
-								<td className="text-right pr-4 align-middle">
-									<LinkContainer to={`/admin/project/${project._id}/edit`}>
-										<Button variant="light" className="btn-md ml-3">
-											<i className="fas fa-edit"></i>
+				<Row>
+					<Table hover responsive className="table-sm mt-3">
+						<tbody>
+							{projects.map((project) => (
+								<tr key={project._id}>
+									<td>
+										<Row>
+											<Col>
+												<p>
+													<strong>Project: </strong>
+													<Link to={`/project/${project._id}`}>
+														{project.projectName}
+													</Link>
+													<br />
+													Client: <em>{project.projectClient}</em>
+													<br />
+													Created Date:{' '}
+													<strong>{project.createdAt.substring(0, 10)}</strong>
+												</p>
+											</Col>
+											<Col className="text-left">
+												<p className="mr-3">
+													<strong>Status: </strong>
+													Active
+												</p>
+											</Col>
+										</Row>
+										<Row>
+											<Col>
+												<p>
+													Assigned:{' '}
+													{project.assignees.length === 0 ? (
+														<strong>No Assignment</strong>
+													) : (
+														project.assignees.map((a) => a).join(', ')
+													)}
+												</p>
+											</Col>
+										</Row>
+									</td>
+									<td className="text-right pr-4 align-middle">
+										<LinkContainer to={`/admin/project/${project._id}/edit`}>
+											<Button variant="light" className="btn-md ml-3">
+												<i className="fas fa-edit"></i>
+											</Button>
+										</LinkContainer>
+										<Button
+											variant="danger"
+											className="btn-md ml-3 "
+											onClick={() => deleteHandler(project._id)}
+										>
+											<i className="fas fa-trash"></i>
 										</Button>
-									</LinkContainer>
-									<Button
-										variant="danger"
-										className="btn-md ml-3 "
-										onClick={() => deleteHandler(project._id)}
-									>
-										<i className="fas fa-trash"></i>
-									</Button>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</Table>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</Table>
+					<Row className="m-auto">
+						<Paginate
+							pages={pages}
+							page={page}
+							urlOne={'/admin/projects/search/'}
+							urlTwo={'/admin/projects/page/'}
+						/>
+					</Row>
+				</Row>
 			)}
 		</>
 	);

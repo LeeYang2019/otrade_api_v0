@@ -17,7 +17,10 @@ import {
 	PROJECT_ASSIGNMENT_FAIL,
 } from '../constants/projectConstants';
 
-export const listProjects = (keyword = '') => async (dispatch, getState) => {
+export const listProjects = (keyword = '', pageNumber = '') => async (
+	dispatch,
+	getState
+) => {
 	try {
 		dispatch({ type: PROJECT_LIST_REQUEST });
 
@@ -32,7 +35,7 @@ export const listProjects = (keyword = '') => async (dispatch, getState) => {
 		};
 
 		const { data } = await axios.get(
-			`/api/v1/projects?keyword=${keyword}`,
+			`/api/v1/projects?keyword=${keyword}&pageNumber=${pageNumber}`,
 			config
 		);
 

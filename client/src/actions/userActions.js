@@ -148,7 +148,10 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 };
 
 //list all users in the db
-export const listUsers = (keyword = '') => async (dispatch, getState) => {
+export const listUsers = (keyword = '', pageNumber = '') => async (
+	dispatch,
+	getState
+) => {
 	try {
 		dispatch({ type: USER_LIST_REQUEST });
 
@@ -162,9 +165,10 @@ export const listUsers = (keyword = '') => async (dispatch, getState) => {
 			},
 		};
 
-		const {
-			data: { data },
-		} = await axios.get(`/api/v1/users?keyword=${keyword}`, config);
+		const { data } = await axios.get(
+			`/api/v1/users?keyword=${keyword}&pageNumber=${pageNumber}`,
+			config
+		);
 
 		dispatch({ type: USER_LIST_SUCCESS, payload: data });
 	} catch (error) {

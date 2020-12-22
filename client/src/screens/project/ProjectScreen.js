@@ -52,8 +52,13 @@ const ProjectScreen = ({ history, match }) => {
 								<h2>Project</h2>
 							</Card.Header>
 							<Card.Body>
-								<p>Project: {project.projectName}</p>
-								<p>Client: {project.projectClient}</p>
+								<p>
+									Project: {project.projectName}
+									<br />
+									Client: <em>{project.projectClient}</em>
+									<br />
+									Location: <strong>TBD</strong>
+								</p>
 							</Card.Body>
 						</Card>
 					)}

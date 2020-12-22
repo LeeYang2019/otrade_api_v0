@@ -6,7 +6,6 @@ import Loader from '../components/Loader.js';
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
 
 const ProfileScreen = ({ location, history }) => {
-	//define states
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [email, setEmail] = useState('');
@@ -31,11 +30,9 @@ const ProfileScreen = ({ location, history }) => {
 		if (!userInfo) {
 			history.push('/login');
 		} else {
-			//if user.name does not exist, fetch data
 			if (!user.firstName) {
 				dispatch(getUserDetails('profile'));
 			} else {
-				//after fetching, set name & email
 				setFirstName(user.firstName);
 				setLastName(user.email);
 			}

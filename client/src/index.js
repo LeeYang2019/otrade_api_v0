@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-import './index.css';
-import './bootstrap.min.css';
+import './style/index.css';
+import './style/bootstrap.min1.css';
 import App from './App';
 
 ReactDOM.render(

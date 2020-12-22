@@ -93,6 +93,9 @@ exports.updateMyUserProfile = asyncHandler(async (req, res) => {
 // @route   GET /api/v1/users
 // @access  Private/admin
 exports.getUsers = asyncHandler(async (req, res) => {
+	const pageSize = 5;
+	const page = Number(req.query.pageNumber) || 1;
+
 	const keyword = req.query.keyword
 		? {
 				lastName: {
@@ -102,10 +105,13 @@ exports.getUsers = asyncHandler(async (req, res) => {
 		  }
 		: {};
 
+	const count = await User.countDocuments({ ...keyword });
 	const users = await User.find({ ...keyword })
 		.select('-password')
-		.sort({ lastName: 1 });
-	res.status(200).json({ success: true, data: users });
+		.sort({ lastName: 1 })
+		.limit(pageSize)
+		.skip(pageSize * (page - 1));
+	res.status(200).json({ users, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc    Get a user

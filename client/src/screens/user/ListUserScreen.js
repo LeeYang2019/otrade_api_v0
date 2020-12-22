@@ -7,38 +7,35 @@ import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import { listUsers } from '../../actions/userActions';
 import SearchBox from '../../components/SearchBox';
+import Paginate from '../../components/Paginate';
 
 const ListUserScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
-	//const pageNumber = match.params.pageNumber || 1;
+	const pageNumber = match.params.pageNumber || 1;
 
 	const dispatch = useDispatch();
 
-	//get list of users
 	const userList = useSelector((state) => state.userList);
-	const { loading, error, users } = userList;
+	const { loading, error, users, page, pages } = userList;
 
-	//get logged in user
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
 	useEffect(() => {
-		// if logged in user exists and role is admin
-		if (userInfo && userInfo.role === 'admin') {
-			dispatch(listUsers(keyword));
-		} else {
+		if (userInfo && userInfo.role !== 'admin') {
 			history.push('/login');
+		} else {
+			dispatch(listUsers(keyword, pageNumber));
 		}
-	}, [dispatch, history, userInfo, keyword]);
+	}, [dispatch, history, userInfo, keyword, pageNumber]);
 
-	//delete user
 	const deleteHandler = (id) => {
 		console.log('delete');
 	};
 
 	return (
 		<>
-			<Row className="align-items-center">
+			<Row className="align-items-center ">
 				<Col md={3}>
 					<h1>Users</h1>
 				</Col>
@@ -65,49 +62,59 @@ const ListUserScreen = ({ history, match }) => {
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<Table hover responsive className="table-sm mt-3">
-					<tbody>
-						{users.map((user) => (
-							<tr key={user._id}>
-								<td>
-									<p>
-										<strong>User: </strong>
-										<Link to={`/profile/${user._id}`}>
-											{user.lastName}, {user.firstName}
-										</Link>
-										<br />
-										Email:{' '}
-										<em>
-											<a href={`mailto:${user.email}`}>{user.email}</a>
-										</em>
-										<br />
-										Role:{' '}
-										<strong>
-											<em>{user.role}</em>
-										</strong>
-										<br />
-										Created Date:{' '}
-										<strong>{user.createdAt.substring(0, 10)}</strong> <br />
-									</p>
-								</td>
-								<td className="text-right pr-4 align-middle">
-									<LinkContainer to={`/profile/${user._id}`}>
-										<Button variant="light" className="btn-md ml-3 ">
-											<i className="fas fa-edit"></i>
+				<Row>
+					<Table hover responsive className="table-sm mt-3">
+						<tbody>
+							{users.map((user) => (
+								<tr key={user._id}>
+									<td>
+										<p>
+											<strong>User: </strong>
+											<Link to={`/profile/${user._id}`}>
+												{user.lastName}, {user.firstName}
+											</Link>
+											<br />
+											Email:{' '}
+											<em>
+												<a href={`mailto:${user.email}`}>{user.email}</a>
+											</em>
+											<br />
+											Role:{' '}
+											<strong>
+												<em>{user.role}</em>
+											</strong>
+											<br />
+											Created Date:{' '}
+											<strong>{user.createdAt.substring(0, 10)}</strong> <br />
+										</p>
+									</td>
+									<td className="text-right pr-4 align-middle">
+										<LinkContainer to={`/profile/${user._id}`}>
+											<Button variant="light" className="btn-md ml-3 ">
+												<i className="fas fa-edit"></i>
+											</Button>
+										</LinkContainer>
+										<Button
+											variant="danger"
+											className="btn-md ml-3"
+											onClick={() => deleteHandler(user._id)}
+										>
+											<i className="fas fa-trash"></i>
 										</Button>
-									</LinkContainer>
-									<Button
-										variant="danger"
-										className="btn-md ml-3"
-										onClick={() => deleteHandler(user._id)}
-									>
-										<i className="fas fa-trash"></i>
-									</Button>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</Table>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</Table>
+					<Row className="m-auto">
+						<Paginate
+							pages={pages}
+							page={page}
+							urlOne={'/admin/userList/search/'}
+							urlTwo={'/admin/userList/page/'}
+						/>
+					</Row>
+				</Row>
 			)}
 		</>
 	);

@@ -37,7 +37,17 @@ const App = () => {
 					<Route exact path="/admin/userlist" component={ListUserScreen} />
 					<Route
 						exact
-						path="/admin/userlist/search/:keyword"
+						path="/admin/userlist/search/:keyword" //just keyword
+						component={ListUserScreen}
+					/>
+					<Route
+						exact
+						path="/admin/userlist/page/:pageNumber" //just pageNumber
+						component={ListUserScreen}
+					/>
+					<Route
+						exact
+						path="/admin/userlist/search/:keyword/page/:pageNumber" //keyword & pageNumber
 						component={ListUserScreen}
 					/>
 
@@ -45,10 +55,19 @@ const App = () => {
 					<Route exact path="/admin/projects" component={ListProjectScreen} />
 					<Route
 						exact
-						path="/admin/projects/search/:keyword"
+						path="/admin/projects/search/:keyword" //just keyword
 						component={ListProjectScreen}
 					/>
-
+					<Route
+						exact
+						path="/admin/projects/page/:pageNumber" //just pageNumber
+						component={ListProjectScreen}
+					/>
+					<Route
+						exact
+						path="/admin/projects/search/:keyword/page/:pageNumber" //keyword & pageNumber
+						component={ListProjectScreen}
+					/>
 					<Route
 						exact
 						path="/admin/project/:id/edit"
