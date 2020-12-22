@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
-// import { listUsers } from '../actions/userActions';
 import { listProjects } from '../../actions/projectActions';
 import SearchBox from '../../components/SearchBox';
 
@@ -38,7 +37,7 @@ const ListProjectScreen = ({ history }) => {
 		<>
 			<Row className="align-items-center">
 				<Col md={3}>
-					<h1>Users</h1>
+					<h1>Projects</h1>
 				</Col>
 				<Col md={7}>
 					<Route
@@ -58,32 +57,38 @@ const ListProjectScreen = ({ history }) => {
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<Table striped responsive className="table-sm">
-					<thead>
-						<tr>
-							<th>Project</th>
-							<th>Client</th>
-							<th>Assigned</th>
-							<th></th>
-						</tr>
-					</thead>
+				<Table hover responsive className="table-sm mt-3">
 					<tbody>
 						{projects.map((project) => (
 							<tr key={project._id}>
-								<td>{project.projectName}</td>
-								<td>{project.projectClient}</td>
 								<td>
-									{project.assignees.map((assignee) => assignee).join(', ')}
+									<p>
+										<strong>Project: </strong>
+										<Link to={`/project/${project._id}`}>
+											{project.projectName}
+										</Link>
+										<br />
+										<em>Client:</em> {project.projectClient}
+										<br />
+										<em>Created Date: </em> {project.createdAt}
+										<br />
+										<em>Assigned: </em>{' '}
+										{project.assignees.length === 0 ? (
+											<strong>No Assignment</strong>
+										) : (
+											project.assignees.map((a) => a).join(', ')
+										)}
+									</p>
 								</td>
-								<td>
+								<td className="text-right pr-4">
 									<LinkContainer to={`/admin/project/${project._id}/edit`}>
-										<Button variant="light" className="btn-sm ml-3">
+										<Button variant="light" className="btn-md ml-3 mt-5">
 											<i className="fas fa-edit"></i>
 										</Button>
 									</LinkContainer>
 									<Button
 										variant="danger"
-										className="btn-sm ml-3"
+										className="btn-md ml-3 mt-5"
 										onClick={() => deleteHandler(project._id)}
 									>
 										<i className="fas fa-trash"></i>

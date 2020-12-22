@@ -12,13 +12,12 @@ const Header = ({ history }) => {
 
 	const logoutHandler = () => {
 		dispatch(logout());
-		//history.push('/login');
 	};
 
 	return (
 		<header>
 			<Navbar
-				bg="primary"
+				bg="warning"
 				variant="dark"
 				expand="lg"
 				collapseOnSelect

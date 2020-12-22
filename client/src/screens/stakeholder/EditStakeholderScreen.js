@@ -13,8 +13,10 @@ const EditStakeholderScreen = ({ userId }) => {
 	const [gender, setGender] = useState('');
 	const [birthdate, setBirthdate] = useState('');
 	const [email, setEmail] = useState('');
+	const [ethnicity, setEthnicity] = useState('');
 
 	const [organization, setOrganization] = useState('');
+	const [community, setCommunity] = useState('');
 
 	const dispatch = useDispatch();
 
@@ -103,6 +105,17 @@ const EditStakeholderScreen = ({ userId }) => {
 								></Form.Control>
 							</Form.Group>
 						</Col>
+						<Col md={4}>
+							<Form.Group controlId="ethnicity">
+								<Form.Label>Ethnicity</Form.Label>
+								<Form.Control
+									type="ethnicity"
+									placeholder="Enter ethnicity"
+									value={ethnicity}
+									onChange={(e) => setEthnicity(e.target.value)}
+								></Form.Control>
+							</Form.Group>
+						</Col>
 					</Row>
 					<Row>
 						<Col md={8}>
@@ -137,6 +150,17 @@ const EditStakeholderScreen = ({ userId }) => {
 									placeholder="--select--"
 									value={organization}
 									onChange={(e) => setOrganization(e.target.value)}
+								></Form.Control>
+							</Form.Group>
+						</Col>
+						<Col md={4}>
+							<Form.Group controlId="community">
+								<Form.Label>Community</Form.Label>
+								<Form.Control
+									type="community"
+									placeholder="--select--"
+									value={community}
+									onChange={(e) => setCommunity(e.target.value)}
 								></Form.Control>
 							</Form.Group>
 						</Col>

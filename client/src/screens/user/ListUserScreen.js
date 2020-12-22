@@ -8,7 +8,10 @@ import Loader from '../../components/Loader.js';
 import { listUsers } from '../../actions/userActions';
 import SearchBox from '../../components/SearchBox';
 
-const ListUserScreen = ({ history }) => {
+const ListUserScreen = ({ history, match }) => {
+	const keyword = match.params.keyword;
+	const pageNumber = match.params.pageNumber || 1;
+
 	const dispatch = useDispatch();
 
 	//get list of users
@@ -58,38 +61,35 @@ const ListUserScreen = ({ history }) => {
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<Table striped bordered hover responsive className="table-sm mt-2">
-					<thead className="table table-dark">
-						<tr>
-							<th>Full Name</th>
-							<th>Email</th>
-							<th>Telephone</th>
-							<th>Role</th>
-							<th></th>
-						</tr>
-					</thead>
+				<Table hover responsive className="table-sm mt-3 ">
 					<tbody>
 						{users.map((user) => (
 							<tr key={user._id}>
 								<td>
-									<Link to={`/profile/${user._id}`}>
-										{user.firstName} {user.lastName}
-									</Link>
+									<p>
+										<strong>User: </strong>
+										<Link to={`/profile/${user._id}`}>
+											{user.lastName}, {user.firstName}
+										</Link>
+										<br />
+										<em>Email: </em>{' '}
+										<a href={`mailto:${user.email}`}>{user.email}</a>
+										<br />
+										<em>Role: </em> <strong>{user.role}</strong>
+										<br />
+										<em>Created Date: </em> <strong>{user.createdAt}</strong>{' '}
+										<br />
+									</p>
 								</td>
-								<td>
-									<a href={`mailto:${user.email}`}>{user.email}</a>{' '}
-								</td>
-								<td></td>
-								<td>{user.role}</td>
-								<td>
+								<td className="text-right pr-4">
 									<LinkContainer to={`/profile/${user._id}`}>
-										<Button variant="light" className="btn-sm ml-3">
+										<Button variant="light" className="btn-md ml-3 mt-5">
 											<i className="fas fa-edit"></i>
 										</Button>
 									</LinkContainer>
 									<Button
 										variant="danger"
-										className="btn-sm ml-3"
+										className="btn-md ml-3 mt-5"
 										onClick={() => deleteHandler(user._id)}
 									>
 										<i className="fas fa-trash"></i>

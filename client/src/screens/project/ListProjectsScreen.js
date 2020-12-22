@@ -6,7 +6,6 @@ import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import { listUserProjects } from '../../actions/projectActions';
 import { Link } from 'react-router-dom';
-import SearchBox from '../../components/SearchBox';
 
 const ListProjectsScreen = ({ history, userId }) => {
 	const dispatch = useDispatch();
@@ -35,24 +34,25 @@ const ListProjectsScreen = ({ history, userId }) => {
 				<Message>{error}</Message>
 			) : (
 				<>
-					<Table striped hover responsive className="table-sm mt-5">
-						<thead className="table table-dark">
-							<tr>
-								<th>Project</th>
-								<th>Client</th>
-								<th>Date Created</th>
-							</tr>
-						</thead>
+					<Table hover responsive className="table-sm mt-5">
 						<tbody>
 							{projects.map((project) => (
 								<tr key={project._id}>
 									<td>
-										<Link to={`/project/${project._id}`}>
-											{project.projectName}
-										</Link>
+										<p>
+											<strong>Project: </strong>
+											<Link to={`/project/${project._id}`}>
+												{project.projectName}
+											</Link>
+											<br />
+											<em>Client:</em> {project.projectClient}
+											<br />
+											<em>Created Date: </em> {project.createdAt}
+											<br />
+											<em>Assigned: </em>{' '}
+											{project.assignees.map((a) => a).join(', ')}
+										</p>
 									</td>
-									<td>{project.projectClient}</td>
-									<td>{project.createdAt}</td>
 								</tr>
 							))}
 						</tbody>

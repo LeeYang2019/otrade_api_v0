@@ -42,23 +42,23 @@ const ListStakeholdersScreen = ({ projectId }) => {
 				<Message>{error}</Message>
 			) : (
 				<Table hover responsive className="table-sm mt-3">
-					<thead className="table table-dark">
-						<tr>
-							<th>Full Name</th>
-							<th>Email</th>
-							<th>Telephone</th>
-						</tr>
-					</thead>
+					<hr className="mx-3" />
 					<tbody>
 						{stakeholders.map((person) => (
 							<tr key={person._id}>
-								<td>
+								<p className="mr-3">
+									<strong>Stakeholder: </strong>
 									<Link to={`/stakeholder/${person._id}`}>
 										{person.lastName}, {person.firstName}
 									</Link>
-								</td>
-								<td>{person.email}</td>
-								<td>{person.telephone}</td>
+									<br />
+									<em>Email: </em> {person.email}
+									<br />
+									<em>Telephone: </em> {person.telephone}
+									<br />
+									<em>Registered Date: </em> {person.createdAt}
+									<hr />
+								</p>
 							</tr>
 						))}
 					</tbody>

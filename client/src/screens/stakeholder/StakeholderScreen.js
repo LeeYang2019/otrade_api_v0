@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import EditStakeholderScreen from './EditStakeholderScreen';
+import CommentsScreen from '../CommentsScreen';
 
 const StakeholderScreen = ({ location, history, match }) => {
 	let userId = match.params.id;
@@ -57,11 +58,18 @@ const StakeholderScreen = ({ location, history, match }) => {
 					{/* )} */}
 				</Col>
 				<Col md={8}>
-					<Tabs defaultActiveKey="stakeholderDetails" id="tabs" variant="tabs">
+					<Tabs
+						defaultActiveKey="stakeholderDetails"
+						id="tabs"
+						variant="tabs"
+						bg="primary"
+					>
 						<Tab eventKey="stakeholderDetails" title="Details">
 							<EditStakeholderScreen />
 						</Tab>
-						<Tab eventKey="comments" title="Comments"></Tab>
+						<Tab eventKey="comments" title="Comments">
+							<CommentsScreen />
+						</Tab>
 					</Tabs>
 				</Col>
 			</Row>
