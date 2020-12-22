@@ -47,16 +47,21 @@ const UserProfileScreen = ({ location, history, match }) => {
 						</Card.Header>
 						<Card.Body>
 							<p>
-								Name: {user.firstName} {user.lastName}
+								<strong>Name: </strong>{' '}
+								<em>
+									{user.firstName} {user.lastName}
+								</em>
+								<br />
+								<strong>Email: </strong> <em>{user.email}</em>
+								<br />
+								<strong>Role: </strong> <em>{user.role}</em>
 							</p>
-							<p>Email: {user.email}</p>
-							<p>Role: {user.role}</p>
 						</Card.Body>
 					</Card>
 				)}
 			</Col>
 			<Col md={8}>
-				<Tabs defaultActiveKey="projects" id="tabs" variant="tabs">
+				<Tabs defaultActiveKey="projects" id="tabs" variant="tabs" className="">
 					<Tab eventKey="userDetails" title="User Details">
 						<EditUserProfileScreen userId={user._id} />
 					</Tab>

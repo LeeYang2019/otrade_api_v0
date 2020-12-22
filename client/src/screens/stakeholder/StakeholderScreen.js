@@ -9,6 +9,7 @@ import CommentsScreen from '../CommentsScreen';
 
 const StakeholderScreen = ({ location, history, match }) => {
 	let userId = match.params.id;
+	let projectId = match.params.projectId;
 
 	// const dispatch = useDispatch();
 
@@ -33,7 +34,10 @@ const StakeholderScreen = ({ location, history, match }) => {
 
 	return (
 		<>
-			<Link to={`/project/`} className="btn btn-primary my-3">
+			<Link
+				to={`/profile/${userId}/project/${projectId}`}
+				className="btn btn-primary my-3"
+			>
 				Previous Page
 			</Link>
 			<Row>

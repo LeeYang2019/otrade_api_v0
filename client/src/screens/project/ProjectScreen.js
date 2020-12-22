@@ -11,7 +11,8 @@ import ProjectDetailsScreen from './ProjectDetailsScreen';
 import { listProjectDetails } from '../../actions/projectActions';
 
 const ProjectScreen = ({ history, match }) => {
-	const projectId = match.params.id;
+	const projectId = match.params.projectId;
+	const userId = match.params.id;
 
 	// get userDispatch
 	const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const ProjectScreen = ({ history, match }) => {
 
 	return (
 		<>
-			<Link to={`/profile/`} className="btn btn-primary my-3">
+			<Link to={`/profile/${userId}`} className="btn btn-primary my-3">
 				Previous Page
 			</Link>
 			<Row>

@@ -102,7 +102,9 @@ exports.getUsers = asyncHandler(async (req, res) => {
 		  }
 		: {};
 
-	const users = await User.find({ ...keyword }).select('-password');
+	const users = await User.find({ ...keyword })
+		.select('-password')
+		.sort({ lastName: 1 });
 	res.status(200).json({ success: true, data: users });
 });
 

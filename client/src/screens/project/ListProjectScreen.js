@@ -8,7 +8,9 @@ import Loader from '../../components/Loader.js';
 import { listProjects } from '../../actions/projectActions';
 import SearchBox from '../../components/SearchBox';
 
-const ListProjectScreen = ({ history }) => {
+const ListProjectScreen = ({ history, match }) => {
+	const keyword = match.params.keyword;
+
 	const dispatch = useDispatch();
 
 	//list of projects
@@ -21,17 +23,16 @@ const ListProjectScreen = ({ history }) => {
 
 	useEffect(() => {
 		if (userInfo && userInfo.role === 'admin') {
-			dispatch(listProjects());
+			dispatch(listProjects(keyword));
 		} else {
 			history.push('/login');
 		}
-	}, [dispatch, history, userInfo]);
-
-	//create a new project
-	const createProjectHandler = () => {};
+	}, [dispatch, history, userInfo, keyword]);
 
 	//delete project
-	const deleteHandler = (id) => {};
+	const deleteHandler = (id) => {
+		console.log('delete');
+	};
 
 	return (
 		<>
@@ -52,9 +53,9 @@ const ListProjectScreen = ({ history }) => {
 					/>
 				</Col>
 				<Col className="text-right" md={2}>
-					<Button className="my-3" onClick={createProjectHandler}>
-						<i className="fas fa-plus"></i> Add User
-					</Button>
+					<Link to="/admin/projects" className="btn btn-primary my-3">
+						<i className="fas fa-plus"></i> Register Project
+					</Link>
 				</Col>
 			</Row>
 			{loading ? (
@@ -73,11 +74,11 @@ const ListProjectScreen = ({ history }) => {
 											{project.projectName}
 										</Link>
 										<br />
-										<em>Client:</em> {project.projectClient}
+										Client: <em>{project.projectClient}</em>
 										<br />
-										<em>Created Date: </em> {project.createdAt}
+										Created Date: <strong>{project.createdAt}</strong>
 										<br />
-										<em>Assigned: </em>{' '}
+										Assigned:{' '}
 										{project.assignees.length === 0 ? (
 											<strong>No Assignment</strong>
 										) : (
@@ -85,15 +86,15 @@ const ListProjectScreen = ({ history }) => {
 										)}
 									</p>
 								</td>
-								<td className="text-right pr-4">
+								<td className="text-right pr-4 align-middle">
 									<LinkContainer to={`/admin/project/${project._id}/edit`}>
-										<Button variant="light" className="btn-md ml-3 mt-5">
+										<Button variant="light" className="btn-md ml-3">
 											<i className="fas fa-edit"></i>
 										</Button>
 									</LinkContainer>
 									<Button
 										variant="danger"
-										className="btn-md ml-3 mt-5"
+										className="btn-md ml-3 "
 										onClick={() => deleteHandler(project._id)}
 									>
 										<i className="fas fa-trash"></i>

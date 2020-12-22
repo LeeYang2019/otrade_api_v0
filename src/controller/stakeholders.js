@@ -9,7 +9,7 @@ const Stakeholder = require('../model/Stakeholder');
 exports.getStakeholders = asyncHandler(async (req, res, next) => {
 	const stakeholders = await Stakeholder.find({
 		project: req.params.projectId,
-	});
+	}).sort({ lastName: 1 });
 
 	if (!stakeholders) {
 		res.status(401);

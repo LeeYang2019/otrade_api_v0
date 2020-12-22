@@ -19,7 +19,7 @@ const LoginScreen = ({ location, history }) => {
 
 	useEffect(() => {
 		if (userInfo) {
-			history.push(`/profile`);
+			history.push(`/profile/${userInfo._id}`);
 		}
 	}, [history, userInfo]);
 

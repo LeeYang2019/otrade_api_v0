@@ -22,8 +22,13 @@ const App = () => {
 					<Route exact path="/login" component={LoginScreen} />
 					<Route exact path="/" component={HomeScreen} />
 
+					{/* userProfile paths */}
 					<Route exact path="/profile/:id" component={UserProfileScreen} />
-					<Route exact path="/project/:id" component={ProjectScreen} />
+					<Route
+						exact
+						path="/profile/:id/project/:projectId"
+						component={ProjectScreen}
+					/>
 					<Route exact path="/stakeholder/:id" component={StakeholderScreen} />
 					<Route exact path="/organization/:id" component={StakeholderScreen} />
 					<Route exact path="/activity/:id" component={StakeholderScreen} />

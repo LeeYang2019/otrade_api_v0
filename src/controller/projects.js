@@ -18,7 +18,7 @@ exports.getProjects = asyncHandler(async (req, res) => {
 		  }
 		: {};
 
-	const projects = await Project.find({ ...keyword });
+	const projects = await Project.find({ ...keyword }).sort({ projectName: 1 });
 	res.status(200).json(projects);
 });
 

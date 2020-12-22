@@ -11,6 +11,8 @@ const EditUserProfileScreen = ({ userId }) => {
 	const [lastName, setLastName] = useState('');
 	const [telephone, setTelephone] = useState('');
 	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
 
 	const dispatch = useDispatch();
 
@@ -100,7 +102,32 @@ const EditUserProfileScreen = ({ userId }) => {
 							</Form.Group>
 						</Col>
 					</Row>
-					<Button type="submit" variant="primary" className="mt-3 px-5">
+					<hr className="my-4" />
+					<Row>
+						<Col md={6}>
+							<Form.Group controlId="password">
+								<Form.Label>Password</Form.Label>
+								<Form.Control
+									type="password"
+									placeholder="Enter Password"
+									value={password}
+									onChange={(e) => setPassword(e.target.value)}
+								></Form.Control>
+							</Form.Group>
+						</Col>
+						<Col md={6}>
+							<Form.Group controlId="confirmPassword">
+								<Form.Label>Retype Password</Form.Label>
+								<Form.Control
+									type="confirmPassword"
+									placeholder="Retype Password"
+									value={confirmPassword}
+									onChange={(e) => setConfirmPassword(e.target.value)}
+								></Form.Control>
+							</Form.Group>
+						</Col>
+					</Row>
+					<Button type="submit" variant="primary" className="mt-4 px-5">
 						Update
 					</Button>
 				</Form>

@@ -31,10 +31,7 @@ const ListUserScreen = ({ history, match }) => {
 		}
 	}, [dispatch, history, userInfo, keyword]);
 
-	const createUserHandler = () => {
-		console.log('create user');
-	};
-
+	//delete user
 	const deleteHandler = (id) => {
 		console.log('delete');
 	};
@@ -68,7 +65,7 @@ const ListUserScreen = ({ history, match }) => {
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<Table hover responsive className="table-sm mt-3 ">
+				<Table hover responsive className="table-sm mt-3">
 					<tbody>
 						{users.map((user) => (
 							<tr key={user._id}>
@@ -79,24 +76,28 @@ const ListUserScreen = ({ history, match }) => {
 											{user.lastName}, {user.firstName}
 										</Link>
 										<br />
-										<em>Email: </em>{' '}
-										<a href={`mailto:${user.email}`}>{user.email}</a>
+										Email:{' '}
+										<em>
+											<a href={`mailto:${user.email}`}>{user.email}</a>
+										</em>
 										<br />
-										<em>Role: </em> <strong>{user.role}</strong>
+										Role:{' '}
+										<strong>
+											<em>{user.role}</em>
+										</strong>
 										<br />
-										<em>Created Date: </em> <strong>{user.createdAt}</strong>{' '}
-										<br />
+										Created Date: <strong>{user.createdAt}</strong> <br />
 									</p>
 								</td>
-								<td className="text-right pr-4">
+								<td className="text-right pr-4 align-middle">
 									<LinkContainer to={`/profile/${user._id}`}>
-										<Button variant="light" className="btn-md ml-3 mt-5">
+										<Button variant="light" className="btn-md ml-3 ">
 											<i className="fas fa-edit"></i>
 										</Button>
 									</LinkContainer>
 									<Button
 										variant="danger"
-										className="btn-md ml-3 mt-5"
+										className="btn-md ml-3"
 										onClick={() => deleteHandler(user._id)}
 									>
 										<i className="fas fa-trash"></i>

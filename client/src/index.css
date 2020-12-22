@@ -16,6 +16,10 @@ p {
 	padding-left: 1rem;
 }
 
+p a {
+	color: #14759c !important;
+}
+
 h2 {
 	font-size: 1.4rem;
 	padding: 0.5rem 0;

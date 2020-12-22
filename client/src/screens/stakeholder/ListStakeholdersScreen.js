@@ -52,11 +52,11 @@ const ListStakeholdersScreen = ({ projectId }) => {
 										{person.lastName}, {person.firstName}
 									</Link>
 									<br />
-									<em>Email: </em> {person.email}
+									Email: <em> {person.email}</em>
 									<br />
-									<em>Telephone: </em> {person.telephone}
+									Telephone: {person.telephone}
 									<br />
-									<em>Registered Date: </em> {person.createdAt}
+									Registered Date: <em> {person.createdAt} </em>
 									<hr />
 								</p>
 							</tr>

@@ -41,7 +41,7 @@ const ListProjectsScreen = ({ history, userId }) => {
 									<td>
 										<p>
 											<strong>Project: </strong>
-											<Link to={`/project/${project._id}`}>
+											<Link to={`/profile/${userId}/project/${project._id}`}>
 												{project.projectName}
 											</Link>
 											<br />
