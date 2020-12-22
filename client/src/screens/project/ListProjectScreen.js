@@ -76,7 +76,8 @@ const ListProjectScreen = ({ history, match }) => {
 										<br />
 										Client: <em>{project.projectClient}</em>
 										<br />
-										Created Date: <strong>{project.createdAt}</strong>
+										Created Date:{' '}
+										<strong>{project.createdAt.substring(0, 10)}</strong>
 										<br />
 										Assigned:{' '}
 										{project.assignees.length === 0 ? (

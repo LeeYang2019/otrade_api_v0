@@ -38,20 +38,37 @@ const ListProjectsScreen = ({ history, userId }) => {
 						<tbody>
 							{projects.map((project) => (
 								<tr key={project._id}>
-									<td>
-										<p>
-											<strong>Project: </strong>
-											<Link to={`/profile/${userId}/project/${project._id}`}>
-												{project.projectName}
-											</Link>
-											<br />
-											<em>Client:</em> {project.projectClient}
-											<br />
-											<em>Created Date: </em> {project.createdAt}
-											<br />
-											<em>Assigned: </em>{' '}
-											{project.assignees.map((a) => a).join(', ')}
-										</p>
+									<td className="ml-3">
+										<Row>
+											<Col>
+												<p>
+													<strong>Project: </strong>
+													<Link
+														to={`/profile/${userId}/project/${project._id}`}
+													>
+														{project.projectName}
+													</Link>
+													<br />
+													Client: <em>{project.projectClient}</em>
+													<br />
+													Created Date:{' '}
+													<strong>{project.createdAt.substring(0, 10)}</strong>
+												</p>
+											</Col>
+											<Col className="text-right">
+												<p className="mr-3">
+													<strong>Status: </strong>
+													Active
+												</p>
+											</Col>
+										</Row>
+										<Row>
+											<Col>
+												<p>
+													Assigned: {project.assignees.map((a) => a).join(', ')}
+												</p>
+											</Col>
+										</Row>
 									</td>
 								</tr>
 							))}

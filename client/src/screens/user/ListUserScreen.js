@@ -86,7 +86,8 @@ const ListUserScreen = ({ history, match }) => {
 											<em>{user.role}</em>
 										</strong>
 										<br />
-										Created Date: <strong>{user.createdAt}</strong> <br />
+										Created Date:{' '}
+										<strong>{user.createdAt.substring(0, 10)}</strong> <br />
 									</p>
 								</td>
 								<td className="text-right pr-4 align-middle">
