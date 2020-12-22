@@ -10,7 +10,7 @@ import SearchBox from '../../components/SearchBox';
 
 const ListUserScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
-	const pageNumber = match.params.pageNumber || 1;
+	//const pageNumber = match.params.pageNumber || 1;
 
 	const dispatch = useDispatch();
 
@@ -25,13 +25,15 @@ const ListUserScreen = ({ history, match }) => {
 	useEffect(() => {
 		// if logged in user exists and role is admin
 		if (userInfo && userInfo.role === 'admin') {
-			dispatch(listUsers());
+			dispatch(listUsers(keyword));
 		} else {
 			history.push('/login');
 		}
-	}, [dispatch, history, userInfo]);
+	}, [dispatch, history, userInfo, keyword]);
 
-	const createUserHandler = () => {};
+	const createUserHandler = () => {
+		console.log('create user');
+	};
 
 	const deleteHandler = (id) => {
 		console.log('delete');
@@ -46,7 +48,12 @@ const ListUserScreen = ({ history, match }) => {
 				<Col md={7}>
 					<Route
 						render={({ history }) => (
-							<SearchBox history={history} searchWord={'User'} />
+							<SearchBox
+								history={history}
+								searchWord={'User'}
+								searchQueryPath={'/admin/userList/search/'}
+								searchQueryEmpty={'/admin/userList'}
+							/>
 						)}
 					/>
 				</Col>

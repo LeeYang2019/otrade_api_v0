@@ -42,7 +42,12 @@ const ListProjectScreen = ({ history }) => {
 				<Col md={7}>
 					<Route
 						render={({ history }) => (
-							<SearchBox history={history} searchWord={'Project...'} />
+							<SearchBox
+								history={history}
+								searchWord={'Project'}
+								searchQueryPath={'/admin/projects/search/'}
+								searchQueryEmpty={'/admin/projects'}
+							/>
 						)}
 					/>
 				</Col>

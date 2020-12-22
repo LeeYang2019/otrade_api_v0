@@ -18,7 +18,6 @@ import {
 
 //logs in the user
 export const login = (email, password) => async (dispatch) => {
-	console.log('inside action');
 	try {
 		dispatch({
 			type: USER_LOGIN_REQUEST,
@@ -149,7 +148,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 };
 
 //list all users in the db
-export const listUsers = () => async (dispatch, getState) => {
+export const listUsers = (keyword = '') => async (dispatch, getState) => {
 	try {
 		dispatch({ type: USER_LIST_REQUEST });
 
@@ -165,7 +164,7 @@ export const listUsers = () => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get('/api/v1/users', config);
+		} = await axios.get(`/api/v1/users?keyword=${keyword}`, config);
 
 		dispatch({ type: USER_LIST_SUCCESS, payload: data });
 	} catch (error) {

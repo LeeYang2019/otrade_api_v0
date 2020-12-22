@@ -9,7 +9,16 @@ const Project = require('../model/Project');
 // @route   GET /api/v1/projects
 // @access  private
 exports.getProjects = asyncHandler(async (req, res) => {
-	const projects = await Project.find();
+	const keyword = req.query.keyword
+		? {
+				projectName: {
+					$regex: req.query.keyword,
+					$options: 'i',
+				},
+		  }
+		: {};
+
+	const projects = await Project.find({ ...keyword });
 	res.status(200).json(projects);
 });
 

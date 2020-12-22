@@ -93,7 +93,16 @@ exports.updateMyUserProfile = asyncHandler(async (req, res) => {
 // @route   GET /api/v1/users
 // @access  Private/admin
 exports.getUsers = asyncHandler(async (req, res) => {
-	const users = await User.find().select('-password');
+	const keyword = req.query.keyword
+		? {
+				lastName: {
+					$regex: req.query.keyword,
+					$options: 'i',
+				},
+		  }
+		: {};
+
+	const users = await User.find({ ...keyword }).select('-password');
 	res.status(200).json({ success: true, data: users });
 });
 

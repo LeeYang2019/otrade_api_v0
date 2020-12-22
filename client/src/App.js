@@ -28,8 +28,22 @@ const App = () => {
 					<Route exact path="/organization/:id" component={StakeholderScreen} />
 					<Route exact path="/activity/:id" component={StakeholderScreen} />
 
+					{/* userList paths */}
 					<Route exact path="/admin/userlist" component={ListUserScreen} />
+					<Route
+						exact
+						path="/admin/userlist/search/:keyword"
+						component={ListUserScreen}
+					/>
+
+					{/* projectList paths */}
 					<Route exact path="/admin/projects" component={ListProjectScreen} />
+					<Route
+						exact
+						path="/admin/projects/search/:keyword"
+						component={ListProjectScreen}
+					/>
+
 					<Route
 						exact
 						path="/admin/project/:id/edit"

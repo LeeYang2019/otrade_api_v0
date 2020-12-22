@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-const SearchBox = ({ history, searchWord }) => {
+const SearchBox = ({
+	history,
+	searchWord,
+	searchQueryPath,
+	searchQueryEmpty,
+}) => {
 	const [keyword, setKeyword] = useState('');
 
 	const submitHandler = (e) => {
 		e.preventDefault();
 		if (keyword.trim()) {
-			history.push(`/search/${keyword}`);
+			history.push(`${searchQueryPath}${keyword}`);
 		} else {
-			history.push('/');
+			history.push(searchQueryEmpty);
 		}
 	};
 
