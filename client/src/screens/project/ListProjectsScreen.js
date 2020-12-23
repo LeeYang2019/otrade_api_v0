@@ -6,6 +6,7 @@ import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import { listUserProjects } from '../../actions/projectActions';
 import { Link } from 'react-router-dom';
+import Project from '../../components/Project';
 
 const ListProjectsScreen = ({ history, userId }) => {
 	const dispatch = useDispatch();
@@ -39,36 +40,7 @@ const ListProjectsScreen = ({ history, userId }) => {
 							{projects.map((project) => (
 								<tr key={project._id}>
 									<td className="ml-3">
-										<Row>
-											<Col>
-												<p>
-													<strong>Project: </strong>
-													<Link
-														to={`/profile/${userId}/project/${project._id}`}
-													>
-														{project.projectName}
-													</Link>
-													<br />
-													Client: <em>{project.projectClient}</em>
-													<br />
-													Created Date:{' '}
-													<strong>{project.createdAt.substring(0, 10)}</strong>
-												</p>
-											</Col>
-											<Col className="text-right">
-												<p className="mr-3">
-													<strong>Status: </strong>
-													Active
-												</p>
-											</Col>
-										</Row>
-										<Row>
-											<Col>
-												<p>
-													Assigned: {project.assignees.map((a) => a).join(', ')}
-												</p>
-											</Col>
-										</Row>
+										<Project project={project} userId={userId} />
 									</td>
 								</tr>
 							))}

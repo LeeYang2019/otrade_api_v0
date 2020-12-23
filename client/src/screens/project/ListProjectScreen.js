@@ -8,6 +8,7 @@ import Loader from '../../components/Loader.js';
 import { listProjects } from '../../actions/projectActions';
 import SearchBox from '../../components/SearchBox';
 import Paginate from '../../components/Paginate';
+import Project from '../../components/Project';
 
 const ListProjectScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
@@ -68,39 +69,7 @@ const ListProjectScreen = ({ history, match }) => {
 							{projects.map((project) => (
 								<tr key={project._id}>
 									<td>
-										<Row>
-											<Col>
-												<p>
-													<strong>Project: </strong>
-													<Link to={`/project/${project._id}`}>
-														{project.projectName}
-													</Link>
-													<br />
-													Client: <em>{project.projectClient}</em>
-													<br />
-													Created Date:{' '}
-													<strong>{project.createdAt.substring(0, 10)}</strong>
-												</p>
-											</Col>
-											<Col className="text-left">
-												<p className="mr-3">
-													<strong>Status: </strong>
-													Active
-												</p>
-											</Col>
-										</Row>
-										<Row>
-											<Col>
-												<p>
-													Assigned:{' '}
-													{project.assignees.length === 0 ? (
-														<strong>No Assignment</strong>
-													) : (
-														project.assignees.map((a) => a).join(', ')
-													)}
-												</p>
-											</Col>
-										</Row>
+										<Project project={project} />
 									</td>
 									<td className="text-right pr-4 align-middle">
 										<LinkContainer to={`/admin/project/${project._id}/edit`}>

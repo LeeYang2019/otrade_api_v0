@@ -25,7 +25,9 @@ exports.getProjects = asyncHandler(async (req, res) => {
 	const projects = await Project.find({ ...keyword })
 		.sort({ projectName: 1 })
 		.limit(pageSize)
-		.skip(pageSize * (page - 1));
+		.skip(pageSize * (page - 1))
+		.populate('assignees')
+		.exec();
 	res.status(200).json({ projects, page, pages: Math.ceil(count / pageSize) });
 });
 
@@ -35,7 +37,9 @@ exports.getProjects = asyncHandler(async (req, res) => {
 exports.getUserProjects = asyncHandler(async (req, res) => {
 	const projects = await Project.find({
 		assignees: mongoose.Types.ObjectId(req.params.id),
-	});
+	})
+		.populate('assignees')
+		.exec();
 
 	if (projects.length === 0) {
 		res.status(404);
@@ -49,7 +53,9 @@ exports.getUserProjects = asyncHandler(async (req, res) => {
 // @route   GET /api/v1/project/:id
 // @access  Private
 exports.getProject = asyncHandler(async (req, res) => {
-	const project = await Project.findById(req.params.id);
+	const project = await Project.findById(req.params.id)
+		.populate('assignees')
+		.exec();
 
 	if (!project) {
 		res.status(404);

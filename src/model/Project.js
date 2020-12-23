@@ -11,11 +11,16 @@ const ProjectSchema = new mongoose.Schema(
 			type: String,
 			required: [true, 'Please add a project client'],
 		},
-		assignees: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+		assignees: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
 		user: {
 			type: mongoose.Schema.ObjectId,
 			ref: 'User',
 			required: true,
+		},
+		status: {
+			type: String,
+			enum: ['active', 'inactive'],
+			default: 'active',
 		},
 	},
 	{
