@@ -15,6 +15,7 @@ import {
 	userLoginReducer,
 	userDetailsReducer,
 	userUpdateProfileReducer,
+	userUpdateReducer,
 	userDeleteReducer,
 } from './reducers/userReducer';
 import { stakeholderListReducer } from './reducers/stakeholderReducer';
@@ -31,6 +32,7 @@ const reducer = combineReducers({
 	projectUser: projectUserReducer,
 	projectUserAssignment: projectUserAssignmentReducer,
 	stakeholderList: stakeholderListReducer,
+	userUpdate: userUpdateReducer,
 	userDelete: userDeleteReducer,
 });
 

@@ -171,12 +171,27 @@ exports.registerUser = asyncHandler(async (req, res) => {
 // @route   PUT /api/v1/admin/users/:id
 // @access  Private/admin
 exports.updateUser = asyncHandler(async (req, res) => {
-	let user = await User.findById(req.params.id);
-	user = await User.findByIdAndUpdate(req.params.id, req.body, {
-		new: true,
-		runValidators: true,
-	});
-	res.status(200).json({ success: true, data: user });
+	console.log('updateUser');
+	const user = await User.findById(req.params.id);
+
+	//matches enteredPassword with db user password
+	if (user) {
+		user.name = req.body.name || user.name;
+		user.email = req.body.email || user.email;
+		user.role = req.body.role;
+
+		const updatedUser = await user.save();
+
+		res.json({
+			_id: updatedUser._id,
+			name: updatedUser.name,
+			email: updatedUser.email,
+			role: updatedUser.role,
+		});
+	} else {
+		res.status(401); //unauthorized
+		throw new Error('user not found');
+	}
 });
 
 // @desc    Delete a user

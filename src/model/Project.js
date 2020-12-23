@@ -11,16 +11,19 @@ const ProjectSchema = new mongoose.Schema(
 			type: String,
 			required: [true, 'Please add a project client'],
 		},
+		status: {
+			type: String,
+			enum: ['open', 'closed'],
+			default: 'open',
+		},
+		comment: {
+			type: String,
+		},
 		assignees: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
 		user: {
 			type: mongoose.Schema.ObjectId,
 			ref: 'User',
 			required: true,
-		},
-		status: {
-			type: String,
-			enum: ['active', 'inactive'],
-			default: 'active',
 		},
 	},
 	{

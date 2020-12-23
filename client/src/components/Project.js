@@ -25,10 +25,14 @@ const Project = ({ project, userId = '' }) => {
 				<Col className="text-left" md={3}>
 					<p>
 						<strong>Status: </strong>
-						{project.status === 'active' ? (
-							<em className="text-success">{project.status}</em>
+						{project.status === 'open' ? (
+							<strong>
+								<em className="text-success">{project.status}</em>
+							</strong>
 						) : (
-							<em className="text-danger">{project.status}</em>
+							<strong>
+								<em className="text-danger">{project.status}</em>
+							</strong>
 						)}
 					</p>
 				</Col>

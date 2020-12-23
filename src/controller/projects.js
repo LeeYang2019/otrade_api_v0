@@ -82,6 +82,7 @@ exports.addProject = asyncHandler(async (req, res) => {
 // @route   PUT /api/v1/project/:id
 // @access  Private
 exports.updateProject = asyncHandler(async (req, res) => {
+	console.log(req.body);
 	let project = await Project.findById(req.params.id);
 	project = await Project.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,

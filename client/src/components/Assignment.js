@@ -81,6 +81,7 @@ const Assignment = ({ history, match }) => {
 									value={assignee}
 									onChange={(e) => setAssignee(e.target.value)}
 									className="px-5"
+									multiple
 								>
 									<option value="select">--Select Name--</option>
 									{users.map((user) => (

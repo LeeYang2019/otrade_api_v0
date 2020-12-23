@@ -12,6 +12,7 @@ import ListProjectScreen from './screens/project/ListProjectScreen';
 import ProjectScreen from './screens/project/ProjectScreen';
 import StakeholderScreen from './screens/stakeholder/StakeholderScreen';
 import ProjectUpdateScreen from './screens/project/ProjectUpdateScreen';
+import AdminEditUserProfileScreen from './screens/user/AdminEditUserProfileScreen';
 
 const App = () => {
 	return (
@@ -50,7 +51,6 @@ const App = () => {
 						path="/admin/userlist/search/:keyword/page/:pageNumber" //keyword & pageNumber
 						component={ListUserScreen}
 					/>
-
 					{/* projectList paths */}
 					<Route exact path="/admin/projects" component={ListProjectScreen} />
 					<Route
@@ -68,11 +68,18 @@ const App = () => {
 						path="/admin/projects/search/:keyword/page/:pageNumber" //keyword & pageNumber
 						component={ListProjectScreen}
 					/>
+					{/* Admin Edit Routes */}
 					<Route
 						exact
 						path="/admin/project/:id/edit"
 						component={ProjectUpdateScreen}
 					/>
+					<Route
+						exact
+						path="/admin/user/:id/edit"
+						component={AdminEditUserProfileScreen}
+					/>
+
 					<Route exact path="/logout" component={LogoutScreen} />
 				</Container>
 			</main>

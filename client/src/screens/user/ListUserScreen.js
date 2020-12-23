@@ -63,7 +63,7 @@ const ListUserScreen = ({ history, match }) => {
 				</Col>
 				<Col className="text-right" md={2}>
 					<Link to="/admin/projects" className="btn btn-primary my-3">
-						<i className="fas fa-plus"></i> Register User
+						<i className="fas fa-plus"></i> User
 					</Link>
 				</Col>
 			</Row>
@@ -101,7 +101,7 @@ const ListUserScreen = ({ history, match }) => {
 											</p>
 										</td>
 										<td className="text-right pr-4 align-middle">
-											<LinkContainer to={`/profile/${user._id}`}>
+											<LinkContainer to={`/admin/user/${user._id}/edit`}>
 												<Button variant="light" className="btn-md ml-3 ">
 													<i className="fas fa-edit"></i>
 												</Button>
