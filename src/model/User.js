@@ -25,11 +25,18 @@ const UserSchema = new mongoose.Schema(
 			enum: ['surveyor', 'client', 'admin'],
 			default: 'surveyor',
 		},
+		status: {
+			type: String,
+			enum: ['active, inactive'],
+			default: 'active',
+		},
+		avatar: {
+			type: String,
+		},
 		password: {
 			type: String,
 			required: [true, 'Please add a password'],
 			minlength: 6,
-			// select: false, //makes this.password not accessible
 		},
 	},
 	{

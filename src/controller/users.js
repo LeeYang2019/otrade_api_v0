@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const generateToken = require('../utils/generateToken');
+const gravatar = require('gravatar');
 const User = require('../model/User');
 const Project = require('../model/Project');
 
@@ -126,15 +127,26 @@ exports.getUser = asyncHandler(async (req, res) => {
 // @route   POST /api/v1/users
 // @access  private/admin
 exports.registerUser = asyncHandler(async (req, res) => {
-	const { firstName, lastName, email, password } = req.body;
+	const { firstName, lastName, email, password, telephone } = req.body;
 
 	const userExists = await User.findOne({ email });
 
 	if (userExists) {
-		res.status(400);
+		res.status(404);
 		throw new Error('User already exists');
 	}
 
+	//get avatar
+	const avatar = gravatar.url(email, {
+		s: '200', //size
+		r: 'pg', //rating
+		d: 'mm',
+	});
+
+	//set avatar in body
+	req.body.avatar = avatar;
+
+	//create user
 	const user = await User.create(req.body);
 
 	if (user) {
@@ -147,7 +159,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
 			token: generateToken(user._id),
 		});
 	} else {
-		res.status(400);
+		res.status(404);
 		throw new Error('User not found');
 	}
 });
@@ -186,7 +198,7 @@ exports.assignUserToProject = async (req, res) => {
 
 	//if neither are found
 	if (!user || !project) {
-		res.status(401);
+		res.status(404);
 		throw new Error('No Resources Found');
 	}
 
@@ -220,7 +232,7 @@ exports.removeUserFromProject = async (req, res) => {
 
 	//if neither are found
 	if (!user || !project) {
-		res.status(401);
+		res.status(404);
 		throw new Error('No Resources Found');
 	}
 
@@ -238,7 +250,7 @@ exports.removeUserFromProject = async (req, res) => {
 			project.assignees = newUpdate;
 		}
 	} else {
-		res.status(401);
+		res.status(404);
 		throw new Error(`There are no assignments for ${user.firstName}`);
 	}
 

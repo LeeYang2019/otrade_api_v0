@@ -20,17 +20,10 @@ const ProjectSchema = new mongoose.Schema(
 
 // delete all stakeholders before deleting the project
 ProjectSchema.pre('remove', async function (next) {
-	console.log(`stakeholders being removed from project ${this._id}`);
 	await this.model('Stakeholder').deleteMany({ project: this._id });
+	await this.model('Organization').deleteMany({ project: this._id });
+	await this.model('Activity').deleteMany({ project: this._id });
 });
-
-// include stakeholders as a field in project
-// ProjectSchema.virtual('stakeholders', {
-// 	ref: 'Stakeholder',
-// 	localField: '_id',
-// 	foreignField: 'project',
-// 	justOne: false,
-// });
 
 // Exports
 module.exports = mongoose.model('Project', ProjectSchema);

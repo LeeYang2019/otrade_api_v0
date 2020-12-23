@@ -39,7 +39,7 @@ exports.getUserProjects = asyncHandler(async (req, res) => {
 
 	if (projects.length === 0) {
 		res.status(404);
-		throw new Error('Projects not found');
+		throw new Error('There are no projects assigned.');
 	}
 
 	res.status(200).json(projects);
@@ -53,7 +53,7 @@ exports.getProject = asyncHandler(async (req, res) => {
 
 	if (!project) {
 		res.status(404);
-		throw new Error('Project not found');
+		throw new Error('Project not found.');
 	}
 
 	res.json(project);
