@@ -26,7 +26,10 @@ exports.getOrganization = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/organizations
 // @access  Public
 exports.addOrganization = asyncHandler(async (req, res, next) => {
-	console.log(req.body);
+	//get project and user
+	req.body.project = req.params.projectId;
+	req.body.user = req.user;
+
 	const organization = await Organization.create(req.body);
 	res.status(200).json({ success: true, data: organization });
 });

@@ -12,6 +12,11 @@ const ProjectSchema = new mongoose.Schema(
 			required: [true, 'Please add a project client'],
 		},
 		assignees: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+		user: {
+			type: mongoose.Schema.ObjectId,
+			ref: 'User',
+			required: true,
+		},
 	},
 	{
 		timestamps: true,

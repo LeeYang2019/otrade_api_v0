@@ -63,6 +63,8 @@ exports.getProject = asyncHandler(async (req, res) => {
 // @route   POST /api/v1/project
 // @access  Public
 exports.addProject = asyncHandler(async (req, res) => {
+	//get the user
+	req.body.user = req.user;
 	const project = await Project.create(req.body);
 	res.status(200).json({
 		success: true,

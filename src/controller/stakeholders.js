@@ -31,7 +31,9 @@ exports.getStakeholder = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/projects/:projectId/stakeholders
 // @access  Private
 exports.addStakeholder = asyncHandler(async (req, res, next) => {
+	//get params and req.user
 	req.body.project = req.params.projectId;
+	req.body.user = req.user;
 
 	const stakeholder = await Stakeholder.create(req.body);
 	res.status(200).json({ success: true, data: stakeholder });

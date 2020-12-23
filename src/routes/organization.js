@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { protect, isAdmin } = require('../middleware/auth');
 
 //import Organization controller functions
 const {
@@ -11,7 +12,7 @@ const {
 } = require('../controller/organization');
 
 //define general route
-router.route('/').get(getOrganizations).post(addOrganization);
+router.route('/').get(getOrganizations).post(protect, addOrganization);
 
 //define specific route
 router

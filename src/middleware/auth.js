@@ -12,7 +12,6 @@ exports.protect = asyncHandler(async (req, res, next) => {
 		try {
 			token = req.headers.authorization.split(' ')[1];
 			const decoded = jwt.verify(token, 'secret123');
-			console.log(decoded);
 			req.user = await User.findById(decoded.id).select('-password');
 			next();
 		} catch (error) {

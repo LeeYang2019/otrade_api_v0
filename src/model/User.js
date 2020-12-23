@@ -41,6 +41,8 @@ const UserSchema = new mongoose.Schema(
 	},
 	{
 		timestamps: true,
+		toJSON: { virtuals: true },
+		toObject: { virtuals: true },
 	}
 );
 
@@ -56,6 +58,13 @@ UserSchema.pre('save', async function (next) {
 
 	const salt = await bcrypt.genSalt(10);
 	this.password = await bcrypt.hash(this.password, salt);
+});
+
+UserSchema.virtual('projects', {
+	ref: 'Project',
+	localField: '_id',
+	foreignField: 'assignees',
+	justOne: false,
 });
 
 module.exports = mongoose.model('User', UserSchema);

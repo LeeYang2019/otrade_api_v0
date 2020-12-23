@@ -52,15 +52,17 @@ const StakeholderSchema = new mongoose.Schema(
 		project: {
 			type: mongoose.Schema.ObjectId,
 			ref: 'Project',
+			required: true,
+		},
+		user: {
+			type: mongoose.Schema.ObjectId,
+			ref: 'User',
+			required: true,
 		},
 	},
 	{
 		timestamps: true,
 	}
-	// {
-	// 	toJSON: { virtuals: true },
-	// 	toObject: { virtuals: true },
-	// }
 );
 
 // delete all associated coments before deleting the stakeholder

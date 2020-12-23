@@ -33,9 +33,9 @@ exports.getComment = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/stakeholders/:stakeholderId/comments
 // @access  Private
 exports.addComment = asyncHandler(async (req, res, next) => {
-	console.log(req.params.stakeholderId);
-	//assign stakholderId to req.body.stakeholder
+	//get stakeholder and user
 	req.body.stakeholder = req.params.stakeholderId;
+	req.body.user = req.user;
 
 	const comment = await Comment.create(req.body);
 	res.status(200).json({ success: true, data: comment });

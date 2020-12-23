@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
+const { protect, isAdmin } = require('../middleware/auth');
 
 //import Comment  controller functions
 const {
@@ -11,20 +12,14 @@ const {
 } = require('../controller/comments');
 
 const Comment = require('../model/Comment');
-const advancedResults = require('../middleware/advancedResuts');
+
+router.route('/').get(protect, getComments).post(protect, addComment);
 
 router
-	.route('/')
-	.get(
-		advancedResults(Comment, {
-			path: 'stakeholder',
-			select: 'comment, date',
-		}),
-		getComments
-	)
-	.post(addComment);
-
-router.route('/:id').get(getComment).put(updateComment).delete(deleteComment);
+	.route('/:id')
+	.get(protect, getComment)
+	.put(protect, updateComment)
+	.delete(protect, deleteComment);
 
 //export router
 module.exports = router;
