@@ -66,27 +66,28 @@ const ListProjectScreen = ({ history, match }) => {
 				<Row>
 					<Table hover responsive className="table-sm mt-3">
 						<tbody>
-							{projects.map((project) => (
-								<tr key={project._id}>
-									<td>
-										<Project project={project} />
-									</td>
-									<td className="text-right pr-4 align-middle">
-										<LinkContainer to={`/admin/project/${project._id}/edit`}>
-											<Button variant="light" className="btn-md ml-3">
-												<i className="fas fa-edit"></i>
+							{projects &&
+								projects.map((project) => (
+									<tr key={project._id}>
+										<td>
+											<Project project={project} />
+										</td>
+										<td className="text-right pr-4 align-middle">
+											<LinkContainer to={`/admin/project/${project._id}/edit`}>
+												<Button variant="light" className="btn-md ml-3">
+													<i className="fas fa-edit"></i>
+												</Button>
+											</LinkContainer>
+											<Button
+												variant="danger"
+												className="btn-md ml-3 "
+												onClick={() => deleteHandler(project._id)}
+											>
+												<i className="fas fa-trash"></i>
 											</Button>
-										</LinkContainer>
-										<Button
-											variant="danger"
-											className="btn-md ml-3 "
-											onClick={() => deleteHandler(project._id)}
-										>
-											<i className="fas fa-trash"></i>
-										</Button>
-									</td>
-								</tr>
-							))}
+										</td>
+									</tr>
+								))}
 						</tbody>
 					</Table>
 					<Row className="m-auto">

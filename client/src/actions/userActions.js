@@ -13,7 +13,9 @@ import {
 	USER_UPDATE_PROFILE_REQUEST,
 	USER_UPDATE_PROFILE_SUCCESS,
 	USER_UPDATE_PROFILE_FAIL,
-	USER_UPDATE_PROFILE_RESET,
+	USER_DELETE_REQUEST,
+	USER_DELETE_SUCCESS,
+	USER_DELETE_FAIL,
 } from '../constants/userConstants';
 
 //logs in the user
@@ -54,15 +56,12 @@ export const login = (email, password) => async (dispatch) => {
 
 //logs out the user
 export const logout = () => (dispatch) => {
-	//remove userInfo from storage
 	localStorage.removeItem('userInfo');
-	//dispatch user logout reducer case
 	dispatch({ type: USER_LOGOUT });
 };
 
 //gets the user details
 export const getUserDetails = (id) => async (dispatch, getState) => {
-	console.log('insider user details');
 	try {
 		dispatch({
 			type: USER_DETAILS_REQUEST,
@@ -85,6 +84,8 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 		const {
 			data: { data },
 		} = await axios.get(`/api/v1/users/${id}`, config);
+
+		console.log(data);
 
 		//dispatch
 		dispatch({
@@ -178,6 +179,42 @@ export const listUsers = (keyword = '', pageNumber = '') => async (
 				error.response && error.response.data.message
 					? error.response.data.message
 					: error.messsage,
+		});
+	}
+};
+
+export const deleteUser = (id) => async (dispatch, getState) => {
+	try {
+		dispatch({
+			type: USER_DELETE_REQUEST,
+		});
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		await axios.delete(`/api/v1/users/${id}`, config);
+
+		dispatch({
+			type: USER_DELETE_SUCCESS,
+		});
+	} catch (error) {
+		const message =
+			error.response && error.response.data.message
+				? error.response.data.message
+				: error.message;
+		if (message === 'Not authorized, token failed') {
+			dispatch(logout());
+		}
+		dispatch({
+			type: USER_DELETE_FAIL,
+			payload: message,
 		});
 	}
 };

@@ -117,10 +117,10 @@ const EditUserProfileScreen = ({ userId }) => {
 						</Col>
 						<Col md={6}>
 							<Form.Group controlId="confirmPassword">
-								<Form.Label>Retype Password</Form.Label>
+								<Form.Label>Re-type Password</Form.Label>
 								<Form.Control
 									type="confirmPassword"
-									placeholder="Retype Password"
+									placeholder="Re-type Password"
 									value={confirmPassword}
 									onChange={(e) => setConfirmPassword(e.target.value)}
 								></Form.Control>

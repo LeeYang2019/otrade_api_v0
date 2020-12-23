@@ -32,7 +32,7 @@ const ListProjectsScreen = ({ history, userId }) => {
 			{loading ? (
 				<Loader />
 			) : error ? (
-				<Message>{error}</Message>
+				<Message variant="light">{error}</Message>
 			) : (
 				<>
 					<Table hover responsive className="table-sm mt-5">

@@ -16,16 +16,16 @@ const Header = ({ history }) => {
 
 	return (
 		<header>
-			<Navbar
-				bg="primary"
-				variant="dark"
-				expand="lg"
-				collapseOnSelect
-				className="py-3"
-			>
+			<Navbar expand="md" collapseOnSelect className="py-3">
 				<Container>
-					<LinkContainer to="/">
-						<Navbar.Brand>Otrade</Navbar.Brand>
+					<LinkContainer to={userInfo ? `/profile/${userInfo._id}` : '/'}>
+						<Navbar.Brand>
+							<img
+								src="https://i0.wp.com/otrade.ca/wp-content/uploads/2020/08/O-Trade-Logo_90pxH-v2.png?fit=78%2C110&ssl=1"
+								alt="otrade company logo"
+								className="w-75"
+							/>
+						</Navbar.Brand>
 					</LinkContainer>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">

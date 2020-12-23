@@ -42,18 +42,24 @@ const UserProfileScreen = ({ location, history, match }) => {
 					<Message variant="danger">{error}</Message>
 				) : (
 					<Card>
-						<Card.Img src="..." alt="user profile" />
+						<Card.Img
+							src={user.avatar}
+							alt="user profile"
+							className="w-75 m-auto mt-5"
+						/>
 						<Card.Body>
 							<hr />
-							<Card.Title>
-								{user.firstName} {user.lastName}
-							</Card.Title>
 							<Card.Text>
-								<strong>Email: </strong> <em>{user.email}</em>
+								<p>
+									{user.firstName} {user.lastName}
+								</p>
+								<em>Email: </em>
+								{user.email}
 								<br />
-								<strong>Phone: </strong> <em>{user.email}</em>
+								<em>Phone: </em> {user.email}
 								<br />
-								<strong>Role: </strong> <em>{user.role}</em>
+								<em>Role: </em>
+								{user.role}
 							</Card.Text>
 						</Card.Body>
 					</Card>

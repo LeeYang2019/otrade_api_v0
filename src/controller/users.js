@@ -3,6 +3,7 @@ const generateToken = require('../utils/generateToken');
 const gravatar = require('gravatar');
 const User = require('../model/User');
 const Project = require('../model/Project');
+const mongoose = require('mongoose');
 
 /**
  * USER Routes
@@ -136,6 +137,8 @@ exports.registerUser = asyncHandler(async (req, res) => {
 		throw new Error('User already exists');
 	}
 
+	req.body.user = req.user;
+
 	//get avatar
 	const avatar = gravatar.url(email, {
 		s: '200', //size
@@ -181,7 +184,7 @@ exports.updateUser = asyncHandler(async (req, res) => {
 // @access  Private/admin
 exports.deleteUser = asyncHandler(async (req, res) => {
 	await User.findByIdAndDelete(req.params.id);
-	res.status(200).json({ success: true, data: {} });
+	res.status(200).json({ success: true });
 });
 
 /**
@@ -196,24 +199,25 @@ exports.assignUserToProject = async (req, res) => {
 	const user = await User.findById(req.params.id);
 	const project = await Project.findById(req.params.projectId);
 
-	//if neither are found
+	//if neither are found throw an error
 	if (!user || !project) {
 		res.status(404);
 		throw new Error('No Resources Found');
 	}
 
-	// if empty, just push
+	// if assignee array is empty, just push user onto assignee array, and save
 	if (project.assignees.length === 0) {
 		project.assignees.push(req.params.id);
 		await project.save();
 		res.status(200).json({ success: true, data: project });
 	} else {
-		// if user not already assigned
+		// if assignee array not empty and user not assigned, push user onto array and save
 		if (!project.assignees.includes(req.params.id)) {
 			project.assignees.push(req.params.id);
 			await project.save();
 			res.status(200).json({ success: true, data: project });
 		} else {
+			//throw error
 			res.status(401);
 			throw new Error(
 				`${user.firstName} has already been assigned to this project`
@@ -236,9 +240,9 @@ exports.removeUserFromProject = async (req, res) => {
 		throw new Error('No Resources Found');
 	}
 
-	//check to see if user is assigned
+	//is user assigned to project?
 	if (project.assignees.includes(req.params.id)) {
-		//if length of array is 1, set to empty array
+		//if array length is 1, set to empty array
 		if (project.assignees.length === 1) {
 			project.assignees = [];
 		} else {

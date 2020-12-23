@@ -33,6 +33,11 @@ const UserSchema = new mongoose.Schema(
 			required: [true, 'Please add a password'],
 			minlength: 6,
 		},
+		user: {
+			type: mongoose.Schema.ObjectId,
+			ref: 'User',
+			required: true,
+		},
 	},
 	{
 		timestamps: true,

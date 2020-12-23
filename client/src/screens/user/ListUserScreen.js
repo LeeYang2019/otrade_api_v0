@@ -5,7 +5,7 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
-import { listUsers } from '../../actions/userActions';
+import { listUsers, deleteUser } from '../../actions/userActions';
 import SearchBox from '../../components/SearchBox';
 import Paginate from '../../components/Paginate';
 
@@ -21,16 +21,26 @@ const ListUserScreen = ({ history, match }) => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
+	const userDelete = useSelector((state) => state.userDelete);
+	const { success } = userDelete;
+
+	console.log(success);
+
 	useEffect(() => {
 		if (userInfo && userInfo.role !== 'admin') {
 			history.push('/login');
 		} else {
+			if (success) {
+				history.push('/admin/userList');
+			}
 			dispatch(listUsers(keyword, pageNumber));
 		}
-	}, [dispatch, history, userInfo, keyword, pageNumber]);
+	}, [dispatch, history, userInfo, keyword, pageNumber, success]);
 
 	const deleteHandler = (id) => {
-		console.log('delete');
+		if (window.confirm('Are you sure?')) {
+			dispatch(deleteUser(id));
+		}
 	};
 
 	return (
@@ -65,45 +75,47 @@ const ListUserScreen = ({ history, match }) => {
 				<Row>
 					<Table hover responsive className="table-sm mt-3">
 						<tbody>
-							{users.map((user) => (
-								<tr key={user._id}>
-									<td>
-										<p>
-											<strong>User: </strong>
-											<Link to={`/profile/${user._id}`}>
-												{user.lastName}, {user.firstName}
-											</Link>
-											<br />
-											Email:{' '}
-											<em>
-												<a href={`mailto:${user.email}`}>{user.email}</a>
-											</em>
-											<br />
-											Role:{' '}
-											<strong>
-												<em>{user.role}</em>
-											</strong>
-											<br />
-											Created Date:{' '}
-											<strong>{user.createdAt.substring(0, 10)}</strong> <br />
-										</p>
-									</td>
-									<td className="text-right pr-4 align-middle">
-										<LinkContainer to={`/profile/${user._id}`}>
-											<Button variant="light" className="btn-md ml-3 ">
-												<i className="fas fa-edit"></i>
+							{users &&
+								users.map((user) => (
+									<tr key={user._id}>
+										<td>
+											<p>
+												<strong>User: </strong>
+												<Link to={`/profile/${user._id}`}>
+													{user.lastName}, {user.firstName}
+												</Link>
+												<br />
+												Email:{' '}
+												<em>
+													<a href={`mailto:${user.email}`}>{user.email}</a>
+												</em>
+												<br />
+												Role:{' '}
+												<strong>
+													<em>{user.role}</em>
+												</strong>
+												<br />
+												Created Date:{' '}
+												<strong>{user.createdAt.substring(0, 10)}</strong>{' '}
+												<br />
+											</p>
+										</td>
+										<td className="text-right pr-4 align-middle">
+											<LinkContainer to={`/profile/${user._id}`}>
+												<Button variant="light" className="btn-md ml-3 ">
+													<i className="fas fa-edit"></i>
+												</Button>
+											</LinkContainer>
+											<Button
+												variant="danger"
+												className="btn-md ml-3"
+												onClick={() => deleteHandler(user._id)}
+											>
+												<i className="fas fa-trash"></i>
 											</Button>
-										</LinkContainer>
-										<Button
-											variant="danger"
-											className="btn-md ml-3"
-											onClick={() => deleteHandler(user._id)}
-										>
-											<i className="fas fa-trash"></i>
-										</Button>
-									</td>
-								</tr>
-							))}
+										</td>
+									</tr>
+								))}
 						</tbody>
 					</Table>
 					<Row className="m-auto">

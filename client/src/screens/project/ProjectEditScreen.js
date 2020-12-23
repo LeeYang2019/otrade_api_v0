@@ -37,7 +37,6 @@ const ProjectEditScreen = ({ match, history }) => {
 		if (successUpdate) {
 			dispatch(listProjectDetails(projectId));
 			dispatch({ type: PROJECT_UPDATE_RESET });
-			//history.push('/admin/projects');
 		} else {
 			if (!project.projectName || project._id !== projectId) {
 				dispatch(listProjectDetails(projectId));

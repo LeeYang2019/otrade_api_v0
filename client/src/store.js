@@ -15,6 +15,7 @@ import {
 	userLoginReducer,
 	userDetailsReducer,
 	userUpdateProfileReducer,
+	userDeleteReducer,
 } from './reducers/userReducer';
 import { stakeholderListReducer } from './reducers/stakeholderReducer';
 
@@ -30,6 +31,7 @@ const reducer = combineReducers({
 	projectUser: projectUserReducer,
 	projectUserAssignment: projectUserAssignmentReducer,
 	stakeholderList: stakeholderListReducer,
+	userDelete: userDeleteReducer,
 });
 
 // localStorages
