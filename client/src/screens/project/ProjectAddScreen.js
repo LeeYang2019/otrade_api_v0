@@ -1,15 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
+import { addProject } from '../../actions/projectActions';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 
-const ProjectAddScreen = () => {
+const ProjectAddScreen = ({ history }) => {
 	const [projectName, setProjectName] = useState('');
 	const [projectClient, setProjectClient] = useState('');
 	const [comment, setComment] = useState('');
 
-	const submitHandler = () => {};
+	const dispatch = useDispatch();
+	const userLogin = useSelector((state) => state.userLogin);
+	const { userInfo } = userLogin;
+
+	const projectAdd = useSelector((state) => state.projectAdd);
+	const { success } = projectAdd;
+
+	useEffect(() => {
+		if (!userInfo) {
+			history.push('/login');
+		} else {
+			if (success) {
+				console.log('success');
+				history.push('/admin/projects');
+			}
+		}
+	}, [history, success, userInfo]);
+
+	const submitHandler = (e) => {
+		e.preventDefault();
+		dispatch(
+			addProject({
+				projectName,
+				projectClient,
+				comment,
+			})
+		);
+	};
 
 	return (
 		<>
@@ -61,7 +90,7 @@ const ProjectAddScreen = () => {
 					<Row className="mt-3">
 						<Col>
 							<Button type="submit" variant="primary" className="px-5 mt-3">
-								Update
+								Submit
 							</Button>
 						</Col>
 					</Row>

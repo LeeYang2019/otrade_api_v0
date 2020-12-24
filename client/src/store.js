@@ -7,6 +7,7 @@ import {
 	projectListReducer,
 	projectDetailsReducer,
 	projectUpdateReducer,
+	projectAddReducer,
 	projectUserReducer,
 	projectUserAssignmentReducer,
 } from './reducers/projectReducers';
@@ -26,14 +27,15 @@ const reducer = combineReducers({
 	userLogin: userLoginReducer,
 	userDetails: userDetailsReducer,
 	userUpdateProfile: userUpdateProfileReducer,
+	userUpdate: userUpdateReducer,
+	userDelete: userDeleteReducer,
 	projectList: projectListReducer,
 	projectDetails: projectDetailsReducer,
 	projectUpdate: projectUpdateReducer,
+	projectAdd: projectAddReducer,
 	projectUser: projectUserReducer,
 	projectUserAssignment: projectUserAssignmentReducer,
 	stakeholderList: stakeholderListReducer,
-	userUpdate: userUpdateReducer,
-	userDelete: userDeleteReducer,
 });
 
 // localStorages

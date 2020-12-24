@@ -24,8 +24,6 @@ const ListUserScreen = ({ history, match }) => {
 	const userDelete = useSelector((state) => state.userDelete);
 	const { success } = userDelete;
 
-	console.log(success);
-
 	useEffect(() => {
 		if (userInfo && userInfo.role !== 'admin') {
 			history.push('/login');

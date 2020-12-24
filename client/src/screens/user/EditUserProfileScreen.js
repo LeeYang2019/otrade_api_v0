@@ -19,36 +19,36 @@ const EditUserProfileScreen = ({ userId }) => {
 
 	const dispatch = useDispatch();
 
-	//call the userRegister reducer in the store
+	// //call the userRegister reducer in the store
 	const userDetails = useSelector((state) => state.userDetails);
 	const { loading, error, user } = userDetails;
 
-	//get logged in user
-	const userLogin = useSelector((state) => state.userLogin);
-	const { userInfo } = userLogin;
+	// //get logged in user
+	// const userLogin = useSelector((state) => state.userLogin);
+	// const { userInfo } = userLogin;
 
-	const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
-	const { success: successUpdate } = userUpdateProfile;
+	// const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+	// const { success: successUpdate } = userUpdateProfile;
 
-	useEffect(() => {
-		if (successUpdate) {
-			dispatch(getUserDetails(userId));
-			dispatch({ type: USER_PROFILE_UPDATE_RESET });
-			setPassword('');
-			setConfirmPassword('');
-			setMessage(null);
-		} else {
-			if (!user.firstName || user._id !== userId) {
-				dispatch(getUserDetails(userId));
-			} else {
-				setFirstName(user.firstName);
-				setLastName(user.lastName);
-				setTelephone(user.telephone);
-				setEmail(user.email);
-				setUpdatedDate(user.updatedAt);
-			}
-		}
-	}, [dispatch, userId, user, successUpdate, userInfo]);
+	// useEffect(() => {
+	// 	if (successUpdate) {
+	// 		dispatch(getUserDetails(userId));
+	// 		dispatch({ type: USER_PROFILE_UPDATE_RESET });
+	// 		setPassword('');
+	// 		setConfirmPassword('');
+	// 		setMessage(null);
+	// 	} else {
+	// 		if (!user.firstName || user._id !== userId) {
+	// 			dispatch(getUserDetails(userId));
+	// 		} else {
+	// 			setFirstName(user.firstName);
+	// 			setLastName(user.lastName);
+	// 			setTelephone(user.telephone);
+	// 			setEmail(user.email);
+	// 			setUpdatedDate(user.updatedAt);
+	// 		}
+	// 	}
+	// }, [dispatch, userId, user, successUpdate, userInfo]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -73,102 +73,102 @@ const EditUserProfileScreen = ({ userId }) => {
 
 	return (
 		<>
-			{message && <Message variant="danger">{message}</Message>}
+			{/* {message && <Message variant="danger">{message}</Message>}
 			{error && <Message variant="danger">{error}</Message>}
 			{successUpdate && <Message variant="success">Profile Updated</Message>}
-			{loading && <Loader />}
+			{loading && <Loader />} */}
 			<Container>
-				{userInfo._id === user._id ? (
-					<Form onSubmit={submitHandler} className="my-5">
-						<Row>
-							<Col md={6}>
-								<Form.Group controlId="firstName">
-									<Form.Label>First Name</Form.Label>
-									<Form.Control
-										type="firstName"
-										placeholder="Enter name"
-										value={firstName}
-										onChange={(e) => setFirstName(e.target.value)}
-									></Form.Control>
-								</Form.Group>
-							</Col>
-							<Col md={6}>
-								<Form.Group controlId="lastName">
-									<Form.Label>Last Name</Form.Label>
-									<Form.Control
-										type="lastName"
-										placeholder="Enter name"
-										value={lastName}
-										onChange={(e) => setLastName(e.target.value)}
-									></Form.Control>
-								</Form.Group>
-							</Col>
-						</Row>
-						<Row>
-							<Col md={8}>
-								<Form.Group controlId="email">
-									<Form.Label>Email Address</Form.Label>
-									<Form.Control
-										type="email"
-										placeholder="Enter email"
-										value={email}
-										onChange={(e) => setEmail(e.target.value)}
-									></Form.Control>
-								</Form.Group>
-							</Col>
-							<Col md={4}>
-								<Form.Group controlId="telephone">
-									<Form.Label>Telephone</Form.Label>
-									<Form.Control
-										type="telephone"
-										placeholder="Enter telephone"
-										value={telephone}
-										onChange={(e) => setTelephone(e.target.value)}
-									></Form.Control>
-								</Form.Group>
-							</Col>
-						</Row>
-						<hr className="my-4" />
-						<Row>
-							<Col md={6}>
-								<Form.Group controlId="password">
-									<Form.Label>Password</Form.Label>
-									<Form.Control
-										type="password"
-										placeholder="Enter Password"
-										value={password}
-										onChange={(e) => setPassword(e.target.value)}
-									></Form.Control>
-								</Form.Group>
-							</Col>
-							<Col md={6}>
-								<Form.Group controlId="confirmPassword">
-									<Form.Label>Re-type Password</Form.Label>
-									<Form.Control
-										type="password"
-										placeholder="Re-type Password"
-										value={confirmPassword}
-										onChange={(e) => setConfirmPassword(e.target.value)}
-									></Form.Control>
-								</Form.Group>
-							</Col>
-						</Row>
-						<Row className="mt-3">
-							<Col>
-								<Button type="submit" variant="primary" className="px-5 mt-3">
-									Update
-								</Button>
-							</Col>
-							<Col className="text-right">
-								<p>updated on: {updatedDate.substring(0, 10)}</p>
-							</Col>
-						</Row>
-					</Form>
-				) : (
+				{/* {userInfo && userInfo._id === user._id ? ( */}
+				<Form onSubmit={submitHandler} className="my-5">
+					<Row>
+						<Col md={6}>
+							<Form.Group controlId="firstName">
+								<Form.Label>First Name</Form.Label>
+								<Form.Control
+									type="firstName"
+									placeholder="Enter name"
+									value={firstName}
+									onChange={(e) => setFirstName(e.target.value)}
+								></Form.Control>
+							</Form.Group>
+						</Col>
+						<Col md={6}>
+							<Form.Group controlId="lastName">
+								<Form.Label>Last Name</Form.Label>
+								<Form.Control
+									type="lastName"
+									placeholder="Enter name"
+									value={lastName}
+									onChange={(e) => setLastName(e.target.value)}
+								></Form.Control>
+							</Form.Group>
+						</Col>
+					</Row>
+					<Row>
+						<Col md={8}>
+							<Form.Group controlId="email">
+								<Form.Label>Email Address</Form.Label>
+								<Form.Control
+									type="email"
+									placeholder="Enter email"
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
+								></Form.Control>
+							</Form.Group>
+						</Col>
+						<Col md={4}>
+							<Form.Group controlId="telephone">
+								<Form.Label>Telephone</Form.Label>
+								<Form.Control
+									type="telephone"
+									placeholder="Enter telephone"
+									value={telephone}
+									onChange={(e) => setTelephone(e.target.value)}
+								></Form.Control>
+							</Form.Group>
+						</Col>
+					</Row>
+					<hr className="my-4" />
+					<Row>
+						<Col md={6}>
+							<Form.Group controlId="password">
+								<Form.Label>Password</Form.Label>
+								<Form.Control
+									type="password"
+									placeholder="Enter Password"
+									value={password}
+									onChange={(e) => setPassword(e.target.value)}
+								></Form.Control>
+							</Form.Group>
+						</Col>
+						<Col md={6}>
+							<Form.Group controlId="confirmPassword">
+								<Form.Label>Re-type Password</Form.Label>
+								<Form.Control
+									type="password"
+									placeholder="Re-type Password"
+									value={confirmPassword}
+									onChange={(e) => setConfirmPassword(e.target.value)}
+								></Form.Control>
+							</Form.Group>
+						</Col>
+					</Row>
+					<Row className="mt-3">
+						<Col>
+							<Button type="submit" variant="primary" className="px-5 mt-3">
+								Update
+							</Button>
+						</Col>
+						<Col className="text-right">
+							<p>updated on: {updatedDate.substring(0, 10)}</p>
+						</Col>
+					</Row>
+				</Form>
+				{/* ) : (
 					<Message variant="danger">
 						ADMIN NOT ALLOWED TO THIS PROTECTED ROUTE
 					</Message>
-				)}
+				)} */}
 			</Container>
 		</>
 	);

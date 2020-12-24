@@ -21,6 +21,9 @@ const UserProfileScreen = ({ history, match }) => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
+	console.log(user);
+	console.log(userInfo);
+
 	if (!userId) {
 		userId = userInfo._id;
 	}
@@ -30,6 +33,7 @@ const UserProfileScreen = ({ history, match }) => {
 			history.push('/login');
 		} else {
 			if (!user || !user.firstName) {
+				console.log('dispatch');
 				dispatch(getUserDetails(userId));
 			}
 		}
@@ -46,7 +50,10 @@ const UserProfileScreen = ({ history, match }) => {
 					<Col md={4}>
 						<Card>
 							<Card.Img
-								src={user.avatar}
+								src={
+									user.firstName === 'Fabiano' &&
+									'https://cdn-aloik.nitrocdn.com/huqEQAiBEvAuNBhDiOttdbmgrSMOWZHL/assets/static/optimized/otrade.ca/newsite/wp-content/uploads/2020/09/25a95d9509d5efaf4818a5e7dc080124.fabiano-bio-2.png'
+								}
 								alt="user profile"
 								className="w-75 m-auto mt-5"
 							/>
@@ -73,12 +80,12 @@ const UserProfileScreen = ({ history, match }) => {
 							className=""
 						>
 							<Tab eventKey="userDetails" title="User Details">
-								<EditUserProfileScreen userId={user._id} />
+								<EditUserProfileScreen userId={userId} />
 							</Tab>
 							<Tab eventKey="projects" title="Projects">
 								<Route
 									render={({ history }) => (
-										<ListProjectsScreen history={history} userId={user._id} />
+										<ListProjectsScreen history={history} userId={userId} />
 									)}
 								/>
 							</Tab>

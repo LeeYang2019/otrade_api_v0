@@ -18,6 +18,9 @@ import {
 	PROJECT_ASSIGNMENT_SUCCESS,
 	PROJECT_ASSIGNMENT_FAIL,
 	PROJECT_ASSIGNMENT_RESET,
+	PROJECT_ADD_REQUEST,
+	PROJECT_ADD_SUCCESS,
+	PROJECT_ADD_FAIL,
 } from '../constants/projectConstants';
 
 //project list
@@ -53,6 +56,19 @@ export const projectDetailsReducer = (state = { project: {} }, action) => {
 				assignees: action.payload.assignees,
 			};
 		case PROJECT_DETAILS_FAIL:
+			return { loading: false, error: action.payload };
+		default:
+			return state;
+	}
+};
+
+export const projectAddReducer = (state = {}, action) => {
+	switch (action.type) {
+		case PROJECT_ADD_REQUEST:
+			return { loading: true };
+		case PROJECT_ADD_SUCCESS:
+			return { loading: false, success: true, project: action.payload };
+		case PROJECT_ADD_FAIL:
 			return { loading: false, error: action.payload };
 		default:
 			return state;

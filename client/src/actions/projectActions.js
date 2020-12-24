@@ -9,6 +9,9 @@ import {
 	PROJECT_UPDATE_REQUEST,
 	PROJECT_UPDATE_SUCCESS,
 	PROJECT_UPDATE_FAIL,
+	PROJECT_ADD_REQUEST,
+	PROJECT_ADD_SUCCESS,
+	PROJECT_ADD_FAIL,
 	PROJECT_USER_REQUEST,
 	PROJECT_USER_SUCCESS,
 	PROJECT_USER_FAIL,
@@ -101,6 +104,41 @@ export const updateProject = (project) => async (dispatch, getState) => {
 
 		dispatch({
 			type: PROJECT_UPDATE_FAIL,
+			payload: message,
+		});
+	}
+};
+
+//update project
+export const addProject = (project) => async (dispatch, getState) => {
+	try {
+		dispatch({ type: PROJECT_ADD_REQUEST });
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		//pass id, project, and config file to api
+		const {
+			data: { data },
+		} = await axios.post(`/api/v1/projects/`, project, config);
+
+		dispatch({ type: PROJECT_ADD_SUCCESS, payload: data });
+	} catch (error) {
+		const message =
+			error.response && error.response.data.message
+				? error.response.data.message
+				: error.message;
+
+		dispatch({
+			type: PROJECT_ADD_FAIL,
 			payload: message,
 		});
 	}
