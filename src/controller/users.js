@@ -39,8 +39,6 @@ exports.getMyUserProfile = asyncHandler(async (req, res) => {
 	//auth middleware passes user here
 	const user = await User.findById(req.user._id);
 
-	console.log(user);
-
 	//matches enteredPassword with db user password
 	if (user) {
 		res.json({
@@ -171,13 +169,15 @@ exports.registerUser = asyncHandler(async (req, res) => {
 // @route   PUT /api/v1/admin/users/:id
 // @access  Private/admin
 exports.updateUser = asyncHandler(async (req, res) => {
-	console.log('updateUser');
 	const user = await User.findById(req.params.id);
 
 	//matches enteredPassword with db user password
 	if (user) {
-		user.name = req.body.name || user.name;
+		user.firstName = req.body.firstName || user.firstName;
+		user.lastName = req.body.lastName || user.lastName;
 		user.email = req.body.email || user.email;
+		user.telephone = req.body.telephone || user.telephone;
+		user.status = req.body.status || user.status;
 		user.role = req.body.role;
 
 		const updatedUser = await user.save();

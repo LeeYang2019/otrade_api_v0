@@ -35,8 +35,8 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 
 	useEffect(() => {
 		if (successUpdate) {
+			dispatch(getUserDetails(userId));
 			dispatch({ type: USER_UPDATE_RESET });
-			history.push('/admin/userlist');
 		} else {
 			if (!user.firstName || user._id !== userId) {
 				dispatch(getUserDetails(userId));
@@ -68,6 +68,9 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 
 	return (
 		<>
+			<Link to="/admin/userList" className="btn btn-primary my-3">
+				Back to Project List
+			</Link>
 			<Container className="w-50">
 				{loadingUpdate && <Loader />}
 				{errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
