@@ -4,15 +4,17 @@ import {
 	USER_LOGIN_SUCCESS,
 	USER_LOGIN_FAIL,
 	USER_LOGOUT,
+	USER_PROFILE_UPDATE_REQUEST,
+	USER_PROFILE_UPDATE_SUCCESS,
+	USER_PROFILE_UPDATE_FAIL,
 	USER_DETAILS_REQUEST,
 	USER_DETAILS_SUCCESS,
 	USER_DETAILS_FAIL,
+	USER_DETAILS_RESET,
 	USER_LIST_REQUEST,
 	USER_LIST_SUCCESS,
 	USER_LIST_FAIL,
-	USER_UPDATE_PROFILE_REQUEST,
-	USER_UPDATE_PROFILE_SUCCESS,
-	USER_UPDATE_PROFILE_FAIL,
+	USER_LIST_RESET,
 	USER_DELETE_REQUEST,
 	USER_DELETE_SUCCESS,
 	USER_DELETE_FAIL,
@@ -20,6 +22,7 @@ import {
 	USER_UPDATE_SUCCESS,
 	USER_UPDATE_FAIL,
 } from '../constants/userConstants';
+import { PROJECT_LIST_RESET } from '../constants/projectConstants';
 
 //logs in the user
 export const login = (email, password) => async (dispatch) => {
@@ -61,6 +64,9 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => (dispatch) => {
 	localStorage.removeItem('userInfo');
 	dispatch({ type: USER_LOGOUT });
+	dispatch({ type: USER_DETAILS_RESET });
+	dispatch({ type: USER_LIST_RESET });
+	dispatch({ type: PROJECT_LIST_RESET });
 };
 
 //gets the user details
@@ -88,8 +94,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 			data: { data },
 		} = await axios.get(`/api/v1/users/${id}`, config);
 
-		console.log(data);
-
 		//dispatch
 		dispatch({
 			type: USER_DETAILS_SUCCESS,
@@ -106,10 +110,11 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 	}
 };
 
+//update a user
 export const updateUserProfile = (user) => async (dispatch, getState) => {
 	try {
 		dispatch({
-			type: USER_UPDATE_PROFILE_REQUEST,
+			type: USER_PROFILE_UPDATE_REQUEST,
 		});
 
 		const {
@@ -126,7 +131,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 		const { data } = await axios.put(`/api/v1/users/profile`, user, config);
 
 		dispatch({
-			type: USER_UPDATE_PROFILE_SUCCESS,
+			type: USER_PROFILE_UPDATE_SUCCESS,
 			payload: data,
 		});
 
@@ -142,16 +147,16 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 				? error.response.data.message
 				: error.message;
 		if (message === 'Not authorized, token failed') {
-			// dispatch(logout());
+			dispatch(logout());
 		}
 		dispatch({
-			type: USER_UPDATE_PROFILE_FAIL,
+			type: USER_PROFILE_UPDATE_FAIL,
 			payload: message,
 		});
 	}
 };
 
-//list all users in the db
+//list all users
 export const listUsers = (keyword = '', pageNumber = '') => async (
 	dispatch,
 	getState

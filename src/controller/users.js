@@ -45,6 +45,7 @@ exports.getMyUserProfile = asyncHandler(async (req, res) => {
 			_id: user._id,
 			firstName: user.firstName,
 			lastName: user.lastName,
+			telephone: user.telephone,
 			email: user.email,
 			role: user.role,
 		});
@@ -58,12 +59,26 @@ exports.getMyUserProfile = asyncHandler(async (req, res) => {
 // @route   PUT /api/v1/users/profile
 // @access  private
 exports.updateMyUserProfile = asyncHandler(async (req, res) => {
+	console.log('inside updateMyUserProfile');
+
 	//auth middleware passes user here
 	const user = await User.findById(req.user._id);
 
+	//get avatar
+	const avatar = gravatar.url(req.body.email, {
+		s: '200', //size
+		r: 'pg', //rating
+		d: 'mm',
+	});
+
+	//set avatar in body
+	req.body.avatar = avatar;
+
 	//matches enteredPassword with db user password
 	if (user) {
-		user.name = req.body.name || user.name;
+		user.firstName = req.body.firstName || user.firstName;
+		user.lastName = req.body.lastName || user.lastName;
+		user.telephone = req.body.telephone || user.telephone;
 		user.email = req.body.email || user.email;
 
 		if (req.body.password) {
@@ -72,11 +87,16 @@ exports.updateMyUserProfile = asyncHandler(async (req, res) => {
 
 		const updatedUser = await user.save();
 
+		console.log(updatedUser);
+
 		res.json({
 			_id: updatedUser._id,
-			name: updatedUser.name,
+			firstName: updatedUser.firstName,
+			lastName: updatedUser.lastName,
 			email: updatedUser.email,
-			isAdmin: updatedUser.isAdmin,
+			telephone: updatedUser.telephone,
+			status: updatedUser.status,
+			role: updatedUser.role,
 			token: generateToken(updatedUser._id),
 		});
 	} else {
@@ -169,6 +189,8 @@ exports.registerUser = asyncHandler(async (req, res) => {
 // @route   PUT /api/v1/admin/users/:id
 // @access  Private/admin
 exports.updateUser = asyncHandler(async (req, res) => {
+	console.log('inside updateUser');
+
 	const user = await User.findById(req.params.id);
 
 	//matches enteredPassword with db user password
@@ -178,7 +200,7 @@ exports.updateUser = asyncHandler(async (req, res) => {
 		user.email = req.body.email || user.email;
 		user.telephone = req.body.telephone || user.telephone;
 		user.status = req.body.status || user.status;
-		user.role = req.body.role;
+		user.role = req.body.role || user.role;
 
 		const updatedUser = await user.save();
 

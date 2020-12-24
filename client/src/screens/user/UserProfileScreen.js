@@ -8,7 +8,7 @@ import Loader from '../../components/Loader.js';
 import { getUserDetails } from '../../actions/userActions';
 import EditUserProfileScreen from './../user/EditUserProfileScreen';
 
-const UserProfileScreen = ({ location, history, match }) => {
+const UserProfileScreen = ({ history, match }) => {
 	let userId = match.params.id;
 
 	const dispatch = useDispatch();
@@ -29,56 +29,63 @@ const UserProfileScreen = ({ location, history, match }) => {
 		if (!userInfo) {
 			history.push('/login');
 		} else {
-			dispatch(getUserDetails(userId));
+			if (!user || !user.firstName) {
+				dispatch(getUserDetails(userId));
+			}
 		}
-	}, [history, dispatch, userInfo, userId]);
+	}, [history, dispatch, userInfo, userId, user]);
 
 	return (
 		<Row className="my-5">
-			<Col md={4}>
-				{loading ? (
-					<Loader />
-				) : error ? (
-					<Message variant="danger">{error}</Message>
-				) : (
-					<Card>
-						<Card.Img
-							src={user.avatar}
-							alt="user profile"
-							className="w-75 m-auto mt-5"
-						/>
-						<Card.Body>
-							<hr />
-							<Card.Text>
-								<p>
-									{user.firstName} {user.lastName}
-								</p>
-								<em>Email: </em>
-								{user.email}
-								<br />
-								<em>Phone: </em> {user.email}
-								<br />
-								<em>Role: </em>
-								{user.role}
-							</Card.Text>
-						</Card.Body>
-					</Card>
-				)}
-			</Col>
-			<Col md={8}>
-				<Tabs defaultActiveKey="projects" id="tabs" variant="tabs" className="">
-					<Tab eventKey="userDetails" title="User Details">
-						<EditUserProfileScreen userId={user._id} />
-					</Tab>
-					<Tab eventKey="projects" title="Projects">
-						<Route
-							render={({ history }) => (
-								<ListProjectsScreen history={history} userId={user._id} />
-							)}
-						/>
-					</Tab>
-				</Tabs>
-			</Col>
+			{loading ? (
+				<Loader />
+			) : error ? (
+				<Message variant="danger">{error}</Message>
+			) : (
+				<>
+					<Col md={4}>
+						<Card>
+							<Card.Img
+								src={user.avatar}
+								alt="user profile"
+								className="w-75 m-auto mt-5"
+							/>
+							<Card.Body>
+								<hr />
+								<Card.Text>
+									<p>
+										{user.firstName} {user.lastName}
+									</p>
+									{user.email}
+									<br />
+									{user.telephone}
+									<br />
+									{user.role}
+								</Card.Text>
+							</Card.Body>
+						</Card>
+					</Col>
+					<Col md={8}>
+						<Tabs
+							defaultActiveKey="projects"
+							id="tabs"
+							variant="tabs"
+							className=""
+						>
+							<Tab eventKey="userDetails" title="User Details">
+								<EditUserProfileScreen userId={user._id} />
+							</Tab>
+							<Tab eventKey="projects" title="Projects">
+								<Route
+									render={({ history }) => (
+										<ListProjectsScreen history={history} userId={user._id} />
+									)}
+								/>
+							</Tab>
+						</Tabs>
+					</Col>
+				</>
+			)}
 		</Row>
 	);
 };

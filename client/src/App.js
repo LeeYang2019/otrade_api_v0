@@ -13,6 +13,8 @@ import ProjectScreen from './screens/project/ProjectScreen';
 import StakeholderScreen from './screens/stakeholder/StakeholderScreen';
 import ProjectUpdateScreen from './screens/project/ProjectUpdateScreen';
 import AdminEditUserProfileScreen from './screens/user/AdminEditUserProfileScreen';
+import UserAddScreen from './screens/user/UserAddScreen';
+import ProjectAddScreen from './screens/project/ProjectAddScreen';
 
 const App = () => {
 	return (
@@ -51,6 +53,12 @@ const App = () => {
 						path="/admin/userlist/search/:keyword/page/:pageNumber" //keyword & pageNumber
 						component={ListUserScreen}
 					/>
+					<Route
+						exact
+						path="/admin/userlist/add" //keyword & pageNumber
+						component={UserAddScreen}
+					/>
+
 					{/* projectList paths */}
 					<Route exact path="/admin/projects" component={ListProjectScreen} />
 					<Route
@@ -68,6 +76,12 @@ const App = () => {
 						path="/admin/projects/search/:keyword/page/:pageNumber" //keyword & pageNumber
 						component={ListProjectScreen}
 					/>
+					<Route
+						exact
+						path="/admin/projects/add" //keyword & pageNumber
+						component={ProjectAddScreen}
+					/>
+
 					{/* Admin Edit Routes */}
 					<Route
 						exact

@@ -79,7 +79,7 @@ const Assignment = ({ history, match }) => {
 								<Form.Control
 									as="select"
 									value={assignee}
-									onChange={(e) => setAssignee(e.target.value)}
+									onSelect={(e) => setAssignee(e.target.value)}
 									className="px-5"
 									multiple
 								>

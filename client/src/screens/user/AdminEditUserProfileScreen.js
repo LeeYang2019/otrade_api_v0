@@ -17,6 +17,7 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 	const [email, setEmail] = useState('');
 	const [status, setStatus] = useState('');
 	const [role, setRole] = useState('');
+	const [updatedDate, setUpdatedDate] = useState('');
 
 	const dispatch = useDispatch();
 
@@ -47,6 +48,7 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 				setEmail(user.email);
 				setStatus(user.status);
 				setRole(user.role);
+				setUpdatedDate(user.updatedAt);
 			}
 		}
 	}, [history, dispatch, userId, user, successUpdate]);
@@ -69,7 +71,7 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 	return (
 		<>
 			<Link to="/admin/userList" className="btn btn-primary my-3">
-				Back to Project List
+				Back to User List
 			</Link>
 			<Container className="w-50">
 				{loadingUpdate && <Loader />}
@@ -161,9 +163,16 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 								</Form.Group>
 							</Col>
 						</Row>
-						<Button type="submit" variant="primary" className="mt-4 px-5">
-							Update
-						</Button>
+						<Row className="mt-3">
+							<Col>
+								<Button type="submit" variant="primary" className="px-5 mt-3">
+									Update
+								</Button>
+							</Col>
+							<Col className="text-right">
+								<p>updated on: {updatedDate.substring(0, 10)}</p>
+							</Col>
+						</Row>
 					</Form>
 				)}
 			</Container>

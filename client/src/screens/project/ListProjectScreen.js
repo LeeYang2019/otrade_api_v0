@@ -53,7 +53,7 @@ const ListProjectScreen = ({ history, match }) => {
 					/>
 				</Col>
 				<Col className="text-right" md={2}>
-					<Link to="/admin/projects" className="btn btn-primary my-3">
+					<Link to="/admin/projects/add" className="btn btn-primary my-3">
 						<i className="fas fa-plus"></i> Project
 					</Link>
 				</Col>

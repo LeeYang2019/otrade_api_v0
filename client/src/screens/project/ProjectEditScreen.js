@@ -122,7 +122,7 @@ const ProjectEditScreen = ({ match, history }) => {
 							<Row>
 								<Col>
 									<Form.Group controlId="comment">
-										<Form.Label>Summary</Form.Label>
+										<Form.Label>Comments</Form.Label>
 										<Form.Control
 											as="textarea"
 											rows="6"
@@ -132,13 +132,13 @@ const ProjectEditScreen = ({ match, history }) => {
 									</Form.Group>
 								</Col>
 							</Row>
-							<Row>
+							<Row className="mt-3">
 								<Col>
 									<Button type="submit" variant="primary" className="px-5 mt-3">
 										Update
 									</Button>
 								</Col>
-								<Col md={4}>
+								<Col className="text-right">
 									<p>updated on: {updatedDate.substring(0, 10)}</p>
 								</Col>
 							</Row>

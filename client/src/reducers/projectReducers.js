@@ -3,6 +3,7 @@ import {
 	PROJECT_LIST_REQUEST,
 	PROJECT_LIST_SUCCESS,
 	PROJECT_LIST_FAIL,
+	PROJECT_LIST_RESET,
 	PROJECT_DETAILS_REQUEST,
 	PROJECT_DETAILS_SUCCESS,
 	PROJECT_DETAILS_FAIL,
@@ -33,6 +34,8 @@ export const projectListReducer = (state = { projects: [] }, action) => {
 			};
 		case PROJECT_LIST_FAIL:
 			return { loading: false, error: action.payload };
+		case PROJECT_LIST_RESET:
+			return { projects: {} };
 		default:
 			return state;
 	}
