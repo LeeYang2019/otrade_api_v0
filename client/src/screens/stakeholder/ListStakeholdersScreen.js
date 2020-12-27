@@ -31,7 +31,10 @@ const ListStakeholdersScreen = ({ projectId }) => {
 					/>
 				</Col>
 				<Col className="text-right" md={4}>
-					<Link to="/admin/projects" className="btn btn-primary my-3">
+					<Link
+						to={`/project/${projectId}/addStakeholder`}
+						className="btn btn-primary my-3"
+					>
 						<i className="fas fa-plus"></i> Register Stakeholder
 					</Link>
 				</Col>

@@ -14,19 +14,14 @@ const StakeholderSchema = new mongoose.Schema(
 		gender: {
 			type: String,
 			require: [true, 'Please enter a gender'],
-			enum: ['male', 'female', 'other'],
+			enum: ['Male', 'Female', 'Other'],
 		},
 		birthDate: {
 			type: String,
 			require: false,
 		},
-		telephone: {
+		ethnicity: {
 			type: String,
-			match: [
-				/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/,
-				/^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/,
-				/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
-			],
 		},
 		email: {
 			type: String,
@@ -35,20 +30,34 @@ const StakeholderSchema = new mongoose.Schema(
 				'Please add a valid email',
 			],
 		},
-		social: {
-			youtube: {
-				type: String,
-			},
-			twitter: {
-				type: String,
-			},
-			facebook: {
-				type: String,
-			},
-			linkedin: {
-				type: String,
-			},
+		telephone: {
+			type: String,
+			// match: [
+			// 	/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/,
+			// 	/^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/,
+			// 	/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
+			// ],
 		},
+		organization: {
+			type: String,
+		},
+		community: {
+			type: String,
+		},
+		// social: {
+		// 	youtube: {
+		// 		type: String,
+		// 	},
+		// 	twitter: {
+		// 		type: String,
+		// 	},
+		// 	facebook: {
+		// 		type: String,
+		// 	},
+		// 	linkedin: {
+		// 		type: String,
+		// 	},
+		// },
 		project: {
 			type: mongoose.Schema.ObjectId,
 			ref: 'Project',

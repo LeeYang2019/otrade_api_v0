@@ -56,6 +56,8 @@ const Assignment = ({ history, match }) => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
+		console.log(projectId);
+		console.log(assignee);
 		dispatch(assignProjectUser(projectId, assignee));
 	};
 
@@ -79,9 +81,8 @@ const Assignment = ({ history, match }) => {
 								<Form.Control
 									as="select"
 									value={assignee}
-									onSelect={(e) => setAssignee(e.target.value)}
+									onChange={(e) => setAssignee(e.target.value)}
 									className="px-5"
-									multiple
 								>
 									<option value="select">--Select Name--</option>
 									{users.map((user) => (
@@ -91,13 +92,15 @@ const Assignment = ({ history, match }) => {
 									))}
 								</Form.Control>
 							</Row>
-							<Button
-								type="submit"
-								variant="primary"
-								className="ml-4 mb-1 px-4"
-							>
-								Assign
-							</Button>
+							<Row className="mt-3">
+								<Button
+									type="submit"
+									variant="primary"
+									className="ml-3 mt-3 px-5"
+								>
+									Assign
+								</Button>
+							</Row>
 						</Form.Group>
 					</Form>
 					{/* {projectLoading ? (

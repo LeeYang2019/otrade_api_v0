@@ -21,13 +21,16 @@ const ListOrganizationsScreen = ({ projectId }) => {
 				<Col className="text-left" md={8}>
 					<Route
 						render={({ history }) => (
-							<SearchBox history={history} searchWord={'Stakeholder'} />
+							<SearchBox history={history} searchWord={'Organization'} />
 						)}
 					/>
 				</Col>
 				<Col className="text-right" md={4}>
-					<Link to="/admin/projects" className="btn btn-primary my-3">
-						<i className="fas fa-plus"></i> Register Stakeholder
+					<Link
+						to={`/project/${projectId}/addOrganization`}
+						className="btn btn-primary my-3"
+					>
+						<i className="fas fa-plus"></i> Register Organization
 					</Link>
 				</Col>
 			</Row>

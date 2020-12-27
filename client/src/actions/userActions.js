@@ -43,8 +43,6 @@ export const login = (email, password) => async (dispatch) => {
 			config
 		);
 
-		console.log(data);
-
 		dispatch({
 			type: USER_LOGIN_SUCCESS,
 			payload: data,
@@ -66,15 +64,13 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => (dispatch) => {
 	localStorage.removeItem('userInfo');
 	dispatch({ type: USER_LOGOUT });
-	// dispatch({ type: USER_DETAILS_RESET });
+	dispatch({ type: USER_DETAILS_RESET });
 	// dispatch({ type: USER_LIST_RESET });
 	// dispatch({ type: PROJECT_LIST_RESET });
 };
 
 //gets the user details
 export const getUserDetails = (id) => async (dispatch, getState) => {
-	console.log('inside getUserDetails');
-	console.log(id);
 	try {
 		dispatch({
 			type: USER_DETAILS_REQUEST,

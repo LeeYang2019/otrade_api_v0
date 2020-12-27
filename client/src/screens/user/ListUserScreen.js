@@ -77,26 +77,46 @@ const ListUserScreen = ({ history, match }) => {
 								users.map((user) => (
 									<tr key={user._id}>
 										<td>
-											<p>
-												<strong>User: </strong>
-												<Link to={`/profile/${user._id}`}>
-													{user.lastName}, {user.firstName}
-												</Link>
-												<br />
-												Email:{' '}
-												<em>
-													<a href={`mailto:${user.email}`}>{user.email}</a>
-												</em>
-												<br />
-												Role:{' '}
-												<strong>
-													<em>{user.role}</em>
-												</strong>
-												<br />
-												Created Date:{' '}
-												<strong>{user.createdAt.substring(0, 10)}</strong>{' '}
-												<br />
-											</p>
+											<Row>
+												<Col md={9}>
+													<p>
+														<strong>User: </strong>
+														<Link to={`/profile/${user._id}`}>
+															{user.lastName}, {user.firstName}
+														</Link>
+														<br />
+														Email:{' '}
+														<em>
+															<a href={`mailto:${user.email}`}>{user.email}</a>
+														</em>
+														<br />
+														Role:{' '}
+														<strong>
+															<em>{user.role}</em>
+														</strong>
+														<br />
+														Created Date:{' '}
+														<strong>
+															{user.createdAt.substring(0, 10)}
+														</strong>{' '}
+														<br />
+													</p>
+												</Col>
+												<Col>
+													<p>
+														<strong>Status: </strong>
+														{user.status === 'active' ? (
+															<strong>
+																<em className="text-success">{user.status}</em>
+															</strong>
+														) : (
+															<strong>
+																<em className="text-danger">{user.status}</em>
+															</strong>
+														)}
+													</p>
+												</Col>
+											</Row>
 										</td>
 										<td className="text-right pr-4 align-middle">
 											<LinkContainer to={`/admin/user/${user._id}/edit`}>

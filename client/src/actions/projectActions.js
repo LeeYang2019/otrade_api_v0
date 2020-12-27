@@ -109,7 +109,7 @@ export const updateProject = (project) => async (dispatch, getState) => {
 	}
 };
 
-//update project
+//add project
 export const addProject = (project) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: PROJECT_ADD_REQUEST });
@@ -196,6 +196,7 @@ export const assignProjectUser = (projectId, userId) => async (
 			data: { data },
 		} = await axios.put(
 			`/api/v1/users/${userId}/projects/${projectId}/assign`,
+			{},
 			config
 		);
 

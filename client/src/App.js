@@ -15,6 +15,9 @@ import ProjectUpdateScreen from './screens/project/ProjectUpdateScreen';
 import AdminEditUserProfileScreen from './screens/user/AdminEditUserProfileScreen';
 import UserAddScreen from './screens/user/UserAddScreen';
 import ProjectAddScreen from './screens/project/ProjectAddScreen';
+import AddStakeholderScreen from './screens/stakeholder/AddStakeholderScreen';
+import AddOrganizationScreen from './screens/organization/AddOrganizationScreen';
+import AddActivityScreen from './screens/activity/AddActivityScreen';
 
 const App = () => {
 	return (
@@ -80,6 +83,21 @@ const App = () => {
 						exact
 						path="/admin/projects/add" //keyword & pageNumber
 						component={ProjectAddScreen}
+					/>
+					<Route
+						exact
+						path="/project/:projectId/addStakeholder" //keyword & pageNumber
+						component={AddStakeholderScreen}
+					/>
+					<Route
+						exact
+						path="/project/:projectId/addOrganization" //keyword & pageNumber
+						component={AddOrganizationScreen}
+					/>
+					<Route
+						exact
+						path="/project/:projectId/addActivity" //keyword & pageNumber
+						component={AddActivityScreen}
 					/>
 
 					{/* Admin Edit Routes */}

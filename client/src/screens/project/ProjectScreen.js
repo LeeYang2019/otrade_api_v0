@@ -65,7 +65,7 @@ const ProjectScreen = ({ history, match }) => {
 				</Col>
 				<Col md={8}>
 					<Tabs defaultActiveKey="stakeholders" id="tabs" variant="tabs">
-						<Tab eventKey="projectDetails" title="Project Details">
+						<Tab eventKey="projectDetails" title="Details">
 							<ProjectDetailsScreen projectId={projectId} />
 						</Tab>
 						<Tab eventKey="stakeholders" title="Stakeholders">
