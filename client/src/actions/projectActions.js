@@ -173,7 +173,7 @@ export const listUserProjects = (id) => async (dispatch, getState) => {
 };
 
 //assign user to project
-export const assignProjectUser = (projectId, userId) => async (
+export const assignProjectUser = (projectId, assignments) => async (
 	dispatch,
 	getState
 ) => {
@@ -191,14 +191,18 @@ export const assignProjectUser = (projectId, userId) => async (
 			},
 		};
 
+		console.log('inside assign project');
+
 		//pass id, project, and config file to api
 		const {
 			data: { data },
 		} = await axios.put(
-			`/api/v1/users/${userId}/projects/${projectId}/assign`,
-			{},
+			`/api/v1/projects/${projectId}/assign`,
+			assignments,
 			config
 		);
+
+		console.log(data);
 
 		dispatch({ type: PROJECT_ASSIGNMENT_SUCCESS, payload: data });
 	} catch (error) {

@@ -9,6 +9,7 @@ const {
 	addProject,
 	updateProject,
 	deleteProject,
+	assignUserToProject,
 } = require('../controller/projects');
 
 const advancedResults = require('../middleware/advancedResuts');
@@ -29,7 +30,9 @@ router
 // define specific route
 router.route('/:id').get(getProject).put(updateProject).delete(deleteProject);
 
-//
+router.route('/:projectId/assign').put(protect, isAdmin, assignUserToProject);
+
+// get a user's projects
 router.route('/user/:id').get(protect, getUserProjects);
 
 module.exports = router;

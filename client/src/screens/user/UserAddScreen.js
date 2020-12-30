@@ -23,7 +23,7 @@ const UserAddScreen = () => {
 			<Link to="/admin/userList" className="btn btn-primary my-3">
 				Back to User List
 			</Link>
-			<Container className="w-50">
+			<Container className="w-75">
 				<h1>Register User</h1>
 				<hr />
 

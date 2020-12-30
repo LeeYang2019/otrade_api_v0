@@ -17,9 +17,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 	const [birthdate, setBirthdate] = useState('');
 	const [email, setEmail] = useState('');
 	const [ethnicity, setEthnicity] = useState('');
-
-	const [organization, setOrganization] = useState('');
-	const [community, setCommunity] = useState('');
+	const [media, setMedia] = useState([{ website: '' }]);
 
 	const dispatch = useDispatch();
 	const userLogin = useSelector((state) => state.userLogin);
@@ -40,6 +38,31 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 		}
 	}, [history, userInfo]);
 
+	//add input field
+	const addHandler = (i) => {
+		console.log('i: ', i);
+		console.log('list[i]: ', media[i]);
+		console.log(media);
+		setMedia([...media, { website: '' }]);
+	};
+
+	const removeHandler = (i) => {
+		console.log('i: ', i);
+		console.log('list[i]: ', media[i]);
+
+		const list = [...media];
+		list.splice(i, 1);
+		setMedia(list);
+	};
+
+	//handle input change
+	const handleInputChange = (e, i) => {
+		e.preventDefault();
+		const list = [...media];
+		list[i] = e.target.value;
+		setMedia(list);
+	};
+
 	const submitHandler = (e) => {
 		e.preventDefault();
 		console.log(projectId);
@@ -53,8 +76,6 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 					birthdate,
 					email,
 					ethnicity,
-					organization,
-					community,
 				},
 				projectId
 			)
@@ -99,18 +120,22 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 							<Form.Group controlId="gender">
 								<Form.Label>Gender</Form.Label>
 								<Form.Control
-									type="gender"
-									placeholder="Enter gender"
+									as="select"
 									value={gender}
 									onChange={(e) => setGender(e.target.value)}
-								></Form.Control>
+								>
+									<option value="">--Select--</option>
+									<option value="male">Male</option>
+									<option value="female">Female</option>
+									<option value="other">Other</option>
+								</Form.Control>
 							</Form.Group>
 						</Col>
 						<Col md={4}>
 							<Form.Group controlId="birthdate">
 								<Form.Label>BirthDate</Form.Label>
 								<Form.Control
-									type="birthdate"
+									type="date"
 									placeholder="Enter birthdate"
 									value={birthdate}
 									onChange={(e) => setBirthdate(e.target.value)}
@@ -154,26 +179,37 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 						</Col>
 					</Row>
 					<Row className="mt-5">
-						<Col md={4}>
-							<Form.Group controlId="organization">
-								<Form.Label>Organization</Form.Label>
-								<Form.Control
-									type="organization"
-									placeholder="--select--"
-									value={organization}
-									onChange={(e) => setOrganization(e.target.value)}
-								></Form.Control>
-							</Form.Group>
-						</Col>
-						<Col md={4}>
-							<Form.Group controlId="community">
-								<Form.Label>Community</Form.Label>
-								<Form.Control
-									type="community"
-									placeholder="--select--"
-									value={community}
-									onChange={(e) => setCommunity(e.target.value)}
-								></Form.Control>
+						<Col md={12}>
+							<Form.Group controlId="media">
+								<Form.Label>Social Media</Form.Label>
+								{media.map((site, i) => (
+									<Row>
+										<Col md={8}>
+											<Form.Control
+												className="mb-3"
+												placeholder="Add Website"
+												value={site.website}
+												onChange={(e) => handleInputChange(e, i)}
+											></Form.Control>
+										</Col>
+										<Col>
+											{media.length !== 1 && (
+												<Button
+													variant="danger"
+													className="btn-md mr-3"
+													onClick={() => removeHandler(i)}
+												>
+													<i className="fas fa-trash"></i>
+												</Button>
+											)}
+											{media.length - 1 === i && (
+												<Button className="px-3" onClick={() => addHandler(i)}>
+													<i className="fas fa-plus"></i> Add
+												</Button>
+											)}
+										</Col>
+									</Row>
+								))}
 							</Form.Group>
 						</Col>
 					</Row>

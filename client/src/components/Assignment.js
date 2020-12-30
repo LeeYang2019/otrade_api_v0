@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Button, Table, Row } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { listUsers } from '../actions/userActions';
 import {
 	assignProjectUser,
 	listProjectDetails,
-	updateProject,
 } from '../actions/projectActions';
-import FormContainer from '../components/FormContainer';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { PROJECT_ASSIGNMENT_RESET } from '../constants/projectConstants';
 
 const Assignment = ({ history, match }) => {
 	const projectId = match.params.id;
 
-	const [assignee, setAssignee] = useState('');
+	//set assigned users
+	const [assignments, setAssignments] = useState([{ assignee: '' }]);
+	const [message, setMessage] = useState(null);
 
 	const dispatch = useDispatch();
 
-	const userLogin = useSelector((state) => state.userLogin);
-	const { userInfo } = userLogin;
-
+	//get userList
 	const userList = useSelector((state) => state.userList);
 	const { loading, error, users } = userList;
 
@@ -30,7 +27,6 @@ const Assignment = ({ history, match }) => {
 		loading: projectLoading,
 		error: projectError,
 		project,
-		assignees,
 	} = projectDetails;
 
 	const projectUserAssignment = useSelector(
@@ -38,99 +34,117 @@ const Assignment = ({ history, match }) => {
 	);
 	const { success } = projectUserAssignment;
 
-	console.log(assignees);
-
 	useEffect(() => {
-		if (userInfo && userInfo.role === 'admin') {
+		if (success) {
 			dispatch(listProjectDetails(projectId));
-			dispatch(listUsers());
-
-			if (success) {
-				dispatch(listProjectDetails(projectId));
-				dispatch({ type: PROJECT_ASSIGNMENT_RESET });
-			}
 		} else {
-			history.push('/login');
+			if (!project.projectName || project._id !== projectId) {
+				dispatch(listProjectDetails(projectId));
+				dispatch(listUsers());
+			} else {
+				setAssignments(project.assignees);
+			}
 		}
-	}, [dispatch, history, userInfo, projectId, success]);
+	}, [dispatch, history, projectId, project, success]);
+
+	const addHandler = () => {
+		setAssignments([...assignments, { assignee: '' }]);
+	};
+
+	const removeHandler = (i) => {
+		const removeItem = assignments[i];
+		const list = assignments.filter((i) => i !== removeItem);
+		setAssignments(list);
+	};
+
+	const handleInputChange = (e, i) => {
+		e.preventDefault();
+		const list = [...assignments];
+
+		if (list.includes(e.target.value)) {
+			setMessage(
+				'Please make sure the same user is not assigned more than once.'
+			);
+		} else {
+			list[i] = e.target.value;
+			setAssignments(list);
+			setMessage('');
+		}
+	};
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		console.log(projectId);
-		console.log(assignee);
-		dispatch(assignProjectUser(projectId, assignee));
+		dispatch(assignProjectUser(projectId, assignments));
 	};
-
-	const deleteHandler = (assignee) => {};
 
 	return (
 		<>
+			{message && <Message variant="danger">{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<FormContainer>
+				<Container>
 					<Form onSubmit={submitHandler} className="my-5">
 						<Form.Group>
 							<h2>Project: {project.projectName}</h2>
 							<Row className="pl-3">
 								<Form.Label>Assign to</Form.Label>
 							</Row>
-							<Row className="d-lg-inline-flex pl-3">
-								<Form.Control
-									as="select"
-									value={assignee}
-									onChange={(e) => setAssignee(e.target.value)}
-									className="px-5"
-								>
-									<option value="select">--Select Name--</option>
-									{users.map((user) => (
-										<option key={user._id} value={user._id}>
-											{user.firstName} {user.lastName}
-										</option>
-									))}
-								</Form.Control>
-							</Row>
-							<Row className="mt-3">
-								<Button
-									type="submit"
-									variant="primary"
-									className="ml-3 mt-3 px-5"
-								>
-									Assign
-								</Button>
+							<Row>
+								<Col md={12}>
+									{assignments &&
+										assignments.map((assignment, i) => (
+											<Row className="mb-3">
+												<Col md={7}>
+													<Form.Control
+														as="select"
+														value={assignment.lastName}
+														onChange={(e) => handleInputChange(e, i)}
+														className="px-5"
+													>
+														<option value="">--Select Name--</option>
+														{users.map((user) => (
+															<option key={user._id} value={user._id}>
+																{user.firstName} {user.lastName}
+															</option>
+														))}
+													</Form.Control>
+												</Col>
+												<Col md={5}>
+													{assignments.length !== 1 && (
+														<Button
+															variant="danger"
+															className="btn-md mr-3"
+															onClick={() => removeHandler(i)}
+														>
+															<i className="fas fa-trash"></i>
+														</Button>
+													)}
+													{assignments.length - 1 === i && (
+														<Button
+															className="px-3"
+															onClick={() => addHandler(i)}
+														>
+															<i className="fas fa-plus"></i> Add
+														</Button>
+													)}
+												</Col>
+											</Row>
+										))}
+								</Col>
 							</Row>
 						</Form.Group>
+						<Row className="mt-3">
+							<Col>
+								<Button type="submit" variant="primary" className="px-5 mt-3">
+									Update
+								</Button>
+							</Col>
+						</Row>
 					</Form>
-					{/* {projectLoading ? (
-						<Loader />
-					) : projectError ? (
-						<Message variant="danger">{projectError}</Message>
-					) : (
-						<>
-							<Table>
-								<tbody>
-									{project &&
-										assignees.map((assignee) => (
-											<tr key={assignee}>
-												<td className="align-middle">{assignee}</td>
-												<td className="text-right pr-4 align-middle">
-													<Button
-														variant="danger"
-														className="btn-md ml-3"
-														onClick={() => deleteHandler(assignee)}
-													>
-														<i className="fas fa-trash"></i>
-													</Button>
-												</td>
-											</tr>
-										))}
-								</tbody>
-							</Table>
-						</>
-					)} */}
-				</FormContainer>
+				</Container>
 			)}
 		</>
 	);

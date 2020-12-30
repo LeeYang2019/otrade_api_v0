@@ -82,7 +82,6 @@ exports.addProject = asyncHandler(async (req, res) => {
 // @route   PUT /api/v1/project/:id
 // @access  Private
 exports.updateProject = asyncHandler(async (req, res) => {
-	console.log(req.body);
 	let project = await Project.findById(req.params.id);
 	project = await Project.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,
@@ -90,6 +89,27 @@ exports.updateProject = asyncHandler(async (req, res) => {
 	});
 	res.status(200).json({ success: true, data: project });
 });
+
+// @desc	Assign user to project
+// @route	/api/v1/projects/:projectId/assign
+// @access	Private/admin
+exports.assignUserToProject = async (req, res) => {
+	console.log(req.body);
+
+	// //find user and project
+	const project = await Project.findById(req.params.projectId);
+
+	// //if neither are found throw an error
+	if (!project) {
+		res.status(404);
+		throw new Error('No Resources Found');
+	}
+
+	project.assignees = req.body;
+
+	await project.save();
+	res.status(200).json({ success: true, data: project });
+};
 
 // @desc    DELETE a project
 // @route   DELETE /api/v1/project/:id

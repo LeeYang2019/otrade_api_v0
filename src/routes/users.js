@@ -36,13 +36,13 @@ router
 	.put(protect, isAdmin, updateUser)
 	.delete(protect, isAdmin, deleteUser);
 
-//assignment user routes
-router
-	.route('/:id/projects/:projectId/assign')
-	.put(protect, isAdmin, assignUserToProject);
-router
-	.route('/:id/projects/:projectId/remove')
-	.put(protect, isAdmin, removeUserFromProject);
+// //assignment user routes
+// router
+// 	.route('/:id/projects/:projectId/assign')
+// 	.put(protect, isAdmin, assignUserToProject);
+// router
+// 	.route('/:id/projects/:projectId/remove')
+// 	.put(protect, isAdmin, removeUserFromProject);
 
 //export router
 module.exports = router;
