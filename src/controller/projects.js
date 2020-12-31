@@ -94,8 +94,6 @@ exports.updateProject = asyncHandler(async (req, res) => {
 // @route	/api/v1/projects/:projectId/assign
 // @access	Private/admin
 exports.assignUserToProject = async (req, res) => {
-	console.log(req.body);
-
 	// //find user and project
 	const project = await Project.findById(req.params.projectId);
 
@@ -105,11 +103,9 @@ exports.assignUserToProject = async (req, res) => {
 		throw new Error('No Resources Found');
 	}
 
-	console.log(req.body);
+	project.assignees = req.body;
 
-	//project.assignees = req.body;
-
-	//await project.save();
+	await project.save();
 	res.status(200).json({ success: true, data: project });
 };
 

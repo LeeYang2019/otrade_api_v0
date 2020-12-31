@@ -36,12 +36,13 @@ const Assignment = ({ history, match }) => {
 	const { success } = projectUserAssignment;
 
 	useEffect(() => {
-		//success initially undefined
+		//if success true; initial value undefined
 		if (success) {
 			dispatch(listProjectDetails(projectId));
 			//reset success to undefined; otherwise continous looping
 			dispatch({ type: PROJECT_ASSIGNMENT_RESET });
 		} else {
+			// if projectName undefined; initial value undefined
 			if (!project.projectName || project._id !== projectId) {
 				dispatch(listProjectDetails(projectId));
 				dispatch(listUsers());
@@ -105,11 +106,19 @@ const Assignment = ({ history, match }) => {
 												<Col md={7}>
 													<Form.Control
 														as="select"
-														value={assignment.lastName}
+														defaultValue={assignment.lastName}
 														onChange={(e) => handleInputChange(e, i)}
 														className="px-5"
 													>
-														<option value="">--Select Name--</option>
+														<option
+															value={
+																assignment && assignment.id ? assignment.id : ''
+															}
+														>
+															{assignment && assignment.id
+																? `${assignment.lastName} ${assignment.firstName}`
+																: '--Select Name--'}
+														</option>
 														{users.map((user) => (
 															<option key={user._id} value={user._id}>
 																{user.firstName} {user.lastName}
@@ -127,14 +136,14 @@ const Assignment = ({ history, match }) => {
 															<i className="fas fa-trash"></i>
 														</Button>
 													)}
-													{assignments.length - 1 === i && (
-														<Button
-															className="px-3"
-															onClick={() => addHandler(i)}
-														>
-															<i className="fas fa-plus"></i> Add
-														</Button>
-													)}
+													{/* {assignments.length === i && ( */}
+													<Button
+														className="px-3"
+														onClick={() => addHandler(i)}
+													>
+														<i className="fas fa-plus"></i> Add
+													</Button>
+													{/* )} */}
 												</Col>
 											</Row>
 										))}
