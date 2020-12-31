@@ -105,9 +105,11 @@ exports.assignUserToProject = async (req, res) => {
 		throw new Error('No Resources Found');
 	}
 
-	project.assignees = req.body;
+	console.log(req.body);
 
-	await project.save();
+	//project.assignees = req.body;
+
+	//await project.save();
 	res.status(200).json({ success: true, data: project });
 };
 

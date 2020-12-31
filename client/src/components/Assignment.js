@@ -6,6 +6,7 @@ import {
 	assignProjectUser,
 	listProjectDetails,
 } from '../actions/projectActions';
+import { PROJECT_ASSIGNMENT_RESET } from '../constants/projectConstants';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
@@ -35,8 +36,11 @@ const Assignment = ({ history, match }) => {
 	const { success } = projectUserAssignment;
 
 	useEffect(() => {
+		//success initially undefined
 		if (success) {
 			dispatch(listProjectDetails(projectId));
+			//reset success to undefined; otherwise continous looping
+			dispatch({ type: PROJECT_ASSIGNMENT_RESET });
 		} else {
 			if (!project.projectName || project._id !== projectId) {
 				dispatch(listProjectDetails(projectId));
@@ -74,6 +78,7 @@ const Assignment = ({ history, match }) => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
+		console.log(assignments);
 		dispatch(assignProjectUser(projectId, assignments));
 	};
 

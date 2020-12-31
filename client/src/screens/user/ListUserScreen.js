@@ -52,7 +52,7 @@ const ListUserScreen = ({ history, match }) => {
 						render={({ history }) => (
 							<SearchBox
 								history={history}
-								searchWord={'User'}
+								searchWord={'LastName'}
 								searchQueryPath={'/admin/userList/search/'}
 								searchQueryEmpty={'/admin/userList'}
 							/>

@@ -65,7 +65,6 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		console.log(projectId);
 		dispatch(
 			addStakeholder(
 				{
@@ -76,6 +75,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 					birthdate,
 					email,
 					ethnicity,
+					media,
 				},
 				projectId
 			)
