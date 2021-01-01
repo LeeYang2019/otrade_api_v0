@@ -23,18 +23,9 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
-	//get incoming url
-	const redirect = location.search ? location.search.split('=')[1] : '/';
-	console.log(redirect);
-
 	useEffect(() => {
 		if (!userInfo) {
 			history.push('/login');
-		} else {
-			// if (success) {
-			// 	console.log('success');
-			// 	history.push('/admin/projects');
-			// }
 		}
 	}, [history, userInfo]);
 
@@ -189,6 +180,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 												className="mb-3"
 												placeholder="Add Website"
 												value={site.website}
+												required
 												onChange={(e) => handleInputChange(e, i)}
 											></Form.Control>
 										</Col>
@@ -208,6 +200,9 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 												</Button>
 											)}
 										</Col>
+										{/* <div style={{ marginTop: 20 }}>
+														{JSON.stringify(assignments)}
+													</div> */}
 									</Row>
 								))}
 							</Form.Group>
