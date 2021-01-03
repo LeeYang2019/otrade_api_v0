@@ -4,6 +4,9 @@ import {
 	USER_LOGIN_SUCCESS,
 	USER_LOGIN_FAIL,
 	USER_LOGOUT,
+	USER_REGISTER_REQUEST,
+	USER_REGISTER_SUCCESS,
+	USER_REGISTER_FAIL,
 	USER_PROFILE_UPDATE_REQUEST,
 	USER_PROFILE_UPDATE_SUCCESS,
 	USER_PROFILE_UPDATE_FAIL,
@@ -52,6 +55,37 @@ export const login = (email, password) => async (dispatch) => {
 	} catch (error) {
 		dispatch({
 			type: USER_LOGIN_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.messsage,
+		});
+	}
+};
+
+export const registerUser = (user) => async (dispatch, getState) => {
+	try {
+		dispatch({ type: USER_REGISTER_REQUEST });
+
+		//get userInfo from state
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		//define headers
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+		console.log(userInfo);
+		const { data } = await axios.post('/api/v1/users', user, config);
+
+		dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
+	} catch (error) {
+		dispatch({
+			type: USER_REGISTER_FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message

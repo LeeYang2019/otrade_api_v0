@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 import { addProject } from '../../actions/projectActions';
-import Message from '../../components/Message';
-import Loader from '../../components/Loader';
 
 const ProjectAddScreen = ({ history }) => {
 	const [projectName, setProjectName] = useState('');
@@ -19,7 +17,7 @@ const ProjectAddScreen = ({ history }) => {
 	const { success } = projectAdd;
 
 	useEffect(() => {
-		if (!userInfo) {
+		if (!userInfo || userInfo.role !== 'admin') {
 			history.push('/login');
 		} else {
 			if (success) {

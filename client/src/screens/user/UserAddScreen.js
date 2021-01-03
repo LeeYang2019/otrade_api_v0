@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { registerUser } from '../../actions/userActions';
 import Message from '../../components/Message';
-import Loader from '../../components/Loader';
 
-const UserAddScreen = () => {
+const UserAddScreen = ({ history }) => {
 	//define states
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -15,18 +15,57 @@ const UserAddScreen = () => {
 	const [role, setRole] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
+	const [message, setMessage] = useState('');
 
-	const submitHandler = () => {};
+	const dispatch = useDispatch();
+
+	//get logged-in user information
+	const userLogin = useSelector((state) => state.userLogin);
+	const { userInfo } = userLogin;
+
+	const userRegister = useSelector((state) => state.userRegister);
+	const { success } = userRegister;
+
+	useEffect(() => {
+		if (!userInfo || userInfo.role !== 'admin') {
+			history.push('/login');
+		}
+	}, [dispatch, history, userInfo]);
+
+	const submitHandler = (e) => {
+		e.preventDefault();
+
+		console.log('password: ', password);
+		console.log('confirmPassword: ', confirmPassword);
+
+		if (password !== confirmPassword) {
+			setMessage('Passwords do not match');
+		} else {
+			dispatch(
+				registerUser({
+					firstName,
+					lastName,
+					email,
+					telephone,
+					role,
+					status,
+					password,
+					confirmPassword,
+				})
+			);
+		}
+	};
 
 	return (
 		<>
 			<Link to="/admin/userList" className="btn btn-primary my-3">
 				Back to User List
 			</Link>
+
 			<Container className="w-75">
 				<h1>Register User</h1>
 				<hr />
-
+				{message && <Message variant="danger">{message}</Message>}
 				<Form onSubmit={submitHandler} className="my-4">
 					<Row>
 						<Col md={6}>
@@ -36,6 +75,7 @@ const UserAddScreen = () => {
 									type="firstName"
 									placeholder="Enter name"
 									value={firstName}
+									required
 									onChange={(e) => setFirstName(e.target.value)}
 								></Form.Control>
 							</Form.Group>
@@ -47,6 +87,7 @@ const UserAddScreen = () => {
 									type="lastName"
 									placeholder="Enter name"
 									value={lastName}
+									required
 									onChange={(e) => setLastName(e.target.value)}
 								></Form.Control>
 							</Form.Group>
@@ -60,6 +101,7 @@ const UserAddScreen = () => {
 									type="email"
 									placeholder="Enter email"
 									value={email}
+									required
 									onChange={(e) => setEmail(e.target.value)}
 								></Form.Control>
 							</Form.Group>
@@ -71,6 +113,7 @@ const UserAddScreen = () => {
 									type="telephone"
 									placeholder="Enter telephone"
 									value={telephone}
+									required
 									onChange={(e) => setTelephone(e.target.value)}
 								></Form.Control>
 							</Form.Group>
@@ -84,8 +127,10 @@ const UserAddScreen = () => {
 								<Form.Control
 									as="select"
 									value={role}
+									required
 									onChange={(e) => setRole(e.target.value)}
 								>
+									<option value="">--select--</option>
 									<option value="client">client</option>
 									<option value="surveyor">surveyor</option>
 									<option value="admin">admin</option>
@@ -98,8 +143,10 @@ const UserAddScreen = () => {
 								<Form.Control
 									as="select"
 									value={status}
+									required
 									onChange={(e) => setStatus(e.target.value)}
 								>
+									<option value="">--select--</option>
 									<option value="active">active</option>
 									<option value="inactive">inactive</option>
 								</Form.Control>
@@ -115,6 +162,7 @@ const UserAddScreen = () => {
 									type="password"
 									placeholder="Enter password"
 									value={password}
+									required
 									onChange={(e) => setPassword(e.target.value)}
 								></Form.Control>
 							</Form.Group>
@@ -126,6 +174,7 @@ const UserAddScreen = () => {
 									type="password"
 									placeholder="Re-type password"
 									value={confirmPassword}
+									required
 									onChange={(e) => setConfirmPassword(e.target.value)}
 								></Form.Control>
 							</Form.Group>

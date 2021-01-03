@@ -146,6 +146,7 @@ exports.getUser = asyncHandler(async (req, res) => {
 // @route   POST /api/v1/users
 // @access  private/admin
 exports.registerUser = asyncHandler(async (req, res) => {
+	console.log(req.body);
 	const { firstName, lastName, email, password, telephone } = req.body;
 
 	const userExists = await User.findOne({ email });
@@ -168,7 +169,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
 	req.body.avatar = avatar;
 
 	//create user
-	const user = await User.create(req.body);
+	//const user = await User.create(req.body);
 
 	if (user) {
 		res.status(201).json({
