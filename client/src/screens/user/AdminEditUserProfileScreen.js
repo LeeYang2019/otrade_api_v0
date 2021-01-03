@@ -20,8 +20,6 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 	const [updatedDate, setUpdatedDate] = useState('');
 
 	const dispatch = useDispatch();
-
-	// get user
 	const userDetails = useSelector((state) => state.userDetails);
 	const { loading, error, user } = userDetails;
 
@@ -39,9 +37,12 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 			dispatch(getUserDetails(userId));
 			dispatch({ type: USER_UPDATE_RESET });
 		} else {
+			//if firstName is not defined/exist or id does not match
 			if (!user.firstName || user._id !== userId) {
+				//get user data
 				dispatch(getUserDetails(userId));
 			} else {
+				//populate with user data once user data is returned
 				setFirstName(user.firstName);
 				setLastName(user.lastName);
 				setTelephone(user.telephone);
@@ -53,6 +54,7 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 		}
 	}, [history, dispatch, userId, user, successUpdate]);
 
+	//submit form
 	const submitHandler = (e) => {
 		e.preventDefault();
 		dispatch(
@@ -93,6 +95,7 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 										type="firstName"
 										placeholder="Enter name"
 										value={firstName}
+										required
 										onChange={(e) => setFirstName(e.target.value)}
 									></Form.Control>
 								</Form.Group>
@@ -104,6 +107,7 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 										type="lastName"
 										placeholder="Enter name"
 										value={lastName}
+										required
 										onChange={(e) => setLastName(e.target.value)}
 									></Form.Control>
 								</Form.Group>
@@ -117,6 +121,7 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 										type="email"
 										placeholder="Enter email"
 										value={email}
+										required
 										onChange={(e) => setEmail(e.target.value)}
 									></Form.Control>
 								</Form.Group>
@@ -128,6 +133,7 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 										type="telephone"
 										placeholder="Enter telephone"
 										value={telephone}
+										required
 										onChange={(e) => setTelephone(e.target.value)}
 									></Form.Control>
 								</Form.Group>

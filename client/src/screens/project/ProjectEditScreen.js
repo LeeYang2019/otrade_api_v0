@@ -90,6 +90,7 @@ const ProjectEditScreen = ({ match, history }) => {
 											type="projectName"
 											placeholder="Enter a project name"
 											value={projectName}
+											required
 											onChange={(e) => setProjectName(e.target.value)}
 										></Form.Control>
 									</Form.Group>
@@ -101,6 +102,7 @@ const ProjectEditScreen = ({ match, history }) => {
 											type="projectClient"
 											placeholder="Enter a project client"
 											value={projectClient}
+											required
 											onChange={(e) => setProjectClient(e.target.value)}
 										></Form.Control>
 									</Form.Group>
@@ -113,6 +115,7 @@ const ProjectEditScreen = ({ match, history }) => {
 										<Form.Control
 											as="select"
 											value={status}
+											required
 											onChange={(e) => setStatus(e.target.value)}
 										>
 											<option value="open">open</option>
@@ -130,6 +133,7 @@ const ProjectEditScreen = ({ match, history }) => {
 											as="textarea"
 											rows="6"
 											value={comment}
+											required
 											onChange={(e) => setComment(e.target.value)}
 										></Form.Control>
 									</Form.Group>

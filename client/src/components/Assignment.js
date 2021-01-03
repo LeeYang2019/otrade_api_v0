@@ -19,6 +19,10 @@ const Assignment = ({ history, match }) => {
 
 	const dispatch = useDispatch();
 
+	//get loggedin user
+	const userLogin = useSelector((state) => state.userLogin);
+	const { userInfo } = userLogin;
+
 	//get userList
 	const userList = useSelector((state) => state.userList);
 	const { loading, error, users } = userList;
@@ -38,23 +42,28 @@ const Assignment = ({ history, match }) => {
 	const { success } = projectUserAssignment;
 
 	useEffect(() => {
-		//if success true; initial value undefined
-		if (success) {
-			dispatch(listProjectDetails(projectId));
-			//reset success to undefined; otherwise continous looping
-			dispatch({ type: PROJECT_ASSIGNMENT_RESET });
+		//if user logs out
+		if (!userInfo) {
+			history.push('/login');
 		} else {
-			// if projectName undefined; initial value undefined
-			if (!project.projectName || project._id !== projectId) {
+			//if success true; initial value undefined
+			if (success) {
 				dispatch(listProjectDetails(projectId));
-				dispatch(listUsers());
+				//reset success to undefined; otherwise continous looping
+				dispatch({ type: PROJECT_ASSIGNMENT_RESET });
 			} else {
-				if (project.assignees.length !== 0) {
-					setAssignments(project.assignees);
+				// if projectName undefined; initial value undefined
+				if (!project.projectName || project._id !== projectId) {
+					dispatch(listProjectDetails(projectId));
+					dispatch(listUsers());
+				} else {
+					if (project.assignees.length !== 0) {
+						setAssignments(project.assignees);
+					}
 				}
 			}
 		}
-	}, [dispatch, history, projectId, project, success]);
+	}, [dispatch, history, projectId, project, success, userInfo]);
 
 	//add input field
 	const addHandler = () => {
@@ -64,7 +73,7 @@ const Assignment = ({ history, match }) => {
 	//remove input field
 	const removeHandler = (i) => {
 		const removeUser = assignments[i];
-		//filter out removeUser and return new array
+		//filter out removeUser from current list and return new list
 		const list = assignments.filter((i) => i !== removeUser);
 		setAssignments(list);
 	};
@@ -95,8 +104,14 @@ const Assignment = ({ history, match }) => {
 	//submit form
 	const submitHandler = (e) => {
 		e.preventDefault();
-		console.log(assignments);
-		//dispatch(assignProjectUser(projectId, assignments));
+
+		if (project.status === 'closed') {
+			setMessage(
+				'Project assingment cannot be updated as the status is closed.'
+			);
+		} else {
+			dispatch(assignProjectUser(projectId, assignments));
+		}
 	};
 
 	return (
@@ -122,55 +137,46 @@ const Assignment = ({ history, match }) => {
 										<Message variant="danger">{projectError}</Message>
 									) : (
 										<>
-											{assignments.map((assignment, i) => (
-												<Row className="mb-3">
-													<Col md={7}>
-														<Form.Control
-															as="select"
-															defaultValue={assignment.lastName}
-															onChange={(e) => handleInputChange(e, i)}
-															required
-															className="px-5"
-														>
-															<option
-																value={
-																	assignment && assignment.id
-																		? assignment.id
-																		: ''
-																}
+											{assignments &&
+												assignments.map((assignee, i) => (
+													<Row className="mb-3">
+														<Col md={7}>
+															<Form.Control
+																as="select"
+																value={assignee._id}
+																onChange={(e) => handleInputChange(e, i)}
+																required
+																className="px-5"
 															>
-																{assignment && assignment.id
-																	? `${assignment.firstName} ${assignment.lastName}`
-																	: '--Select Name--'}
-															</option>
-															{users.map((user) => (
-																<option key={user._id} value={user._id}>
-																	{user.firstName} {user.lastName}
-																</option>
-															))}
-														</Form.Control>
-													</Col>
-													<Col md={5}>
-														{assignments.length !== 1 && (
-															<Button
-																variant="danger"
-																className="btn-md mr-3"
-																onClick={() => removeHandler(i)}
-															>
-																<i className="fas fa-trash"></i>
-															</Button>
-														)}
-														{assignments.length - 1 === i && (
-															<Button
-																className="px-3"
-																onClick={() => addHandler(i)}
-															>
-																<i className="fas fa-plus"></i> Assignee
-															</Button>
-														)}
-													</Col>
-												</Row>
-											))}
+																<option value="">--Select--</option>
+																{users.map((user) => (
+																	<option key={user._id} value={user._id}>
+																		{user.firstName} {user.lastName}
+																	</option>
+																))}
+															</Form.Control>
+														</Col>
+														<Col md={5}>
+															{assignments.length !== 1 && (
+																<Button
+																	variant="danger"
+																	className="btn-md mr-3"
+																	onClick={() => removeHandler(i)}
+																>
+																	<i className="fas fa-trash"></i>
+																</Button>
+															)}
+															{assignments.length - 1 === i && (
+																<Button
+																	className="px-3"
+																	onClick={() => addHandler(i)}
+																>
+																	<i className="fas fa-plus"></i> Assignee
+																</Button>
+															)}
+														</Col>
+													</Row>
+												))}
 										</>
 									)}
 								</Col>

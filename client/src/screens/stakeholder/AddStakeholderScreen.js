@@ -31,18 +31,13 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 
 	//add input field
 	const addHandler = (i) => {
-		console.log('i: ', i);
-		console.log('list[i]: ', media[i]);
-		console.log(media);
 		setMedia([...media, { website: '' }]);
 	};
 
 	const removeHandler = (i) => {
-		console.log('i: ', i);
-		console.log('list[i]: ', media[i]);
-
-		const list = [...media];
-		list.splice(i, 1);
+		const removeMediaItem = media[i];
+		//filter out media item to remove from current list and return a new list
+		const list = media.filter((i) => i !== removeMediaItem);
 		setMedia(list);
 	};
 
@@ -56,6 +51,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
+
 		dispatch(
 			addStakeholder(
 				{
@@ -90,6 +86,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 									type="firstName"
 									placeholder="Enter name"
 									value={firstName}
+									required
 									onChange={(e) => setFirstName(e.target.value)}
 								></Form.Control>
 							</Form.Group>
@@ -101,6 +98,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 									type="lastName"
 									placeholder="Enter name"
 									value={lastName}
+									required
 									onChange={(e) => setLastName(e.target.value)}
 								></Form.Control>
 							</Form.Group>
@@ -113,6 +111,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 								<Form.Control
 									as="select"
 									value={gender}
+									required
 									onChange={(e) => setGender(e.target.value)}
 								>
 									<option value="">--Select--</option>
@@ -129,6 +128,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 									type="date"
 									placeholder="Enter birthdate"
 									value={birthdate}
+									required
 									onChange={(e) => setBirthdate(e.target.value)}
 								></Form.Control>
 							</Form.Group>
@@ -140,6 +140,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 									type="ethnicity"
 									placeholder="Enter ethnicity"
 									value={ethnicity}
+									required
 									onChange={(e) => setEthnicity(e.target.value)}
 								></Form.Control>
 							</Form.Group>
@@ -164,6 +165,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 									type="telephone"
 									placeholder="Enter telephone"
 									value={telephone}
+									required
 									onChange={(e) => setTelephone(e.target.value)}
 								></Form.Control>
 							</Form.Group>
@@ -174,36 +176,39 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 							<Form.Group controlId="media">
 								<Form.Label>Social Media</Form.Label>
 								{media.map((site, i) => (
-									<Row>
-										<Col md={8}>
-											<Form.Control
-												className="mb-3"
-												placeholder="Add Website"
-												value={site.website}
-												required
-												onChange={(e) => handleInputChange(e, i)}
-											></Form.Control>
-										</Col>
-										<Col>
-											{media.length !== 1 && (
-												<Button
-													variant="danger"
-													className="btn-md mr-3"
-													onClick={() => removeHandler(i)}
-												>
-													<i className="fas fa-trash"></i>
-												</Button>
-											)}
-											{media.length - 1 === i && (
-												<Button className="px-3" onClick={() => addHandler(i)}>
-													<i className="fas fa-plus"></i> Add
-												</Button>
-											)}
-										</Col>
-										{/* <div style={{ marginTop: 20 }}>
-														{JSON.stringify(assignments)}
-													</div> */}
-									</Row>
+									<>
+										<Row>
+											<Col md={8}>
+												<Form.Control
+													className="mb-3"
+													placeholder="Add Website"
+													value={site.website}
+													required
+													onChange={(e) => handleInputChange(e, i)}
+												></Form.Control>
+											</Col>
+											<Col>
+												{media.length !== 1 && (
+													<Button
+														variant="danger"
+														className="btn-md mr-3"
+														onClick={() => removeHandler(i)}
+													>
+														<i className="fas fa-trash"></i>
+													</Button>
+												)}
+												{media.length - 1 === i && (
+													<Button
+														className="px-3"
+														onClick={() => addHandler(i)}
+													>
+														<i className="fas fa-plus"></i> Add
+													</Button>
+												)}
+											</Col>
+										</Row>
+										<Row style={{ marginTop: 20 }}>{JSON.stringify(media)}</Row>
+									</>
 								))}
 							</Form.Group>
 						</Col>

@@ -64,7 +64,7 @@ const StakeholderSchema = new mongoose.Schema(
 // delete all associated coments before deleting the stakeholder
 StakeholderSchema.pre('remove', async function (next) {
 	console.log(`comments being removed from stakeholder ${this._id}`);
-	await this.model('Comment').deleteMany({ stakeholder: this._id });
+	//await this.model('Comment').deleteMany({ stakeholder: this._id });
 	//remove activities associations
 	//remove organizations associations
 });
