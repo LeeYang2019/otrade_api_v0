@@ -29,8 +29,14 @@ const UserAddScreen = ({ history }) => {
 	useEffect(() => {
 		if (!userInfo || userInfo.role !== 'admin') {
 			history.push('/login');
+		} else {
+			console.log(success);
+			if (success) {
+				console.log('success');
+				history.push('/admin/userlist');
+			}
 		}
-	}, [dispatch, history, userInfo]);
+	}, [dispatch, history, userInfo, success]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
