@@ -40,9 +40,7 @@ const StakeholderSchema = new mongoose.Schema(
 		},
 		media: [
 			{
-				website: {
-					type: String,
-				},
+				type: String,
 			},
 		],
 		project: {
