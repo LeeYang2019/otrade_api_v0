@@ -4,7 +4,7 @@ import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addStakeholder } from '../../actions/stakeholderActions';
 import Message from '../../components/Message.js';
-import Loader from '../../components/Loader.js';
+import { STAKEHOLDER_ADD_RESET } from '../../constants/stakeholderConstants';
 
 const AddStakeholderScreen = ({ location, history, match }) => {
 	const projectId = match.params.projectId;
@@ -18,16 +18,25 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 	const [email, setEmail] = useState('');
 	const [ethnicity, setEthnicity] = useState('');
 	const [media, setMedia] = useState([{ website: '' }]);
+	const [message, setMessage] = useState(null);
 
 	const dispatch = useDispatch();
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
+	const stakeholderAdd = useSelector((state) => state.stakeholderAdd);
+	const { success } = stakeholderAdd;
+
 	useEffect(() => {
 		if (!userInfo) {
 			history.push('/login');
+		} else {
+			if (success) {
+				setMessage('Stakeholder was successfully added.');
+				dispatch({ type: STAKEHOLDER_ADD_RESET });
+			}
 		}
-	}, [history, userInfo]);
+	}, [history, dispatch, userInfo, success]);
 
 	//add input field
 	const addHandler = (i) => {
@@ -77,6 +86,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 			<Container className="w-50">
 				<h1>Register Stakeholder</h1>
 				<hr />
+				{message && <Message variant="success">{message}</Message>}
 				<Form onSubmit={submitHandler} className="my-5">
 					<Row>
 						<Col md={6}>

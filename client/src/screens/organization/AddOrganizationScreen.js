@@ -12,15 +12,23 @@ const AddOrganizationScreen = ({ history, match }) => {
 	const [organization, setOrganization] = useState('');
 	const [division, setDivision] = useState('');
 	const [location, setLocation] = useState('');
-	const [stakeholders, setStakeholders] = useState([]);
 	const [email, setEmail] = useState('');
 	const [telephone, setTelephone] = useState('');
 	const [website, setWebsite] = useState('');
+	const [stakeholders, setStakeholders] = useState([{ stakeholder: '' }]);
+	const [message, setMessage] = useState(null);
 
 	const dispatch = useDispatch();
 
+	//get logged-in user
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
+
+	//get userList
+	const userList = useSelector((state) => state.userList);
+	const { loading, error, users } = userList;
+
+	//get project
 
 	useEffect(() => {
 		if (!userInfo) {
@@ -32,13 +40,40 @@ const AddOrganizationScreen = ({ history, match }) => {
 		}
 	});
 
+	//add select field
+	const addHandler = () => {
+		//spread in existing array and add an element
+		setStakeholders([...stakeholders, { stakeholder: '' }]);
+	};
+
+	const removeHandler = (i) => {
+		const stakeholderToRemove = stakeholders[i];
+		const list = stakeholders.filter((i) => i !== stakeholderToRemove);
+		setStakeholders(list);
+	};
+
+	const handleInputChange = (e, i) => {
+		e.preventDefault();
+		const list = [...stakeholders];
+
+		if (
+			list.includes(e.target.value) ||
+			list.some((item) => item._id === e.target.value)
+		) {
+			setMessage('Please make sure the same user is not assigned twice.');
+		} else {
+			list[i] = e.target.value;
+			setStakeholders(list);
+			setMessage('');
+		}
+	};
+
 	const submitHandler = (e) => {
 		e.preventDefault();
 		console.log('submit');
 		console.log(organization);
 		console.log(division);
 		console.log(location);
-		//console.log(stakeholders);
 		console.log(email);
 		console.log(telephone);
 		console.log(website);

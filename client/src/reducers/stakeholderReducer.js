@@ -5,6 +5,7 @@ import {
 	STAKEHOLDER_ADD_REQUEST,
 	STAKEHOLDER_ADD_SUCCESS,
 	STAKEHOLDER_ADD_FAIL,
+	STAKEHOLDER_ADD_RESET,
 	STAKEHOLDER_UPDATE_REQUEST,
 	STAKEHOLDER_UPDATE_SUCCESS,
 	STAKEHOLDER_UPDATE_FAIL,
@@ -39,6 +40,8 @@ export const stakeholderAddReducer = (state = {}, action) => {
 			return { loading: false, success: true, stakeholder: action.payload };
 		case STAKEHOLDER_ADD_FAIL:
 			return { loading: false, error: action.payload };
+		case STAKEHOLDER_ADD_RESET:
+			return { stakeholder: {} };
 		default:
 			return state;
 	}

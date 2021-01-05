@@ -19,13 +19,18 @@ const ProjectDetailsScreen = ({ history, projectId }) => {
 	return (
 		<>
 			<h2>ProjectDetails</h2>
-			<p>{project.projectName}</p>
-			{/* {project &&
-				project.assignees.map((a) => (
-					<p>
-						{a.firstName} {a.lastName}
-					</p>
-				))} */}
+			{loading ? (
+				<Loader />
+			) : error ? (
+				<Message variant="danger">{error}</Message>
+			) : (
+				<>
+					<p>{project.projectName}</p>
+					<p>{project.projectClient}</p>
+					<p>{project.status}</p>
+					<p>{project.comment}</p>
+				</>
+			)}
 		</>
 	);
 };
