@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
@@ -12,6 +12,8 @@ import Paginate from '../../components/Paginate';
 const ListUserScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
+
+	const [message, setMessage] = useState(null);
 
 	const dispatch = useDispatch();
 
@@ -36,8 +38,13 @@ const ListUserScreen = ({ history, match }) => {
 	}, [dispatch, history, userInfo, keyword, pageNumber, success]);
 
 	const deleteHandler = (id) => {
-		if (window.confirm('Are you sure?')) {
-			dispatch(deleteUser(id));
+		if (id === userInfo._id) {
+			setMessage('You cannot delete yourself');
+		} else {
+			if (window.confirm('Are you sure?')) {
+				dispatch(deleteUser(id));
+				setMessage(null);
+			}
 		}
 	};
 
@@ -71,6 +78,7 @@ const ListUserScreen = ({ history, match }) => {
 				<Message variant="danger">{error}</Message>
 			) : (
 				<Row>
+					{message && <Message variant="danger">{message}</Message>}
 					<Table hover responsive className="table-sm mt-3">
 						<tbody>
 							{users &&
