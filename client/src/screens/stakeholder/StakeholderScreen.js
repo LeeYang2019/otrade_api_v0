@@ -21,6 +21,9 @@ const StakeholderScreen = ({ location, history, match }) => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
+	console.log(location);
+	console.log(history);
+
 	// if (!userId) {
 	// 	userId = userInfo._id;
 	// }
@@ -34,10 +37,7 @@ const StakeholderScreen = ({ location, history, match }) => {
 
 	return (
 		<>
-			<Link
-				to={`/profile/${userId}/project/${projectId}`}
-				className="btn btn-primary my-3"
-			>
+			<Link to={`/project/${projectId}`} className="btn btn-primary my-3">
 				Previous Page
 			</Link>
 			<Row>

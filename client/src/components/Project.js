@@ -10,9 +10,7 @@ const Project = ({ project, userId = '' }) => {
 					<p>
 						<strong>Project: </strong>
 						{userId ? (
-							<Link to={`/profile/${userId}/project/${project._id}`}>
-								{project.projectName}
-							</Link>
+							<Link to={`/project/${project._id}`}>{project.projectName}</Link>
 						) : (
 							<Link to={`/project/${project._id}`}>{project.projectName}</Link>
 						)}

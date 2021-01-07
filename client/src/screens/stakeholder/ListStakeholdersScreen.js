@@ -18,8 +18,6 @@ const ListStakeholdersScreen = ({ projectId }) => {
 		dispatch(listStakeholders(projectId));
 	}, [dispatch, projectId]);
 
-	const createProjectHandler = () => {};
-
 	return (
 		<>
 			<Row className="align-items-center mt-3">
@@ -51,7 +49,9 @@ const ListStakeholdersScreen = ({ projectId }) => {
 								<td>
 									<p className="mr-3">
 										<strong>Stakeholder: </strong>
-										<Link to={`/stakeholder/${person._id}`}>
+										<Link
+											to={`/project/${projectId}/stakeholder/${person._id}`}
+										>
 											{person.lastName}, {person.firstName}
 										</Link>
 										<br />
