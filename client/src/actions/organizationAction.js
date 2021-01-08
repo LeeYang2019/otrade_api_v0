@@ -12,7 +12,7 @@ export const addOrganization = (organization, projectId) => async (
 	dispatch,
 	getState
 ) => {
-	console.log('inside add org');
+	console.log(organization);
 	try {
 		dispatch({ type: ORGANIZATION_ADD_REQUEST });
 

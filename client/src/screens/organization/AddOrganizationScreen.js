@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrganization } from '../../actions/organizationAction';
+import { listStakeholders } from '../../actions/stakeholderActions';
+import { listProjectDetails } from '../../actions/projectActions';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
+import { ORGANIZATION_ADD_RESET } from '../../constants/organizationConstants';
 
 const AddOrganizationScreen = ({ history, match }) => {
 	const projectId = match.params.projectId;
@@ -25,19 +28,43 @@ const AddOrganizationScreen = ({ history, match }) => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
-	//get stakeholders
-
 	//get project
+	const projectDetails = useSelector((state) => state.projectDetails);
+	const { project } = projectDetails;
+
+	//get stakeholders
+	const stakeholderList = useSelector((state) => state.stakeholderList);
+	const { stakeholders: stakeholdersList } = stakeholderList;
+
+	//get addorganization success
+	const organizationAdd = useSelector((state) => state.organizationAdd);
+	const { success } = organizationAdd;
+
+	console.log(stakeholdersList);
 
 	useEffect(() => {
 		if (!userInfo) {
 			history.pushState('/login');
 		} else {
-			//if (success) {
-			//
-			//}
+			if (success) {
+				setMessage('Organization was successfully added.');
+				dispatch({ type: ORGANIZATION_ADD_RESET });
+			} else {
+				if (!project.projectName || project._id !== projectId) {
+					dispatch(listProjectDetails(projectId));
+					dispatch(listStakeholders(projectId));
+				}
+			}
 		}
-	});
+	}, [
+		dispatch,
+		history,
+		userInfo,
+		projectId,
+		stakeholderList,
+		project,
+		success,
+	]);
 
 	//add select field
 	const addHandler = () => {
@@ -45,12 +72,14 @@ const AddOrganizationScreen = ({ history, match }) => {
 		setStakeholders([...stakeholders, { stakeholder: '' }]);
 	};
 
+	//filter out element i
 	const removeHandler = (i) => {
 		const stakeholderToRemove = stakeholders[i];
 		const list = stakeholders.filter((i) => i !== stakeholderToRemove);
 		setStakeholders(list);
 	};
 
+	//add element to array && provide validation
 	const handleInputChange = (e, i) => {
 		e.preventDefault();
 		const list = [...stakeholders];
@@ -67,26 +96,20 @@ const AddOrganizationScreen = ({ history, match }) => {
 		}
 	};
 
+	//submit form
 	const submitHandler = (e) => {
 		e.preventDefault();
-		console.log('submit');
-		console.log(organization);
-		console.log(division);
-		console.log(location);
-		console.log(email);
-		console.log(telephone);
-		console.log(website);
 
-		//dispatch
 		dispatch(
 			addOrganization(
 				{
 					name: organization,
-					political_division: division,
+					division,
 					address: location,
 					email,
 					telephone,
 					website,
+					stakeholders,
 				},
 				projectId
 			)
@@ -101,6 +124,10 @@ const AddOrganizationScreen = ({ history, match }) => {
 			<Container className="w-50">
 				<h1>Register Organization</h1>
 				<hr />
+				{success && Message ? (
+					<Message variant="success">{message}</Message>
+				) : null}
+				{message && <Message variant="danger">{message}</Message>}
 				<Form onSubmit={submitHandler} className="my-5">
 					<Row>
 						<Col md={6}>
@@ -110,6 +137,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 									type="organization"
 									placeholder="Enter organization"
 									value={organization}
+									required
 									onChange={(e) => setOrganization(e.target.value)}
 								></Form.Control>
 							</Form.Group>
@@ -120,12 +148,15 @@ const AddOrganizationScreen = ({ history, match }) => {
 								<Form.Control
 									as="select"
 									value={division}
+									required
 									onChange={(e) => setDivision(e.target.value)}
 								>
 									<option value="">--Select--</option>
-									<option value="federal">Federal</option>
-									<option value="province">Province</option>
-									<option value="state">State</option>
+									<option value="Canton">Canton</option>
+									<option value="Comunidad">Comunidad</option>
+									<option value="Federacion">Federacion</option>
+									<option value="Parroquia">Parroquia</option>
+									<option value="Provincia">Provincia</option>
 								</Form.Control>
 							</Form.Group>
 						</Col>
@@ -194,9 +225,9 @@ const AddOrganizationScreen = ({ history, match }) => {
 												className="px-5"
 											>
 												<option value="">--Select--</option>
-												{stakeholders.map((user) => (
-													<option key={user._id} value={user._id}>
-														{user.firstName} {user.lastName}
+												{stakeholderList.stakeholders.map((stakeholder) => (
+													<option key={stakeholder._id} value={stakeholder._id}>
+														{stakeholder.firstName} {stakeholder.lastName}
 													</option>
 												))}
 											</Form.Control>

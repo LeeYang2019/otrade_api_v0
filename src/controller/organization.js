@@ -32,16 +32,12 @@ exports.getOrganization = asyncHandler(async (req, res, next) => {
 exports.addOrganization = asyncHandler(async (req, res, next) => {
 	//get project and autthorized user
 	req.body.project = req.params.projectId;
-
-	console.log(req.params.projectId);
-
 	req.body.user = req.user.id;
 
 	console.log(req.body);
 
-	//const organization = await Organization.create(req.body);
-	//res.status(200).json({ success: true, data: organization });
-	res.status(200).json({ success: true });
+	const organization = await Organization.create(req.body);
+	res.status(200).json({ success: true, data: organization });
 });
 
 // @desc    Update an organization
@@ -62,5 +58,5 @@ exports.updateOrganization = asyncHandler(async (req, res, next) => {
 // @access  Private
 exports.deleteOrganization = asyncHandler(async (req, res, next) => {
 	await Organization.findByIdAndDelete(req.params.id);
-	res.status(200).json({ success: true, data: {} });
+	res.status(200).json({ success: true });
 });

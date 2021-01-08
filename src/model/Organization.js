@@ -7,7 +7,7 @@ const OrganizationSchema = mongoose.Schema(
 			type: String,
 			required: [true, 'Please add an organization name'],
 		},
-		political_division: {
+		division: {
 			type: String,
 			require: [true, 'Please enter a political division'],
 			enum: ['Canton', 'Comunidad', 'Federacion', 'Parroquia', 'Provincia'],
@@ -32,20 +32,10 @@ const OrganizationSchema = mongoose.Schema(
 				/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
 			],
 		},
-		social: {
-			youtube: {
-				type: String,
-			},
-			twitter: {
-				type: String,
-			},
-			facebook: {
-				type: String,
-			},
-			linkedin: {
-				type: String,
-			},
+		website: {
+			type: String,
 		},
+		stakeholders: [{ type: mongoose.Schema.ObjectId, ref: 'Stakeholder' }],
 		project: {
 			type: mongoose.Schema.ObjectId,
 			ref: 'Project',

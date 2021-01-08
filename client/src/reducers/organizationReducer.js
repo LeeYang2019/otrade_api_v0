@@ -2,6 +2,7 @@ import {
 	ORGANIZATION_ADD_REQUEST,
 	ORGANIZATION_ADD_SUCCESS,
 	ORGANIZATION_ADD_FAIL,
+	ORGANIZATION_ADD_RESET,
 	ORGANIZATION_LIST_REQUEST,
 	ORGANIZATION_LIST_SUCCESS,
 	ORGANIZATION_LIST_FAIL,
@@ -15,6 +16,8 @@ export const organizationAddReducer = (state = {}, action) => {
 			return { loading: false, success: true, organization: action.payload };
 		case ORGANIZATION_ADD_FAIL:
 			return { loading: false, error: action.payload };
+		case ORGANIZATION_ADD_RESET:
+			return { organization: {} };
 		default:
 			return state;
 	}
