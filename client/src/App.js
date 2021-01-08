@@ -48,7 +48,7 @@ const App = () => {
 					{/*Organization paths*/}
 					<Route
 						exact
-						path="/project/:projectId/organization/:id"
+						path="/project/:projectId/organization/:id/edit"
 						component={OrganizationScreen}
 					/>
 

@@ -77,9 +77,9 @@ const reducer = combineReducers({
 
 	//activity reducers
 	activityAdd: activityAddReducer,
-	activityDetails: activityDetailsReducer,
-	activityUpdate: activityUpdateReducer,
-	activityDelete: activityDeleteReducer,
+	// activityDetails: activityDetailsReducer,
+	// activityUpdate: activityUpdateReducer,
+	// activityDelete: activityDeleteReducer,
 	activityList: activityListReducer,
 });
 

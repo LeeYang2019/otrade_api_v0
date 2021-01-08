@@ -52,7 +52,7 @@ const ListOrganizationsScreen = ({ projectId }) => {
 								<p className="mr-3">
 									<strong>Stakeholder: </strong>
 									<Link
-										to={`/project/${projectId}/organization/${organization._id}`}
+										to={`/project/${projectId}/organization/${organization._id}/edit`}
 									>
 										{organization.name}
 									</Link>

@@ -35,12 +35,9 @@ const ProjectEditScreen = ({ match, history }) => {
 		error: errorUpdate,
 	} = projectUpdate;
 
-	//console.log('initial value of successUpdate: ', successUpdate);
-
 	//useEffect
 	useEffect(() => {
 		if (successUpdate) {
-			//console.log('value of successUpdate: ', successUpdate);
 			dispatch(listProjectDetails(projectId));
 			dispatch({ type: PROJECT_UPDATE_RESET });
 		} else {
