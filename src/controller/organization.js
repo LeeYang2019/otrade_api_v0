@@ -12,10 +12,17 @@ exports.getOrganizations = asyncHandler(async (req, res, next) => {
 		? { name: { $regex: req.query.keyword, $options: 'i' } }
 		: {};
 
-	const organizations = await Organization.find();
-	res
-		.status(200)
-		.json({ success: true, count: organizations.length, data: organizations });
+	const organizations = await Organization.find({
+		project: req.params.projectId,
+		...keyword,
+	});
+
+	if (!organizations) {
+		res.status(401);
+		throw new Error('No resources found');
+	}
+
+	res.status(200).json({ success: true, data: organizations });
 });
 
 // @desc    GET an organization

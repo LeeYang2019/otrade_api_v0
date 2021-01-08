@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { Route, Link } from 'react-router-dom';
-import { Table, Button, Row, Col } from 'react-bootstrap';
+import { Table, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { listOrganizations } from '../../actions/organizationAction';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import SearchBox from '../../components/SearchBox';
@@ -10,9 +11,13 @@ const ListOrganizationsScreen = ({ projectId }) => {
 	const dispatch = useDispatch();
 
 	//get organizations
+	const organizationList = useSelector((state) => state.organizationList);
+	const { loading, error, organizations } = organizationList;
+
+	console.log(organizations);
 
 	useEffect(() => {
-		//dispatch(listStakeholders(projectId));
+		dispatch(listOrganizations(projectId));
 	}, [dispatch, projectId]);
 
 	return (
@@ -38,35 +43,38 @@ const ListOrganizationsScreen = ({ projectId }) => {
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
-			) : (
-				<Table hover responsive className="table-sm mt-3">
-					<tbody>
-						{stakeholders.map((person) => (
-							<tr key={person._id}>
-								<td>
-									<p className="mr-3">
-										<strong>Stakeholder: </strong>
-										<Link to={`/stakeholder/${person._id}`}>
-											{person.lastName}, {person.firstName}
-										</Link>
-										<br />
-										Email: <em> {person.email}</em>
-										<br />
-										Telephone: {person.telephone}
-										<br />
-										Registered Date:{' '}
-										<strong>
-											{' '}
-											{person.createdAt &&
-												person.createdAt.substring(0, 10)}{' '}
-										</strong>
-									</p>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</Table>
-			)} */}
+			) : ( */}
+			<Table hover responsive className="table-sm mt-3">
+				<tbody>
+					{organizations.map((organization) => (
+						<tr key={organization._id}>
+							<td>
+								<p className="mr-3">
+									<strong>Stakeholder: </strong>
+									<Link to={`/stakeholder/${organization._id}`}>
+										{organization.name}
+									</Link>
+									<br />
+									Address: <em> {organization.location}</em>
+									<br />
+									<br />
+									Email: <em> {organization.email}</em>
+									<br />
+									Telephone: {organization.telephone}
+									<br />
+									Registered Date:{' '}
+									<strong>
+										{' '}
+										{organization.createdAt &&
+											organization.createdAt.substring(0, 10)}{' '}
+									</strong>
+								</p>
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</Table>
+			{/* )} */}
 		</>
 	);
 };

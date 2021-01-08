@@ -22,7 +22,7 @@ export const stakeholderListReducer = (
 ) => {
 	switch (action.type) {
 		case STAKEHOLDER_LIST_REQUEST:
-			return { loading: true, stakholders: [] };
+			return { loading: true, stakeholders: [] };
 		case STAKEHOLDER_LIST_SUCCESS:
 			return { loading: false, stakeholders: action.payload };
 		case STAKEHOLDER_LIST_FAIL:

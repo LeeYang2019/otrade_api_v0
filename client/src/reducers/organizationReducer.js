@@ -8,6 +8,7 @@ import {
 	ORGANIZATION_LIST_FAIL,
 } from '../constants/organizationConstants';
 
+//add organization reducer
 export const organizationAddReducer = (state = {}, action) => {
 	switch (action.type) {
 		case ORGANIZATION_ADD_REQUEST:
@@ -23,20 +24,32 @@ export const organizationAddReducer = (state = {}, action) => {
 	}
 };
 
+//get organization details reducer
+export const organizationDetailsReducer = () => {};
+
+//update organization reducer
+export const organizationUpdateReducer = () => {};
+
+//delete organization reducer
+export const organizationDeleteReducer = () => {};
+
+//get organization list reducer
 export const organizationListReducer = (
 	state = { organizations: [] },
 	action
 ) => {
 	switch (action.type) {
 		case ORGANIZATION_LIST_REQUEST:
-			return { loading: true };
+			console.log('request');
+			return { loading: true, organizations: [] };
 		case ORGANIZATION_LIST_SUCCESS:
+			console.log('success');
 			return {
 				loading: false,
-				success: true,
-				organizations: action.payload.organizations,
+				organizations: action.payload,
 			};
 		case ORGANIZATION_LIST_FAIL:
+			console.log('fail');
 			return { loading: false, error: action.payload };
 		default:
 			return state;

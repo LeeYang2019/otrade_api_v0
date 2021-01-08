@@ -79,7 +79,7 @@ export const registerUser = (user) => async (dispatch, getState) => {
 				Authorization: `Bearer ${userInfo.token}`,
 			},
 		};
-		console.log(userInfo);
+
 		const { data } = await axios.post('/api/v1/users', user, config);
 
 		dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
@@ -100,8 +100,8 @@ export const logout = () => (dispatch) => {
 	localStorage.removeItem('usersInfo');
 	dispatch({ type: USER_LOGOUT });
 	dispatch({ type: USER_DETAILS_RESET });
-	// dispatch({ type: USER_LIST_RESET });
-	// dispatch({ type: PROJECT_LIST_RESET });
+	dispatch({ type: USER_LIST_RESET });
+	dispatch({ type: PROJECT_LIST_RESET });
 };
 
 //gets the user details

@@ -8,11 +8,11 @@ import {
 	ORGANIZATION_LIST_FAIL,
 } from '../constants/organizationConstants';
 
+//add organization
 export const addOrganization = (organization, projectId) => async (
 	dispatch,
 	getState
 ) => {
-	console.log(organization);
 	try {
 		dispatch({ type: ORGANIZATION_ADD_REQUEST });
 
@@ -35,19 +35,38 @@ export const addOrganization = (organization, projectId) => async (
 			config
 		);
 
-		console.log(data);
-
 		dispatch({ type: ORGANIZATION_ADD_SUCCESS, payload: data });
 	} catch (error) {
-		const message =
-			error.response && error.response.data.message
-				? error.response.data.message
-				: error.message;
-		dispatch({ type: ORGANIZATION_ADD_FAIL, payload: message });
+		dispatch({
+			type: ORGANIZATION_ADD_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
 	}
 };
 
-export const listOrganizations = () => async (dispatch, getState) => {
+//get organization details
+export const getOrganizationDetails = (orgId) => async (dispatch, getState) => {
+	try {
+	} catch (error) {}
+};
+
+//update organization
+export const updateOrganization = (orgId) => async (dispatch, getState) => {
+	try {
+	} catch (error) {}
+};
+
+//delete organization
+export const deleteOrganization = (orgId) => async (dispatch, getState) => {
+	try {
+	} catch (error) {}
+};
+
+//list all organizations
+export const listOrganizations = (projectId) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ORGANIZATION_LIST_REQUEST });
 
@@ -61,14 +80,18 @@ export const listOrganizations = () => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.get(``, config);
+		const {
+			data: { data },
+		} = await axios.get(`/api/v1/projects/${projectId}/organizations`, config);
 
 		dispatch({ type: ORGANIZATION_LIST_SUCCESS, payload: data });
 	} catch (error) {
-		const message =
-			error.response && error.response.data.message
-				? error.response.data.message
-				: error.message;
-		dispatch({ type: ORGANIZATION_LIST_FAIL, payload: message });
+		dispatch({
+			type: ORGANIZATION_LIST_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.messsage,
+		});
 	}
 };

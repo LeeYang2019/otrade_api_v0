@@ -38,9 +38,10 @@ const AddOrganizationScreen = ({ history, match }) => {
 
 	//get addorganization success
 	const organizationAdd = useSelector((state) => state.organizationAdd);
-	const { success } = organizationAdd;
+	const { success, organization: addOrg } = organizationAdd;
 
-	console.log(stakeholdersList);
+	console.log(success);
+	console.log(addOrg);
 
 	useEffect(() => {
 		if (!userInfo) {
