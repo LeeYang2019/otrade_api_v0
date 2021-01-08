@@ -51,7 +51,9 @@ const ListOrganizationsScreen = ({ projectId }) => {
 							<td>
 								<p className="mr-3">
 									<strong>Stakeholder: </strong>
-									<Link to={`/stakeholder/${organization._id}`}>
+									<Link
+										to={`/project/${projectId}/organization/${organization._id}`}
+									>
 										{organization.name}
 									</Link>
 									<br />

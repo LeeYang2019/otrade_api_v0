@@ -17,6 +17,7 @@ import UserAddScreen from './screens/user/UserAddScreen';
 import ProjectAddScreen from './screens/project/ProjectAddScreen';
 import AddStakeholderScreen from './screens/stakeholder/AddStakeholderScreen';
 import AddOrganizationScreen from './screens/organization/AddOrganizationScreen';
+import OrganizationScreen from './screens/organization/OrganizationScreen';
 import AddActivityScreen from './screens/activity/AddActivityScreen';
 
 const App = () => {
@@ -31,6 +32,8 @@ const App = () => {
 					{/* userProfile paths */}
 					<Route exact path="/profile/:id" component={UserProfileScreen} />
 					<Route exact path="/project/:projectId" component={ProjectScreen} />
+
+					{/*Stakeholder paths*/}
 					<Route
 						exact
 						path="/project/:projectId/search/:stakeholder"
@@ -41,7 +44,15 @@ const App = () => {
 						path="/project/:projectId/stakeholder/:id"
 						component={StakeholderScreen}
 					/>
-					<Route exact path="/organization/:id" component={StakeholderScreen} />
+
+					{/*Organization paths*/}
+					<Route
+						exact
+						path="/project/:projectId/organization/:id"
+						component={OrganizationScreen}
+					/>
+
+					{/*Activity paths*/}
 					<Route exact path="/activity/:id" component={StakeholderScreen} />
 
 					{/* userList paths */}

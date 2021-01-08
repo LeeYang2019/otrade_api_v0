@@ -21,35 +21,66 @@ import {
 	userDeleteReducer,
 } from './reducers/userReducer';
 import {
-	stakeholderListReducer,
 	stakeholderAddReducer,
+	stakeholderDetailsReducer,
 	stakeholderUpdateReducer,
+	stakeholderDeleteReducer,
+	stakeholderListReducer,
 } from './reducers/stakeholderReducer';
 import {
 	organizationAddReducer,
+	organizationDetailsReducer,
+	organizationUpdateReducer,
+	organizationDeleteReducer,
 	organizationListReducer,
 } from './reducers/organizationReducer';
+import {
+	activityAddReducer,
+	activityDetailsReducer,
+	activityUpdateReducer,
+	activityDeleteReducer,
+	activityListReducer,
+} from './reducers/activityReducer';
 
 // useSelector calls
 const reducer = combineReducers({
-	userList: userListReducer,
+	//user reducers
 	userLogin: userLoginReducer,
 	userRegister: userRegisterReducer,
 	userDetails: userDetailsReducer,
 	userUpdateProfile: userUpdateProfileReducer,
 	userUpdate: userUpdateReducer,
 	userDelete: userDeleteReducer,
-	projectList: projectListReducer,
+	userList: userListReducer,
+
+	//project reducers
+	projectAdd: projectAddReducer,
 	projectDetails: projectDetailsReducer,
 	projectUpdate: projectUpdateReducer,
-	projectAdd: projectAddReducer,
+	projectList: projectListReducer,
 	projectUser: projectUserReducer,
 	projectUserAssignment: projectUserAssignmentReducer,
-	stakeholderList: stakeholderListReducer,
+
+	//stakeholder reducers
 	stakeholderAdd: stakeholderAddReducer,
+	stakeholderDetails: stakeholderDetailsReducer,
 	stakeholderUpdate: stakeholderUpdateReducer,
+	stakeholderDelete: stakeholderDeleteReducer,
+	stakeholderList: stakeholderListReducer,
+
+	//organization reducers
 	organizationAdd: organizationAddReducer,
+	organizationDetails: organizationDetailsReducer,
+	organizationUpdate: organizationUpdateReducer,
+	organizationDelete: organizationDeleteReducer,
 	organizationList: organizationListReducer,
+
+	//activity reducers
+	activityAdd: activityAddReducer,
+	activityDetails: activityDetailsReducer,
+	activityUpdate: activityUpdateReducer,
+	activityDelete: activityDeleteReducer,
+	activityList: activityListReducer,
 });
 
 // localStorages
@@ -57,17 +88,17 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 	? JSON.parse(localStorage.getItem('userInfo'))
 	: null;
 
-const usersInfoFromStorage = localStorage.getItem('usersInfo')
-	? JSON.parse(localStorage.getItem('usersInfo'))
-	: null;
+// const usersInfoFromStorage = localStorage.getItem('usersInfo')
+// 	? JSON.parse(localStorage.getItem('usersInfo'))
+// 	: null;
 
-const projectsInfoFromStorage = localStorage.getItem('projectsInfo')
-	? JSON.parse(localStorage.getItem('projectsInfo'))
-	: null;
+// const projectsInfoFromStorage = localStorage.getItem('projectsInfo')
+// 	? JSON.parse(localStorage.getItem('projectsInfo'))
+// 	: null;
 
-const stakeholdersFromStorage = localStorage.getItem('stakeholdersInfo')
-	? JSON.parse(localStorage.getItem('stakeholdersInfo'))
-	: null;
+// const stakeholdersFromStorage = localStorage.getItem('stakeholdersInfo')
+// 	? JSON.parse(localStorage.getItem('stakeholdersInfo'))
+// 	: null;
 
 // initialState
 const initialState = {

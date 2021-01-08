@@ -9,7 +9,7 @@ import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import { ORGANIZATION_ADD_RESET } from '../../constants/organizationConstants';
 
-const AddOrganizationScreen = ({ history, match }) => {
+const OrganizationScreen = ({ history, match }) => {
 	const projectId = match.params.projectId;
 
 	//define states
@@ -36,33 +36,19 @@ const AddOrganizationScreen = ({ history, match }) => {
 	const stakeholderList = useSelector((state) => state.stakeholderList);
 	const { stakeholders: stakeholdersList } = stakeholderList;
 
-	//get addorganization success
-	const organizationAdd = useSelector((state) => state.organizationAdd);
-	const { success, organization: addOrg } = organizationAdd;
+	//get organization
 
 	useEffect(() => {
 		if (!userInfo) {
 			history.pushState('/login');
 		} else {
-			if (success) {
-				setMessage('Organization was successfully added.');
-				dispatch({ type: ORGANIZATION_ADD_RESET });
+			if (!project.name || project._id !== projectId) {
+				//get organization details
 			} else {
-				if (!project.projectName || project._id !== projectId) {
-					dispatch(listProjectDetails(projectId));
-					dispatch(listStakeholders(projectId));
-				}
+				//set organization details
 			}
 		}
-	}, [
-		dispatch,
-		history,
-		userInfo,
-		projectId,
-		stakeholderList,
-		project,
-		success,
-	]);
+	}, [history, userInfo, project, projectId]);
 
 	//add select field
 	const addHandler = () => {
@@ -98,20 +84,19 @@ const AddOrganizationScreen = ({ history, match }) => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 
-		dispatch(
-			addOrganization(
-				{
-					name: organization,
-					division,
-					address: location,
-					email,
-					telephone,
-					website,
-					stakeholders,
-				},
-				projectId
-			)
-		);
+		dispatch();
+		// addOrganization(
+		// 	{
+		// 		name: organization,
+		// 		division,
+		// 		address: location,
+		// 		email,
+		// 		telephone,
+		// 		website,
+		// 		stakeholders,
+		// 	},
+		// 	projectId
+		// )
 	};
 
 	return (
@@ -122,10 +107,10 @@ const AddOrganizationScreen = ({ history, match }) => {
 			<Container className="w-50">
 				<h1>Register Organization</h1>
 				<hr />
-				{success && Message ? (
+				{/* {success && Message ? (
 					<Message variant="success">{message}</Message>
 				) : null}
-				{message && <Message variant="danger">{message}</Message>}
+				{message && <Message variant="danger">{message}</Message>} */}
 				<Form onSubmit={submitHandler} className="my-5">
 					<Row>
 						<Col md={6}>
@@ -263,4 +248,4 @@ const AddOrganizationScreen = ({ history, match }) => {
 	);
 };
 
-export default AddOrganizationScreen;
+export default OrganizationScreen;
