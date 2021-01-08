@@ -80,7 +80,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 
 	return (
 		<>
-			<Link to="/admin/projects" className="btn btn-primary my-3">
+			<Link to={`/project/${projectId}`} className="btn btn-primary my-3">
 				Back to Project
 			</Link>
 			<Container className="w-50">

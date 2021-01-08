@@ -47,13 +47,25 @@ const reducer = combineReducers({
 });
 
 // localStorages
-const uesrInfoFromStorage = localStorage.getItem('userInfo')
+const userInfoFromStorage = localStorage.getItem('userInfo')
 	? JSON.parse(localStorage.getItem('userInfo'))
+	: null;
+
+const usersInfoFromStorage = localStorage.getItem('usersInfo')
+	? JSON.parse(localStorage.getItem('usersInfo'))
+	: null;
+
+const projectsInfoFromStorage = localStorage.getItem('projectsInfo')
+	? JSON.parse(localStorage.getItem('projectsInfo'))
+	: null;
+
+const stakeholdersFromStorage = localStorage.getItem('stakeholdersInfo')
+	? JSON.parse(localStorage.getItem('stakeholdersInfo'))
 	: null;
 
 // initialState
 const initialState = {
-	userLogin: { userInfo: uesrInfoFromStorage },
+	userLogin: { userInfo: userInfoFromStorage },
 };
 
 const middleware = [thunk];

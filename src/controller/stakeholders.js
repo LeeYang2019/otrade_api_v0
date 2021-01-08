@@ -7,8 +7,15 @@ const Stakeholder = require('../model/Stakeholder');
 // @route   GET /api/v1/projects/:projectId/stakeholders
 // @access  Private
 exports.getStakeholders = asyncHandler(async (req, res, next) => {
+	const keyword = req.query.keyword
+		? { lastName: { $regex: req.query.keyword, $options: 'i' } }
+		: {};
+
+	console.log(keyword);
+
 	const stakeholders = await Stakeholder.find({
 		project: req.params.projectId,
+		...keyword,
 	}).sort({ lastName: 1 });
 
 	if (!stakeholders) {

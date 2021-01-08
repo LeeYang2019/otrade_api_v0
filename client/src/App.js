@@ -33,6 +33,11 @@ const App = () => {
 					<Route exact path="/project/:projectId" component={ProjectScreen} />
 					<Route
 						exact
+						path="/project/:projectId/search/:stakeholder"
+						component={ProjectScreen}
+					/>
+					<Route
+						exact
 						path="/project/:projectId/stakeholder/:id"
 						component={StakeholderScreen}
 					/>
@@ -96,7 +101,17 @@ const App = () => {
 					/>
 					<Route
 						exact
+						path="/project/:projectId/addOrganization/stakeholder/:stakeholderId" //keyword & pageNumber
+						component={AddOrganizationScreen}
+					/>
+					<Route
+						exact
 						path="/project/:projectId/addActivity" //keyword & pageNumber
+						component={AddActivityScreen}
+					/>
+					<Route
+						exact
+						path="/project/:projectId/addActivity/stakeholder/:stakeholderId" //keyword & pageNumber
 						component={AddActivityScreen}
 					/>
 

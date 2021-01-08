@@ -62,15 +62,15 @@ const AddActivityScreen = ({ history, match }) => {
 
 	return (
 		<>
-			<Link to="/admin/projects" className="btn btn-primary my-3">
+			<Link to={`/project/${projectId}`} className="btn btn-primary my-3">
 				Back to Project
 			</Link>
-			<Container className="w-50">
+			<Container className="w-75">
 				<h1>Register Activity</h1>
 				<hr />
 				<Form onSubmit={submitHandler} className="my-5">
 					<Row>
-						<Col md={12}>
+						<Col md={6}>
 							<Form.Group controlId="activity">
 								<Form.Label>Activity</Form.Label>
 								<Form.Control
@@ -94,7 +94,7 @@ const AddActivityScreen = ({ history, match }) => {
 						</Col>
 					</Row>
 					<Row>
-						<Col md={8}>
+						<Col md={6}>
 							<Form.Group controlId="date">
 								<Form.Label>Date</Form.Label>
 								<Form.Control
@@ -105,7 +105,7 @@ const AddActivityScreen = ({ history, match }) => {
 								></Form.Control>
 							</Form.Group>
 						</Col>
-						<Col md={4}>
+						<Col>
 							<Form.Group controlId="hours">
 								<Form.Label>Activity Hours</Form.Label>
 								<Form.Control
@@ -138,22 +138,27 @@ const AddActivityScreen = ({ history, match }) => {
 							<Form.Group controlId="discussion">
 								<Form.Label>Discussion Points</Form.Label>
 								{disPoints.map((point, i) => (
-									<Row>
-										<Col md={10}>
-											<Form.Control
-												className="mb-3"
-												type="discussion"
-												placeholder="Enter Discussion"
-												value={point.point}
-												onChange={(e) => handleInputChange(e, i)}
-											></Form.Control>
-										</Col>
-										<Col md={2}>
-											<Button className="px-3" onClick={handleAdd}>
-												Add
-											</Button>
-										</Col>
-									</Row>
+									<>
+										<Row>
+											<Col md={12}>
+												<Form.Control
+													className="mb-3"
+													as="textarea"
+													rows="4"
+													placeholder="Enter Discussion"
+													value={point.point}
+													onChange={(e) => handleInputChange(e, i)}
+												></Form.Control>
+											</Col>
+										</Row>
+										<Row className="mb-3">
+											<Col md={12}>
+												<Button className="px-3" onClick={handleAdd}>
+													Add Additional
+												</Button>
+											</Col>
+										</Row>
+									</>
 								))}
 							</Form.Group>
 						</Col>

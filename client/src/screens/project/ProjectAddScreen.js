@@ -43,7 +43,7 @@ const ProjectAddScreen = ({ history }) => {
 			<Link to="/admin/projects" className="btn btn-primary my-3">
 				Back to Project List
 			</Link>
-			<Container className="w-50">
+			<Container className="w-75">
 				<h1>Add Project</h1>
 				<hr />
 				<Form onSubmit={submitHandler} className="my-4">

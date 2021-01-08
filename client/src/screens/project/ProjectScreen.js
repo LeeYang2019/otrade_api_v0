@@ -14,6 +14,9 @@ const ProjectScreen = ({ history, match }) => {
 	const projectId = match.params.projectId;
 	const userId = match.params.id;
 
+	const keyword = match.params.stakeholder;
+	console.log(keyword);
+
 	// get userDispatch
 	const dispatch = useDispatch();
 
@@ -69,7 +72,7 @@ const ProjectScreen = ({ history, match }) => {
 							<ProjectDetailsScreen projectId={projectId} />
 						</Tab>
 						<Tab eventKey="stakeholders" title="Stakeholders">
-							<ListStakeholdersScreen projectId={projectId} />
+							<ListStakeholdersScreen projectId={projectId} keyword={keyword} />
 						</Tab>
 						<Tab eventKey="organizations" title="Organizations">
 							<ListOrganizationsScreen projectId={projectId} />

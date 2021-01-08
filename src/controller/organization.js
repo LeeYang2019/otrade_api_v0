@@ -8,6 +8,10 @@ const Organization = require('../model/Organization');
 // @route   GET /api/v1/organizations
 // @access  Private
 exports.getOrganizations = asyncHandler(async (req, res, next) => {
+	const keyword = req.query.keyword
+		? { name: { $regex: req.query.keyword, $options: 'i' } }
+		: {};
+
 	const organizations = await Organization.find();
 	res
 		.status(200)
@@ -26,9 +30,11 @@ exports.getOrganization = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/organizations
 // @access  Public
 exports.addOrganization = asyncHandler(async (req, res, next) => {
-	//get project and user
+	//get project and autthorized user
 	req.body.project = req.params.projectId;
-	req.body.user = req.user;
+	req.body.user = req.user.id;
+
+	console.log(req.body);
 
 	const organization = await Organization.create(req.body);
 	res.status(200).json({ success: true, data: organization });

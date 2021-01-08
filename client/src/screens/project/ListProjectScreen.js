@@ -23,7 +23,7 @@ const ListProjectScreen = ({ history, match }) => {
 	const { userInfo } = userLogin;
 
 	useEffect(() => {
-		if (userInfo && userInfo.role !== 'admin') {
+		if (!userInfo && userInfo.role !== 'admin') {
 			history.push('/login');
 		} else {
 			dispatch(listProjects(keyword, pageNumber));

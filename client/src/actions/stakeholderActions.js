@@ -8,7 +8,10 @@ import {
 	STAKEHOLDER_ADD_FAIL,
 } from '../constants/stakeholderConstants';
 
-export const listStakeholders = (projectId) => async (dispatch, getState) => {
+export const listStakeholders = (projectId, keyword = '') => async (
+	dispatch,
+	getState
+) => {
 	console.log('entered listStakeholders');
 	try {
 		dispatch({ type: STAKEHOLDER_LIST_REQUEST });
@@ -23,10 +26,18 @@ export const listStakeholders = (projectId) => async (dispatch, getState) => {
 			},
 		};
 
+		console.log(keyword);
+
 		const {
 			data: { data },
-		} = await axios.get(`/api/v1/projects/${projectId}/stakeholders`, config);
+		} = await axios.get(
+			`/api/v1/projects/${projectId}/stakeholders?keyword=${keyword}`,
+			config
+		);
+
 		dispatch({ type: STAKEHOLDER_LIST_SUCCESS, payload: data });
+
+		localStorage.setItem('stakeholdersInfo', JSON.stringify(data));
 	} catch (error) {
 		dispatch({
 			type: STAKEHOLDER_LIST_FAIL,

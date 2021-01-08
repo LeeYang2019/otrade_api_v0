@@ -83,7 +83,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 
 	return (
 		<>
-			<Link to="/admin/projects" className="btn btn-primary my-3">
+			<Link to={`/project/${projectId}`} className="btn btn-primary my-3">
 				Back to Project
 			</Link>
 			<Container className="w-50">
@@ -156,7 +156,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 						</Col>
 					</Row>
 					<Row>
-						<Col md={8}>
+						<Col md={12}>
 							<Form.Group controlId="website">
 								<Form.Label>Website</Form.Label>
 								<Form.Control
@@ -168,17 +168,46 @@ const AddOrganizationScreen = ({ history, match }) => {
 							</Form.Group>
 						</Col>
 					</Row>
+					<hr className="my-4" />
 					<Row className="mt-5">
-						<Col md={4}>
-							<Form.Group controlId="stakeholders">
-								<Form.Label>Stakeholders</Form.Label>
-								<Form.Control
-									type="stakeholders"
-									placeholder="--select--"
-									value={organization}
-									onChange={(e) => setOrganization(e.target.value)}
-								></Form.Control>
-							</Form.Group>
+						<Col md={12}>
+							{stakeholders &&
+								stakeholders.map((assignee, i) => (
+									<Row className="mb-3">
+										<Col md={7}>
+											<Form.Control
+												as="select"
+												value={assignee._id}
+												onChange={(e) => handleInputChange(e, i)}
+												required
+												className="px-5"
+											>
+												<option value="">--Select--</option>
+												{users.map((user) => (
+													<option key={user._id} value={user._id}>
+														{user.firstName} {user.lastName}
+													</option>
+												))}
+											</Form.Control>
+										</Col>
+										<Col md={5}>
+											{stakeholders.length !== 1 && (
+												<Button
+													variant="danger"
+													className="btn-md mr-3"
+													onClick={() => removeHandler(i)}
+												>
+													<i className="fas fa-trash"></i>
+												</Button>
+											)}
+											{stakeholders.length - 1 === i && (
+												<Button className="px-3" onClick={() => addHandler(i)}>
+													<i className="fas fa-plus"></i> Stakeholder
+												</Button>
+											)}
+										</Col>
+									</Row>
+								))}
 						</Col>
 					</Row>
 					<Row className="mt-3">
