@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { addOrganization } from '../../actions/organizationAction';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 
@@ -24,9 +25,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
-	//get userList
-	const userList = useSelector((state) => state.userList);
-	const { loading, error, users } = userList;
+	//get stakeholders
 
 	//get project
 
@@ -79,6 +78,19 @@ const AddOrganizationScreen = ({ history, match }) => {
 		console.log(website);
 
 		//dispatch
+		dispatch(
+			addOrganization(
+				{
+					name: organization,
+					political_division: division,
+					address: location,
+					email,
+					telephone,
+					website,
+				},
+				projectId
+			)
+		);
 	};
 
 	return (
@@ -179,11 +191,10 @@ const AddOrganizationScreen = ({ history, match }) => {
 												as="select"
 												value={assignee._id}
 												onChange={(e) => handleInputChange(e, i)}
-												required
 												className="px-5"
 											>
 												<option value="">--Select--</option>
-												{users.map((user) => (
+												{stakeholders.map((user) => (
 													<option key={user._id} value={user._id}>
 														{user.firstName} {user.lastName}
 													</option>

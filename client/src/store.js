@@ -25,6 +25,10 @@ import {
 	stakeholderAddReducer,
 	stakeholderUpdateReducer,
 } from './reducers/stakeholderReducer';
+import {
+	organizationAddReducer,
+	organizationListReducer,
+} from './reducers/organizationReducer';
 
 // useSelector calls
 const reducer = combineReducers({
@@ -44,6 +48,8 @@ const reducer = combineReducers({
 	stakeholderList: stakeholderListReducer,
 	stakeholderAdd: stakeholderAddReducer,
 	stakeholderUpdate: stakeholderUpdateReducer,
+	organizationAdd: organizationAddReducer,
+	organizationList: organizationListReducer,
 });
 
 // localStorages

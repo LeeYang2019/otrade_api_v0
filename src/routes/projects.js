@@ -18,8 +18,10 @@ const Project = require('../model/Project');
 
 // import resource routers
 const stakeholderRouter = require('./stakeholders');
+const organizationRouter = require('./organization');
 
 router.use('/:projectId/stakeholders', stakeholderRouter);
+router.use('/:projectId/organizations', organizationRouter);
 
 // define general route
 router

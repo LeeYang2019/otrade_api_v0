@@ -5,7 +5,7 @@ const asyncHandler = require('../middleware/async');
 const Organization = require('../model/Organization');
 
 // @desc    GET all organizations
-// @route   GET /api/v1/organizations
+// @route   GET /api/v1/projects/projectId/organizations
 // @access  Private
 exports.getOrganizations = asyncHandler(async (req, res, next) => {
 	const keyword = req.query.keyword
@@ -27,17 +27,21 @@ exports.getOrganization = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Add an organization
-// @route   POST /api/v1/organizations
-// @access  Public
+// @route   POST /api/v1/projects/:projectId/organizations
+// @access  Private
 exports.addOrganization = asyncHandler(async (req, res, next) => {
 	//get project and autthorized user
 	req.body.project = req.params.projectId;
+
+	console.log(req.params.projectId);
+
 	req.body.user = req.user.id;
 
 	console.log(req.body);
 
-	const organization = await Organization.create(req.body);
-	res.status(200).json({ success: true, data: organization });
+	//const organization = await Organization.create(req.body);
+	//res.status(200).json({ success: true, data: organization });
+	res.status(200).json({ success: true });
 });
 
 // @desc    Update an organization

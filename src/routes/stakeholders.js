@@ -19,7 +19,7 @@ const commentRouter = require('./comments');
 
 router.use('/:stakeholderId/comments', commentRouter);
 
-// define general route
+// general route through project
 router.route('/').get(protect, getStakeholders).post(protect, addStakeholder);
 
 // define specific route

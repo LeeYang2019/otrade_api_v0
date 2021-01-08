@@ -69,8 +69,6 @@ export const addStakeholder = (stakeholder, projectId) => async (
 			},
 		};
 
-		console.log(userInfo);
-
 		//pass id, project, and config file to api
 		const {
 			data: { data },
@@ -79,8 +77,6 @@ export const addStakeholder = (stakeholder, projectId) => async (
 			stakeholder,
 			config
 		);
-
-		console.log(data);
 
 		dispatch({ type: STAKEHOLDER_ADD_SUCCESS, payload: data });
 	} catch (error) {
