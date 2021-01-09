@@ -6,7 +6,7 @@ import { USER_PROFILE_UPDATE_RESET } from '../../constants/userConstants';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 
-const EditUserProfileScreen = ({ userId }) => {
+const EditUser = ({ userId }) => {
 	//define states
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -23,32 +23,24 @@ const EditUserProfileScreen = ({ userId }) => {
 	const userDetails = useSelector((state) => state.userDetails);
 	const { loading, error, user } = userDetails;
 
-	// //get logged in user
-	// const userLogin = useSelector((state) => state.userLogin);
-	// const { userInfo } = userLogin;
+	const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+	const { success: successUpdate } = userUpdateProfile;
 
-	// const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
-	// const { success: successUpdate } = userUpdateProfile;
-
-	// useEffect(() => {
-	// 	if (successUpdate) {
-	// 		dispatch(getUserDetails(userId));
-	// 		dispatch({ type: USER_PROFILE_UPDATE_RESET });
-	// 		setPassword('');
-	// 		setConfirmPassword('');
-	// 		setMessage(null);
-	// 	} else {
-	// 		if (!user.firstName || user._id !== userId) {
-	// 			dispatch(getUserDetails(userId));
-	// 		} else {
-	// 			setFirstName(user.firstName);
-	// 			setLastName(user.lastName);
-	// 			setTelephone(user.telephone);
-	// 			setEmail(user.email);
-	// 			setUpdatedDate(user.updatedAt);
-	// 		}
-	// 	}
-	// }, [dispatch, userId, user, successUpdate, userInfo]);
+	useEffect(() => {
+		if (successUpdate) {
+			dispatch(getUserDetails(userId));
+			dispatch({ type: USER_PROFILE_UPDATE_RESET });
+			setPassword('');
+			setConfirmPassword('');
+			setMessage(null);
+		} else {
+			setFirstName(user.firstName);
+			setLastName(user.lastName);
+			setTelephone(user.telephone);
+			setEmail(user.email);
+			setUpdatedDate(user.updatedAt);
+		}
+	}, [dispatch, userId, user, successUpdate]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -73,10 +65,10 @@ const EditUserProfileScreen = ({ userId }) => {
 
 	return (
 		<>
-			{/* {message && <Message variant="danger">{message}</Message>}
+			{message && <Message variant="danger">{message}</Message>}
 			{error && <Message variant="danger">{error}</Message>}
 			{successUpdate && <Message variant="success">Profile Updated</Message>}
-			{loading && <Loader />} */}
+			{loading && <Loader />}
 			<Container>
 				{/* {userInfo && userInfo._id === user._id ? ( */}
 				<Form onSubmit={submitHandler} className="my-5">
@@ -174,4 +166,4 @@ const EditUserProfileScreen = ({ userId }) => {
 	);
 };
 
-export default EditUserProfileScreen;
+export default EditUser;

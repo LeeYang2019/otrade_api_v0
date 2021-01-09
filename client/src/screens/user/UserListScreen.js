@@ -9,7 +9,7 @@ import { listUsers, deleteUser } from '../../actions/userActions';
 import SearchBox from '../../components/SearchBox';
 import Paginate from '../../components/Paginate';
 
-const ListUserScreen = ({ history, match }) => {
+const UserListScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
 
@@ -158,4 +158,4 @@ const ListUserScreen = ({ history, match }) => {
 	);
 };
 
-export default ListUserScreen;
+export default UserListScreen;

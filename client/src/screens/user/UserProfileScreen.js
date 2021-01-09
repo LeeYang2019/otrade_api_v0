@@ -7,23 +7,20 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader.js';
 import { getUserDetails } from '../../actions/userActions';
 import { USER_DETAILS_RESET } from '../../constants/userConstants';
-import EditUserProfileScreen from './../user/EditUserProfileScreen';
+import EditUser from './../user/EditUser';
 
 const UserProfileScreen = ({ history, match }) => {
 	let userId = match.params.id;
 
 	const dispatch = useDispatch();
 
-	// get user
-	const userDetails = useSelector((state) => state.userDetails);
-	const { loading, error, user } = userDetails;
-
 	//get logged in user
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
-	console.log(user);
-	console.log(userInfo);
+	// get user
+	const userDetails = useSelector((state) => state.userDetails);
+	const { loading, error, user } = userDetails;
 
 	if (!userId) {
 		userId = userInfo._id;
@@ -33,8 +30,7 @@ const UserProfileScreen = ({ history, match }) => {
 		if (!userInfo) {
 			history.push('/login');
 		} else {
-			if (!user || !user.firstName) {
-				console.log('dispatch');
+			if (!user.firstName || user._id !== userId) {
 				dispatch(getUserDetails(userId));
 			}
 		}
@@ -81,7 +77,11 @@ const UserProfileScreen = ({ history, match }) => {
 							className=""
 						>
 							<Tab eventKey="userDetails" title="User Details">
-								<EditUserProfileScreen userId={userId} />
+								<Route
+									render={({ history }) => (
+										<EditUser history={history} userId={userId} />
+									)}
+								/>
 							</Tab>
 							<Tab eventKey="projects" title="Projects">
 								<Route

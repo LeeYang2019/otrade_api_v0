@@ -7,7 +7,7 @@ import LoginScreen from './screens/LoginScreen';
 import LogoutScreen from './screens/LogoutScreen';
 import HomeScreen from './screens/HomeScreen';
 import UserProfileScreen from './screens/user/UserProfileScreen';
-import ListUserScreen from './screens/user/ListUserScreen';
+import UserListScreen from './screens/user/UserListScreen';
 import ListProjectScreen from './screens/project/ListProjectScreen';
 import ProjectScreen from './screens/project/ProjectScreen';
 import StakeholderScreen from './screens/stakeholder/StakeholderScreen';
@@ -56,21 +56,21 @@ const App = () => {
 					<Route exact path="/activity/:id" component={StakeholderScreen} />
 
 					{/* userList paths */}
-					<Route exact path="/admin/userlist" component={ListUserScreen} />
+					<Route exact path="/admin/userlist" component={UserListScreen} />
 					<Route
 						exact
 						path="/admin/userlist/search/:keyword" //just keyword
-						component={ListUserScreen}
+						component={UserListScreen}
 					/>
 					<Route
 						exact
 						path="/admin/userlist/page/:pageNumber" //just pageNumber
-						component={ListUserScreen}
+						component={UserListScreen}
 					/>
 					<Route
 						exact
 						path="/admin/userlist/search/:keyword/page/:pageNumber" //keyword & pageNumber
-						component={ListUserScreen}
+						component={UserListScreen}
 					/>
 					<Route
 						exact
