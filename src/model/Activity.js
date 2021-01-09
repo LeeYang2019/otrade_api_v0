@@ -3,6 +3,42 @@ const mongoose = require('mongoose');
 //define schema
 const ActivitySchema = mongoose.Schema(
 	{
+		activity: {
+			type: String,
+			enum: [
+				'consulta informal',
+				'reunion formal',
+				'asamblea en comunidad',
+				'socializacion',
+				'apoyo a geologia',
+				'apoyo a la fundacion',
+			],
+		},
+		date: {
+			type: Date,
+			min: '1900-01-01',
+		},
+		hours: {
+			type: Number,
+		},
+		compromise: {
+			type: String,
+			enum: ['Yes', 'No'],
+		},
+		isComplete: {
+			type: Boolean,
+		},
+		discussPoints: [
+			{
+				type: String,
+			},
+		],
+		stakeholders: [
+			{
+				type: mongoose.Schema.ObjectId,
+				ref: 'Stakeholder',
+			},
+		],
 		project: {
 			type: mongoose.Schema.ObjectId,
 			ref: 'Project',

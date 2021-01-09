@@ -12,6 +12,8 @@ import EditUser from './../user/EditUser';
 const UserProfileScreen = ({ history, match }) => {
 	let userId = match.params.id;
 
+	console.log(userId);
+
 	const dispatch = useDispatch();
 
 	//get logged in user
@@ -46,14 +48,14 @@ const UserProfileScreen = ({ history, match }) => {
 				<>
 					<Col md={4}>
 						<Card>
-							<Card.Img
+							{/* <Card.Img
 								src={
 									user.firstName === 'Fabiano' &&
 									'https://cdn-aloik.nitrocdn.com/huqEQAiBEvAuNBhDiOttdbmgrSMOWZHL/assets/static/optimized/otrade.ca/newsite/wp-content/uploads/2020/09/25a95d9509d5efaf4818a5e7dc080124.fabiano-bio-2.png'
 								}
 								alt="user profile"
 								className="w-75 m-auto mt-5"
-							/>
+							/> */}
 							<Card.Body>
 								<hr />
 								<Card.Text>

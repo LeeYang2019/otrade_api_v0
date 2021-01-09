@@ -1,6 +1,4 @@
 const express = require('express');
-const router = express.Router({ mergeParams: true });
-const { protect, isAdmin } = require('../middleware/auth');
 
 // import stakeholder controller functions
 const {
@@ -11,18 +9,21 @@ const {
 	deleteStakeholder,
 } = require('../controller/stakeholders');
 
-const Stakeholder = require('../model/Stakeholder');
-const advancedResults = require('../middleware/advancedResuts');
+const { protect, isAdmin } = require('../middleware/auth');
+
+//create router
+const router = express.Router({ mergeParams: true });
 
 //import resource routers
 const commentRouter = require('./comments');
 
+//use with stakeholder route
 router.use('/:stakeholderId/comments', commentRouter);
 
-// general route through project
+// use with project route
 router.route('/').get(protect, getStakeholders).post(protect, addStakeholder);
 
-// define specific route
+// speicific stakeholder routes
 router
 	.route('/:id')
 	.get(protect, getStakeholder)

@@ -23,22 +23,15 @@ import {
 	PROJECT_ADD_FAIL,
 } from '../constants/projectConstants';
 
-//project list
-export const projectListReducer = (state = { projects: [] }, action) => {
+//add project
+export const projectAddReducer = (state = {}, action) => {
 	switch (action.type) {
-		case PROJECT_LIST_REQUEST:
-			return { loading: true, projects: [] };
-		case PROJECT_LIST_SUCCESS:
-			return {
-				loading: false,
-				projects: action.payload.projects,
-				pages: action.payload.pages,
-				page: action.payload.page,
-			};
-		case PROJECT_LIST_FAIL:
+		case PROJECT_ADD_REQUEST:
+			return { loading: true };
+		case PROJECT_ADD_SUCCESS:
+			return { loading: false, success: true, project: action.payload };
+		case PROJECT_ADD_FAIL:
 			return { loading: false, error: action.payload };
-		case PROJECT_LIST_RESET:
-			return { projects: {} };
 		default:
 			return state;
 	}
@@ -56,19 +49,6 @@ export const projectDetailsReducer = (state = { project: {} }, action) => {
 				assignees: action.payload.assignees,
 			};
 		case PROJECT_DETAILS_FAIL:
-			return { loading: false, error: action.payload };
-		default:
-			return state;
-	}
-};
-
-export const projectAddReducer = (state = {}, action) => {
-	switch (action.type) {
-		case PROJECT_ADD_REQUEST:
-			return { loading: true };
-		case PROJECT_ADD_SUCCESS:
-			return { loading: false, success: true, project: action.payload };
-		case PROJECT_ADD_FAIL:
 			return { loading: false, error: action.payload };
 		default:
 			return state;
@@ -123,6 +103,27 @@ export const projectUserAssignmentReducer = (
 			return { loading: false, error: action.payload };
 		case PROJECT_ASSIGNMENT_RESET:
 			return { project: {} };
+		default:
+			return state;
+	}
+};
+
+//project list
+export const projectListReducer = (state = { projects: [] }, action) => {
+	switch (action.type) {
+		case PROJECT_LIST_REQUEST:
+			return { loading: true, projects: [] };
+		case PROJECT_LIST_SUCCESS:
+			return {
+				loading: false,
+				projects: action.payload.projects,
+				pages: action.payload.pages,
+				page: action.payload.page,
+			};
+		case PROJECT_LIST_FAIL:
+			return { loading: false, error: action.payload };
+		case PROJECT_LIST_RESET:
+			return { projects: {} };
 		default:
 			return state;
 	}

@@ -41,7 +41,7 @@ const ProjectScreen = ({ history, match }) => {
 
 	return (
 		<>
-			<Link to={`/profile/${userId}`} className="btn btn-primary my-3">
+			<Link to={`/profile/${userInfo._id}`} className="btn btn-primary my-3">
 				Previous Page
 			</Link>
 			<Row>

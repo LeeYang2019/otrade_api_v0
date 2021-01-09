@@ -1,6 +1,4 @@
 const express = require('express');
-const router = express.Router({ mergeParams: true });
-const { protect, isAdmin } = require('../middleware/auth');
 
 //import Organization controller functions
 const {
@@ -11,14 +9,20 @@ const {
 	deleteOrganization,
 } = require('../controller/organization');
 
-//general route through project
+const { protect, isAdmin } = require('../middleware/auth');
+
+//create router
+const router = express.Router({ mergeParams: true });
+
+//use with project route
 router.route('/').get(protect, getOrganizations).post(protect, addOrganization);
 
-//define specific route
+//specific organization routes
 router
 	.route('/:id')
-	.get(getOrganization)
-	.put(updateOrganization)
-	.delete(deleteOrganization);
+	.get(protect, getOrganization)
+	.put(protect, updateOrganization)
+	.delete(protect, deleteOrganization);
 
+//export
 module.exports = router;

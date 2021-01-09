@@ -9,7 +9,10 @@ import {
 } from '../constants/activityConstants';
 
 //add activity
-export const addActivity = (activity) => async (dispatch, getState) => {
+export const addActivity = (activity, projectId) => async (
+	dispatch,
+	getState
+) => {
 	try {
 		dispatch({ type: ACTIVITY_ADD_REQUEST });
 
@@ -24,7 +27,16 @@ export const addActivity = (activity) => async (dispatch, getState) => {
 			},
 		};
 
-		dispatch({ type: ACTIVITY_ADD_SUCCESS });
+		console.log('user: ', userInfo);
+		console.log('act: ', activity);
+
+		const { data } = await axios.post(
+			`/api/v1/projects/${projectId}/activities`,
+			activity,
+			config
+		);
+
+		dispatch({ type: ACTIVITY_ADD_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
 			type: ACTIVITY_ADD_FAIL,

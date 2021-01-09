@@ -1,4 +1,3 @@
-//bring in express
 const express = require('express');
 
 //bring in controller functions
@@ -10,18 +9,20 @@ const {
 	deleteActivity,
 } = require('../controller/activities');
 
-//create router
-const router = express.Router();
+const { protect, isAdmin } = require('../middleware/auth');
 
-//define general route
-router.route('/').get(getActivities).post(addActivity);
+//create router
+const router = express.Router({ mergeParams: true });
+
+//use with project route
+router.route('/').get(protect, getActivities).post(protect, addActivity);
 
 //define route with id
 router
 	.route('/:id')
-	.get(getActivity)
-	.put(updateActivity)
-	.delete(deleteActivity);
+	.get(protect, getActivity)
+	.put(protect, updateActivity)
+	.delete(protect, deleteActivity);
 
 //export
 module.exports = router;
