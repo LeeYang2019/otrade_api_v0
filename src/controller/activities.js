@@ -8,7 +8,7 @@ const Activity = require('../model/Activity');
 // @desc    POST an activity
 // @route   POST /api/v1/project/:projectId/activities
 // @access  Private
-exports.addActivity = async (req, res, next) => {
+exports.addActivity = asyncHandler(async (req, res, next) => {
 	req.body.user = req.user.id;
 	req.body.project = req.params.projectId;
 
@@ -16,12 +16,12 @@ exports.addActivity = async (req, res, next) => {
 
 	const activity = await Activity.create(req.body);
 	res.status(200).json({ success: true, data: activity });
-};
+});
 
 // @desc    GET an activity
 // @route   GET /api/v1/activities/:id
 // @access  Private
-exports.getActivity = async (req, res, next) => {
+exports.getActivity = asyncHandler(async (req, res, next) => {
 	const activity = await Activity.findById(req.params.id);
 
 	if (!activity) {
@@ -30,19 +30,35 @@ exports.getActivity = async (req, res, next) => {
 	}
 
 	res.status(200).json({ success: true, data: activity });
-};
+});
 
 // @desc    PUT an activity
 // @route   PUT /api/v1/activities/:id
 // @access  Private
-exports.updateActivity = async (req, res, next) => {};
+exports.updateActivity = asyncHandler(async (req, res, next) => {});
 
 // @desc    DELETE an activity
 // @route   DELETE /api/v1/activities/:id
 // @access  Private
-exports.deleteActivity = async (req, res, next) => {};
+exports.deleteActivity = asyncHandler(async (req, res, next) => {});
 
 // @desc    GET all activities
 // @route   GET /api/v1/project/:projectId/activities
 // @access  Private
-exports.getActivities = async (req, res, next) => {};
+exports.getActivities = asyncHandler(async (req, res, next) => {
+	const keyword = req.query.keyword
+		? { name: { $regex: req.query.keyword, $options: 'i' } }
+		: {};
+
+	const activities = await Activity.find({
+		project: req.params.projectId,
+		...keyword,
+	});
+
+	if (!activities) {
+		res.status(401);
+		throw new Error('No resources found');
+	}
+
+	res.status(200).json({ success: true, data: activities });
+});

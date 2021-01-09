@@ -30,7 +30,9 @@ export const addActivity = (activity, projectId) => async (
 		console.log('user: ', userInfo);
 		console.log('act: ', activity);
 
-		const { data } = await axios.post(
+		const {
+			data: { data },
+		} = await axios.post(
 			`/api/v1/projects/${projectId}/activities`,
 			activity,
 			config
@@ -132,7 +134,11 @@ export const listActivities = (projectId) => async (dispatch, getState) => {
 			},
 		};
 
-		dispatch({ type: ACTIVITY_LIST_SUCCESS });
+		const {
+			data: { data },
+		} = await axios.get(`/api/v1/projects/${projectId}/activities`, config);
+
+		dispatch({ type: ACTIVITY_LIST_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
 			type: ACTIVITY_LIST_FAIL,

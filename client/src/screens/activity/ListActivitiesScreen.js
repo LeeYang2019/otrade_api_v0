@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react';
 import { Route, Link } from 'react-router-dom';
-import { Table, Button, Row, Col } from 'react-bootstrap';
+import { Table, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { listActivities } from '../../actions/activityActions';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import SearchBox from '../../components/SearchBox';
 
-const ListActivitiesScreen = ({ projectId }) => {
+const ListActivitiesScreen = ({ projectId, keyword }) => {
 	const dispatch = useDispatch();
 
-	//get organizations
+	//get activities
+	const activityList = useSelector((state) => state.activityList);
+	const { loading, error, activities } = activityList;
 
 	useEffect(() => {
-		//dispatch(listStakeholders(projectId));
+		dispatch(listActivities(projectId));
 	}, [dispatch, projectId]);
 
 	return (
@@ -34,31 +37,38 @@ const ListActivitiesScreen = ({ projectId }) => {
 					</Link>
 				</Col>
 			</Row>
-			{/* {loading ? (
+			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
 				<Table hover responsive className="table-sm mt-3">
 					<tbody>
-						{stakeholders.map((person) => (
-							<tr key={person._id}>
+						{activities.map((activity) => (
+							<tr key={activity._id}>
 								<td>
 									<p className="mr-3">
-										<strong>Stakeholder: </strong>
-										<Link to={`/stakeholder/${person._id}`}>
-											{person.lastName}, {person.firstName}
+										<strong>Activity: </strong>
+										<Link to={`/stakeholder/${activity._id}`}>
+											{activity.activity}
 										</Link>
 										<br />
-										Email: <em> {person.email}</em>
+										Stakeholders: <em> {activity.stakeholders.join('')}</em>
 										<br />
-										Telephone: {person.telephone}
+										Status:{' '}
+										<em>
+											{activity.isComplete === 'true' ? (
+												<strong className="text-success">Complete</strong>
+											) : (
+												<strong className="text-warning">In Progress</strong>
+											)}
+										</em>
 										<br />
 										Registered Date:{' '}
 										<strong>
 											{' '}
-											{person.createdAt &&
-												person.createdAt.substring(0, 10)}{' '}
+											{activity.createdAt &&
+												activity.createdAt.substring(0, 10)}{' '}
 										</strong>
 									</p>
 								</td>
@@ -66,7 +76,7 @@ const ListActivitiesScreen = ({ projectId }) => {
 						))}
 					</tbody>
 				</Table>
-			)} */}
+			)}
 		</>
 	);
 };
