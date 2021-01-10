@@ -41,8 +41,6 @@ exports.addOrganization = asyncHandler(async (req, res, next) => {
 	req.body.project = req.params.projectId;
 	req.body.user = req.user.id;
 
-	console.log(req.body);
-
 	const organization = await Organization.create(req.body);
 	res.status(200).json({ success: true, data: organization });
 });
@@ -51,6 +49,8 @@ exports.addOrganization = asyncHandler(async (req, res, next) => {
 // @route   PUT /api/v1/organizations/:id
 // @access  Private
 exports.updateOrganization = asyncHandler(async (req, res, next) => {
+	req.body.user = req.user.id;
+
 	let organization = await Organization.findById(req.params.id);
 	organization = await Organization.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,

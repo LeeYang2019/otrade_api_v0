@@ -48,6 +48,8 @@ exports.addStakeholder = asyncHandler(async (req, res, next) => {
 // @route   PUT /api/v1/stakeholders/:id
 // @access  Private
 exports.updateStakeholder = asyncHandler(async (req, res, next) => {
+	req.body.user = req.user.id;
+
 	let stakeholder = await Stakeholder.findById(req.params.id);
 	stakeholder = await Stakeholder.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,

@@ -90,7 +90,7 @@ export const getOrganizationDetails = (orgId) => async (dispatch, getState) => {
 };
 
 //update organization
-export const updateOrganization = (orgId, org) => async (
+export const updateOrganization = (org, orgId) => async (
 	dispatch,
 	getState
 ) => {

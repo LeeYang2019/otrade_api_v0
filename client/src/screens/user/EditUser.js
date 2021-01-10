@@ -19,10 +19,11 @@ const EditUser = ({ userId }) => {
 
 	const dispatch = useDispatch();
 
-	// //call the userRegister reducer in the store
+	//get the user
 	const userDetails = useSelector((state) => state.userDetails);
 	const { loading, error, user } = userDetails;
 
+	//get success from user update
 	const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
 	const { success: successUpdate } = userUpdateProfile;
 

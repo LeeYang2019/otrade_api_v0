@@ -45,7 +45,7 @@ export const stakeholderDetailsReducer = (
 		case STAKEHOLDER_DETAILS_SUCCESS:
 			return { loading: false, success: true, stakeholder: action.payload };
 		case STAKEHOLDER_DETAILS_FAIL:
-			return { stakeholder: {} };
+			return { loading: false, error: action.payload };
 		default:
 			return state;
 	}

@@ -22,6 +22,8 @@ export const addStakeholder = (stakeholder, projectId) => async (
 	dispatch,
 	getState
 ) => {
+	console.log(stakeholder);
+
 	try {
 		dispatch({ type: STAKEHOLDER_ADD_REQUEST });
 
@@ -69,7 +71,9 @@ export const getStakeholderDetails = (id) => async (dispatch, getState) => {
 
 		//create config
 		const config = {
-			Authorization: `Bearer ${userInfo.token}`,
+			headers: {
+				Authorization: `Bearer ${userInfo.token}`,
+			},
 		};
 
 		const {
@@ -89,7 +93,7 @@ export const getStakeholderDetails = (id) => async (dispatch, getState) => {
 };
 
 //update stakeholder
-export const updateStakeholder = (id, stakeholder) => async (
+export const updateStakeholder = (stakeholder, id) => async (
 	dispatch,
 	getState
 ) => {
@@ -108,6 +112,8 @@ export const updateStakeholder = (id, stakeholder) => async (
 				Authorization: `Bearer ${userInfo.token}`,
 			},
 		};
+
+		console.log(stakeholder);
 
 		const {
 			data: { data },

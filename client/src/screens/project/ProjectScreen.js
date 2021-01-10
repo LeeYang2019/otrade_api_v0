@@ -75,22 +75,13 @@ const ProjectScreen = ({ history, match }) => {
 							<ProjectDetailsScreen projectId={projectId} />
 						</Tab>
 						<Tab eventKey="stakeholders" title="Stakeholders">
-							<ListStakeholdersScreen
-								projectId={projectId}
-								keyword={stakeholder}
-							/>
+							<ListStakeholdersScreen projectId={projectId} />
 						</Tab>
 						<Tab eventKey="organizations" title="Organizations">
-							<ListOrganizationsScreen
-								projectId={projectId}
-								//keyword={organization}
-							/>
+							<ListOrganizationsScreen projectId={projectId} />
 						</Tab>
 						<Tab eventKey="activities" title="Activities">
-							<ListActivitiesScreen
-								projectId={projectId}
-								//keyword={activity}
-							/>
+							<ListActivitiesScreen projectId={projectId} />
 						</Tab>
 					</Tabs>
 				</Col>
