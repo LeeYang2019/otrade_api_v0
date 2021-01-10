@@ -3,6 +3,15 @@ import {
 	ACTIVITY_ADD_REQUEST,
 	ACTIVITY_ADD_SUCCESS,
 	ACTIVITY_ADD_FAIL,
+	ACTIVITY_DETAILS_REQUEST,
+	ACTIVITY_DETAILS_SUCCESS,
+	ACTIVITY_DETAILS_FAIL,
+	ACTIVITY_UPDATE_REQUEST,
+	ACTIVITY_UPDATE_SUCCESS,
+	ACTIVITY_UPDATE_FAIL,
+	ACTIVITY_DELETE_REQUEST,
+	ACTIVITY_DELETE_SUCCESS,
+	ACTIVITY_DELETE_FAIL,
 	ACTIVITY_LIST_REQUEST,
 	ACTIVITY_LIST_SUCCESS,
 	ACTIVITY_LIST_FAIL,
@@ -27,9 +36,6 @@ export const addActivity = (activity, projectId) => async (
 			},
 		};
 
-		console.log('user: ', userInfo);
-		console.log('act: ', activity);
-
 		const {
 			data: { data },
 		} = await axios.post(
@@ -53,7 +59,7 @@ export const addActivity = (activity, projectId) => async (
 //get activity details
 export const getActivityDetails = (id) => async (dispatch, getState) => {
 	try {
-		dispatch({});
+		dispatch({ type: ACTIVITY_DETAILS_REQUEST });
 
 		//get logged in user
 		const {
@@ -67,16 +73,26 @@ export const getActivityDetails = (id) => async (dispatch, getState) => {
 			},
 		};
 
-		dispatch({});
+		const {
+			data: { data },
+		} = await axios.get(`/api/v1/activities/${id}`, config);
+
+		dispatch({ type: ACTIVITY_DETAILS_SUCCESS, payload: data });
 	} catch (error) {
-		dispatch({});
+		dispatch({
+			type: ACTIVITY_DETAILS_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.messsage,
+		});
 	}
 };
 
 //update activity
-export const updateActivity = (id) => async (dispatch, getState) => {
+export const updateActivity = (id, activity) => async (dispatch, getState) => {
 	try {
-		dispatch({});
+		dispatch({ type: ACTIVITY_UPDATE_REQUEST });
 
 		//get logged in user
 		const {
@@ -85,21 +101,32 @@ export const updateActivity = (id) => async (dispatch, getState) => {
 
 		//create config object
 		const config = {
+			'Content-Type': 'application/json',
 			headers: {
 				Authorization: `Bearer ${userInfo.token}`,
 			},
 		};
 
-		dispatch({});
+		const {
+			data: { data },
+		} = await axios.put(`/api/v1/activities/${id}`, activity, config);
+
+		dispatch({ type: ACTIVITY_UPDATE_SUCCESS, payload: data });
 	} catch (error) {
-		dispatch({});
+		dispatch({
+			type: ACTIVITY_UPDATE_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.messsage,
+		});
 	}
 };
 
 //delete activity
 export const deleteActivity = (id) => async (dispatch, getState) => {
 	try {
-		dispatch({});
+		dispatch({ type: ACTIVITY_DELETE_REQUEST });
 
 		//get logged in user
 		const {
@@ -113,9 +140,17 @@ export const deleteActivity = (id) => async (dispatch, getState) => {
 			},
 		};
 
-		dispatch({});
+		await axios.delete(`/api/v1/activities/${id}`, config);
+
+		dispatch({ type: ACTIVITY_DELETE_SUCCESS });
 	} catch (error) {
-		dispatch({});
+		dispatch({
+			type: ACTIVITY_DELETE_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.messsage,
+		});
 	}
 };
 
