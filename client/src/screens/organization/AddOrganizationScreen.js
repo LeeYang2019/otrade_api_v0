@@ -42,7 +42,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 
 	useEffect(() => {
 		if (!userInfo) {
-			history.pushState('/login');
+			history.push('/login');
 		} else {
 			if (success) {
 				setMessage('Organization was successfully added.');

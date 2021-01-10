@@ -37,13 +37,14 @@ const ListProjectsScreen = ({ history, userId }) => {
 				<>
 					<Table hover responsive className="table-sm mt-5">
 						<tbody>
-							{projects.map((project) => (
-								<tr key={project._id}>
-									<td className="ml-3">
-										<Project project={project} userId={userId} />
-									</td>
-								</tr>
-							))}
+							{projects &&
+								projects.map((project) => (
+									<tr key={project._id}>
+										<td className="ml-3">
+											<Project project={project} userId={userId} />
+										</td>
+									</tr>
+								))}
 						</tbody>
 					</Table>
 				</>

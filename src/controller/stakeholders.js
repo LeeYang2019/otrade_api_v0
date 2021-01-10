@@ -11,8 +11,6 @@ exports.getStakeholders = asyncHandler(async (req, res, next) => {
 		? { lastName: { $regex: req.query.keyword, $options: 'i' } }
 		: {};
 
-	console.log(keyword);
-
 	const stakeholders = await Stakeholder.find({
 		project: req.params.projectId,
 		...keyword,

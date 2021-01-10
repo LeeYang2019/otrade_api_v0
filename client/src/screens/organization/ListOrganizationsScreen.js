@@ -7,7 +7,7 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import SearchBox from '../../components/SearchBox';
 
-const ListOrganizationsScreen = ({ projectId, keyword }) => {
+const ListOrganizationsScreen = ({ projectId }) => {
 	const dispatch = useDispatch();
 
 	//get organizations
@@ -26,7 +26,12 @@ const ListOrganizationsScreen = ({ projectId, keyword }) => {
 				<Col className="text-left" md={8}>
 					<Route
 						render={({ history }) => (
-							<SearchBox history={history} searchWord={'Organization'} />
+							<SearchBox
+								history={history}
+								searchWord={'Organization'}
+								searchQueryPath={`/project/${projectId}/search/`}
+								searchQueryEmpty={`/project/${projectId}`}
+							/>
 						)}
 					/>
 				</Col>
@@ -46,34 +51,35 @@ const ListOrganizationsScreen = ({ projectId, keyword }) => {
 			) : (
 				<Table hover responsive className="table-sm mt-3">
 					<tbody>
-						{organizations.map((organization) => (
-							<tr key={organization._id}>
-								<td>
-									<p className="mr-3">
-										<strong>Stakeholder: </strong>
-										<Link
-											to={`/project/${projectId}/organization/${organization._id}/edit`}
-										>
-											{organization.name}
-										</Link>
-										<br />
-										Address: <em> {organization.address}</em>
-										<br />
-										<br />
-										Email: <em> {organization.email}</em>
-										<br />
-										Telephone: {organization.telephone}
-										<br />
-										Registered Date:{' '}
-										<strong>
-											{' '}
-											{organization.createdAt &&
-												organization.createdAt.substring(0, 10)}{' '}
-										</strong>
-									</p>
-								</td>
-							</tr>
-						))}
+						{organizations &&
+							organizations.map((organization) => (
+								<tr key={organization._id}>
+									<td>
+										<p className="mr-3">
+											<strong>Organization: </strong>
+											<Link
+												to={`/project/${projectId}/organization/${organization._id}`}
+											>
+												{organization.name}
+											</Link>
+											<br />
+											Address: <em> {organization.address}</em>
+											<br />
+											<br />
+											Email: <em> {organization.email}</em>
+											<br />
+											Telephone: {organization.telephone}
+											<br />
+											Registered Date:{' '}
+											<strong>
+												{' '}
+												{organization.createdAt &&
+													organization.createdAt.substring(0, 10)}{' '}
+											</strong>
+										</p>
+									</td>
+								</tr>
+							))}
 					</tbody>
 				</Table>
 			)}

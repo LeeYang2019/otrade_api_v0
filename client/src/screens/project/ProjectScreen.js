@@ -12,7 +12,6 @@ import { listProjectDetails } from '../../actions/projectActions';
 
 const ProjectScreen = ({ history, match }) => {
 	const projectId = match.params.projectId;
-	const userId = match.params.id;
 
 	const stakeholder = match.params.stakeholder;
 	// const organization = match.params.organization;
@@ -30,18 +29,21 @@ const ProjectScreen = ({ history, match }) => {
 	const { userInfo } = userLogin;
 
 	useEffect(() => {
-		if (userInfo) {
+		if (!userInfo) {
+			history.push('/login');
+		} else {
 			if (!project.projectName || project._id !== projectId) {
 				dispatch(listProjectDetails(projectId));
 			}
-		} else {
-			history.push('/login');
 		}
 	}, [dispatch, history, project, projectId, userInfo]);
 
 	return (
 		<>
-			<Link to={`/profile/${userInfo._id}`} className="btn btn-primary my-3">
+			<Link
+				to={userInfo && `/profile/${userInfo._id}`}
+				className="btn btn-primary my-3"
+			>
 				Previous Page
 			</Link>
 			<Row>
@@ -79,10 +81,16 @@ const ProjectScreen = ({ history, match }) => {
 							/>
 						</Tab>
 						<Tab eventKey="organizations" title="Organizations">
-							<ListOrganizationsScreen projectId={projectId} />
+							<ListOrganizationsScreen
+								projectId={projectId}
+								//keyword={organization}
+							/>
 						</Tab>
 						<Tab eventKey="activities" title="Activities">
-							<ListActivitiesScreen projectId={projectId} />
+							<ListActivitiesScreen
+								projectId={projectId}
+								//keyword={activity}
+							/>
 						</Tab>
 					</Tabs>
 				</Col>

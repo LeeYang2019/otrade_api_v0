@@ -53,7 +53,7 @@ exports.getActivities = asyncHandler(async (req, res, next) => {
 	const activities = await Activity.find({
 		project: req.params.projectId,
 		...keyword,
-	});
+	}).sort({ name: 1 });
 
 	if (!activities) {
 		res.status(401);

@@ -24,7 +24,12 @@ const ListActivitiesScreen = ({ projectId, keyword }) => {
 				<Col className="text-left" md={8}>
 					<Route
 						render={({ history }) => (
-							<SearchBox history={history} searchWord={'Activity'} />
+							<SearchBox
+								history={history}
+								searchWord={'Activity'}
+								searchQueryPath={`/project/${projectId}/search/`}
+								searchQueryEmpty={`/project/${projectId}`}
+							/>
 						)}
 					/>
 				</Col>
@@ -44,36 +49,39 @@ const ListActivitiesScreen = ({ projectId, keyword }) => {
 			) : (
 				<Table hover responsive className="table-sm mt-3">
 					<tbody>
-						{activities.map((activity) => (
-							<tr key={activity._id}>
-								<td>
-									<p className="mr-3">
-										<strong>Activity: </strong>
-										<Link to={`/stakeholder/${activity._id}`}>
-											{activity.activity}
-										</Link>
-										<br />
-										Stakeholders: <em> {activity.stakeholders.join('')}</em>
-										<br />
-										Status:{' '}
-										<em>
-											{activity.isComplete === 'true' ? (
-												<strong className="text-success">Complete</strong>
-											) : (
-												<strong className="text-warning">In Progress</strong>
-											)}
-										</em>
-										<br />
-										Registered Date:{' '}
-										<strong>
-											{' '}
-											{activity.createdAt &&
-												activity.createdAt.substring(0, 10)}{' '}
-										</strong>
-									</p>
-								</td>
-							</tr>
-						))}
+						{activities &&
+							activities.map((activity) => (
+								<tr key={activity._id}>
+									<td>
+										<p className="mr-3">
+											<strong>Activity: </strong>
+											<Link
+												to={`/project/${projectId}/activity/${activity._id}`}
+											>
+												{activity.activity}
+											</Link>
+											<br />
+											Stakeholders: <em> {activity.stakeholders.join('')}</em>
+											<br />
+											Status:{' '}
+											<em>
+												{activity.isComplete === 'true' ? (
+													<strong className="text-success">Complete</strong>
+												) : (
+													<strong className="text-warning">In Progress</strong>
+												)}
+											</em>
+											<br />
+											Registered Date:{' '}
+											<strong>
+												{' '}
+												{activity.createdAt &&
+													activity.createdAt.substring(0, 10)}{' '}
+											</strong>
+										</p>
+									</td>
+								</tr>
+							))}
 					</tbody>
 				</Table>
 			)}

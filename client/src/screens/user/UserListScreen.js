@@ -17,12 +17,15 @@ const UserListScreen = ({ history, match }) => {
 
 	const dispatch = useDispatch();
 
-	const userList = useSelector((state) => state.userList);
-	const { loading, error, users, page, pages } = userList;
-
+	//get logged in user
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
+	//get list of users
+	const userList = useSelector((state) => state.userList);
+	const { loading, error, users, page, pages } = userList;
+
+	//get success from userDelete reducer
 	const userDelete = useSelector((state) => state.userDelete);
 	const { success } = userDelete;
 
@@ -37,6 +40,7 @@ const UserListScreen = ({ history, match }) => {
 		}
 	}, [dispatch, history, userInfo, keyword, pageNumber, success]);
 
+	//delete user
 	const deleteHandler = (id) => {
 		if (id === userInfo._id) {
 			setMessage('You cannot delete yourself');

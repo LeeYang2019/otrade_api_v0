@@ -20,9 +20,16 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 	const [updatedDate, setUpdatedDate] = useState('');
 
 	const dispatch = useDispatch();
+
+	//get current user information
+	const userLogin = useSelector((state) => state.userLogin);
+	const { userInfo } = userLogin;
+
+	//get project details
 	const userDetails = useSelector((state) => state.userDetails);
 	const { loading, error, user } = userDetails;
 
+	//get project update results
 	const userUpdate = useSelector((state) => state.userUpdate);
 	const {
 		loading: loadingUpdate,
@@ -30,29 +37,31 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 		error: errorUpdate,
 	} = userUpdate;
 
-	console.log(user);
-
 	useEffect(() => {
-		if (successUpdate) {
-			dispatch(getUserDetails(userId));
-			dispatch({ type: USER_UPDATE_RESET });
+		if (!userInfo) {
+			history.push('/login');
 		} else {
-			//if firstName is not defined/exist or id does not match
-			if (!user.firstName || user._id !== userId) {
-				//get user data
+			if (successUpdate) {
 				dispatch(getUserDetails(userId));
+				dispatch({ type: USER_UPDATE_RESET });
 			} else {
-				//populate with user data once user data is returned
-				setFirstName(user.firstName);
-				setLastName(user.lastName);
-				setTelephone(user.telephone);
-				setEmail(user.email);
-				setStatus(user.status);
-				setRole(user.role);
-				setUpdatedDate(user.updatedAt);
+				//if firstName is not defined/exist or id does not match
+				if (!user.firstName || user._id !== userId) {
+					//get user data
+					dispatch(getUserDetails(userId));
+				} else {
+					//populate with user data once user data is returned
+					setFirstName(user.firstName);
+					setLastName(user.lastName);
+					setTelephone(user.telephone);
+					setEmail(user.email);
+					setStatus(user.status);
+					setRole(user.role);
+					setUpdatedDate(user.updatedAt);
+				}
 			}
 		}
-	}, [history, dispatch, userId, user, successUpdate]);
+	}, [history, dispatch, userId, user, userInfo, successUpdate]);
 
 	//submit form
 	const submitHandler = (e) => {

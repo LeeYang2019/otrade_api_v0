@@ -66,7 +66,10 @@ export const deleteOrganization = (orgId) => async (dispatch, getState) => {
 };
 
 //list all organizations
-export const listOrganizations = (projectId) => async (dispatch, getState) => {
+export const listOrganizations = (projectId, keyword = '') => async (
+	dispatch,
+	getState
+) => {
 	try {
 		dispatch({ type: ORGANIZATION_LIST_REQUEST });
 
@@ -82,7 +85,10 @@ export const listOrganizations = (projectId) => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get(`/api/v1/projects/${projectId}/organizations`, config);
+		} = await axios.get(
+			`/api/v1/projects/${projectId}/organizations?keyword=${keyword}`,
+			config
+		);
 
 		dispatch({ type: ORGANIZATION_LIST_SUCCESS, payload: data });
 	} catch (error) {

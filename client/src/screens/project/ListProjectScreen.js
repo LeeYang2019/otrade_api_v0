@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
@@ -14,16 +14,20 @@ const ListProjectScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
 
+	const [message, setMessage] = useState(null);
+
 	const dispatch = useDispatch();
 
-	const projectList = useSelector((state) => state.projectList);
-	const { loading, error, projects, page, pages } = projectList;
-
+	//get logged in user
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
+	//get projects
+	const projectList = useSelector((state) => state.projectList);
+	const { loading, error, projects, page, pages } = projectList;
+
 	useEffect(() => {
-		if (!userInfo && userInfo.role !== 'admin') {
+		if (!userInfo) {
 			history.push('/login');
 		} else {
 			dispatch(listProjects(keyword, pageNumber));
@@ -31,7 +35,11 @@ const ListProjectScreen = ({ history, match }) => {
 	}, [dispatch, history, userInfo, keyword, pageNumber]);
 
 	const deleteHandler = (id) => {
-		console.log('delete');
+		if (window.confirm('Are you sure?')) {
+			console.log('project delete');
+			//dispatch(deleteProject(id))
+			//setMessage(null)
+		}
 	};
 
 	return (

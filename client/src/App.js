@@ -48,12 +48,26 @@ const App = () => {
 					{/*Organization paths*/}
 					<Route
 						exact
-						path="/project/:projectId/organization/:id/edit"
+						path="/project/:projectId/search/:organization"
+						component={ProjectScreen}
+					/>
+					<Route
+						exact
+						path="/project/:projectId/organization/:id"
 						component={OrganizationScreen}
 					/>
 
 					{/*Activity paths*/}
-					<Route exact path="/activity/:id" component={StakeholderScreen} />
+					<Route
+						exact
+						path="/project/:projectId/search/:activity"
+						component={ProjectScreen}
+					/>
+					<Route
+						exact
+						path="/project/:projectId/activity/:id"
+						component={StakeholderScreen}
+					/>
 
 					{/* userList paths */}
 					<Route exact path="/admin/userlist" component={UserListScreen} />

@@ -49,51 +49,52 @@ const ListStakeholdersScreen = ({ projectId, keyword }) => {
 			) : (
 				<Table hover responsive className="table-sm mt-3 overflow-scroll">
 					<tbody>
-						{stakeholders.map((person) => (
-							<tr key={person._id}>
-								<td>
-									<Row>
-										<Col>
-											<p>
-												<strong>Stakeholder: </strong>
+						{stakeholders &&
+							stakeholders.map((person) => (
+								<tr key={person._id}>
+									<td>
+										<Row>
+											<Col>
+												<p>
+													<strong>Stakeholder: </strong>
+													<Link
+														to={`/project/${projectId}/stakeholder/${person._id}`}
+													>
+														{person.lastName}, {person.firstName}
+													</Link>
+													<br />
+													Email: <em> {person.email}</em>
+													<br />
+													Telephone: {person.telephone}
+													<br />
+													Registered Date:{' '}
+													<strong>
+														{' '}
+														{person.createdAt &&
+															person.createdAt.substring(0, 10)}{' '}
+													</strong>
+												</p>
+											</Col>
+											<Col md={3} className="mt-auto">
 												<Link
-													to={`/project/${projectId}/stakeholder/${person._id}`}
+													to={`/project/${projectId}/addOrganization/stakeholder/${person._id}`}
+													className="btn btn-primary my-3"
 												>
-													{person.lastName}, {person.firstName}
+													<i className="fas fa-plus"></i> Organization
 												</Link>
-												<br />
-												Email: <em> {person.email}</em>
-												<br />
-												Telephone: {person.telephone}
-												<br />
-												Registered Date:{' '}
-												<strong>
-													{' '}
-													{person.createdAt &&
-														person.createdAt.substring(0, 10)}{' '}
-												</strong>
-											</p>
-										</Col>
-										<Col md={3} className="mt-auto">
-											<Link
-												to={`/project/${projectId}/addOrganization/stakeholder/${person._id}`}
-												className="btn btn-primary my-3"
-											>
-												<i className="fas fa-plus"></i> Organization
-											</Link>
-										</Col>
-										<Col md={2} className="mt-auto">
-											<Link
-												to={`/project/${projectId}/addActivity/stakeholder/${person._id}`}
-												className="btn btn-primary my-3"
-											>
-												<i className="fas fa-plus"></i> Activity
-											</Link>
-										</Col>
-									</Row>
-								</td>
-							</tr>
-						))}
+											</Col>
+											<Col md={2} className="mt-auto">
+												<Link
+													to={`/project/${projectId}/addActivity/stakeholder/${person._id}`}
+													className="btn btn-primary my-3"
+												>
+													<i className="fas fa-plus"></i> Activity
+												</Link>
+											</Col>
+										</Row>
+									</td>
+								</tr>
+							))}
 					</tbody>
 				</Table>
 			)}
