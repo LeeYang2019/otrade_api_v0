@@ -119,18 +119,15 @@ const AddOrganizationScreen = ({ history, match }) => {
 			<Link to={`/project/${projectId}`} className="btn btn-primary my-3">
 				Back to Project
 			</Link>
-			<Container className="w-50">
+			<Container className="w-75">
 				<h1>Register Organization</h1>
 				<hr />
-				{success && Message ? (
-					<Message variant="success">{message}</Message>
-				) : null}
-				{message && <Message variant="danger">{message}</Message>}
+				{message && <Message variant="success">{message}</Message>}
 				<Form onSubmit={submitHandler} className="my-5">
 					<Row>
 						<Col md={6}>
 							<Form.Group controlId="organization">
-								<Form.Label>Organization</Form.Label>
+								<Form.Label>Organization Name</Form.Label>
 								<Form.Control
 									type="organization"
 									placeholder="Enter organization"
@@ -142,7 +139,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 						</Col>
 						<Col md={6}>
 							<Form.Group controlId="division">
-								<Form.Label>Division</Form.Label>
+								<Form.Label>Political Division</Form.Label>
 								<Form.Control
 									as="select"
 									value={division}
@@ -162,7 +159,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 					<Row>
 						<Col md={12}>
 							<Form.Group controlId="location">
-								<Form.Label>Location</Form.Label>
+								<Form.Label>Address (street, city, state, country)</Form.Label>
 								<Form.Control
 									type="location"
 									placeholder="Enter Location"
@@ -197,9 +194,9 @@ const AddOrganizationScreen = ({ history, match }) => {
 						</Col>
 					</Row>
 					<Row>
-						<Col md={12}>
+						<Col md={8} className="mt-3">
 							<Form.Group controlId="website">
-								<Form.Label>Website</Form.Label>
+								<Form.Label>Social Media</Form.Label>
 								<Form.Control
 									type="website"
 									placeholder="Enter website"
@@ -214,7 +211,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 						<Col md={12}>
 							{stakeholders &&
 								stakeholders.map((assignee, i) => (
-									<Row className="mb-3">
+									<Row className="mb-3" key={assignee}>
 										<Col md={7}>
 											<Form.Control
 												as="select"

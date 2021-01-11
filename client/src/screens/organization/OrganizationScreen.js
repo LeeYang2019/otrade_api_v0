@@ -215,7 +215,10 @@ const OrganizationScreen = ({ history, match }) => {
 							</Col>
 						</Row>
 						<hr className="my-4" />
-						<Row className="mt-5">
+						<Row className="mt-5 pl-3">
+							<Form.Label>Organization Members</Form.Label>
+						</Row>
+						<Row>
 							<Col md={12}>
 								{stakeholders &&
 									stakeholders.map((assignee, i) => (

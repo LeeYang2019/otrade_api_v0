@@ -35,6 +35,8 @@ export const addOrganization = (organization, projectId) => async (
 				Authorization: `Bearer ${userInfo.token}`,
 			},
 		};
+		console.log('inside addorg');
+		console.log(organization);
 
 		const {
 			data: { data },
