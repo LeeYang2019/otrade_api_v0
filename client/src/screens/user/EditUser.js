@@ -29,11 +29,11 @@ const EditUser = ({ userId }) => {
 
 	useEffect(() => {
 		if (successUpdate) {
+			setMessage('User profile has successfully been updated.');
 			dispatch(getUserDetails(userId));
 			dispatch({ type: USER_PROFILE_UPDATE_RESET });
 			setPassword('');
 			setConfirmPassword('');
-			setMessage(null);
 		} else {
 			setFirstName(user.firstName);
 			setLastName(user.lastName);
@@ -66,9 +66,8 @@ const EditUser = ({ userId }) => {
 
 	return (
 		<>
-			{message && <Message variant="danger">{message}</Message>}
 			{error && <Message variant="danger">{error}</Message>}
-			{successUpdate && <Message variant="success">Profile Updated</Message>}
+			{successUpdate && <Message variant="success">{message}</Message>}
 			{loading && <Loader />}
 			<Container>
 				{/* {userInfo && userInfo._id === user._id ? ( */}

@@ -146,7 +146,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 									<Form.Label>BirthDate</Form.Label>
 									<Form.Control
 										type="date"
-										value={birthdate.substring(0, 10)}
+										value={birthdate && birthdate.substring(0, 10)}
 										onChange={(e) => setBirthdate(e.target.value)}
 									></Form.Control>
 								</Form.Group>

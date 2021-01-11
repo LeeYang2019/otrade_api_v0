@@ -91,7 +91,7 @@ const AddActivityScreen = ({ history, match }) => {
 					compromise,
 					isComplete,
 					discussPoints: disPoints,
-					//stakeholders,
+					stakeholders,
 				},
 				projectId
 			)
@@ -176,29 +176,30 @@ const AddActivityScreen = ({ history, match }) => {
 						<Col md={12}>
 							<Form.Group controlId="discussion">
 								<Form.Label>Discussion Points</Form.Label>
-								{disPoints.map((point, i) => (
-									<>
-										<Row>
-											<Col md={12}>
-												<Form.Control
-													className="mb-3"
-													as="textarea"
-													rows="4"
-													placeholder="Enter Discussion"
-													value={point.point}
-													onChange={(e) => handleInputChange(e, i)}
-												></Form.Control>
-											</Col>
-										</Row>
-										<Row className="mb-3">
-											<Col md={12}>
-												<Button className="px-3" onClick={handleAdd}>
-													Add Additional
-												</Button>
-											</Col>
-										</Row>
-									</>
-								))}
+								{disPoints &&
+									disPoints.map((point, i) => (
+										<>
+											<Row>
+												<Col md={12}>
+													<Form.Control
+														className="mb-3"
+														as="textarea"
+														rows="4"
+														placeholder="Enter Discussion"
+														value={point.point}
+														onChange={(e) => handleInputChange(e, i)}
+													></Form.Control>
+												</Col>
+											</Row>
+											<Row className="mb-3">
+												<Col md={12}>
+													<Button className="px-3" onClick={handleAdd}>
+														Add Additional
+													</Button>
+												</Col>
+											</Row>
+										</>
+									))}
 							</Form.Group>
 						</Col>
 					</Row>
