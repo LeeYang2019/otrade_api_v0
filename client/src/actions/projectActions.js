@@ -1,17 +1,20 @@
 import axios from 'axios';
 import {
-	PROJECT_LIST_REQUEST,
-	PROJECT_LIST_SUCCESS,
-	PROJECT_LIST_FAIL,
+	PROJECT_ADD_REQUEST,
+	PROJECT_ADD_SUCCESS,
+	PROJECT_ADD_FAIL,
 	PROJECT_DETAILS_REQUEST,
 	PROJECT_DETAILS_SUCCESS,
 	PROJECT_DETAILS_FAIL,
 	PROJECT_UPDATE_REQUEST,
 	PROJECT_UPDATE_SUCCESS,
 	PROJECT_UPDATE_FAIL,
-	PROJECT_ADD_REQUEST,
-	PROJECT_ADD_SUCCESS,
-	PROJECT_ADD_FAIL,
+	PROJECT_DELETE_REQUEST,
+	PROJECT_DELETE_SUCCESS,
+	PROJECT_DELETE_FAIL,
+	PROJECT_LIST_REQUEST,
+	PROJECT_LIST_SUCCESS,
+	PROJECT_LIST_FAIL,
 	PROJECT_USER_REQUEST,
 	PROJECT_USER_SUCCESS,
 	PROJECT_USER_FAIL,
@@ -20,12 +23,10 @@ import {
 	PROJECT_ASSIGNMENT_FAIL,
 } from '../constants/projectConstants';
 
-export const listProjects = (keyword = '', pageNumber = '') => async (
-	dispatch,
-	getState
-) => {
+//add project
+export const addProject = (project) => async (dispatch, getState) => {
 	try {
-		dispatch({ type: PROJECT_LIST_REQUEST });
+		dispatch({ type: PROJECT_ADD_REQUEST });
 
 		const {
 			userLogin: { userInfo },
@@ -33,23 +34,26 @@ export const listProjects = (keyword = '', pageNumber = '') => async (
 
 		const config = {
 			headers: {
+				'Content-Type': 'application/json',
 				Authorization: `Bearer ${userInfo.token}`,
 			},
 		};
 
-		const { data } = await axios.get(
-			`/api/v1/projects?keyword=${keyword}&pageNumber=${pageNumber}`,
-			config
-		);
+		//pass id, project, and config file to api
+		const {
+			data: { data },
+		} = await axios.post(`/api/v1/projects/`, project, config);
 
-		dispatch({ type: PROJECT_LIST_SUCCESS, payload: data });
+		dispatch({ type: PROJECT_ADD_SUCCESS, payload: data });
 	} catch (error) {
+		const message =
+			error.response && error.response.data.message
+				? error.response.data.message
+				: error.message;
+
 		dispatch({
-			type: PROJECT_LIST_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
+			type: PROJECT_ADD_FAIL,
+			payload: message,
 		});
 	}
 };
@@ -97,22 +101,53 @@ export const updateProject = (project) => async (dispatch, getState) => {
 
 		dispatch({ type: PROJECT_UPDATE_SUCCESS, payload: data });
 	} catch (error) {
-		const message =
-			error.response && error.response.data.message
-				? error.response.data.message
-				: error.message;
-
 		dispatch({
 			type: PROJECT_UPDATE_FAIL,
-			payload: message,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
 		});
 	}
 };
 
-//add project
-export const addProject = (project) => async (dispatch, getState) => {
+//delete a project
+export const deleteProject = (id) => async (dispatch, getState) => {
 	try {
-		dispatch({ type: PROJECT_ADD_REQUEST });
+		dispatch({ type: PROJECT_DELETE_REQUEST });
+
+		//get logged-in user
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		await axios.delete(`/api/v1/projects/${id}`, config);
+
+		dispatch({ type: PROJECT_DELETE_REQUEST });
+	} catch (error) {
+		dispatch({
+			type: PROJECT_DELETE_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.messsage,
+		});
+	}
+};
+
+//get all projects
+export const listProjects = (keyword = '', pageNumber = '') => async (
+	dispatch,
+	getState
+) => {
+	try {
+		dispatch({ type: PROJECT_LIST_REQUEST });
 
 		const {
 			userLogin: { userInfo },
@@ -120,30 +155,28 @@ export const addProject = (project) => async (dispatch, getState) => {
 
 		const config = {
 			headers: {
-				'Content-Type': 'application/json',
 				Authorization: `Bearer ${userInfo.token}`,
 			},
 		};
 
-		//pass id, project, and config file to api
-		const {
-			data: { data },
-		} = await axios.post(`/api/v1/projects/`, project, config);
+		const { data } = await axios.get(
+			`/api/v1/projects?keyword=${keyword}&pageNumber=${pageNumber}`,
+			config
+		);
 
-		dispatch({ type: PROJECT_ADD_SUCCESS, payload: data });
+		dispatch({ type: PROJECT_LIST_SUCCESS, payload: data });
 	} catch (error) {
-		const message =
-			error.response && error.response.data.message
-				? error.response.data.message
-				: error.message;
-
 		dispatch({
-			type: PROJECT_ADD_FAIL,
-			payload: message,
+			type: PROJECT_LIST_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.messsage,
 		});
 	}
 };
 
+//list all projects for a user
 export const listUserProjects = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: PROJECT_USER_REQUEST });
