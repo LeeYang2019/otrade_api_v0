@@ -110,6 +110,7 @@ const Assignment = ({ history, match }) => {
 				'Project assingment cannot be updated as the status is closed.'
 			);
 		} else {
+			console.log(assignments);
 			dispatch(assignProjectUser(projectId, assignments));
 		}
 	};

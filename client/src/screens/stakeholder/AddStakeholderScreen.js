@@ -14,7 +14,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 	const [lastName, setLastName] = useState('');
 	const [telephone, setTelephone] = useState('');
 	const [gender, setGender] = useState('');
-	const [birthdate, setBirthdate] = useState('');
+	const [birthdate, setBirthdate] = useState(Date);
 	const [email, setEmail] = useState('');
 	const [ethnicity, setEthnicity] = useState('');
 	const [media, setMedia] = useState([{ website: '' }]);
@@ -83,7 +83,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 			<Link to={`/project/${projectId}`} className="btn btn-primary my-3">
 				Back to Project
 			</Link>
-			<Container className="w-50">
+			<Container className="w-75">
 				<h1>Register Stakeholder</h1>
 				<hr />
 				{message && <Message variant="success">{message}</Message>}
@@ -217,7 +217,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 												)}
 											</Col>
 										</Row>
-										<Row style={{ marginTop: 20 }}>{JSON.stringify(media)}</Row>
+										{/* <Row style={{ marginTop: 20 }}>{JSON.stringify(media)}</Row> */}
 									</>
 								))}
 							</Form.Group>

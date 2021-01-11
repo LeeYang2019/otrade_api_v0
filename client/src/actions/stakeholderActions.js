@@ -22,8 +22,6 @@ export const addStakeholder = (stakeholder, projectId) => async (
 	dispatch,
 	getState
 ) => {
-	console.log(stakeholder);
-
 	try {
 		dispatch({ type: STAKEHOLDER_ADD_REQUEST });
 
@@ -46,7 +44,7 @@ export const addStakeholder = (stakeholder, projectId) => async (
 			stakeholder,
 			config
 		);
-
+		console.log(stakeholder);
 		dispatch({ type: STAKEHOLDER_ADD_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({

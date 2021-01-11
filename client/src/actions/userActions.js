@@ -99,9 +99,9 @@ export const logout = () => (dispatch) => {
 	localStorage.removeItem('userInfo');
 	localStorage.removeItem('usersInfo');
 	dispatch({ type: USER_LOGOUT });
-	dispatch({ type: USER_DETAILS_RESET });
-	dispatch({ type: USER_LIST_RESET });
-	dispatch({ type: PROJECT_LIST_RESET });
+	// dispatch({ type: USER_DETAILS_RESET });
+	// dispatch({ type: USER_LIST_RESET });
+	// dispatch({ type: PROJECT_LIST_RESET });
 };
 
 //gets the user details

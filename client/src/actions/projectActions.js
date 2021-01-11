@@ -224,8 +224,6 @@ export const assignProjectUser = (projectId, assignments) => async (
 			},
 		};
 
-		console.log('inside assign project');
-
 		//pass id, project, and config file to api
 		const {
 			data: { data },

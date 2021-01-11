@@ -16,7 +16,7 @@ const StakeholderSchema = new mongoose.Schema(
 			require: [true, 'Please enter a gender'],
 			enum: ['male', 'female', 'other'],
 		},
-		birthDate: {
+		birthdate: {
 			type: Date,
 			required: false,
 		},

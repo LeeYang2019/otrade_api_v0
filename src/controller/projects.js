@@ -82,6 +82,8 @@ exports.addProject = asyncHandler(async (req, res) => {
 // @route   PUT /api/v1/project/:id
 // @access  Private
 exports.updateProject = asyncHandler(async (req, res) => {
+	req.body.user = req.user.id;
+
 	let project = await Project.findById(req.params.id);
 	project = await Project.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,
@@ -104,6 +106,7 @@ exports.assignUserToProject = async (req, res) => {
 	}
 
 	project.assignees = req.body;
+	project.user = req.user.id;
 
 	await project.save();
 	res.status(200).json({ success: true, data: project });

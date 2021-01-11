@@ -91,16 +91,13 @@ export const organizationListReducer = (
 ) => {
 	switch (action.type) {
 		case ORGANIZATION_LIST_REQUEST:
-			console.log('request');
 			return { loading: true, organizations: [] };
 		case ORGANIZATION_LIST_SUCCESS:
-			console.log('success');
 			return {
 				loading: false,
 				organizations: action.payload,
 			};
 		case ORGANIZATION_LIST_FAIL:
-			console.log('fail');
 			return { loading: false, error: action.payload };
 		default:
 			return state;

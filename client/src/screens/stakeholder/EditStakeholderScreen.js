@@ -15,7 +15,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 	const [lastName, setLastName] = useState('');
 	const [telephone, setTelephone] = useState('');
 	const [gender, setGender] = useState('');
-	const [birthdate, setBirthdate] = useState();
+	const [birthdate, setBirthdate] = useState(Date);
 	const [email, setEmail] = useState('');
 	const [ethnicity, setEthnicity] = useState('');
 	const [media, setMedia] = useState([{ website: '' }]);
@@ -36,8 +36,6 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 	const stakeholderUpdate = useSelector((state) => state.stakeholderUpdate);
 	const { success } = stakeholderUpdate;
 
-	console.log(stakeholder);
-
 	useEffect(() => {
 		if (success) {
 			setMessage('Stakeholder was successfully updated.');
@@ -47,7 +45,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 			setFirstName(stakeholder.firstName);
 			setLastName(stakeholder.lastName);
 			setGender(stakeholder.gender);
-			setBirthdate(stakeholder.birthdate);
+			setBirthdate(stakeholder.birthdate.substring(0, 10));
 			setEthnicity(stakeholder.ethnicity);
 			setEmail(stakeholder.email);
 			setTelephone(stakeholder.telephone);
@@ -200,7 +198,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 													<Form.Control
 														className="mb-3"
 														placeholder="Add Website"
-														value={site.website}
+														value={site}
 														onChange={(e) => handleInputChange(e, i)}
 													></Form.Control>
 												</Col>

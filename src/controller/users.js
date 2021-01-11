@@ -59,8 +59,6 @@ exports.getMyUserProfile = asyncHandler(async (req, res) => {
 // @route   PUT /api/v1/users/profile
 // @access  private
 exports.updateMyUserProfile = asyncHandler(async (req, res) => {
-	console.log('inside updateMyUserProfile');
-
 	//auth middleware passes user here
 	const user = await User.findById(req.user._id);
 
@@ -86,8 +84,6 @@ exports.updateMyUserProfile = asyncHandler(async (req, res) => {
 		}
 
 		const updatedUser = await user.save();
-
-		console.log(updatedUser);
 
 		res.json({
 			_id: updatedUser._id,
@@ -198,8 +194,6 @@ exports.registerUser = asyncHandler(async (req, res) => {
 // @route   PUT /api/v1/admin/users/:id
 // @access  Private/admin
 exports.updateUser = asyncHandler(async (req, res) => {
-	console.log('inside updateUser');
-
 	const user = await User.findById(req.params.id);
 
 	//matches enteredPassword with db user password

@@ -122,8 +122,6 @@ export const projectListReducer = (state = { projects: [] }, action) => {
 			};
 		case PROJECT_LIST_FAIL:
 			return { loading: false, error: action.payload };
-		case PROJECT_LIST_RESET:
-			return { projects: {} };
 		default:
 			return state;
 	}
