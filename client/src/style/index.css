@@ -60,3 +60,8 @@ td {
 	background-color: #f26827 !important;
 	border-color: #f26827 !important;
 }
+
+label {
+	font-size: 1rem !important;
+	font-weight: 900;
+}

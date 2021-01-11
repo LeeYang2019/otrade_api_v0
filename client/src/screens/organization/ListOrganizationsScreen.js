@@ -63,9 +63,6 @@ const ListOrganizationsScreen = ({ projectId }) => {
 												{organization.name}
 											</Link>
 											<br />
-											Address: <em> {organization.address}</em>
-											<br />
-											<br />
 											Email: <em> {organization.email}</em>
 											<br />
 											Telephone: {organization.telephone}

@@ -48,26 +48,21 @@ const UserProfileScreen = ({ history, match }) => {
 				<>
 					<Col md={4}>
 						<Card>
-							{/* <Card.Img
-								src={
-									user.firstName === 'Fabiano' &&
-									'https://cdn-aloik.nitrocdn.com/huqEQAiBEvAuNBhDiOttdbmgrSMOWZHL/assets/static/optimized/otrade.ca/newsite/wp-content/uploads/2020/09/25a95d9509d5efaf4818a5e7dc080124.fabiano-bio-2.png'
-								}
-								alt="user profile"
-								className="w-75 m-auto mt-5"
-							/> */}
+							<Card.Header>
+								<h2>User Profile</h2>
+							</Card.Header>
 							<Card.Body>
-								<hr />
-								<Card.Text>
-									<p>
-										{user.firstName} {user.lastName}
-									</p>
-									{user.email}
-									<br />
+								<p>
+									<strong>Name: </strong>
+									{user.firstName} {user.lastName} <br />
+									<strong>Email: </strong>
+									{user.email} <br />
+									<strong>Telephone: </strong>
 									{user.telephone}
 									<br />
+									<strong>Role: </strong>
 									{user.role}
-								</Card.Text>
+								</p>
 							</Card.Body>
 						</Card>
 					</Col>

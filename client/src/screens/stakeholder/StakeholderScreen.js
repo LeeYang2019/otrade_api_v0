@@ -47,13 +47,19 @@ const StakeholderScreen = ({ history, match }) => {
 					) : (
 						<Card>
 							<Card.Header>
-								<h2>Profile</h2>
+								<h2>Stakeholder Profile</h2>
 							</Card.Header>
 							<Card.Body>
 								<p>
-									Name: {stakeholder.firstName} {stakeholder.lastName}
+									<strong>Name: </strong> {stakeholder.firstName}{' '}
+									{stakeholder.lastName}
+									<br />
+									<strong>Email: </strong>
+									{stakeholder.email}
+									<br />
+									<strong>Telephone: </strong>
+									{stakeholder.telephone}
 								</p>
-								<p>Email: {stakeholder.email}</p>
 							</Card.Body>
 						</Card>
 					)}

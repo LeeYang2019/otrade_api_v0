@@ -38,7 +38,7 @@ const Project = ({ project, userId = '' }) => {
 			<Row>
 				<Col>
 					<p>
-						<em>Assigned:</em>{' '}
+						<em>Assigned To:</em>{' '}
 						{project.assignees.length === 0 ? (
 							<strong>No Assignment</strong>
 						) : (
