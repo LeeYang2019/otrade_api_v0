@@ -1,24 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
+import { addComment } from '../actions/commentActions';
+import { useDispatch, useSelector } from 'react-redux';
 
-const CommentForm = () => {
+const CommentForm = ({ stakeholderId }) => {
 	const [comment, setComment] = useState('');
+
+	const dispatch = useDispatch();
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		//addComment(comment)
+		console.log(comment);
+		dispatch(addComment({ comment }, stakeholderId));
 		setComment('');
 	};
 
 	return (
-		<div>
+		<Container>
 			<Form onSubmit={submitHandler}>
 				<Form.Group controlId="comment">
-					<Form.Label>Comments</Form.Label>
+					<Form.Label>Summary</Form.Label>
 					<Form.Control
 						as="textarea"
-						rows="6"
-						value="comment"
+						rows="4"
+						value={comment}
+						placeholder="create a post"
 						onChange={(e) => setComment(e.target.value)}
 					></Form.Control>
 				</Form.Group>
@@ -26,7 +32,7 @@ const CommentForm = () => {
 					Submit
 				</Button>
 			</Form>
-		</div>
+		</Container>
 	);
 };
 

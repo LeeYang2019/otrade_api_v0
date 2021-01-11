@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import { getStakeholderDetails } from '../../actions/stakeholderActions';
+import Comments from '../stakeholder/Comments';
 import EditStakeholderScreen from './EditStakeholderScreen';
 import ListOrganizationsScreen from './../organization/ListOrganizationsScreen';
 import ListActivitiesScreen from './../activity/ListActivitiesScreen';
@@ -77,6 +78,17 @@ const StakeholderScreen = ({ history, match }) => {
 									<EditStakeholderScreen
 										history={history}
 										proejctId={projectId}
+										stakeholderId={stakeholderId}
+									/>
+								)}
+							/>
+						</Tab>
+						<Tab eventKey="comments" title="comments">
+							<Route
+								render={({ history }) => (
+									<Comments
+										history={history}
+										projectId={projectId}
 										stakeholderId={stakeholderId}
 									/>
 								)}

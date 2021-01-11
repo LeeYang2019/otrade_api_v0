@@ -35,7 +35,9 @@ exports.getComment = asyncHandler(async (req, res, next) => {
 exports.addComment = asyncHandler(async (req, res, next) => {
 	//get stakeholder and user
 	req.body.stakeholder = req.params.stakeholderId;
-	req.body.user = req.user;
+	req.body.user = req.user.id;
+
+	console.log(req.body);
 
 	const comment = await Comment.create(req.body);
 	res.status(200).json({ success: true, data: comment });

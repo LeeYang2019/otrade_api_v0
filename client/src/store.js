@@ -41,6 +41,13 @@ import {
 	activityDeleteReducer,
 	activityListReducer,
 } from './reducers/activityReducer';
+import {
+	commentAddReducer,
+	commentDetailsReducer,
+	commentUpdateReducer,
+	commentDeleteReducer,
+	commentListReducer,
+} from './reducers/commentReducer';
 
 // useSelector calls
 const reducer = combineReducers({
@@ -81,6 +88,13 @@ const reducer = combineReducers({
 	activityUpdate: activityUpdateReducer,
 	activityDelete: activityDeleteReducer,
 	activityList: activityListReducer,
+
+	//comment reducers
+	commentAdd: commentAddReducer,
+	commentDetails: commentDetailsReducer,
+	commentUpdate: commentUpdateReducer,
+	commentDelete: commentDeleteReducer,
+	commentList: commentListReducer,
 });
 
 // localStorages

@@ -6,18 +6,9 @@ const CommentSchema = mongoose.Schema(
 		comment: {
 			type: String,
 		},
-		date: {
-			type: Date,
-			default: Date.now,
-		},
 		stakeholder: {
 			type: mongoose.Schema.ObjectId,
 			ref: 'Stakeholder',
-			required: true,
-		},
-		project: {
-			type: mongoose.Schema.ObjectId,
-			ref: 'Project',
 			required: true,
 		},
 		user: {
@@ -27,8 +18,7 @@ const CommentSchema = mongoose.Schema(
 		},
 	},
 	{
-		toJSON: { virtuals: true },
-		toObject: { virtuals: true },
+		timestamps: true,
 	}
 );
 
