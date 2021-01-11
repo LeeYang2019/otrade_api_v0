@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
@@ -14,7 +14,7 @@ const ListProjectScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
 
-	const [message, setMessage] = useState(null);
+	//const [message, setMessage] = useState(null);
 
 	const dispatch = useDispatch();
 

@@ -7,7 +7,6 @@ import {
 	updateOrganization,
 } from '../../actions/organizationAction';
 import { ORGANIZATION_UPDATE_RESET } from '../../constants/organizationConstants';
-import { listStakeholders } from '../../actions/stakeholderActions';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 

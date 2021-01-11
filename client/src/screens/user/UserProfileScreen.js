@@ -6,7 +6,6 @@ import ListProjectsScreen from './../project/ListProjectsScreen';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader.js';
 import { getUserDetails } from '../../actions/userActions';
-import { USER_DETAILS_RESET } from '../../constants/userConstants';
 import EditUser from './../user/EditUser';
 
 const UserProfileScreen = ({ history, match }) => {

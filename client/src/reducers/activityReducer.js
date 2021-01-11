@@ -68,7 +68,7 @@ export const activityDeleteReducer = (state = {}, action) => {
 			return { loading: true, ...state };
 		case ACTIVITY_DELETE_SUCCESS:
 			return { loading: false, success: true };
-		case ACTIVITY_DETAILS_FAIL:
+		case ACTIVITY_DELETE_FAIL:
 			return { loading: false, error: action.payload };
 		default:
 			return state;

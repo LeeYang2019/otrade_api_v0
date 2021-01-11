@@ -5,7 +5,6 @@ import {
 	getStakeholderDetails,
 	updateStakeholder,
 } from '../../actions/stakeholderActions';
-import { listProjectDetails } from '../../actions/projectActions';
 import { STAKEHOLDER_UPDATE_RESET } from '../../constants/stakeholderConstants';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';

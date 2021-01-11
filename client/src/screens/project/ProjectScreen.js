@@ -13,7 +13,7 @@ import { listProjectDetails } from '../../actions/projectActions';
 const ProjectScreen = ({ history, match }) => {
 	const projectId = match.params.projectId;
 
-	const stakeholder = match.params.stakeholder;
+	//const stakeholder = match.params.stakeholder;
 	// const organization = match.params.organization;
 	// const activity = match.params.activity;
 
