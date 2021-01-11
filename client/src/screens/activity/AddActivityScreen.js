@@ -131,11 +131,9 @@ const AddActivityScreen = ({ history, match }) => {
 								</Form.Control>
 							</Form.Group>
 						</Col>
-					</Row>
-					<Row>
 						<Col md={6}>
 							<Form.Group controlId="date">
-								<Form.Label>Date</Form.Label>
+								<Form.Label>Current Date</Form.Label>
 								<Form.Control
 									type="date"
 									placeholder="Enter Date"
@@ -144,7 +142,22 @@ const AddActivityScreen = ({ history, match }) => {
 								></Form.Control>
 							</Form.Group>
 						</Col>
-						<Col>
+					</Row>
+					<Row>
+						<Col md={12}>
+							<Form.Group controlId="location">
+								<Form.Label>Activity Location</Form.Label>
+								<Form.Control
+									type="text"
+									placeholder="Enter Date"
+									value={date}
+									onChange={(e) => setDate(e.target.value)}
+								></Form.Control>
+							</Form.Group>
+						</Col>
+					</Row>
+					<Row>
+						<Col md={4}>
 							<Form.Group controlId="hours">
 								<Form.Label>Activity Hours</Form.Label>
 								<Form.Control
