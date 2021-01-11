@@ -11,11 +11,9 @@ const CommitmentSchema = mongoose.Schema(
 			type: Date,
 			require: true,
 		},
-		// available documents
-		// documents: [],
-		project: {
+		activity: {
 			type: mongoose.Schema.ObjectId,
-			ref: 'Project',
+			ref: 'Activity',
 			required: true,
 		},
 		user: {
@@ -30,4 +28,4 @@ const CommitmentSchema = mongoose.Schema(
 );
 
 //export schema as model
-module.exports = mongoose.Model('Commitment', CommitmentSchema);
+module.exports = mongoose.model('Commitment', CommitmentSchema);

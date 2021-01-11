@@ -11,7 +11,8 @@ const users = require('./routes/users');
 const stakeholders = require('./routes/stakeholders');
 const organizations = require('./routes/organization');
 const activities = require('./routes/activities');
-// const comments = require('./routes/comments');
+const commitments = require('./routes/commitments');
+const comments = require('./routes/comments');
 
 //load env vars
 dotenv.config();
@@ -35,8 +36,8 @@ app.use('/api/v1/projects', projects);
 app.use('/api/v1/stakeholders', stakeholders);
 app.use('/api/v1/organizations', organizations);
 app.use('/api/v1/activities', activities);
-// app.use('/api/v1/comments', comments);
-// app.use('/api/v1/auth', auth);
+app.use('/api/v1/commitments', commitments);
+app.use('/api/v1/comments', comments);
 
 app.use(notFound, errorHandler);
 
