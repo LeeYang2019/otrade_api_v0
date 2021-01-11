@@ -45,7 +45,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 			setFirstName(stakeholder.firstName);
 			setLastName(stakeholder.lastName);
 			setGender(stakeholder.gender);
-			setBirthdate(stakeholder.birthdate.substring(0, 10));
+			setBirthdate(stakeholder.birthdate);
 			setEthnicity(stakeholder.ethnicity);
 			setEmail(stakeholder.email);
 			setTelephone(stakeholder.telephone);
@@ -146,7 +146,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 									<Form.Label>BirthDate</Form.Label>
 									<Form.Control
 										type="date"
-										value={birthdate}
+										value={birthdate.substring(0, 10)}
 										onChange={(e) => setBirthdate(e.target.value)}
 									></Form.Control>
 								</Form.Group>
@@ -187,6 +187,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 								</Form.Group>
 							</Col>
 						</Row>
+						<hr className="my-4" />
 						<Row className="mt-5">
 							<Col md={12}>
 								<Form.Group controlId="media">

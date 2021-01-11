@@ -48,6 +48,7 @@ const Assignment = ({ history, match }) => {
 		} else {
 			//if success true; initial value undefined
 			if (success) {
+				setMessage('Project was successfully updated.');
 				dispatch(listProjectDetails(projectId));
 				//reset success to undefined; otherwise continous looping
 				dispatch({ type: PROJECT_ASSIGNMENT_RESET });
@@ -117,7 +118,7 @@ const Assignment = ({ history, match }) => {
 
 	return (
 		<>
-			{message && <Message variant="danger">{message}</Message>}
+			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
