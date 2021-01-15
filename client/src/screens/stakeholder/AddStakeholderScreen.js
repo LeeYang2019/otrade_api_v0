@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addStakeholder } from '../../actions/stakeholderActions';
 import Message from '../../components/Message.js';
 import { STAKEHOLDER_ADD_RESET } from '../../constants/stakeholderConstants';
+import RegisterSteps from '../../components/RegisterSteps';
 
 const AddStakeholderScreen = ({ location, history, match }) => {
 	const projectId = match.params.projectId;
@@ -60,22 +61,23 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-
-		dispatch(
-			addStakeholder(
-				{
-					firstName,
-					lastName,
-					telephone,
-					gender,
-					birthdate,
-					email,
-					ethnicity,
-					media,
-				},
-				projectId
-			)
-		);
+		console.log('hello');
+		history.push(`/project/${projectId}/addStakeholderPart2`);
+		// dispatch(
+		// 	addStakeholder(
+		// 		{
+		// 			firstName,
+		// 			lastName,
+		// 			telephone,
+		// 			gender,
+		// 			birthdate,
+		// 			email,
+		// 			ethnicity,
+		// 			media,
+		// 		},
+		// 		projectId
+		// 	)
+		// );
 	};
 
 	return (
@@ -88,6 +90,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 				<hr />
 				{message && <Message variant="success">{message}</Message>}
 				<Form onSubmit={submitHandler} className="my-5">
+					<RegisterSteps projectId={projectId} step1 />
 					<Row>
 						<Col md={6}>
 							<Form.Group controlId="firstName">
@@ -226,7 +229,7 @@ const AddStakeholderScreen = ({ location, history, match }) => {
 					<Row className="mt-3">
 						<Col>
 							<Button type="submit" variant="primary" className="px-5 mt-3">
-								Register
+								Continue
 							</Button>
 						</Col>
 					</Row>

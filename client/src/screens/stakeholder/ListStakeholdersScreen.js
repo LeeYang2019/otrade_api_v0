@@ -48,11 +48,6 @@ const ListStakeholdersScreen = ({ projectId, keyword }) => {
 				<Message>{error}</Message>
 			) : (
 				<>
-					{/* {stakeholders && stakeholders.length === 0 && (
-						<Message variant="danger">
-							There are no stakeholders registered
-						</Message>
-					)} */}
 					<Table hover responsive className="table-sm mt-3 overflow-scroll">
 						<tbody>
 							{stakeholders &&

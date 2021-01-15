@@ -1,41 +1,25 @@
 import React, { useEffect } from 'react';
-import { Route } from 'react-router-dom';
-import { Tabs, Tab, Card, Row, Col } from 'react-bootstrap';
+import { NavLink, Outlet } from 'react-router-dom';
+import { Card, Row, Col, Navbar } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import ListProjectsScreen from './../project/ListProjectsScreen';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader.js';
 import { getUserDetails } from '../../actions/userActions';
-import EditUser from './../user/EditUser';
 
 const UserProfileScreen = ({ history, match }) => {
 	let userId = match.params.id;
 
-	console.log(userId);
-
 	const dispatch = useDispatch();
-
-	//get logged in user
-	const userLogin = useSelector((state) => state.userLogin);
-	const { userInfo } = userLogin;
 
 	// get user
 	const userDetails = useSelector((state) => state.userDetails);
 	const { loading, error, user } = userDetails;
 
-	if (!userId) {
-		userId = userInfo._id;
-	}
-
 	useEffect(() => {
-		if (!userInfo) {
-			history.push('/login');
-		} else {
-			if (!user.firstName || user._id !== userId) {
-				dispatch(getUserDetails(userId));
-			}
+		if (!user.firstName || user._id !== userId) {
+			dispatch(getUserDetails(userId));
 		}
-	}, [history, dispatch, userInfo, userId, user]);
+	}, [history, dispatch, userId, user]);
 
 	return (
 		<Row className="my-5">
@@ -66,27 +50,9 @@ const UserProfileScreen = ({ history, match }) => {
 						</Card>
 					</Col>
 					<Col md={8}>
-						<Tabs
-							defaultActiveKey="projects"
-							id="tabs"
-							variant="tabs"
-							className=""
-						>
-							<Tab eventKey="userDetails" title="User Details">
-								<Route
-									render={({ history }) => (
-										<EditUser history={history} userId={userId} />
-									)}
-								/>
-							</Tab>
-							<Tab eventKey="projects" title="Projects">
-								<Route
-									render={({ history }) => (
-										<ListProjectsScreen history={history} userId={userId} />
-									)}
-								/>
-							</Tab>
-						</Tabs>
+						<nav>
+							<NavLink to={`/user/${userId}/edit`}>Edit Profile</NavLink>
+						</nav>
 					</Col>
 				</>
 			)}

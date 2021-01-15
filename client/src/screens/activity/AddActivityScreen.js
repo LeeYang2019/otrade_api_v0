@@ -18,8 +18,7 @@ const AddActivityScreen = ({ history, match }) => {
 	const [stakeholders, setStakeholders] = useState([]);
 	const [disPoints, setDispoints] = useState([{ point: '' }]);
 	const [actHours, setActHours] = useState(0);
-	const [compromise, setcompromise] = useState('');
-	const [isComplete, setIsComplete] = useState(false);
+	const [location, setLocation] = useState('');
 	const [message, setMessage] = useState(null);
 
 	const dispatch = useDispatch();
@@ -80,22 +79,22 @@ const AddActivityScreen = ({ history, match }) => {
 	//handle submit form
 	const submitHandler = (e) => {
 		e.preventDefault();
-
-		//dispatch
-		dispatch(
-			addActivity(
-				{
-					activity,
-					date,
-					hours: actHours,
-					compromise,
-					isComplete,
-					discussPoints: disPoints,
-					stakeholders,
-				},
-				projectId
-			)
-		);
+		history.push(`/project/${projectId}/addActivityPart2`);
+		// //dispatch
+		// dispatch(
+		// 	addActivity(
+		// 		{
+		// 			activity,
+		// 			date,
+		// 			hours: actHours,
+		// 			compromise,
+		// 			isComplete,
+		// 			discussPoints: disPoints,
+		// 			stakeholders,
+		// 		},
+		// 		projectId
+		// 	)
+		// );
 	};
 
 	return (
@@ -109,7 +108,7 @@ const AddActivityScreen = ({ history, match }) => {
 				{message && <Message variant="success">{message}</Message>}
 				<Form onSubmit={submitHandler} className="my-5">
 					<Row>
-						<Col md={6}>
+						<Col md={8}>
 							<Form.Group controlId="activity">
 								<Form.Label>Activity</Form.Label>
 								<Form.Control
@@ -131,6 +130,8 @@ const AddActivityScreen = ({ history, match }) => {
 								</Form.Control>
 							</Form.Group>
 						</Col>
+					</Row>
+					<Row>
 						<Col md={6}>
 							<Form.Group controlId="date">
 								<Form.Label>Current Date</Form.Label>
@@ -142,21 +143,6 @@ const AddActivityScreen = ({ history, match }) => {
 								></Form.Control>
 							</Form.Group>
 						</Col>
-					</Row>
-					<Row>
-						<Col md={12}>
-							<Form.Group controlId="location">
-								<Form.Label>Activity Location</Form.Label>
-								<Form.Control
-									type="text"
-									placeholder="Enter Date"
-									value={date}
-									onChange={(e) => setDate(e.target.value)}
-								></Form.Control>
-							</Form.Group>
-						</Col>
-					</Row>
-					<Row>
 						<Col md={4}>
 							<Form.Group controlId="hours">
 								<Form.Label>Activity Hours</Form.Label>
@@ -170,22 +156,19 @@ const AddActivityScreen = ({ history, match }) => {
 						</Col>
 					</Row>
 					<Row>
-						<Col md={4}>
-							<Form.Group controlId="compromise">
-								<Form.Label>Compromise?</Form.Label>
+						<Col md={12}>
+							<Form.Group controlId="location">
+								<Form.Label>Location</Form.Label>
 								<Form.Control
-									as="select"
-									value={compromise}
-									onChange={(e) => setcompromise(e.target.value)}
-								>
-									<option value="">--Select--</option>
-									<option value="Yes">Yes</option>
-									<option value="No">No</option>
-								</Form.Control>
+									type="text"
+									placeholder="Enter Location"
+									value={location}
+									onChange={(e) => setLocation(e.target.value)}
+								></Form.Control>
 							</Form.Group>
 						</Col>
 					</Row>
-					<Row className="mt-5">
+					<Row className="my-5">
 						<Col md={12}>
 							<Form.Group controlId="discussion">
 								<Form.Label>Discussion Points</Form.Label>
@@ -205,7 +188,7 @@ const AddActivityScreen = ({ history, match }) => {
 												</Col>
 											</Row>
 											<Row className="mb-3">
-												<Col md={12}>
+												<Col>
 													<Button className="px-3" onClick={handleAdd}>
 														Add Additional
 													</Button>
@@ -216,28 +199,10 @@ const AddActivityScreen = ({ history, match }) => {
 							</Form.Group>
 						</Col>
 					</Row>
-					{compromise && compromise === 'yes' && (
-						<Row>
-							<hr />
-							Hello
-						</Row>
-					)}
-					<Row className="mt-5">
-						<Col md={4}>
-							<Form.Group controlId="complete">
-								<Form.Check
-									type="checkbox"
-									label="Is Complete?"
-									checked={isComplete}
-									onChange={(e) => setIsComplete(e.target.checked)}
-								></Form.Check>
-							</Form.Group>
-						</Col>
-					</Row>
 					<Row>
 						<Col>
 							<Button type="submit" variant="primary" className="px-5 mt-3">
-								Register
+								Continue
 							</Button>
 						</Col>
 					</Row>

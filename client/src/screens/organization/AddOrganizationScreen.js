@@ -8,6 +8,7 @@ import { listProjectDetails } from '../../actions/projectActions';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import { ORGANIZATION_ADD_RESET } from '../../constants/organizationConstants';
+import RegisterSteps from '../../components/RegisterSteps';
 
 const AddOrganizationScreen = ({ history, match }) => {
 	const projectId = match.params.projectId;
@@ -40,29 +41,29 @@ const AddOrganizationScreen = ({ history, match }) => {
 	const organizationAdd = useSelector((state) => state.organizationAdd);
 	const { success } = organizationAdd;
 
-	useEffect(() => {
-		if (!userInfo) {
-			history.push('/login');
-		} else {
-			if (success) {
-				setMessage('Organization was successfully added.');
-				dispatch({ type: ORGANIZATION_ADD_RESET });
-			} else {
-				if (!project.projectName || project._id !== projectId) {
-					dispatch(listProjectDetails(projectId));
-					dispatch(listStakeholders(projectId));
-				}
-			}
-		}
-	}, [
-		dispatch,
-		history,
-		userInfo,
-		projectId,
-		stakeholderList,
-		project,
-		success,
-	]);
+	// useEffect(() => {
+	// 	if (!userInfo) {
+	// 		history.push('/login');
+	// 	} else {
+	// 		if (success) {
+	// 			setMessage('Organization was successfully added.');
+	// 			dispatch({ type: ORGANIZATION_ADD_RESET });
+	// 		} else {
+	// 			if (!project.projectName || project._id !== projectId) {
+	// 				dispatch(listProjectDetails(projectId));
+	// 				dispatch(listStakeholders(projectId));
+	// 			}
+	// 		}
+	// 	}
+	// }, [
+	// 	dispatch,
+	// 	history,
+	// 	userInfo,
+	// 	projectId,
+	// 	stakeholderList,
+	// 	project,
+	// 	success,
+	// ]);
 
 	//add select field
 	const addHandler = () => {
@@ -124,6 +125,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 				<hr />
 				{message && <Message variant="success">{message}</Message>}
 				<Form onSubmit={submitHandler} className="my-5">
+					<RegisterSteps projectId={projectId} step1 step2 />
 					<Row>
 						<Col md={6}>
 							<Form.Group controlId="organization">

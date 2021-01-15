@@ -1,14 +1,8 @@
 import React from 'react';
-import { Row } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 
 const HomeScreen = () => {
-	return (
-		<>
-			<div>Hello from home</div>
-			<Row>{/* <UserListScreen /> */}</Row>
-			<Row>{/* <ProjectScreen /> */}</Row>
-		</>
-	);
+	return <Redirect to="/login" />;
 };
 
 export default HomeScreen;

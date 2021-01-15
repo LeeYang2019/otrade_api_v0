@@ -5,6 +5,7 @@ import { updateUserProfile, getUserDetails } from '../../actions/userActions';
 import { USER_PROFILE_UPDATE_RESET } from '../../constants/userConstants';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
+import UserNavbar from '../../components/UserNavBar';
 
 const EditUser = ({ userId }) => {
 	//define states
@@ -70,7 +71,7 @@ const EditUser = ({ userId }) => {
 			{successUpdate && <Message variant="success">{message}</Message>}
 			{loading && <Loader />}
 			<Container>
-				{/* {userInfo && userInfo._id === user._id ? ( */}
+				<UserNavbar />
 				<Form onSubmit={submitHandler} className="my-5">
 					<Row>
 						<Col md={6}>
