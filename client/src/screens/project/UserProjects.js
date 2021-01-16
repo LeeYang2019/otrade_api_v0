@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import { listUserProjects } from '../../actions/projectActions';
 import Project from '../../components/Project';
 
-const UserProjects = ({ history, match }) => {
+const UserProjects = ({ match }) => {
 	const userId = match.params.id;
-
-	console.log('inside userprojects');
 
 	const dispatch = useDispatch();
 
@@ -30,7 +28,7 @@ const UserProjects = ({ history, match }) => {
 				<Message variant="light">{error}</Message>
 			) : (
 				<>
-					<Table hover responsive className="table-sm mt-5">
+					<Table responsive className="table-sm mt-5">
 						<tbody>
 							{projects &&
 								projects.map((project) => (

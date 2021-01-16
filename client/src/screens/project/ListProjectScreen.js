@@ -72,7 +72,7 @@ const ListProjectScreen = ({ history, match }) => {
 				<Message variant="danger">{error}</Message>
 			) : (
 				<Row>
-					<Table hover responsive className="table-sm mt-3">
+					<Table responsive className="table-sm mt-3">
 						<tbody>
 							{projects &&
 								projects.map((project) => (

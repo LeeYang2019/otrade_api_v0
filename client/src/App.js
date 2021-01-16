@@ -9,6 +9,7 @@ import PrivateRoute from './components/Routing/PrivateRoute';
 import UserProfileScreen from './screens/user/UserProfileScreen';
 import ProjectScreen from './screens/project/ProjectScreen';
 import StakeholderScreen from './screens/stakeholder/StakeholderScreen';
+import AdminRoutes from './components/Routing/AdminRoutes';
 
 const App = () => {
 	return (
@@ -21,14 +22,8 @@ const App = () => {
 					<PrivateRoute path="/profile/:id" component={UserProfileScreen} />
 					<PrivateRoute path="/project/:id" component={ProjectScreen} />
 					<PrivateRoute path="/stakeholder/:id" component={StakeholderScreen} />
-					{/* <PrivateRoute
-						path="/organization/:projectId"
-						component={ProjectScreen}
-					/>
-					<PrivateRoute
-						path="/activities/:projectId"
-						component={ProjectScreen}
-					/> */}
+
+					<Route component={AdminRoutes} />
 				</Container>
 			</main>
 			<Footer />

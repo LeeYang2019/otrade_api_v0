@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { NavLink, Link, useRouteMatch, Route, Switch } from 'react-router-dom';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader.js';
@@ -40,7 +40,7 @@ const UserProfileScreen = ({ history, match, location }) => {
 
 						<Col md={10}>
 							<Row>
-								<Col>
+								<Col md={12}>
 									<h1>
 										<strong>
 											{user.firstName} {user.lastName}
@@ -80,19 +80,22 @@ const UserProfileScreen = ({ history, match, location }) => {
 						</Col>
 					</Row>
 					<Row>
-						<Switch>
-							<Route
-								exact
-								path={path}
-								render={({ match }) => <EditUser match={match} />}
-							/>
+						<Col md={2}></Col>
+						<Col md={10}>
+							<Switch>
+								<Route
+									exact
+									path={path}
+									render={({ match }) => <EditUser match={match} />}
+								/>
 
-							<Route
-								exact
-								path={`${path}/projects`}
-								render={({ match }) => <UserProjects match={match} />}
-							/>
-						</Switch>
+								<Route
+									exact
+									path={`${path}/projects`}
+									render={({ match }) => <UserProjects match={match} />}
+								/>
+							</Switch>
+						</Col>
 					</Row>
 				</>
 			)}

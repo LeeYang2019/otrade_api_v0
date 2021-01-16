@@ -31,7 +31,7 @@ const Project = ({ project, userId = '' }) => {
 					</p>
 				</Col>
 			</Row>
-			<Row>
+			{/* <Row>
 				<Col>
 					<p>
 						<em>Assigned To:</em>{' '}
@@ -46,7 +46,7 @@ const Project = ({ project, userId = '' }) => {
 						)}
 					</p>
 				</Col>
-			</Row>
+			</Row> */}
 		</>
 	);
 };

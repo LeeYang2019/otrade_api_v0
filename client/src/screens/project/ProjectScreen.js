@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, Link, useRouteMatch, NavLink } from 'react-router-dom';
-import { Row, Col, Card } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
@@ -35,86 +35,93 @@ const ProjectScreen = ({ match }) => {
 
 	return (
 		<>
-			{/* <Link
-				to={userInfo && `/profile/${userInfo._id}`}
-				className="btn btn-primary my-3"
-			>
-				Previous Page
-			</Link> */}
-			<Row>
-				<Col md={2}>
-					<img src={BrazilPic} alt="profile" className="profile" />
-				</Col>
-				<Col md={10}>
+			{loading ? (
+				<Loader />
+			) : error ? (
+				<Message variant="danger">{error}</Message>
+			) : (
+				<>
 					<Row>
-						<Col>
-							<h1>
-								<strong>{project.projectName}</strong>
-							</h1>
-						</Col>
-					</Row>
-					<Row>
-						<Col>
-							<strong>{project.projectClient}</strong>
-							<br />
-							<strong>Status: </strong>
-							{project.status}
-							<br />
-							<strong>Location: </strong>
-							<strong>In Development</strong>
-						</Col>
 						<Col md={2}>
-							<Link to="/admin/userList/add" className="btn btn-primary my-3">
-								<i className="fas fa-edit"></i> Edit User
-							</Link>
+							<img src={BrazilPic} alt="profile" className="profile" />
+						</Col>
+						<Col md={10}>
+							<Row>
+								<Col>
+									<h1>
+										<strong>{project.projectName}</strong>
+									</h1>
+								</Col>
+							</Row>
+							<Row>
+								<Col>
+									<strong>{project.projectClient}</strong>
+									<br />
+									<strong>Status: </strong>
+									{project.status}
+									<br />
+									<strong>Location: </strong>
+									<strong>In Development</strong>
+								</Col>
+								<Col md={2}>
+									<Link
+										to="/admin/userList/add"
+										className="btn btn-primary my-3"
+									>
+										<i className="fas fa-edit"></i> Edit User
+									</Link>
+								</Col>
+							</Row>
+							<hr />
+							<Row>
+								<ul className="my-navbar">
+									<li>
+										<NavLink to={`${url}`}>Dashboard</NavLink>
+									</li>
+									<li>
+										<NavLink to={`${url}/stakeholders`}>Stakeholders</NavLink>
+									</li>
+									<li>
+										<NavLink to={`${url}/organizations`}>Organizations</NavLink>
+									</li>
+									<li>
+										<NavLink to={`${url}/activities`}>Activities</NavLink>
+									</li>
+								</ul>
+							</Row>
 						</Col>
 					</Row>
-					<hr />
 					<Row>
-						<ul className="my-navbar">
-							<li>
-								<NavLink to={`${url}`}>Dashboard</NavLink>
-							</li>
-							<li>
-								<NavLink to={`${url}/stakeholders`}>Stakeholders</NavLink>
-							</li>
-							<li>
-								<NavLink to={`${url}/organizations`}>Organizations</NavLink>
-							</li>
-							<li>
-								<NavLink to={`${url}/activities`}>Activities</NavLink>
-							</li>
-						</ul>
+						<Col md={2}></Col>
+						<Col>
+							<Switch>
+								<Route
+									exact
+									path={path}
+									render={({ match }) => <Dashboard match={match} />}
+								/>
+								<Route
+									exact
+									path={`${path}/stakeholders`}
+									render={({ match }) => <ListStakeholders match={match} />}
+								/>
+
+								<Route
+									exact
+									path={`${path}/organizations`}
+									render={({ match }) => <ListOrganizations match={match} />}
+								/>
+
+								<Route
+									exact
+									path={`${path}/activities`}
+									render={({ match }) => <ActivitiesList match={match} />}
+								/>
+							</Switch>
+						</Col>
 					</Row>
-				</Col>
-				<hr />
-				<Row>
-					<Switch>
-						<Route
-							exact
-							path={path}
-							render={({ match }) => <Dashboard match={match} />}
-						/>
-						<Route
-							exact
-							path={`${path}/stakeholders`}
-							render={({ match }) => <ListStakeholders match={match} />}
-						/>
-
-						<Route
-							exact
-							path={`${path}/organizations`}
-							render={({ match }) => <ListOrganizations match={match} />}
-						/>
-
-						<Route
-							exact
-							path={`${path}/activities`}
-							render={({ match }) => <ActivitiesList match={match} />}
-						/>
-					</Switch>
-				</Row>
-			</Row>
+				</>
+			)}
 		</>
 	);
 };

@@ -9,7 +9,6 @@ import { listStakeholders } from '../../actions/stakeholderActions';
 
 const StakeholdersList = ({ match, keyword = '' }) => {
 	const projectId = match.params.id;
-	console.log('inside listStakeholders');
 
 	const dispatch = useDispatch();
 
@@ -22,36 +21,36 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 	}, [dispatch, keyword, projectId]);
 
 	return (
-		<>
-			<Row className="align-items-center mt-3">
-				<Col className="text-left" md={8}>
-					<Route
-						render={({ history }) => (
-							<SearchBox
-								history={history}
-								searchWord={'Stakeholder'}
-								searchQueryPath={`/project/${projectId}/search/`}
-								searchQueryEmpty={`/project/${projectId}`}
-							/>
-						)}
-					/>
-				</Col>
-				<Col className="text-right" md={4}>
-					<Link
-						to={`/project/${projectId}/addStakeholder`}
-						className="btn btn-primary my-3"
-					>
-						<i className="fas fa-plus"></i> Register Stakeholder
-					</Link>
-				</Col>
-			</Row>
+		<Row>
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
 				<>
-					<Table hover responsive className="table-sm mt-3 overflow-scroll">
+					<Row className="align-items-center mt-3">
+						<Col className="text-left" md={8}>
+							<Route
+								render={({ history }) => (
+									<SearchBox
+										history={history}
+										searchWord={'Stakeholder'}
+										searchQueryPath={`/project/${projectId}/search/`}
+										searchQueryEmpty={`/project/${projectId}`}
+									/>
+								)}
+							/>
+						</Col>
+						<Col className="text-right" md={4}>
+							<Link
+								to={`/project/${projectId}/addStakeholder`}
+								className="btn btn-primary my-3"
+							>
+								<i className="fas fa-plus"></i> Register
+							</Link>
+						</Col>
+					</Row>
+					<Table responsive className="table-sm mt-3 overflow-scroll">
 						<tbody>
 							{stakeholders &&
 								stakeholders.map((person) => (
@@ -67,8 +66,8 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 														<br />
 														Email: <em> {person.email}</em>
 														<br />
-														Telephone: {person.telephone}
-														<br />
+														{/* Telephone: {person.telephone}
+														<br /> */}
 														Registered Date:{' '}
 														<strong>
 															{' '}
@@ -101,7 +100,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 					</Table>
 				</>
 			)}
-		</>
+		</Row>
 	);
 };
 
