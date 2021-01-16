@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { NavLink, Link, useRouteMatch, Route, Switch } from 'react-router-dom';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader.js';
@@ -58,11 +58,8 @@ const UserProfileScreen = ({ history, match, location }) => {
 									{user.status}
 								</Col>
 								<Col md={2}>
-									<Link
-										to="/admin/userList/add"
-										className="btn btn-primary my-3"
-									>
-										<i className="fas fa-edit"></i> Edit User
+									<Link to={url} className="btn btn-primary my-3">
+										<i className="fas fa-edit"></i> Edit Profile
 									</Link>
 								</Col>
 							</Row>
@@ -70,7 +67,7 @@ const UserProfileScreen = ({ history, match, location }) => {
 							<Row>
 								<ul className="my-navbar">
 									<li>
-										<NavLink to={url}>Profile</NavLink>
+										<NavLink to={`${url}/dashboard`}>Dashboard</NavLink>
 									</li>
 									<li>
 										<NavLink to={`${url}/projects`}>Project</NavLink>
@@ -80,22 +77,19 @@ const UserProfileScreen = ({ history, match, location }) => {
 						</Col>
 					</Row>
 					<Row>
-						<Col md={2}></Col>
-						<Col md={10}>
-							<Switch>
-								<Route
-									exact
-									path={path}
-									render={({ match }) => <EditUser match={match} />}
-								/>
+						<Switch>
+							<Route
+								exact
+								path={path}
+								render={({ match }) => <EditUser match={match} />}
+							/>
 
-								<Route
-									exact
-									path={`${path}/projects`}
-									render={({ match }) => <UserProjects match={match} />}
-								/>
-							</Switch>
-						</Col>
+							<Route
+								exact
+								path={`${path}/projects`}
+								render={({ match }) => <UserProjects match={match} />}
+							/>
+						</Switch>
 					</Row>
 				</>
 			)}

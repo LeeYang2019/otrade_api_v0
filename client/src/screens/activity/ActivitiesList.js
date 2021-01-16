@@ -28,8 +28,9 @@ const ActivitiesList = ({ match, keyword = '' }) => {
 				<Message>{error}</Message>
 			) : (
 				<>
-					<Row className="align-items-center mt-3">
-						<Col className="text-left" md={8}>
+					<Row className="align-items-center mt-2 mb-3">
+						<Col md={2}></Col>
+						<Col md={8}>
 							<Route
 								render={({ history }) => (
 									<SearchBox
@@ -41,7 +42,7 @@ const ActivitiesList = ({ match, keyword = '' }) => {
 								)}
 							/>
 						</Col>
-						<Col className="text-right" md={4}>
+						<Col>
 							<Link
 								to={`/project/${projectId}/addActivity`}
 								className="btn btn-primary my-3"
@@ -50,45 +51,48 @@ const ActivitiesList = ({ match, keyword = '' }) => {
 							</Link>
 						</Col>
 					</Row>
-					<Table responsive className="table-sm mt-3 overflow-scroll">
-						<tbody>
-							{activities &&
-								activities.map((activity) => (
-									<tr key={activity._id}>
-										<td>
-											<p className="mr-3">
-												<strong>Activity: </strong>
-												<Link
-													to={`/project/${projectId}/activity/${activity._id}`}
-												>
-													{activity.activity}
-												</Link>
-												<br />
-												Stakeholders: <em> {activity.stakeholders.join('')}</em>
-												<br />
-												Status:{' '}
-												<em>
-													{activity.isComplete === 'true' ? (
-														<strong className="text-success">Complete</strong>
-													) : (
-														<strong className="text-warning">
-															In Progress
-														</strong>
-													)}
-												</em>
-												<br />
-												Registered Date:{' '}
-												<strong>
-													{' '}
-													{activity.createdAt &&
-														activity.createdAt.substring(0, 10)}{' '}
-												</strong>
-											</p>
-										</td>
-									</tr>
-								))}
-						</tbody>
-					</Table>
+					<Row>
+						<Table responsive className="table-sm mt-3 overflow-scroll">
+							<tbody>
+								{activities &&
+									activities.map((activity) => (
+										<tr key={activity._id}>
+											<td>
+												<p className="mr-3">
+													<strong>Activity: </strong>
+													<Link
+														to={`/project/${projectId}/activity/${activity._id}`}
+													>
+														{activity.activity}
+													</Link>
+													<br />
+													Stakeholders:{' '}
+													<em> {activity.stakeholders.join('')}</em>
+													<br />
+													Status:{' '}
+													<em>
+														{activity.isComplete === 'true' ? (
+															<strong className="text-success">Complete</strong>
+														) : (
+															<strong className="text-warning">
+																In Progress
+															</strong>
+														)}
+													</em>
+													<br />
+													Registered Date:{' '}
+													<strong>
+														{' '}
+														{activity.createdAt &&
+															activity.createdAt.substring(0, 10)}{' '}
+													</strong>
+												</p>
+											</td>
+										</tr>
+									))}
+							</tbody>
+						</Table>
+					</Row>
 				</>
 			)}
 		</>

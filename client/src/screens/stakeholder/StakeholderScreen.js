@@ -83,24 +83,19 @@ const StakeholderScreen = ({ history, match }) => {
 						</Col>
 					</Row>
 					<Row>
-						<Col md={2}></Col>
-						<Col>
-							<Switch>
-								<Route
-									exact
-									path={path}
-									render={({ match }) => (
-										<EditStakeholderScreen match={match} />
-									)}
-								/>
+						<Switch>
+							<Route
+								exact
+								path={path}
+								render={({ match }) => <EditStakeholderScreen match={match} />}
+							/>
 
-								{/* <Route
+							{/* <Route
 								exact
 								path={`${path}/projects`}
 								render={({ match }) => <UserProjects match={match} />}
 							/> */}
-							</Switch>
-						</Col>
+						</Switch>
 					</Row>
 				</>
 			)}

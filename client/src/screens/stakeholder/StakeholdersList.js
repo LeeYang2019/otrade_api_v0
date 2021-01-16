@@ -21,15 +21,16 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 	}, [dispatch, keyword, projectId]);
 
 	return (
-		<Row>
+		<>
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
 				<>
-					<Row className="align-items-center mt-3">
-						<Col className="text-left" md={8}>
+					<Row className="align-items-center mt-2 mb-3">
+						<Col md={2}></Col>
+						<Col md={8}>
 							<Route
 								render={({ history }) => (
 									<SearchBox
@@ -41,7 +42,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 								)}
 							/>
 						</Col>
-						<Col className="text-right" md={4}>
+						<Col>
 							<Link
 								to={`/project/${projectId}/addStakeholder`}
 								className="btn btn-primary my-3"
@@ -50,55 +51,57 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 							</Link>
 						</Col>
 					</Row>
-					<Table responsive className="table-sm mt-3 overflow-scroll">
-						<tbody>
-							{stakeholders &&
-								stakeholders.map((person) => (
-									<tr key={person._id}>
-										<td>
-											<Row>
-												<Col>
-													<p>
-														<strong>Stakeholder: </strong>
-														<Link to={`/stakeholder/${person._id}`}>
-															{person.lastName}, {person.firstName}
+					<Row>
+						<Table responsive className="table-sm mt-3 overflow-scroll">
+							<tbody>
+								{stakeholders &&
+									stakeholders.map((person) => (
+										<tr key={person._id}>
+											<td>
+												<Row>
+													<Col>
+														<p>
+															<strong>Stakeholder: </strong>
+															<Link to={`/stakeholder/${person._id}`}>
+																{person.lastName}, {person.firstName}
+															</Link>
+															<br />
+															Email: <em> {person.email}</em>
+															<br />
+															Registered Date:{' '}
+															<strong>
+																{' '}
+																{person.createdAt &&
+																	person.createdAt.substring(0, 10)}{' '}
+															</strong>
+														</p>
+													</Col>
+													<Col md={3} className="mt-auto">
+														<Link
+															to={`/project/${projectId}/addOrganization/stakeholder/${person._id}`}
+															className="btn btn-primary my-3"
+														>
+															<i className="fas fa-plus"></i> Organization
 														</Link>
-														<br />
-														Email: <em> {person.email}</em>
-														<br />
-														Registered Date:{' '}
-														<strong>
-															{' '}
-															{person.createdAt &&
-																person.createdAt.substring(0, 10)}{' '}
-														</strong>
-													</p>
-												</Col>
-												<Col md={3} className="mt-auto">
-													<Link
-														to={`/project/${projectId}/addOrganization/stakeholder/${person._id}`}
-														className="btn btn-primary my-3"
-													>
-														<i className="fas fa-plus"></i> Organization
-													</Link>
-												</Col>
-												<Col md={2} className="mt-auto">
-													<Link
-														to={`/project/${projectId}/addActivity/stakeholder/${person._id}`}
-														className="btn btn-primary my-3"
-													>
-														<i className="fas fa-plus"></i> Activity
-													</Link>
-												</Col>
-											</Row>
-										</td>
-									</tr>
-								))}
-						</tbody>
-					</Table>
+													</Col>
+													<Col md={2} className="mt-auto">
+														<Link
+															to={`/project/${projectId}/addActivity/stakeholder/${person._id}`}
+															className="btn btn-primary my-3"
+														>
+															<i className="fas fa-plus"></i> Activity
+														</Link>
+													</Col>
+												</Row>
+											</td>
+										</tr>
+									))}
+							</tbody>
+						</Table>
+					</Row>
 				</>
 			)}
-		</Row>
+		</>
 	);
 };
 

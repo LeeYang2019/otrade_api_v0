@@ -68,7 +68,7 @@ const ProjectScreen = ({ match }) => {
 										to="/admin/userList/add"
 										className="btn btn-primary my-3"
 									>
-										<i className="fas fa-edit"></i> Edit User
+										<i className="fas fa-edit"></i> Photo
 									</Link>
 								</Col>
 							</Row>
@@ -91,35 +91,32 @@ const ProjectScreen = ({ match }) => {
 							</Row>
 						</Col>
 					</Row>
-					<Row>
-						<Col md={2}></Col>
-						<Col>
-							<Switch>
-								<Route
-									exact
-									path={path}
-									render={({ match }) => <Dashboard match={match} />}
-								/>
-								<Route
-									exact
-									path={`${path}/stakeholders`}
-									render={({ match }) => <ListStakeholders match={match} />}
-								/>
+					<Container>
+						<Switch>
+							<Route
+								exact
+								path={path}
+								render={({ match }) => <Dashboard match={match} />}
+							/>
+							<Route
+								exact
+								path={`${path}/stakeholders`}
+								render={({ match }) => <ListStakeholders match={match} />}
+							/>
 
-								<Route
-									exact
-									path={`${path}/organizations`}
-									render={({ match }) => <ListOrganizations match={match} />}
-								/>
+							<Route
+								exact
+								path={`${path}/organizations`}
+								render={({ match }) => <ListOrganizations match={match} />}
+							/>
 
-								<Route
-									exact
-									path={`${path}/activities`}
-									render={({ match }) => <ActivitiesList match={match} />}
-								/>
-							</Switch>
-						</Col>
-					</Row>
+							<Route
+								exact
+								path={`${path}/activities`}
+								render={({ match }) => <ActivitiesList match={match} />}
+							/>
+						</Switch>
+					</Container>
 				</>
 			)}
 		</>
