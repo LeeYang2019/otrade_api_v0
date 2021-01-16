@@ -5,9 +5,10 @@ import { updateUserProfile, getUserDetails } from '../../actions/userActions';
 import { USER_PROFILE_UPDATE_RESET } from '../../constants/userConstants';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
-import UserNavbar from '../../components/UserNavBar';
 
-const EditUser = ({ userId }) => {
+const EditUser = ({ match }) => {
+	const userId = match.params.id;
+
 	//define states
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -24,11 +25,16 @@ const EditUser = ({ userId }) => {
 	const userDetails = useSelector((state) => state.userDetails);
 	const { loading, error, user } = userDetails;
 
+	console.log(user);
+
 	//get success from user update
 	const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
 	const { success: successUpdate } = userUpdateProfile;
 
+	console.log('control inside editUser');
+
 	useEffect(() => {
+		console.log('here');
 		if (successUpdate) {
 			setMessage('User profile has successfully been updated.');
 			dispatch(getUserDetails(userId));
@@ -71,7 +77,6 @@ const EditUser = ({ userId }) => {
 			{successUpdate && <Message variant="success">{message}</Message>}
 			{loading && <Loader />}
 			<Container>
-				<UserNavbar />
 				<Form onSubmit={submitHandler} className="my-5">
 					<Row>
 						<Col md={6}>
@@ -153,7 +158,7 @@ const EditUser = ({ userId }) => {
 							</Button>
 						</Col>
 						<Col className="text-right">
-							<p>updated on: {updatedDate.substring(0, 10)}</p>
+							{/* <p>updated on: {updatedDate.substring(0, 10)}</p> */}
 						</Col>
 					</Row>
 				</Form>

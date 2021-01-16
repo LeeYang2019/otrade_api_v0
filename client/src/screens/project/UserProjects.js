@@ -6,24 +6,21 @@ import Loader from '../../components/Loader.js';
 import { listUserProjects } from '../../actions/projectActions';
 import Project from '../../components/Project';
 
-const ListProjectsScreen = ({ history, userId }) => {
-	const dispatch = useDispatch();
+const UserProjects = ({ history, match }) => {
+	const userId = match.params.id;
 
-	//get logged in user
-	const userLogin = useSelector((state) => state.userLogin);
-	const { userInfo } = userLogin;
+	console.log('inside userprojects');
+
+	const dispatch = useDispatch();
 
 	//get projects of user
 	const projectUser = useSelector((state) => state.projectUser);
 	const { loading, error, projects } = projectUser;
 
 	useEffect(() => {
-		if (!userInfo) {
-			history.push('/login');
-		} else {
-			dispatch(listUserProjects(userId));
-		}
-	}, [history, dispatch, userInfo, userId]);
+		dispatch(listUserProjects(userId));
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<>
@@ -51,4 +48,4 @@ const ListProjectsScreen = ({ history, userId }) => {
 	);
 };
 
-export default ListProjectsScreen;
+export default UserProjects;

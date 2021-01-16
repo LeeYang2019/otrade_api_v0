@@ -9,11 +9,7 @@ const Project = ({ project, userId = '' }) => {
 				<Col md={9}>
 					<p>
 						<strong>Project: </strong>
-						{userId ? (
-							<Link to={`/project/${project._id}`}>{project.projectName}</Link>
-						) : (
-							<Link to={`/project/${project._id}`}>{project.projectName}</Link>
-						)}
+						<Link to={`/project/${project._id}`}>{project.projectName}</Link>
 						<br />
 						Client: <em>{project.projectClient}</em>
 						<br />

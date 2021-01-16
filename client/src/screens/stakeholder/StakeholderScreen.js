@@ -1,51 +1,107 @@
 import React, { useEffect } from 'react';
-import { Route, Link } from 'react-router-dom';
-import { Tabs, Tab, Card, Row, Col } from 'react-bootstrap';
+import { Route, Link, useRouteMatch, NavLink, Switch } from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import { getStakeholderDetails } from '../../actions/stakeholderActions';
 import Comments from '../stakeholder/Comments';
 import EditStakeholderScreen from './EditStakeholderScreen';
-import ListOrganizationsScreen from './../organization/ListOrganizationsScreen';
-import ListActivitiesScreen from './../activity/ListActivitiesScreen';
+import ListOrganizations from './../organization/ListOrganizations';
+import ActivitiesList from './../activity/ActivitiesList';
+import ProfilePic2 from '../../img/Nhialee_Yang2.jpg';
 
 const StakeholderScreen = ({ history, match }) => {
 	let stakeholderId = match.params.id;
-	let projectId = match.params.projectId;
+	const { path, url } = useRouteMatch();
 
 	const dispatch = useDispatch();
-
-	//get logged in user
-	const userLogin = useSelector((state) => state.userLogin);
-	const { userInfo } = userLogin;
 
 	//get stakeholder
 	const stakeholderDetails = useSelector((state) => state.stakeholderDetails);
 	const { loading, error, stakeholder } = stakeholderDetails;
 
 	useEffect(() => {
-		if (!userInfo) {
-			history.push('/login');
-		} else {
-			dispatch(getStakeholderDetails(stakeholderId));
-		}
-	}, [dispatch, history, stakeholderId, userInfo]);
-
-	console.log(stakeholder);
+		dispatch(getStakeholderDetails(stakeholderId));
+	}, [dispatch, stakeholderId]);
 
 	return (
 		<>
-			<Link to={`/project/${projectId}`} className="btn btn-primary my-3">
-				Previous Page
-			</Link>
-			<Row>
-				<Col md={4}>
-					{loading ? (
-						<Loader />
-					) : error ? (
-						<Message variant="danger">{error}</Message>
-					) : (
+			{loading ? (
+				<Loader />
+			) : error ? (
+				<Message variant="danger">{error}</Message>
+			) : (
+				<>
+					<Row>
+						<Col md={2}>
+							<img src={ProfilePic2} alt="profile" className="profile" />
+						</Col>
+
+						<Col md={10}>
+							<Row>
+								<Col>
+									<h1>
+										<strong>
+											{stakeholder.firstName} {stakeholder.lastName}
+										</strong>
+									</h1>
+								</Col>
+							</Row>
+							<Row>
+								<Col md={10}>
+									<strong>{stakeholder.email}</strong>
+									<br />
+									{stakeholder.telephone}
+								</Col>
+								<Col md={2}>
+									<Link
+										to="/admin/userList/add"
+										className="btn btn-primary my-3"
+									>
+										<i className="fas fa-edit"></i> Edit User
+									</Link>
+								</Col>
+							</Row>
+							<hr />
+							<Row>
+								<ul className="my-navbar">
+									<li>
+										<NavLink to={url}>Profile</NavLink>
+									</li>
+									<li>
+										<NavLink to={`${url}/projects`}>Project</NavLink>
+									</li>
+								</ul>
+							</Row>
+						</Col>
+					</Row>
+					<Row>
+						<Switch>
+							{/* <Route
+								exact
+								path={path}
+								render={({ match }) => <EditUser match={match} />}
+							/>
+
+							<Route
+								exact
+								path={`${path}/projects`}
+								render={({ match }) => <UserProjects match={match} />}
+							/> */}
+						</Switch>
+					</Row>
+				</>
+			)}
+		</>
+	);
+};
+
+export default StakeholderScreen;
+
+{
+	/* <Row>
+					<Col md={4}>
 						<Card>
 							<Card.Header>
 								<h2>Stakeholder Profile</h2>
@@ -63,64 +119,7 @@ const StakeholderScreen = ({ history, match }) => {
 								</p>
 							</Card.Body>
 						</Card>
-					)}
-				</Col>
-				<Col md={8}>
-					<Tabs
-						defaultActiveKey="stakeholderDetails"
-						id="tabs"
-						variant="tabs"
-						bg="primary"
-					>
-						<Tab eventKey="stakeholderDetails" title="Details">
-							<Route
-								render={({ history }) => (
-									<EditStakeholderScreen
-										history={history}
-										proejctId={projectId}
-										stakeholderId={stakeholderId}
-									/>
-								)}
-							/>
-						</Tab>
-						<Tab eventKey="comments" title="comments">
-							<Route
-								render={({ history }) => (
-									<Comments
-										history={history}
-										projectId={projectId}
-										stakeholderId={stakeholderId}
-									/>
-								)}
-							/>
-						</Tab>
-						<Tab eventKey="organizations" title="Organizations">
-							<Route
-								render={({ history }) => (
-									<ListOrganizationsScreen
-										history={history}
-										projectId={projectId}
-										stakeholderId={stakeholderId}
-									/>
-								)}
-							/>
-						</Tab>
-						<Tab eventKey="activities" title="Activities">
-							<Route
-								render={({ history }) => (
-									<ListActivitiesScreen
-										history={history}
-										projectId={projectId}
-										stakeholderId={stakeholderId}
-									/>
-								)}
-							/>
-						</Tab>
-					</Tabs>
-				</Col>
-			</Row>
-		</>
-	);
-};
-
-export default StakeholderScreen;
+					</Col>
+					<Col md={8}></Col>
+				</Row> */
+}

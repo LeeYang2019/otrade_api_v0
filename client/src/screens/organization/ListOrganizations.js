@@ -2,20 +2,24 @@ import React, { useEffect } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { Table, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { listActivities } from '../../actions/activityActions';
-import Message from '../../components/Message.js';
-import Loader from '../../components/Loader.js';
+import { listOrganizations } from '../../actions/organizationAction';
+import Message from '../../components/Message';
+import Loader from '../../components/Loader';
 import SearchBox from '../../components/SearchBox';
 
-const ListActivitiesScreen = ({ projectId, keyword }) => {
+const ListOrganizations = ({ match }) => {
+	const projectId = match.params.id;
+
 	const dispatch = useDispatch();
 
-	//get activities
-	const activityList = useSelector((state) => state.activityList);
-	const { loading, error, activities } = activityList;
+	//get organizations
+	const organizationList = useSelector((state) => state.organizationList);
+	const { loading, error, organizations } = organizationList;
+
+	console.log(organizations);
 
 	useEffect(() => {
-		dispatch(listActivities(projectId));
+		dispatch(listOrganizations(projectId));
 	}, [dispatch, projectId]);
 
 	return (
@@ -26,7 +30,7 @@ const ListActivitiesScreen = ({ projectId, keyword }) => {
 						render={({ history }) => (
 							<SearchBox
 								history={history}
-								searchWord={'Activity'}
+								searchWord={'Organization'}
 								searchQueryPath={`/project/${projectId}/search/`}
 								searchQueryEmpty={`/project/${projectId}`}
 							/>
@@ -35,10 +39,10 @@ const ListActivitiesScreen = ({ projectId, keyword }) => {
 				</Col>
 				<Col className="text-right" md={4}>
 					<Link
-						to={`/project/${projectId}/addActivity`}
+						to={`/project/${projectId}/addOrganization`}
 						className="btn btn-primary my-3"
 					>
-						<i className="fas fa-plus"></i> Register Activity
+						<i className="fas fa-plus"></i> Register Organization
 					</Link>
 				</Col>
 			</Row>
@@ -49,34 +53,27 @@ const ListActivitiesScreen = ({ projectId, keyword }) => {
 			) : (
 				<Table hover responsive className="table-sm mt-3">
 					<tbody>
-						{activities &&
-							activities.map((activity) => (
-								<tr key={activity._id}>
+						{organizations &&
+							organizations.map((organization) => (
+								<tr key={organization._id}>
 									<td>
 										<p className="mr-3">
-											<strong>Activity: </strong>
+											<strong>Organization: </strong>
 											<Link
-												to={`/project/${projectId}/activity/${activity._id}`}
+												to={`/project/${projectId}/organization/${organization._id}`}
 											>
-												{activity.activity}
+												{organization.name}
 											</Link>
 											<br />
-											Stakeholders: <em> {activity.stakeholders.join('')}</em>
+											Email: <em> {organization.email}</em>
 											<br />
-											Status:{' '}
-											<em>
-												{activity.isComplete === 'true' ? (
-													<strong className="text-success">Complete</strong>
-												) : (
-													<strong className="text-warning">In Progress</strong>
-												)}
-											</em>
+											Telephone: {organization.telephone}
 											<br />
 											Registered Date:{' '}
 											<strong>
 												{' '}
-												{activity.createdAt &&
-													activity.createdAt.substring(0, 10)}{' '}
+												{organization.createdAt &&
+													organization.createdAt.substring(0, 10)}{' '}
 											</strong>
 										</p>
 									</td>
@@ -89,4 +86,4 @@ const ListActivitiesScreen = ({ projectId, keyword }) => {
 	);
 };
 
-export default ListActivitiesScreen;
+export default ListOrganizations;

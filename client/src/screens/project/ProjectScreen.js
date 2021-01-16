@@ -1,21 +1,25 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Tabs, Tab, Row, Col, Card } from 'react-bootstrap';
+import { Switch, Route, Link, useRouteMatch, NavLink } from 'react-router-dom';
+import { Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
-import ListStakeholdersScreen from './../stakeholder/ListStakeholdersScreen';
-import ListOrganizationsScreen from './../organization/ListOrganizationsScreen';
-import ListActivitiesScreen from './../activity/ListActivitiesScreen';
-import ProjectDetailsScreen from './ProjectDetailsScreen';
+import ListStakeholders from './../stakeholder/StakeholdersList';
 import { listProjectDetails } from '../../actions/projectActions';
+import Dashboard from '../project/Dashboard';
+import ListOrganizations from '../organization/ListOrganizations';
+import ActivitiesList from '../activity/ActivitiesList';
+import BrazilPic from '../../img/Brazil.jpg';
 
-const ProjectScreen = ({ history, match }) => {
-	const projectId = match.params.projectId;
+const ProjectScreen = ({ match }) => {
+	console.log(match);
 
-	//const stakeholder = match.params.stakeholder;
-	// const organization = match.params.organization;
-	// const activity = match.params.activity;
+	const projectId = match.params.id;
+
+	const { url, path } = useRouteMatch();
+
+	console.log('url', url);
+	console.log('path', path);
 
 	// get userDispatch
 	const dispatch = useDispatch();
@@ -24,70 +28,92 @@ const ProjectScreen = ({ history, match }) => {
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { loading, error, project } = projectDetails;
 
-	//get current user information
-	const userLogin = useSelector((state) => state.userLogin);
-	const { userInfo } = userLogin;
-
 	useEffect(() => {
-		if (!userInfo) {
-			history.push('/login');
-		} else {
-			if (!project.projectName || project._id !== projectId) {
-				dispatch(listProjectDetails(projectId));
-			}
-		}
-	}, [dispatch, history, project, projectId, userInfo]);
+		dispatch(listProjectDetails(projectId));
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<>
-			<Link
+			{/* <Link
 				to={userInfo && `/profile/${userInfo._id}`}
 				className="btn btn-primary my-3"
 			>
 				Previous Page
-			</Link>
+			</Link> */}
 			<Row>
-				<Col md={4}>
-					{loading ? (
-						<Loader />
-					) : error ? (
-						<Message>{error}</Message>
-					) : (
-						<Card>
-							<Card.Header>
-								<h2>Project</h2>
-							</Card.Header>
-							<Card.Body>
-								<p>
-									<strong>Project: </strong>
-									{project.projectName}
-									<br />
-									<strong>Client: </strong>
-									{project.projectClient}
-									<br />
-									<strong>Location: </strong>
-									<strong>In Development</strong>
-								</p>
-							</Card.Body>
-						</Card>
-					)}
+				<Col md={2}>
+					<img src={BrazilPic} alt="profile" className="profile" />
 				</Col>
-				<Col md={8}>
-					<Tabs defaultActiveKey="stakeholders" id="tabs" variant="tabs">
-						<Tab eventKey="projectDetails" title="Details">
-							<ProjectDetailsScreen projectId={projectId} />
-						</Tab>
-						<Tab eventKey="stakeholders" title="Stakeholders">
-							<ListStakeholdersScreen projectId={projectId} />
-						</Tab>
-						<Tab eventKey="organizations" title="Organizations">
-							<ListOrganizationsScreen projectId={projectId} />
-						</Tab>
-						<Tab eventKey="activities" title="Activities">
-							<ListActivitiesScreen projectId={projectId} />
-						</Tab>
-					</Tabs>
+				<Col md={10}>
+					<Row>
+						<Col>
+							<h1>
+								<strong>{project.projectName}</strong>
+							</h1>
+						</Col>
+					</Row>
+					<Row>
+						<Col>
+							<strong>{project.projectClient}</strong>
+							<br />
+							<strong>Status: </strong>
+							{project.status}
+							<br />
+							<strong>Location: </strong>
+							<strong>In Development</strong>
+						</Col>
+						<Col md={2}>
+							<Link to="/admin/userList/add" className="btn btn-primary my-3">
+								<i className="fas fa-edit"></i> Edit User
+							</Link>
+						</Col>
+					</Row>
+					<hr />
+					<Row>
+						<ul className="my-navbar">
+							<li>
+								<NavLink to={`${url}`}>Dashboard</NavLink>
+							</li>
+							<li>
+								<NavLink to={`${url}/stakeholders`}>Stakeholders</NavLink>
+							</li>
+							<li>
+								<NavLink to={`${url}/organizations`}>Organizations</NavLink>
+							</li>
+							<li>
+								<NavLink to={`${url}/activities`}>Activities</NavLink>
+							</li>
+						</ul>
+					</Row>
 				</Col>
+				<hr />
+				<Row>
+					<Switch>
+						<Route
+							exact
+							path={path}
+							render={({ match }) => <Dashboard match={match} />}
+						/>
+						<Route
+							exact
+							path={`${path}/stakeholders`}
+							render={({ match }) => <ListStakeholders match={match} />}
+						/>
+
+						<Route
+							exact
+							path={`${path}/organizations`}
+							render={({ match }) => <ListOrganizations match={match} />}
+						/>
+
+						<Route
+							exact
+							path={`${path}/activities`}
+							render={({ match }) => <ActivitiesList match={match} />}
+						/>
+					</Switch>
+				</Row>
 			</Row>
 		</>
 	);

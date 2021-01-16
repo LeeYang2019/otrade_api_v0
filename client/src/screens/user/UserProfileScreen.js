@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import { Card, Row, Col, Navbar } from 'react-bootstrap';
+import { NavLink, Link, useRouteMatch, Route, Switch } from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader.js';
 import { getUserDetails } from '../../actions/userActions';
+import EditUser from '../user/EditUser';
+import UserProjects from '../project/UserProjects';
+import ProfilePic from '../../img/Nhialee_Yang.jpg';
 
-const UserProfileScreen = ({ history, match }) => {
+const UserProfileScreen = ({ history, match, location }) => {
 	let userId = match.params.id;
+	const { path, url } = useRouteMatch();
 
 	const dispatch = useDispatch();
 
@@ -22,41 +26,77 @@ const UserProfileScreen = ({ history, match }) => {
 	}, [history, dispatch, userId, user]);
 
 	return (
-		<Row className="my-5">
+		<>
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
 				<>
-					<Col md={4}>
-						<Card>
-							<Card.Header>
-								<h2>User Profile</h2>
-							</Card.Header>
-							<Card.Body>
-								<p>
-									<strong>Name: </strong>
-									{user.firstName} {user.lastName} <br />
-									<strong>Email: </strong>
-									{user.email} <br />
-									<strong>Telephone: </strong>
+					<Row>
+						<Col md={2}>
+							<img src={ProfilePic} alt="profile" className="profile" />
+						</Col>
+
+						<Col md={10}>
+							<Row>
+								<Col>
+									<h1>
+										<strong>
+											{user.firstName} {user.lastName}
+										</strong>
+									</h1>
+								</Col>
+							</Row>
+							<Row>
+								<Col md={10}>
+									<strong>{user.email}</strong>
+									<br />
 									{user.telephone}
 									<br />
-									<strong>Role: </strong>
-									{user.role}
-								</p>
-							</Card.Body>
-						</Card>
-					</Col>
-					<Col md={8}>
-						<nav>
-							<NavLink to={`/user/${userId}/edit`}>Edit Profile</NavLink>
-						</nav>
-					</Col>
+									<strong>Status: </strong>
+									{user.status}
+								</Col>
+								<Col md={2}>
+									<Link
+										to="/admin/userList/add"
+										className="btn btn-primary my-3"
+									>
+										<i className="fas fa-edit"></i> Edit User
+									</Link>
+								</Col>
+							</Row>
+							<hr />
+							<Row>
+								<ul className="my-navbar">
+									<li>
+										<NavLink to={url}>Profile</NavLink>
+									</li>
+									<li>
+										<NavLink to={`${url}/projects`}>Project</NavLink>
+									</li>
+								</ul>
+							</Row>
+						</Col>
+					</Row>
+					<Row>
+						<Switch>
+							<Route
+								exact
+								path={path}
+								render={({ match }) => <EditUser match={match} />}
+							/>
+
+							<Route
+								exact
+								path={`${path}/projects`}
+								render={({ match }) => <UserProjects match={match} />}
+							/>
+						</Switch>
+					</Row>
 				</>
 			)}
-		</Row>
+		</>
 	);
 };
 

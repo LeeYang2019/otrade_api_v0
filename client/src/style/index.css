@@ -9,6 +9,10 @@ a {
 	font-family: 'Montserrat', sans-serif !important;
 }
 
+ul {
+	padding: 0;
+}
+
 main {
 	min-height: 80vh;
 }
@@ -42,10 +46,6 @@ h2 {
 	padding: 0.5rem 0;
 }
 
-.rating span {
-	margin: 0.1rem;
-}
-
 th {
 	font-size: 1.5rem;
 	text-align: center;
@@ -68,4 +68,22 @@ label {
 
 .alert {
 	font-size: 1rem !important;
+}
+
+.profile {
+	width: 100%;
+	height: auto;
+	border-radius: 10%;
+}
+
+.profile_information {
+	margin: 0;
+	padding: 0;
+}
+
+.my-navbar li {
+	list-style: none;
+	display: inline;
+	margin-right: 10px;
+	margin-left: 13px;
 }

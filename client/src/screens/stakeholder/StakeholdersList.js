@@ -7,7 +7,10 @@ import Loader from '../../components/Loader';
 import SearchBox from '../../components/SearchBox';
 import { listStakeholders } from '../../actions/stakeholderActions';
 
-const ListStakeholdersScreen = ({ projectId, keyword }) => {
+const StakeholdersList = ({ match, keyword = '' }) => {
+	const projectId = match.params.id;
+	console.log('inside listStakeholders');
+
 	const dispatch = useDispatch();
 
 	//get stakeholders
@@ -58,9 +61,7 @@ const ListStakeholdersScreen = ({ projectId, keyword }) => {
 												<Col>
 													<p>
 														<strong>Stakeholder: </strong>
-														<Link
-															to={`/project/${projectId}/stakeholder/${person._id}`}
-														>
+														<Link to={`/stakeholder/${person._id}`}>
 															{person.lastName}, {person.firstName}
 														</Link>
 														<br />
@@ -104,4 +105,4 @@ const ListStakeholdersScreen = ({ projectId, keyword }) => {
 	);
 };
 
-export default ListStakeholdersScreen;
+export default StakeholdersList;
