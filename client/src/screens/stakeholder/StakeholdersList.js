@@ -66,8 +66,6 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 														<br />
 														Email: <em> {person.email}</em>
 														<br />
-														{/* Telephone: {person.telephone}
-														<br /> */}
 														Registered Date:{' '}
 														<strong>
 															{' '}

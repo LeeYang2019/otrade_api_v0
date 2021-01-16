@@ -27,20 +27,18 @@ const UserProjects = ({ match }) => {
 			) : error ? (
 				<Message variant="light">{error}</Message>
 			) : (
-				<>
-					<Table responsive className="table-sm mt-5">
-						<tbody>
-							{projects &&
-								projects.map((project) => (
-									<tr key={project._id}>
-										<td className="ml-3">
-											<Project project={project} userId={userId} />
-										</td>
-									</tr>
-								))}
-						</tbody>
-					</Table>
-				</>
+				<Table responsive className="table-sm mt-5 overflow-scroll">
+					<tbody>
+						{projects &&
+							projects.map((project) => (
+								<tr key={project._id}>
+									<td>
+										<Project project={project} userId={userId} />
+									</td>
+								</tr>
+							))}
+					</tbody>
+				</Table>
 			)}
 		</>
 	);

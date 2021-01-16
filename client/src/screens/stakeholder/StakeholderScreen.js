@@ -67,29 +67,40 @@ const StakeholderScreen = ({ history, match }) => {
 							<Row>
 								<ul className="my-navbar">
 									<li>
+										<NavLink to={`${url}/dashboard`}>Dashboard</NavLink>
+									</li>
+									<li>
 										<NavLink to={url}>Profile</NavLink>
 									</li>
 									<li>
-										<NavLink to={`${url}/projects`}>Project</NavLink>
+										<NavLink to={`${url}/organizations`}>Organizations</NavLink>
+									</li>
+									<li>
+										<NavLink to={`${url}/Activities`}>Activities</NavLink>
 									</li>
 								</ul>
 							</Row>
 						</Col>
 					</Row>
 					<Row>
-						<Switch>
-							{/* <Route
-								exact
-								path={path}
-								render={({ match }) => <EditUser match={match} />}
-							/>
+						<Col md={2}></Col>
+						<Col>
+							<Switch>
+								<Route
+									exact
+									path={path}
+									render={({ match }) => (
+										<EditStakeholderScreen match={match} />
+									)}
+								/>
 
-							<Route
+								{/* <Route
 								exact
 								path={`${path}/projects`}
 								render={({ match }) => <UserProjects match={match} />}
 							/> */}
-						</Switch>
+							</Switch>
+						</Col>
 					</Row>
 				</>
 			)}
@@ -98,28 +109,3 @@ const StakeholderScreen = ({ history, match }) => {
 };
 
 export default StakeholderScreen;
-
-{
-	/* <Row>
-					<Col md={4}>
-						<Card>
-							<Card.Header>
-								<h2>Stakeholder Profile</h2>
-							</Card.Header>
-							<Card.Body>
-								<p>
-									<strong>Name: </strong> {stakeholder.firstName}{' '}
-									{stakeholder.lastName}
-									<br />
-									<strong>Email: </strong>
-									{stakeholder.email}
-									<br />
-									<strong>Telephone: </strong>
-									{stakeholder.telephone}
-								</p>
-							</Card.Body>
-						</Card>
-					</Col>
-					<Col md={8}></Col>
-				</Row> */
-}
