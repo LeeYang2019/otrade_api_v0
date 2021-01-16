@@ -12,8 +12,6 @@ import ActivitiesList from '../activity/ActivitiesList';
 import BrazilPic from '../../img/Brazil.jpg';
 
 const ProjectScreen = ({ match }) => {
-	console.log(match);
-
 	const projectId = match.params.id;
 
 	const { url, path } = useRouteMatch();

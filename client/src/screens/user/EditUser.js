@@ -25,16 +25,11 @@ const EditUser = ({ match }) => {
 	const userDetails = useSelector((state) => state.userDetails);
 	const { loading, error, user } = userDetails;
 
-	console.log(user);
-
 	//get success from user update
 	const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
 	const { success: successUpdate } = userUpdateProfile;
 
-	console.log('control inside editUser');
-
 	useEffect(() => {
-		console.log('here');
 		if (successUpdate) {
 			setMessage('User profile has successfully been updated.');
 			dispatch(getUserDetails(userId));

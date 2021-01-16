@@ -49,7 +49,7 @@ const StakeholderScreen = ({ history, match }) => {
 								</Col>
 							</Row>
 							<Row>
-								<Col md={10}>
+								<Col md={8}>
 									<strong>{stakeholder.email}</strong>
 									<br />
 									{stakeholder.telephone}
@@ -59,7 +59,12 @@ const StakeholderScreen = ({ history, match }) => {
 										to="/admin/userList/add"
 										className="btn btn-primary my-3"
 									>
-										<i className="fas fa-edit"></i> Edit User
+										<i className="fas fa-edit"></i> Photo
+									</Link>
+								</Col>
+								<Col md={2}>
+									<Link to={url} className="btn btn-primary my-3">
+										<i className="fas fa-edit"></i> Edit Profile
 									</Link>
 								</Col>
 							</Row>
@@ -68,9 +73,6 @@ const StakeholderScreen = ({ history, match }) => {
 								<ul className="my-navbar">
 									<li>
 										<NavLink to={`${url}/dashboard`}>Dashboard</NavLink>
-									</li>
-									<li>
-										<NavLink to={url}>Profile</NavLink>
 									</li>
 									<li>
 										<NavLink to={`${url}/organizations`}>Organizations</NavLink>

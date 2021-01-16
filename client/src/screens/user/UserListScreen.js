@@ -102,15 +102,15 @@ const UserListScreen = ({ history, match }) => {
 															<a href={`mailto:${user.email}`}>{user.email}</a>
 														</em>
 														<br />
+														Telephone:{' '}
+														<strong>
+															<em>{user.telephone}</em>
+														</strong>
+														<br />
 														Role:{' '}
 														<strong>
 															<em>{user.role}</em>
 														</strong>
-														<br />
-														Created Date:{' '}
-														<strong>
-															{user.createdAt.substring(0, 10)}
-														</strong>{' '}
 														<br />
 													</p>
 												</Col>
@@ -126,6 +126,13 @@ const UserListScreen = ({ history, match }) => {
 																<em className="text-danger">{user.status}</em>
 															</strong>
 														)}
+														<br />
+														<br />
+														Created:{' '}
+														<strong>
+															{user.createdAt.substring(0, 10)}
+														</strong>{' '}
+														<br />
 													</p>
 												</Col>
 											</Row>

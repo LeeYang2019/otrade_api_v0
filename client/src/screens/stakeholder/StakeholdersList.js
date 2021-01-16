@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, useRouteMatch } from 'react-router-dom';
 import { Table, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
@@ -9,6 +9,11 @@ import { listStakeholders } from '../../actions/stakeholderActions';
 
 const StakeholdersList = ({ match, keyword = '' }) => {
 	const projectId = match.params.id;
+
+	const { url, path } = useRouteMatch();
+
+	console.log('url', url);
+	console.log('path', path);
 
 	const dispatch = useDispatch();
 
@@ -36,7 +41,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 									<SearchBox
 										history={history}
 										searchWord={'Stakeholder'}
-										searchQueryPath={`/project/${projectId}/search/`}
+										searchQueryPath={`${url}/search/`}
 										searchQueryEmpty={`/project/${projectId}`}
 									/>
 								)}
@@ -44,7 +49,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 						</Col>
 						<Col>
 							<Link
-								to={`/project/${projectId}/addStakeholder`}
+								to={`${url}/addStakeholder`}
 								className="btn btn-primary my-3"
 							>
 								<i className="fas fa-plus"></i> Register
