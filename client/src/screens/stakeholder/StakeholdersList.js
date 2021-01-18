@@ -40,7 +40,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 								render={({ history }) => (
 									<SearchBox
 										history={history}
-										searchWord={'Stakeholder'}
+										searchWord={'Last Name'}
 										searchQueryPath={`${url}/search/`}
 										searchQueryEmpty={`/project/${projectId}`}
 									/>
@@ -66,9 +66,9 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 												<Row>
 													<Col>
 														<p>
-															<strong>Stakeholder: </strong>
+															<strong>Name: </strong>
 															<Link to={`/stakeholder/${person._id}`}>
-																{person.lastName}, {person.firstName}
+																{person.firstName} {person.lastName}
 															</Link>
 															<br />
 															Email: <em> {person.email}</em>

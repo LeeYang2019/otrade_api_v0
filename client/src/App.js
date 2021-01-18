@@ -9,9 +9,10 @@ import PrivateRoute from './components/Routing/PrivateRoute';
 import UserProfileScreen from './screens/user/UserProfileScreen';
 import ProjectScreen from './screens/project/ProjectScreen';
 import StakeholderScreen from './screens/stakeholder/StakeholderScreen';
-import AddStakeholderScreen from './screens/stakeholder/AddStakeholderScreen';
-import AddStakeholderScreenTwo from './screens/stakeholder/AddStakeholderScreenTwo';
+import AddOrganizationScreen from './screens/organization/AddOrganizationScreen';
+import StakeholderForm from './screens/stakeholder/StakeHolderForm';
 import AdminRoutes from './components/Routing/AdminRoutes';
+import ActivityForm from './screens/activity/ActivityForm';
 
 const App = () => {
 	return (
@@ -23,14 +24,23 @@ const App = () => {
 					<Route exact path="/login" component={LoginScreen} />
 					<PrivateRoute path="/profile/:id" component={UserProfileScreen} />
 					<PrivateRoute path="/project/:id" component={ProjectScreen} />
-					<PrivateRoute
-						path="/project/:id/stakeholders/addStakeholder"
-						component={AddStakeholderScreen}
-					/>
+
 					<PrivateRoute
 						exact
-						path="/project/:id/stakeholders/addStakeholder/part2"
-						component={ProjectScreen}
+						path="/project/:id/activities/addActivity"
+						component={ActivityForm}
+					/>
+
+					<PrivateRoute
+						exact
+						path="/project/:id/stakeholders/addStakeholder"
+						component={StakeholderForm}
+					/>
+
+					<PrivateRoute
+						exact
+						path="/project/:id/organizations/addOrganization"
+						component={AddOrganizationScreen}
 					/>
 
 					<PrivateRoute path="/stakeholder/:id" component={StakeholderScreen} />

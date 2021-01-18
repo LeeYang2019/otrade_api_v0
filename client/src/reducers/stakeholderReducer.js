@@ -16,6 +16,8 @@ import {
 	STAKEHOLDER_LIST_REQUEST,
 	STAKEHOLDER_LIST_SUCCESS,
 	STAKEHOLDER_LIST_FAIL,
+	STAKEHOLDER_SAVE_REQUEST,
+	STAKEHOLDER_SAVE_RESET,
 } from '../constants/stakeholderConstants';
 
 //add stakeholder
@@ -96,6 +98,20 @@ export const stakeholderListReducer = (
 			return { loading: false, stakeholders: action.payload };
 		case STAKEHOLDER_LIST_FAIL:
 			return { loading: false, error: action.payload };
+		default:
+			return state;
+	}
+};
+
+export const stakeholderSaveReducer = (
+	state = { stakeholderInfo: {} },
+	action
+) => {
+	switch (action.type) {
+		case STAKEHOLDER_SAVE_REQUEST:
+			return { ...state, stakeholderInfo: action.payload };
+		case STAKEHOLDER_SAVE_RESET:
+			return { stakeholderInfo: {} };
 		default:
 			return state;
 	}

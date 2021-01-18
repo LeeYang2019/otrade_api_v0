@@ -43,6 +43,29 @@ const StakeholderSchema = new mongoose.Schema(
 				type: String,
 			},
 		],
+		organization: {
+			type: String,
+		},
+		position: {
+			type: String,
+			enum: [
+				'contrario',
+				'activo',
+				'contrario pasivo',
+				'desconocido',
+				'favorable activo',
+				'favorable inactivo',
+				'favorable con condiciones',
+			],
+		},
+		influence: {
+			type: String,
+			enum: ['alto', 'muy alto', 'bajo', 'desconocido', 'medio'],
+		},
+		projImpact: {
+			type: String,
+			enum: ['alto', 'muy alto', 'bajo', 'desconocido', 'medio'],
+		},
 		project: {
 			type: mongoose.Schema.ObjectId,
 			ref: 'Project',

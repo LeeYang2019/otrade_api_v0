@@ -1,38 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
-import { Form, Button, Row, Col, Container } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addStakeholder } from '../../actions/stakeholderActions';
-import Message from '../../components/Message.js';
-import { STAKEHOLDER_ADD_RESET } from '../../constants/stakeholderConstants';
-import RegisterSteps from '../../components/RegisterSteps';
+import { saveStakeholderInfo } from '../../actions/stakeholderActions';
 
-const AddStakeholderScreen = ({ history, match }) => {
-	const projectId = match.params.projectId;
-	const { url, path } = useRouteMatch();
+const StakeholderContactInfo = ({ navigation }) => {
+	const stakeholder = useSelector((state) => state.stakeholderSave);
+	const { stakeholderInfo } = stakeholder;
 
 	//define states
-	const [firstName, setFirstName] = useState('');
-	const [lastName, setLastName] = useState('');
-	const [telephone, setTelephone] = useState('');
-	const [gender, setGender] = useState('');
-	const [birthdate, setBirthdate] = useState(Date);
-	const [email, setEmail] = useState('');
-	const [ethnicity, setEthnicity] = useState('');
+	const [firstName, setFirstName] = useState(stakeholderInfo.firstName);
+	const [lastName, setLastName] = useState(stakeholderInfo.lastName);
+	const [telephone, setTelephone] = useState(stakeholderInfo.telephone);
+	const [gender, setGender] = useState(stakeholderInfo.gender);
+	const [birthdate, setBirthdate] = useState(stakeholderInfo.birthdate);
+	const [email, setEmail] = useState(stakeholderInfo.email);
+	const [ethnicity, setEthnicity] = useState(stakeholderInfo.ethnicity);
+
 	const [media, setMedia] = useState([{ website: '' }]);
-	const [message, setMessage] = useState(null);
 
 	const dispatch = useDispatch();
-
-	const stakeholderAdd = useSelector((state) => state.stakeholderAdd);
-	const { success } = stakeholderAdd;
-
-	useEffect(() => {
-		if (success) {
-			setMessage('Stakeholder was successfully added.');
-			dispatch({ type: STAKEHOLDER_ADD_RESET });
-		}
-	}, [dispatch, success]);
 
 	//add input field
 	const addHandler = (i) => {
@@ -56,29 +42,24 @@ const AddStakeholderScreen = ({ history, match }) => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		history.push(`${url}/part2`);
-		// dispatch(
-		// 	addStakeholder(
-		// 		{
-		// 			firstName,
-		// 			lastName,
-		// 			telephone,
-		// 			gender,
-		// 			birthdate,
-		// 			email,
-		// 			ethnicity,
-		// 			media,
-		// 		},
-		// 		projectId
-		// 	)
-		// );
+		dispatch(
+			saveStakeholderInfo({
+				firstName,
+				lastName,
+				telephone,
+				gender,
+				birthdate,
+				email,
+				ethnicity,
+				media,
+			})
+		);
+		navigation.next();
 	};
 
 	return (
 		<>
-			{message && <Message variant="success">{message}</Message>}
 			<Form onSubmit={submitHandler} className="my-5">
-				{/* <RegisterSteps projectId={projectId} step1 /> */}
 				<Row>
 					<Col md={6}>
 						<Form.Group controlId="firstName">
@@ -176,37 +157,41 @@ const AddStakeholderScreen = ({ history, match }) => {
 					<Col md={12}>
 						<Form.Group controlId="media">
 							<Form.Label>Social Media</Form.Label>
-							{media.map((site, i) => (
-								<>
-									<Row>
-										<Col md={8}>
-											<Form.Control
-												className="mb-3"
-												placeholder="Add Website"
-												value={site.website}
-												required
-												onChange={(e) => handleInputChange(e, i)}
-											></Form.Control>
-										</Col>
-										<Col>
-											{media.length !== 1 && (
-												<Button
-													variant="danger"
-													className="btn-md mr-3"
-													onClick={() => removeHandler(i)}
-												>
-													<i className="fas fa-trash"></i>
-												</Button>
-											)}
-											{media.length - 1 === i && (
-												<Button className="px-3" onClick={() => addHandler(i)}>
-													<i className="fas fa-plus"></i> Add
-												</Button>
-											)}
-										</Col>
-									</Row>
-								</>
-							))}
+							{stakeholder &&
+								media.map((site, i) => (
+									<>
+										<Row>
+											<Col md={8}>
+												<Form.Control
+													className="mb-3"
+													placeholder="Add Website"
+													value={site.website}
+													required
+													onChange={(e) => handleInputChange(e, i)}
+												></Form.Control>
+											</Col>
+											<Col>
+												{media.length !== 1 && (
+													<Button
+														variant="danger"
+														className="btn-md mr-3"
+														onClick={() => removeHandler(i)}
+													>
+														<i className="fas fa-trash"></i>
+													</Button>
+												)}
+												{media.length - 1 === i && (
+													<Button
+														className="px-3"
+														onClick={() => addHandler(i)}
+													>
+														<i className="fas fa-plus"></i> Add
+													</Button>
+												)}
+											</Col>
+										</Row>
+									</>
+								))}
 						</Form.Group>
 					</Col>
 				</Row>
@@ -222,4 +207,4 @@ const AddStakeholderScreen = ({ history, match }) => {
 	);
 };
 
-export default AddStakeholderScreen;
+export default StakeholderContactInfo;

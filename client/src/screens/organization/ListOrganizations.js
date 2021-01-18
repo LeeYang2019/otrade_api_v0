@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, useRouteMatch } from 'react-router-dom';
 import { Table, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { listOrganizations } from '../../actions/organizationAction';
@@ -9,6 +9,9 @@ import SearchBox from '../../components/SearchBox';
 
 const ListOrganizations = ({ match }) => {
 	const projectId = match.params.id;
+	const { url } = useRouteMatch();
+
+	console.log('url', url);
 
 	const dispatch = useDispatch();
 
@@ -44,7 +47,7 @@ const ListOrganizations = ({ match }) => {
 						</Col>
 						<Col>
 							<Link
-								to={`/project/${projectId}/addOrganization`}
+								to={`${url}/addOrganization`}
 								className="btn btn-primary my-3"
 							>
 								<i className="fas fa-plus"></i> Register

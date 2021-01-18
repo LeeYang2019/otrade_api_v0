@@ -15,6 +15,7 @@ import {
 	STAKEHOLDER_LIST_REQUEST,
 	STAKEHOLDER_LIST_SUCCESS,
 	STAKEHOLDER_LIST_FAIL,
+	STAKEHOLDER_SAVE_REQUEST,
 } from '../constants/stakeholderConstants';
 
 //add stakeholder
@@ -163,7 +164,6 @@ export const listStakeholders = (projectId, keyword = '') => async (
 	dispatch,
 	getState
 ) => {
-	console.log('entered listStakeholders');
 	try {
 		dispatch({ type: STAKEHOLDER_LIST_REQUEST });
 
@@ -196,4 +196,13 @@ export const listStakeholders = (projectId, keyword = '') => async (
 					: error.messsage,
 		});
 	}
+};
+
+export const saveStakeholderInfo = (data) => (dispatch) => {
+	console.log(data);
+	dispatch({
+		type: STAKEHOLDER_SAVE_REQUEST,
+		payload: data,
+	});
+	localStorage.setItem('stakeholdersInfo', JSON.stringify(data));
 };

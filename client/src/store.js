@@ -26,6 +26,7 @@ import {
 	stakeholderUpdateReducer,
 	stakeholderDeleteReducer,
 	stakeholderListReducer,
+	stakeholderSaveReducer,
 } from './reducers/stakeholderReducer';
 import {
 	organizationAddReducer,
@@ -74,6 +75,7 @@ const reducer = combineReducers({
 	stakeholderUpdate: stakeholderUpdateReducer,
 	stakeholderDelete: stakeholderDeleteReducer,
 	stakeholderList: stakeholderListReducer,
+	stakeholderSave: stakeholderSaveReducer,
 
 	//organization reducers
 	organizationAdd: organizationAddReducer,
@@ -102,21 +104,14 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 	? JSON.parse(localStorage.getItem('userInfo'))
 	: null;
 
-// const usersInfoFromStorage = localStorage.getItem('usersInfo')
-// 	? JSON.parse(localStorage.getItem('usersInfo'))
-// 	: null;
-
-// const projectsInfoFromStorage = localStorage.getItem('projectsInfo')
-// 	? JSON.parse(localStorage.getItem('projectsInfo'))
-// 	: null;
-
-// const stakeholdersFromStorage = localStorage.getItem('stakeholdersInfo')
-// 	? JSON.parse(localStorage.getItem('stakeholdersInfo'))
-// 	: null;
+const stakeholderInfoFromStorage = localStorage.getItem('stakeholdersInfo')
+	? JSON.parse(localStorage.getItem('stakeholdersInfo'))
+	: null;
 
 // initialState
 const initialState = {
 	userLogin: { userInfo: userInfoFromStorage },
+	stakeholder: { stakeholderInfo: stakeholderInfoFromStorage },
 };
 
 const middleware = [thunk];

@@ -98,20 +98,18 @@ const ProjectScreen = ({ match }) => {
 							/>
 							<Route
 								exact
-								path={`${path}/stakeholders`}
-								render={({ match }) => <ListStakeholders match={match} />}
+								path={`${path}/activities`}
+								render={({ match }) => <ActivitiesList match={match} />}
 							/>
-
 							<Route
 								exact
 								path={`${path}/organizations`}
 								render={({ match }) => <ListOrganizations match={match} />}
 							/>
-
 							<Route
 								exact
-								path={`${path}/activities`}
-								render={({ match }) => <ActivitiesList match={match} />}
+								path={`${path}/stakeholders`}
+								render={({ match }) => <ListStakeholders match={match} />}
 							/>
 						</Switch>
 					</Container>
