@@ -16,9 +16,6 @@ const ProjectScreen = ({ match }) => {
 
 	const { url, path } = useRouteMatch();
 
-	console.log('url', url);
-	console.log('path', path);
-
 	// get userDispatch
 	const dispatch = useDispatch();
 
