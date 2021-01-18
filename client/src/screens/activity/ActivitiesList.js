@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, useRouteMatch } from 'react-router-dom';
 import { Table, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { listActivities } from '../../actions/activityActions';
@@ -11,6 +11,10 @@ const ActivitiesList = ({ match, keyword = '' }) => {
 	const dispatch = useDispatch();
 
 	const projectId = match.params.id;
+
+	const { url } = useRouteMatch();
+
+	console.log(url);
 
 	//get activities
 	const activityList = useSelector((state) => state.activityList);
@@ -43,10 +47,7 @@ const ActivitiesList = ({ match, keyword = '' }) => {
 							/>
 						</Col>
 						<Col>
-							<Link
-								to={`/project/${projectId}/addActivity`}
-								className="btn btn-primary my-3"
-							>
+							<Link to={`${url}/addActivity`} className="btn btn-primary my-3">
 								<i className="fas fa-plus"></i> Register
 							</Link>
 						</Col>

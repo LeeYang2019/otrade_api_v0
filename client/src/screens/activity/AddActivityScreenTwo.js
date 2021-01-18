@@ -8,9 +8,12 @@ import { addActivity } from '../../actions/activityActions';
 import { ACTIVITY_ADD_RESET } from '../../constants/activityConstants';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
+import { Next } from 'react-bootstrap/esm/PageItem';
 
-const AddActivityScreenTwo = ({ history, match }) => {
+const AddActivityScreenTwo = ({ match, navigation }) => {
 	const projectId = match.params.projectId;
+
+	const { next, previous } = navigation;
 
 	//define states
 	const [compromise, setcompromise] = useState('');
@@ -18,14 +21,6 @@ const AddActivityScreenTwo = ({ history, match }) => {
 	const [message, setMessage] = useState(null);
 
 	const dispatch = useDispatch();
-
-	//get logged in user
-	const userLogin = useSelector((state) => state.userLogin);
-	const { userInfo } = userLogin;
-
-	//get project
-	const projectDetails = useSelector((state) => state.projectDetails);
-	const { project } = projectDetails;
 
 	//get stakeholders
 	const stakeholderList = useSelector((state) => state.stakeholderList);
@@ -39,7 +34,7 @@ const AddActivityScreenTwo = ({ history, match }) => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 		if (compromise === 'Yes') {
-			history.push(`/project/${projectId}/addActivityPart3`);
+			next();
 		}
 		// //dispatch
 		// dispatch(
@@ -60,41 +55,34 @@ const AddActivityScreenTwo = ({ history, match }) => {
 
 	return (
 		<>
-			<Link to={`/project/${projectId}`} className="btn btn-primary my-3">
-				Back to Project
-			</Link>
-			<Container className="w-75">
-				<h1>Register Activity</h1>
-				<hr />
-				{message && <Message variant="success">{message}</Message>}
-				<Form onSubmit={submitHandler} className="my-5">
-					<Form.Group controlId="compromise">
-						<Row>
-							<Col md={6}>
-								<Form.Label>Is there a compromise?</Form.Label>
-							</Col>
-							<Col md={2}>
-								<Form.Control
-									as="select"
-									value={compromise}
-									onChange={(e) => setcompromise(e.target.value)}
-								>
-									<option value="">--Select--</option>
-									<option value="Yes">Yes</option>
-									<option value="No">No</option>
-								</Form.Control>
-							</Col>
-						</Row>
-					</Form.Group>
+			{message && <Message variant="success">{message}</Message>}
+			<Form onSubmit={submitHandler} className="my-5">
+				<Form.Group controlId="compromise">
 					<Row>
-						<Col>
-							<Button type="submit" variant="primary" className="px-5 mt-3">
-								Continue
-							</Button>
+						<Col md={10}>
+							<Form.Label>Is there a compromise?</Form.Label>
+						</Col>
+						<Col md={2}>
+							<Form.Control
+								as="select"
+								value={compromise}
+								onChange={(e) => setcompromise(e.target.value)}
+							>
+								<option value="">--Select--</option>
+								<option value="Yes">Yes</option>
+								<option value="No">No</option>
+							</Form.Control>
 						</Col>
 					</Row>
-				</Form>
-			</Container>
+				</Form.Group>
+				<Row>
+					<Col>
+						<Button type="submit" variant="primary" className="px-5 mt-3">
+							Continue
+						</Button>
+					</Col>
+				</Row>
+			</Form>
 		</>
 	);
 };
