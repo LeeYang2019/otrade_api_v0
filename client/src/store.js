@@ -10,6 +10,7 @@ import {
 	projectAddReducer,
 	projectUserReducer,
 	projectUserAssignmentReducer,
+	projectSaveReducer,
 } from './reducers/projectReducers';
 import {
 	userListReducer,
@@ -34,6 +35,7 @@ import {
 	organizationUpdateReducer,
 	organizationDeleteReducer,
 	organizationListReducer,
+	organizationStakeholderListReducer,
 } from './reducers/organizationReducer';
 import {
 	activityAddReducer,
@@ -68,6 +70,7 @@ const reducer = combineReducers({
 	projectList: projectListReducer,
 	projectUser: projectUserReducer,
 	projectUserAssignment: projectUserAssignmentReducer,
+	projectSave: projectSaveReducer,
 
 	//stakeholder reducers
 	stakeholderAdd: stakeholderAddReducer,
@@ -83,6 +86,7 @@ const reducer = combineReducers({
 	organizationUpdate: organizationUpdateReducer,
 	organizationDelete: organizationDeleteReducer,
 	organizationList: organizationListReducer,
+	organizationStakeholderList: organizationStakeholderListReducer,
 
 	//activity reducers
 	activityAdd: activityAddReducer,
@@ -108,10 +112,15 @@ const stakeholderInfoFromStorage = localStorage.getItem('stakeholdersInfo')
 	? JSON.parse(localStorage.getItem('stakeholdersInfo'))
 	: null;
 
+const projectInfoFromStorage = localStorage.getItem('projectInfo')
+	? JSON.parse(localStorage.getItem('projectInfo'))
+	: null;
+
 // initialState
 const initialState = {
 	userLogin: { userInfo: userInfoFromStorage },
 	stakeholder: { stakeholderInfo: stakeholderInfoFromStorage },
+	project: { projectInfo: projectInfoFromStorage },
 };
 
 const middleware = [thunk];

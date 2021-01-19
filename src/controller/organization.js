@@ -4,7 +4,7 @@ const asyncHandler = require('../middleware/async');
 //import Organization model
 const Organization = require('../model/Organization');
 
-// @desc    GET all organizations
+// @desc    GET all organizations by project
 // @route   GET /api/v1/projects/projectId/organizations
 // @access  Private
 exports.getOrganizations = asyncHandler(async (req, res, next) => {
@@ -14,6 +14,27 @@ exports.getOrganizations = asyncHandler(async (req, res, next) => {
 
 	const organizations = await Organization.find({
 		project: req.params.projectId,
+		...keyword,
+	});
+
+	if (!organizations) {
+		res.status(401);
+		throw new Error('No resources found');
+	}
+
+	res.status(200).json({ success: true, data: organizations });
+});
+
+// @desc    GET all organizations by stakeholderId
+// @route   GET /api/v1/stakeholders/stakeholderId/organizations
+// @access  Private
+exports.getStakeholderOrganizations = asyncHandler(async (req, res, next) => {
+	const keyword = req.query.keyword
+		? { name: { $regex: req.query.keyword, $options: 'i' } }
+		: {};
+
+	const organizations = await Organization.find({
+		stakeholder: req.params.projectId,
 		...keyword,
 	});
 

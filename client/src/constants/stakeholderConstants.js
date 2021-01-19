@@ -28,6 +28,6 @@ export const STAKEHOLDER_LIST_SUCCESS = 'STAKEHOLDER_LIST_SUCCESS';
 export const STAKEHOLDER_LIST_FAIL = 'STAKEHOLDER_LIST_FAIL';
 export const STAKEHOLDER_LIST_RESET = 'STAKEHOLDER_LIST_RESET';
 
-//save 1st part of stakeholderInfo in localStorage
+//save stakeholderInfo in localStorage
 export const STAKEHOLDER_SAVE_REQUEST = 'STAKEHOLDER_SAVE_REQUEST';
 export const STAKEHOLDER_SAVE_RESET = 'STAKEHOLDER_SAVE_RESET';

@@ -20,6 +20,10 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 
 	const dispatch = useDispatch();
 
+	//get project details
+	const projectDetails = useSelector((state) => state.projectDetails);
+	const { loading, error, project } = projectDetails;
+
 	//get stakeholders
 	const stakeholderList = useSelector((state) => state.stakeholderList);
 	const { stakeholders: stakeholdersList } = stakeholderList;

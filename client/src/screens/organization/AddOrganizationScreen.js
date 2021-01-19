@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrganization } from '../../actions/organizationAction';
-import { listStakeholders } from '../../actions/stakeholderActions';
 import Message from '../../components/Message.js';
 import { ORGANIZATION_ADD_RESET } from '../../constants/organizationConstants';
 
@@ -20,6 +19,10 @@ const AddOrganizationScreen = ({ history, match }) => {
 	const [message, setMessage] = useState(null);
 
 	const dispatch = useDispatch();
+
+	//get project details
+	const projectDetails = useSelector((state) => state.projectDetails);
+	const { project } = projectDetails;
 
 	//get stakeholders
 	const stakeholderList = useSelector((state) => state.stakeholderList);
@@ -81,7 +84,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 					website,
 					stakeholders,
 				},
-				projectId
+				project._id
 			)
 		);
 	};

@@ -7,8 +7,8 @@ import Loader from '../../components/Loader.js';
 import { getStakeholderDetails } from '../../actions/stakeholderActions';
 import Comments from '../stakeholder/Comments';
 import EditStakeholderScreen from './EditStakeholderScreen';
-import ListOrganizations from './../organization/ListOrganizations';
-import ActivitiesList from './../activity/ActivitiesList';
+import ListStakeholderOrganizations from '../organization/ListStakeholderOrganizations';
+import ListStakeholderActivities from '../activity/ListStakeholderActivities';
 import ProfilePic2 from '../../img/Nhialee_Yang2.jpg';
 
 const StakeholderScreen = ({ history, match }) => {
@@ -78,7 +78,7 @@ const StakeholderScreen = ({ history, match }) => {
 										<NavLink to={`${url}/organizations`}>Organizations</NavLink>
 									</li>
 									<li>
-										<NavLink to={`${url}/Activities`}>Activities</NavLink>
+										<NavLink to={`${url}/activities`}>Activities</NavLink>
 									</li>
 								</ul>
 							</Row>
@@ -92,11 +92,21 @@ const StakeholderScreen = ({ history, match }) => {
 								render={({ match }) => <EditStakeholderScreen match={match} />}
 							/>
 
-							{/* <Route
+							<Route
 								exact
-								path={`${path}/projects`}
-								render={({ match }) => <UserProjects match={match} />}
-							/> */}
+								path={`${path}/organizations`}
+								render={({ match }) => (
+									<ListStakeholderOrganizations match={match} />
+								)}
+							/>
+
+							<Route
+								exact
+								path={`${path}/activities`}
+								render={({ match }) => (
+									<ListStakeholderActivities match={match} />
+								)}
+							/>
 						</Switch>
 					</Row>
 				</>

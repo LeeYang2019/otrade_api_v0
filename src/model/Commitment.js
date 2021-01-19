@@ -16,6 +16,12 @@ const CommitmentSchema = mongoose.Schema(
 			ref: 'Activity',
 			required: true,
 		},
+		stakeholders: [{ type: mongoose.Schema.ObjectId, ref: 'Stakeholder' }],
+		project: {
+			type: mongoose.Schema.ObjectId,
+			ref: 'Project',
+			required: true,
+		},
 		user: {
 			type: mongoose.Schema.ObjectId,
 			ref: 'User',

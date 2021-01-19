@@ -2,23 +2,26 @@ import React, { useEffect } from 'react';
 import { Route, Link, useRouteMatch } from 'react-router-dom';
 import { Table, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { listOrganizations } from '../../actions/organizationAction';
-import Message from '../../components/Message';
-import Loader from '../../components/Loader';
+import { listActivities } from '../../actions/activityActions';
+import Message from '../../components/Message.js';
+import Loader from '../../components/Loader.js';
 import SearchBox from '../../components/SearchBox';
 
-const ListOrganizations = ({ match }) => {
-	const projectId = match.params.id;
-	const { url } = useRouteMatch();
-
+const ListStakeholderActivities = ({ match, keyword = '' }) => {
 	const dispatch = useDispatch();
 
-	//get organizations
-	const organizationList = useSelector((state) => state.organizationList);
-	const { loading, error, organizations } = organizationList;
+	const projectId = match.params.id;
+
+	const { url } = useRouteMatch();
+
+	console.log(url);
+
+	//get activities
+	const activityList = useSelector((state) => state.activityList);
+	const { loading, error, activities } = activityList;
 
 	useEffect(() => {
-		dispatch(listOrganizations(projectId));
+		dispatch(listActivities(projectId));
 	}, [dispatch, projectId]);
 
 	return (
@@ -36,7 +39,7 @@ const ListOrganizations = ({ match }) => {
 								render={({ history }) => (
 									<SearchBox
 										history={history}
-										searchWord={'Organization'}
+										searchWord={'Activity'}
 										searchQueryPath={`/project/${projectId}/search/`}
 										searchQueryEmpty={`/project/${projectId}`}
 									/>
@@ -44,10 +47,7 @@ const ListOrganizations = ({ match }) => {
 							/>
 						</Col>
 						<Col>
-							<Link
-								to={`${url}/addOrganization`}
-								className="btn btn-primary my-3"
-							>
+							<Link to={`${url}/addActivity`} className="btn btn-primary my-3">
 								<i className="fas fa-plus"></i> Register
 							</Link>
 						</Col>
@@ -55,27 +55,37 @@ const ListOrganizations = ({ match }) => {
 					<Row>
 						<Table responsive className="table-sm mt-3 overflow-scroll">
 							<tbody>
-								{organizations &&
-									organizations.map((organization) => (
-										<tr key={organization._id}>
+								{activities &&
+									activities.map((activity) => (
+										<tr key={activity._id}>
 											<td>
 												<p className="mr-3">
-													<strong>Organization: </strong>
+													<strong>Activity: </strong>
 													<Link
-														to={`/project/${projectId}/organization/${organization._id}`}
+														to={`/project/${projectId}/activity/${activity._id}`}
 													>
-														{organization.name}
+														{activity.activity}
 													</Link>
 													<br />
-													Email: <em> {organization.email}</em>
+													Stakeholders:{' '}
+													<em> {activity.stakeholders.join('')}</em>
 													<br />
-													Telephone: {organization.telephone}
+													Status:{' '}
+													<em>
+														{activity.isComplete === 'true' ? (
+															<strong className="text-success">Complete</strong>
+														) : (
+															<strong className="text-warning">
+																In Progress
+															</strong>
+														)}
+													</em>
 													<br />
 													Registered Date:{' '}
 													<strong>
 														{' '}
-														{organization.createdAt &&
-															organization.createdAt.substring(0, 10)}{' '}
+														{activity.createdAt &&
+															activity.createdAt.substring(0, 10)}{' '}
 													</strong>
 												</p>
 											</td>
@@ -90,4 +100,4 @@ const ListOrganizations = ({ match }) => {
 	);
 };
 
-export default ListOrganizations;
+export default ListStakeholderActivities;

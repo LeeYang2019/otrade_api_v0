@@ -12,10 +12,10 @@ import {
 import Message from '../../components/Message.js';
 
 const AddStakeholderScreen = ({ navigation, match }) => {
-	const projectId = match.params.id;
-
-	console.log(match.params.id);
-	console.log(projectId);
+	//get projectDetails
+	//get project details
+	const projectDetails = useSelector((state) => state.projectDetails);
+	const { project } = projectDetails;
 
 	//get stakeholder from localstorage
 	const stakeholder = useSelector((state) => state.stakeholderSave);
@@ -57,7 +57,7 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 		dispatch(saveStakeholderInfo(stakeholderInfo));
 
 		//save to database
-		dispatch(addStakeholder(stakeholderInfo, projectId));
+		dispatch(addStakeholder(stakeholderInfo, project._id));
 
 		if (organization === 'Yes') {
 			next();

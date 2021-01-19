@@ -21,6 +21,8 @@ import {
 	PROJECT_ADD_REQUEST,
 	PROJECT_ADD_SUCCESS,
 	PROJECT_ADD_FAIL,
+	PROJECT_SAVE_REQUEST,
+	PROJECT_SAVE_RESET,
 } from '../constants/projectConstants';
 
 //add project
@@ -122,6 +124,17 @@ export const projectListReducer = (state = { projects: [] }, action) => {
 			};
 		case PROJECT_LIST_FAIL:
 			return { loading: false, error: action.payload };
+		default:
+			return state;
+	}
+};
+
+export const projectSaveReducer = (state = { projectInfo: {} }, action) => {
+	switch (action.type) {
+		case PROJECT_SAVE_REQUEST:
+			return { ...state, projectInfo: action.payload };
+		case PROJECT_SAVE_RESET:
+			return { projectInfo: {} };
 		default:
 			return state;
 	}

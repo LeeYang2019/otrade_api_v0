@@ -121,7 +121,7 @@ const AddActivityScreen = ({ match, navigation }) => {
 				<Row>
 					<Col md={12}>
 						<Form.Group controlId="location">
-							<Form.Label>Location</Form.Label>
+							<Form.Label>Location (street, city, state, country)</Form.Label>
 							<Form.Control
 								type="text"
 								placeholder="Enter Location"

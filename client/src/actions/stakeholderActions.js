@@ -199,7 +199,6 @@ export const listStakeholders = (projectId, keyword = '') => async (
 };
 
 export const saveStakeholderInfo = (data) => (dispatch) => {
-	console.log(data);
 	dispatch({
 		type: STAKEHOLDER_SAVE_REQUEST,
 		payload: data,

@@ -7,13 +7,13 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import SearchBox from '../../components/SearchBox';
 
-const ListOrganizations = ({ match }) => {
+const ListStakeholderOrganizations = ({ match }) => {
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();
 
 	const dispatch = useDispatch();
 
-	//get organizations
+	//get organizations for stakeholder
 	const organizationList = useSelector((state) => state.organizationList);
 	const { loading, error, organizations } = organizationList;
 
@@ -90,4 +90,4 @@ const ListOrganizations = ({ match }) => {
 	);
 };
 
-export default ListOrganizations;
+export default ListStakeholderOrganizations;

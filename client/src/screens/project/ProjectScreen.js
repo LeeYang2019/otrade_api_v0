@@ -23,10 +23,12 @@ const ProjectScreen = ({ match }) => {
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { loading, error, project } = projectDetails;
 
+	//save project details to localStorage
+	//localStorage.setItem('userInfo', JSON.stringify(data));
+
 	useEffect(() => {
 		dispatch(listProjectDetails(projectId));
-		// eslint-disable-next-line
-	}, []);
+	}, [dispatch, projectId]);
 
 	return (
 		<>
@@ -44,7 +46,7 @@ const ProjectScreen = ({ match }) => {
 							<Row>
 								<Col>
 									<h1>
-										<strong>{project.projectName}</strong>
+										<strong>Project: {project.projectName}</strong>
 									</h1>
 								</Col>
 							</Row>
@@ -86,6 +88,7 @@ const ProjectScreen = ({ match }) => {
 							</Row>
 						</Col>
 					</Row>
+
 					<Container>
 						<Switch>
 							<Route

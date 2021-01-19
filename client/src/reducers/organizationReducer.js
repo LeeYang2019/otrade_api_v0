@@ -16,6 +16,9 @@ import {
 	ORGANIZATION_LIST_REQUEST,
 	ORGANIZATION_LIST_SUCCESS,
 	ORGANIZATION_LIST_FAIL,
+	ORGANIZATION_STAKEHOLDER_LIST_REQUEST,
+	ORGANIZATION_STAKEHOLDER_LIST_SUCCESS,
+	ORGANIZATION_STAKEHOLDER_LIST_FAIL,
 } from '../constants/organizationConstants';
 
 //add organization reducer
@@ -98,6 +101,26 @@ export const organizationListReducer = (
 				organizations: action.payload,
 			};
 		case ORGANIZATION_LIST_FAIL:
+			return { loading: false, error: action.payload };
+		default:
+			return state;
+	}
+};
+
+//get organization list reducer
+export const organizationStakeholderListReducer = (
+	state = { organizations: [] },
+	action
+) => {
+	switch (action.type) {
+		case ORGANIZATION_STAKEHOLDER_LIST_REQUEST:
+			return { loading: true, organizations: [] };
+		case ORGANIZATION_STAKEHOLDER_LIST_SUCCESS:
+			return {
+				loading: false,
+				organizations: action.payload,
+			};
+		case ORGANIZATION_STAKEHOLDER_LIST_FAIL:
 			return { loading: false, error: action.payload };
 		default:
 			return state;

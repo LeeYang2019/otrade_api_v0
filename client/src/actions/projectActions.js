@@ -10,7 +10,6 @@ import {
 	PROJECT_UPDATE_SUCCESS,
 	PROJECT_UPDATE_FAIL,
 	PROJECT_DELETE_REQUEST,
-	PROJECT_DELETE_SUCCESS,
 	PROJECT_DELETE_FAIL,
 	PROJECT_LIST_REQUEST,
 	PROJECT_LIST_SUCCESS,
@@ -21,6 +20,7 @@ import {
 	PROJECT_ASSIGNMENT_REQUEST,
 	PROJECT_ASSIGNMENT_SUCCESS,
 	PROJECT_ASSIGNMENT_FAIL,
+	PROJECT_SAVE_REQUEST,
 } from '../constants/projectConstants';
 
 //add project
@@ -247,4 +247,12 @@ export const assignProjectUser = (projectId, assignments) => async (
 			payload: message,
 		});
 	}
+};
+
+export const saveProjectInfo = (data) => (dispatch) => {
+	dispatch({
+		type: PROJECT_SAVE_REQUEST,
+		payload: data,
+	});
+	localStorage.setItem('projectInfo', JSON.stringify(data));
 };
