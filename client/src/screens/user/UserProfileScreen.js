@@ -35,9 +35,8 @@ const UserProfileScreen = ({ history, match, location }) => {
 				<>
 					<Row>
 						<Col md={2}>
-							<img src={ProfilePic} alt="profile" className="profile" />
+							<img src={user.image} alt="profile" className="profile" />
 						</Col>
-
 						<Col md={10}>
 							<Row>
 								<Col md={12}>

@@ -62,16 +62,6 @@ exports.updateMyUserProfile = asyncHandler(async (req, res) => {
 	//auth middleware passes user here
 	const user = await User.findById(req.user._id);
 
-	//get avatar
-	const avatar = gravatar.url(req.body.email, {
-		s: '200', //size
-		r: 'pg', //rating
-		d: 'mm',
-	});
-
-	//set avatar in body
-	req.body.avatar = avatar;
-
 	//matches enteredPassword with db user password
 	if (user) {
 		user.firstName = req.body.firstName || user.firstName;
@@ -142,15 +132,7 @@ exports.getUser = asyncHandler(async (req, res) => {
 // @route   POST /api/v1/users
 // @access  private/admin
 exports.registerUser = asyncHandler(async (req, res) => {
-	const {
-		firstName,
-		lastName,
-		email,
-		role,
-		status,
-		password,
-		telephone,
-	} = req.body;
+	const { email } = req.body;
 
 	const userExists = await User.findOne({ email });
 
@@ -161,16 +143,6 @@ exports.registerUser = asyncHandler(async (req, res) => {
 
 	req.body.user = req.user;
 
-	//get avatar
-	const avatar = gravatar.url(email, {
-		s: '200', //size
-		r: 'pg', //rating
-		d: 'mm',
-	});
-
-	//set avatar in body
-	req.body.avatar = avatar;
-
 	//create user
 	const user = await User.create(req.body);
 
@@ -180,6 +152,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
 			firstName: user.firstName,
 			lastName: user.lastName,
 			email: user.email,
+			image: user.image,
 			role: user.role,
 			status: user.status,
 			token: generateToken(user._id),
@@ -201,6 +174,7 @@ exports.updateUser = asyncHandler(async (req, res) => {
 		user.firstName = req.body.firstName || user.firstName;
 		user.lastName = req.body.lastName || user.lastName;
 		user.email = req.body.email || user.email;
+		user.image = req.body.image || user.image;
 		user.telephone = req.body.telephone || user.telephone;
 		user.status = req.body.status || user.status;
 		user.role = req.body.role || user.role;
@@ -208,10 +182,7 @@ exports.updateUser = asyncHandler(async (req, res) => {
 		const updatedUser = await user.save();
 
 		res.json({
-			_id: updatedUser._id,
-			name: updatedUser.name,
-			email: updatedUser.email,
-			role: updatedUser.role,
+			updatedUser,
 		});
 	} else {
 		res.status(401); //unauthorized

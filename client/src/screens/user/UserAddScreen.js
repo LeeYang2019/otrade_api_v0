@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../actions/userActions';
 import Message from '../../components/Message';
+import Loader from '../../components/Loader';
 
 const UserAddScreen = ({ history }) => {
 	//define states
@@ -16,6 +18,10 @@ const UserAddScreen = ({ history }) => {
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [message, setMessage] = useState('');
+
+	//add fileupload
+	const [image, setImage] = useState('');
+	const [uploading, setUploading] = useState(false);
 
 	const dispatch = useDispatch();
 
@@ -38,6 +44,29 @@ const UserAddScreen = ({ history }) => {
 		}
 	}, [dispatch, history, userInfo, success]);
 
+	const uploadFileHandler = async (e) => {
+		const file = e.target.files[0];
+		const formData = new FormData();
+		formData.append('image', file);
+		setUploading(true);
+
+		try {
+			const config = {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			};
+
+			const { data } = await axios.post('/api/v1/uploads', formData, config);
+
+			setImage(data);
+			setUploading(false);
+		} catch (error) {
+			console.error(error);
+			setUploading(false);
+		}
+	};
+
 	const submitHandler = (e) => {
 		e.preventDefault();
 
@@ -51,6 +80,7 @@ const UserAddScreen = ({ history }) => {
 				registerUser({
 					firstName,
 					lastName,
+					image,
 					email,
 					telephone,
 					role,
@@ -156,6 +186,36 @@ const UserAddScreen = ({ history }) => {
 									<option value="active">active</option>
 									<option value="inactive">inactive</option>
 								</Form.Control>
+							</Form.Group>
+						</Col>
+					</Row>
+					<hr className="my-4" />
+					<Row>
+						<Col>
+							<Form.Group controlId="image">
+								<Form.Label>Image</Form.Label>
+								<Row className="mb-3">
+									<Col md={6}>
+										<Form.Control
+											type="text"
+											placeholder="Enter image url"
+											value={image}
+											onChange={(e) => setImage(e.target.value)}
+										></Form.Control>
+									</Col>
+								</Row>
+								<Row>
+									<Col md={6}>
+										<Form.File
+											id="image-file"
+											label="Choose File"
+											custom
+											onChange={uploadFileHandler}
+										>
+											{uploading && <Loader />}
+										</Form.File>
+									</Col>
+								</Row>
 							</Form.Group>
 						</Col>
 					</Row>

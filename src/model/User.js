@@ -11,6 +11,10 @@ const UserSchema = new mongoose.Schema(
 			type: String,
 			required: [true, 'Please add a lastname'],
 		},
+		image: {
+			type: String,
+			required: true,
+		},
 		email: {
 			type: String,
 			required: [true, 'Please add an email'],

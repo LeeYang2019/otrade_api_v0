@@ -111,7 +111,7 @@ const ProjectAddScreen = ({ history }) => {
 											type="text"
 											placeholder="Enter image url"
 											value={image}
-											onChange={(e) => setProjectName(e.target.value)}
+											onChange={(e) => setImage(e.target.value)}
 										></Form.Control>
 									</Col>
 								</Row>
