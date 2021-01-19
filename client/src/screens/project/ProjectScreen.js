@@ -23,9 +23,6 @@ const ProjectScreen = ({ match }) => {
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { loading, error, project } = projectDetails;
 
-	//save project details to localStorage
-	//localStorage.setItem('userInfo', JSON.stringify(data));
-
 	useEffect(() => {
 		dispatch(listProjectDetails(projectId));
 	}, [dispatch, projectId]);
@@ -39,10 +36,10 @@ const ProjectScreen = ({ match }) => {
 			) : (
 				<>
 					<Row>
-						<Col md={2}>
-							<img src={BrazilPic} alt="profile" className="profile" />
+						<Col md={3}>
+							<img src={project.image} alt="profile" className="profile" />
 						</Col>
-						<Col md={10}>
+						<Col md={9}>
 							<Row>
 								<Col>
 									<h1>

@@ -6,8 +6,6 @@ import Message from '../../components/Message.js';
 import { ORGANIZATION_ADD_RESET } from '../../constants/organizationConstants';
 
 const AddOrganizationScreen = ({ history, match }) => {
-	const projectId = match.params.projectId;
-
 	//define states
 	const [organization, setOrganization] = useState('');
 	const [division, setDivision] = useState('');

@@ -11,6 +11,10 @@ const ProjectSchema = new mongoose.Schema(
 			type: String,
 			required: [true, 'Please add a project client'],
 		},
+		image: {
+			type: String,
+			required: true,
+		},
 		status: {
 			type: String,
 			enum: ['open', 'closed'],

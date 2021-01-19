@@ -61,9 +61,7 @@ const ListOrganizations = ({ match }) => {
 											<td>
 												<p className="mr-3">
 													<strong>Organization: </strong>
-													<Link
-														to={`/project/${projectId}/organization/${organization._id}`}
-													>
+													<Link to={`${url}/${organization._id}/profile`}>
 														{organization.name}
 													</Link>
 													<br />

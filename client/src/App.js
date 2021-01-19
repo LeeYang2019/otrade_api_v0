@@ -43,6 +43,12 @@ const App = () => {
 						component={AddOrganizationScreen}
 					/>
 
+					<PrivateRoute
+						exact
+						path="/project/:id/organizations/:id/profile"
+						component={AddOrganizationScreen}
+					/>
+
 					<PrivateRoute path="/stakeholder/:id" component={StakeholderScreen} />
 
 					<Route component={AdminRoutes} />

@@ -1,13 +1,18 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 import { addProject } from '../../actions/projectActions';
+import { PROJECT_ADD_RESET } from '../../constants/projectConstants';
+import Loader from '../../components/Loader';
 
 const ProjectAddScreen = ({ history }) => {
 	const [projectName, setProjectName] = useState('');
 	const [projectClient, setProjectClient] = useState('');
+	const [image, setImage] = useState('');
 	const [comment, setComment] = useState('');
+	const [uploading, setUploading] = useState(false);
 
 	const dispatch = useDispatch();
 	const userLogin = useSelector((state) => state.userLogin);
@@ -21,11 +26,34 @@ const ProjectAddScreen = ({ history }) => {
 			history.push('/login');
 		} else {
 			if (success) {
-				console.log('success');
+				dispatch({ type: PROJECT_ADD_RESET });
 				history.push('/admin/projects');
 			}
 		}
-	}, [history, success, userInfo]);
+	}, [dispatch, history, success, userInfo]);
+
+	const uploadFileHandler = async (e) => {
+		const file = e.target.files[0];
+		const formData = new FormData();
+		formData.append('image', file);
+		setUploading(true);
+
+		try {
+			const config = {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			};
+
+			const { data } = await axios.post('/api/v1/uploads', formData, config);
+
+			setImage(data);
+			setUploading(false);
+		} catch (error) {
+			console.error(error);
+			setUploading(false);
+		}
+	};
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -33,6 +61,7 @@ const ProjectAddScreen = ({ history }) => {
 			addProject({
 				projectName,
 				projectClient,
+				image,
 				comment,
 			})
 		);
@@ -52,7 +81,7 @@ const ProjectAddScreen = ({ history }) => {
 							<Form.Group controlId="projectName">
 								<Form.Label>Project Name</Form.Label>
 								<Form.Control
-									type="projectName"
+									type="text"
 									placeholder="Enter a project name"
 									value={projectName}
 									onChange={(e) => setProjectName(e.target.value)}
@@ -63,7 +92,7 @@ const ProjectAddScreen = ({ history }) => {
 							<Form.Group controlId="projectClient">
 								<Form.Label>Project Client</Form.Label>
 								<Form.Control
-									type="projectClient"
+									type="text"
 									placeholder="Enter a project client"
 									value={projectClient}
 									onChange={(e) => setProjectClient(e.target.value)}
@@ -73,6 +102,36 @@ const ProjectAddScreen = ({ history }) => {
 					</Row>
 					<hr />
 					<Row>
+						<Col>
+							<Form.Group controlId="image">
+								<Form.Label>Image</Form.Label>
+								<Row className="mb-3">
+									<Col md={8}>
+										<Form.Control
+											type="text"
+											placeholder="Enter image url"
+											value={image}
+											onChange={(e) => setProjectName(e.target.value)}
+										></Form.Control>
+									</Col>
+								</Row>
+								<Row>
+									<Col md={8}>
+										<Form.File
+											id="image-file"
+											label="Choose File"
+											custom
+											onChange={uploadFileHandler}
+										>
+											{uploading && <Loader />}
+										</Form.File>
+									</Col>
+								</Row>
+							</Form.Group>
+						</Col>
+					</Row>
+					<hr />
+					<Row className="mt-3">
 						<Col>
 							<Form.Group controlId="comment">
 								<Form.Label>Comments</Form.Label>

@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
@@ -13,6 +14,7 @@ const organizations = require('./routes/organization');
 const activities = require('./routes/activities');
 const commitments = require('./routes/commitments');
 const comments = require('./routes/comments');
+const uploads = require('./routes/uploadRoutes');
 
 //load env vars
 dotenv.config();
@@ -38,6 +40,10 @@ app.use('/api/v1/organizations', organizations);
 app.use('/api/v1/activities', activities);
 app.use('/api/v1/commitments', commitments);
 app.use('/api/v1/comments', comments);
+app.use('/api/v1/uploads', uploads);
+
+// const __dirname = path.resolve();
+app.use('/uploads', express.static(path.join(path.resolve(), '/uploads')));
 
 app.use(notFound, errorHandler);
 

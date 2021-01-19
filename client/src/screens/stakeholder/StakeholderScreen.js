@@ -75,6 +75,9 @@ const StakeholderScreen = ({ history, match }) => {
 										<NavLink to={`${url}/dashboard`}>Dashboard</NavLink>
 									</li>
 									<li>
+										<NavLink to={`${url}/comments`}>Comments</NavLink>
+									</li>
+									<li>
 										<NavLink to={`${url}/organizations`}>Organizations</NavLink>
 									</li>
 									<li>

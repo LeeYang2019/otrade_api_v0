@@ -70,7 +70,7 @@ const UserProfileScreen = ({ history, match, location }) => {
 										<NavLink to={`${url}/dashboard`}>Dashboard</NavLink>
 									</li>
 									<li>
-										<NavLink to={`${url}/projects`}>Project</NavLink>
+										<NavLink to={`${url}/projects`}>Projects</NavLink>
 									</li>
 								</ul>
 							</Row>
