@@ -9,6 +9,8 @@ const {
 	deleteStakeholder,
 } = require('../controller/stakeholders');
 
+const { getStakeholderOrganizations } = require('../controller/organization');
+
 const { protect, isAdmin } = require('../middleware/auth');
 
 //create router
@@ -37,6 +39,8 @@ router
 	.get(protect, getStakeholder)
 	.put(protect, updateStakeholder)
 	.delete(protect, isAdmin, deleteStakeholder);
+
+router.route('/:id/organizations').get(protect, getStakeholderOrganizations);
 
 // export router
 module.exports = router;
