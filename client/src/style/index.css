@@ -92,3 +92,11 @@ label {
 	width: 100%;
 	text-justify: center;
 }
+
+.border-container {
+	width: 100%;
+	height: auto;
+	margin-top: 1rem;
+	padding: 1.5rem 2rem;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+}

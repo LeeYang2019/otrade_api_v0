@@ -68,9 +68,11 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 	};
 
 	return (
-		<>
+		<div className="border-container">
+			<Form.Label>Client Information</Form.Label>
+			<hr className="mt-4 mb-4" />
 			{message && <Message variant="success">{message}</Message>}
-			<Form onSubmit={submitHandler} className="my-5">
+			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Form.Group controlId="organization">
 					<Row>
 						<Col md={10}>
@@ -189,7 +191,7 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 					</Col>
 				</Row>
 			</Form>
-		</>
+		</div>
 	);
 };
 

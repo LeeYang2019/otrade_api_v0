@@ -84,18 +84,18 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 			<Link to="/admin/userList" className="btn btn-primary my-3">
 				Back to User List
 			</Link>
-			<Container className="w-50">
+			<div className="border-container">
 				{loadingUpdate && <Loader />}
 				{errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
 				{successUpdate && <Message variant="success">Profile Update</Message>}
 				<h1>Update User</h1>
-				<hr />
+				<hr className="mt-4 mb-4" />
 				{loading ? (
 					<Loader />
 				) : error ? (
 					<Message variant="danger">{error}</Message>
 				) : (
-					<Form onSubmit={submitHandler} className="my-4">
+					<Form onSubmit={submitHandler} className="mt-4 mb-3">
 						<Row>
 							<Col md={6}>
 								<Form.Group controlId="firstName">
@@ -190,7 +190,7 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 						</Row>
 					</Form>
 				)}
-			</Container>
+			</div>
 		</>
 	);
 };

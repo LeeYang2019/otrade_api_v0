@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Table, Row, Col } from 'react-bootstrap';
+import { Table, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
@@ -27,7 +27,7 @@ const UserProjects = ({ match }) => {
 			) : error ? (
 				<Message variant="light">{error}</Message>
 			) : (
-				<Table responsive className="table-sm mt-5 overflow-scroll">
+				<Table responsive className="table-sm mt-4 overflow-scroll">
 					<tbody>
 						{projects &&
 							projects.map((project) => (

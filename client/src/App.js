@@ -68,7 +68,7 @@ const App = () => {
 					/>
 					<PrivateRoute
 						exact
-						path="/stakeholder/:id/stakeholders/addActivity"
+						path="/project/:id/stakeholders/addActivity"
 						component={ActivityForm}
 					/>
 

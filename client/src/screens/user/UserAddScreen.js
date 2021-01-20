@@ -98,11 +98,11 @@ const UserAddScreen = ({ history }) => {
 				Back to User List
 			</Link>
 
-			<Container className="w-75">
+			<div className="border-container">
 				<h1>Register User</h1>
-				<hr />
+				<hr className="mt-4 mb-4" />
 				{message && <Message variant="danger">{message}</Message>}
-				<Form onSubmit={submitHandler} className="my-4">
+				<Form onSubmit={submitHandler} className="mt-4 mb-3">
 					<Row>
 						<Col md={6}>
 							<Form.Group controlId="firstName">
@@ -254,7 +254,7 @@ const UserAddScreen = ({ history }) => {
 						</Col>
 					</Row>
 				</Form>
-			</Container>
+			</div>
 		</>
 	);
 };

@@ -68,12 +68,14 @@ const EditUser = ({ match }) => {
 	};
 
 	return (
-		<>
+		<div className="border-container">
+			<Form.Label>User Information</Form.Label>
+			<hr className="mt-4 mb-4" />
 			{error && <Message variant="danger">{error}</Message>}
 			{successUpdate && <Message variant="success">{message}</Message>}
 			{loading && <Loader />}
 			<Container>
-				<Form onSubmit={submitHandler} className="my-5">
+				<Form onSubmit={submitHandler} className="mt-4 mb-3">
 					<Row>
 						<Col md={6}>
 							<Form.Group controlId="firstName">
@@ -164,7 +166,7 @@ const EditUser = ({ match }) => {
 					</Message>
 				)} */}
 			</Container>
-		</>
+		</div>
 	);
 };
 

@@ -11,7 +11,7 @@ const ProjectUpdateScreen = ({ match, history }) => {
 				Back to Project List
 			</Link>
 			<Row>
-				<Col md={8} className="m-auto">
+				<Col md={12} className="m-auto">
 					<Tabs defaultActiveKey="editProject" id="tabs" variant="tabs">
 						<Tab eventKey="editProject" title="Edit Project">
 							<ProjectEditScreen match={match} history={history} />

@@ -58,8 +58,10 @@ const StakeholderContactInfo = ({ navigation }) => {
 	};
 
 	return (
-		<>
-			<Form onSubmit={submitHandler} className="my-5">
+		<div className="border-container">
+			<Form.Label>Client Information</Form.Label>
+			<hr className="mt-4 mb-4" />
+			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Row>
 					<Col md={6}>
 						<Form.Group controlId="firstName">
@@ -153,7 +155,7 @@ const StakeholderContactInfo = ({ navigation }) => {
 						</Form.Group>
 					</Col>
 				</Row>
-				<Row className="mt-5">
+				<Row className="mt-4">
 					<Col md={12}>
 						<Form.Group controlId="media">
 							<Form.Label>Social Media</Form.Label>
@@ -203,7 +205,7 @@ const StakeholderContactInfo = ({ navigation }) => {
 					</Col>
 				</Row>
 			</Form>
-		</>
+		</div>
 	);
 };
 

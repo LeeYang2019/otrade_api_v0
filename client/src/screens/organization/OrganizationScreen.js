@@ -118,14 +118,16 @@ const OrganizationScreen = ({ history, match }) => {
 	};
 
 	return (
-		<>
+		<div className="border-container">
+			<Form.Label>Organization Information</Form.Label>
+			<hr className="mt-4 mb-4" />
 			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
-				<Form onSubmit={submitHandler} className="my-5">
+				<Form onSubmit={submitHandler} className="mt-4 mb-3">
 					<Row>
 						<Col md={6}>
 							<Form.Group controlId="organization">
@@ -269,7 +271,7 @@ const OrganizationScreen = ({ history, match }) => {
 					</Row>
 				</Form>
 			)}
-		</>
+		</div>
 	);
 };
 

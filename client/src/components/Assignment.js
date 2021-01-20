@@ -117,84 +117,83 @@ const Assignment = ({ history, match }) => {
 	};
 
 	return (
-		<>
+		<div className="border-container">
+			<h1>Project Assignment</h1>
+			<hr className="mt-4 mb-4" />
 			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<Container>
-					<Form onSubmit={submitHandler} className="my-5">
-						<Form.Group>
-							<h2>Project: {project.projectName}</h2>
-							<Row className="pl-3">
-								<Form.Label>Assign to</Form.Label>
-							</Row>
-							<Row>
-								<Col md={12}>
-									{projectLoading ? (
-										<Loader />
-									) : projectError ? (
-										<Message variant="danger">{projectError}</Message>
-									) : (
-										<>
-											{assignments &&
-												assignments.map((assignee, i) => (
-													<Row className="mb-3">
-														<Col md={7}>
-															<Form.Control
-																as="select"
-																value={assignee._id}
-																onChange={(e) => handleInputChange(e, i)}
-																required
-																className="px-5"
+				<Form onSubmit={submitHandler} className="my-5">
+					<Form.Group>
+						<Row className="pl-3">
+							<Form.Label>Assign to</Form.Label>
+						</Row>
+						<Row>
+							<Col md={12}>
+								{projectLoading ? (
+									<Loader />
+								) : projectError ? (
+									<Message variant="danger">{projectError}</Message>
+								) : (
+									<>
+										{assignments &&
+											assignments.map((assignee, i) => (
+												<Row className="mb-3">
+													<Col md={7}>
+														<Form.Control
+															as="select"
+															value={assignee._id}
+															onChange={(e) => handleInputChange(e, i)}
+															required
+															className="px-5"
+														>
+															<option value="">--Select--</option>
+															{users.map((user) => (
+																<option key={user._id} value={user._id}>
+																	{user.firstName} {user.lastName}
+																</option>
+															))}
+														</Form.Control>
+													</Col>
+													<Col md={5}>
+														{assignments.length !== 1 && (
+															<Button
+																variant="danger"
+																className="btn-md mr-3"
+																onClick={() => removeHandler(i)}
 															>
-																<option value="">--Select--</option>
-																{users.map((user) => (
-																	<option key={user._id} value={user._id}>
-																		{user.firstName} {user.lastName}
-																	</option>
-																))}
-															</Form.Control>
-														</Col>
-														<Col md={5}>
-															{assignments.length !== 1 && (
-																<Button
-																	variant="danger"
-																	className="btn-md mr-3"
-																	onClick={() => removeHandler(i)}
-																>
-																	<i className="fas fa-trash"></i>
-																</Button>
-															)}
-															{assignments.length - 1 === i && (
-																<Button
-																	className="px-3"
-																	onClick={() => addHandler(i)}
-																>
-																	<i className="fas fa-plus"></i> Assignee
-																</Button>
-															)}
-														</Col>
-													</Row>
-												))}
-										</>
-									)}
-								</Col>
-							</Row>
-						</Form.Group>
-						<Row className="mt-3">
-							<Col>
-								<Button type="submit" variant="primary" className="px-5 mt-3">
-									Assign
-								</Button>
+																<i className="fas fa-trash"></i>
+															</Button>
+														)}
+														{assignments.length - 1 === i && (
+															<Button
+																className="px-3"
+																onClick={() => addHandler(i)}
+															>
+																<i className="fas fa-plus"></i> Assignee
+															</Button>
+														)}
+													</Col>
+												</Row>
+											))}
+									</>
+								)}
 							</Col>
 						</Row>
-					</Form>
-				</Container>
+					</Form.Group>
+					<Row className="mt-3">
+						<Col>
+							<Button type="submit" variant="primary" className="px-5 mt-3">
+								Assign
+							</Button>
+						</Col>
+					</Row>
+				</Form>
 			)}
-		</>
+		</div>
 	);
 };
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route, Link, useRouteMatch } from 'react-router-dom';
-import { Table, Row, Col } from 'react-bootstrap';
+import { Table, Row, Col, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
@@ -10,10 +10,7 @@ import { listStakeholders } from '../../actions/stakeholderActions';
 const StakeholdersList = ({ match, keyword = '' }) => {
 	const projectId = match.params.id;
 
-	const { url, path } = useRouteMatch();
-
-	console.log('url', url);
-	console.log('path', path);
+	const { url } = useRouteMatch();
 
 	const dispatch = useDispatch();
 

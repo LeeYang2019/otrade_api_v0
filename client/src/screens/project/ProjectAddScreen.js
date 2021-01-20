@@ -72,10 +72,10 @@ const ProjectAddScreen = ({ history }) => {
 			<Link to="/admin/projects" className="btn btn-primary my-3">
 				Back to Project List
 			</Link>
-			<Container className="w-75">
+			<div className="border-container">
 				<h1>Add Project</h1>
-				<hr />
-				<Form onSubmit={submitHandler} className="my-4">
+				<hr className="mt-4 mb-4" />
+				<Form onSubmit={submitHandler} className="mt-4 mb-3">
 					<Row>
 						<Col>
 							<Form.Group controlId="projectName">
@@ -152,7 +152,7 @@ const ProjectAddScreen = ({ history }) => {
 						</Col>
 					</Row>
 				</Form>
-			</Container>
+			</div>
 		</>
 	);
 };

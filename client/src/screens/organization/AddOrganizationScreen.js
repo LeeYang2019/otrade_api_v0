@@ -88,13 +88,15 @@ const AddOrganizationScreen = ({ history, match }) => {
 	};
 
 	return (
-		<>
+		<div className="border-container">
+			<Form.Label>Organization Information</Form.Label>
+			<hr className="mt-4 mb-4" />
 			{message && <Message variant="success">{message}</Message>}
-			<Form onSubmit={submitHandler} className="my-5">
+			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Row>
 					<Col md={6}>
 						<Form.Group controlId="organization">
-							<Form.Label>Organization Name</Form.Label>
+							<Form.Label>Name of Organization</Form.Label>
 							<Form.Control
 								type="organization"
 								placeholder="Enter organization"
@@ -174,7 +176,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 					</Col>
 				</Row>
 				<hr className="my-4" />
-				<Row className="mt-5">
+				<Row className="mt-4">
 					<Col md={12}>
 						<Form.Label>Organization Members</Form.Label>
 						{stakeholders &&
@@ -223,7 +225,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 					</Col>
 				</Row>
 			</Form>
-		</>
+		</div>
 	);
 };
 

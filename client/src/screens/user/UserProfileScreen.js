@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { NavLink, Link, useRouteMatch, Route, Switch } from 'react-router-dom';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader.js';
@@ -88,33 +88,31 @@ const UserProfileScreen = ({ history, match, location }) => {
 							</Row>
 						</Col>
 					</Row>
-					<Row>
-						<Col>
-							<Switch>
-								<Route
-									exact
-									path={`${path}/profile`}
-									render={({ match }) => <EditUser match={match} />}
-								/>
-								<Route
-									exact
-									path={`${path}/profile-photo`}
-									render={({ match }) => <EditUserPhoto match={match} />}
-								/>
-								<Route
-									exact
-									path={path}
-									render={({ match }) => <UserProjects match={match} />}
-								/>
+					<Container>
+						<Switch>
+							<Route
+								exact
+								path={`${path}/profile`}
+								render={({ match }) => <EditUser match={match} />}
+							/>
+							<Route
+								exact
+								path={`${path}/profile-photo`}
+								render={({ match }) => <EditUserPhoto match={match} />}
+							/>
+							<Route
+								exact
+								path={path}
+								render={({ match }) => <UserProjects match={match} />}
+							/>
 
-								{/* <Route
+							{/* <Route
 								exact
 								path={`${path}/projects`}
 								render={({ match }) => <UserProjects match={match} />}
 							/> */}
-							</Switch>
-						</Col>
-					</Row>
+						</Switch>
+					</Container>
 				</>
 			)}
 		</>
