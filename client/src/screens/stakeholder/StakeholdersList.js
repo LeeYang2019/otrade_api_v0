@@ -83,14 +83,14 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 													</Col>
 													<Col className="d-flex justify-content-end">
 														<Link
-															to={`/project/${projectId}/addOrganization/stakeholder/${person._id}`}
+															to={`${url}/addOrganization`}
 															className="btn btn-primary mt-5 my-3 mr-3"
 														>
 															<i className="fas fa-plus"></i> Organization
 														</Link>
 
 														<Link
-															to={`/project/${projectId}/addActivity/stakeholder/${person._id}`}
+															to={`${url}/addActivity`}
 															className="btn btn-primary mt-5 my-3"
 														>
 															<i className="fas fa-plus"></i> Activity

@@ -1,5 +1,6 @@
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
+const mongoose = require('mongoose');
 
 //import Organization model
 const Organization = require('../model/Organization');
@@ -30,14 +31,17 @@ exports.getOrganizations = asyncHandler(async (req, res, next) => {
 // @access  Private
 exports.getStakeholderOrganizations = asyncHandler(async (req, res, next) => {
 	console.log('code entered here');
+	console.log(req.params);
 	const keyword = req.query.keyword
 		? { name: { $regex: req.query.keyword, $options: 'i' } }
 		: {};
 
 	const organizations = await Organization.find({
-		stakeholder: req.params.projectId,
+		stakeholders: mongoose.Types.ObjectId(req.params.stakeholderId),
 		...keyword,
 	});
+
+	console.log(organizations);
 
 	if (!organizations) {
 		res.status(401);
