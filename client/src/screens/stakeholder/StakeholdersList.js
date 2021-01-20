@@ -44,7 +44,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 								)}
 							/>
 						</Col>
-						<Col className="d-flex justify-content-end">
+						<Col>
 							<Link
 								to={`${url}/addStakeholder`}
 								className="btn btn-primary my-3"
@@ -54,13 +54,13 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 						</Col>
 					</Row>
 					<Row>
-						<Table responsive className="table-sm mt-3 overflow-scroll">
+						<Table responsive className="table-sm">
 							<tbody>
 								{stakeholders &&
 									stakeholders.map((person) => (
 										<tr key={person._id}>
 											<td>
-												<Row>
+												<Row className="mt-3">
 													<Col md={6}>
 														<p>
 															<strong>Name: </strong>
@@ -69,26 +69,30 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 															</Link>
 															<br />
 															Email: <em> {person.email}</em>
-															<br />
+															{/* <br />
 															Registered Date:{' '}
 															<strong>
 																{' '}
 																{person.createdAt &&
 																	person.createdAt.substring(0, 10)}{' '}
-															</strong>
+															</strong> */}
 														</p>
 													</Col>
-													<Col className="d-flex justify-content-end">
+
+													<Col
+														md={6}
+														className="d-flex justify-content-between align-items-center"
+													>
 														<Link
 															to={`${url}/addOrganization`}
-															className="btn btn-primary mt-5 my-3 mr-3"
+															className="btn btn-primary"
 														>
 															<i className="fas fa-plus"></i> Organization
 														</Link>
 
 														<Link
 															to={`${url}/addActivity`}
-															className="btn btn-primary mt-5 my-3"
+															className="btn btn-primary"
 														>
 															<i className="fas fa-plus"></i> Activity
 														</Link>

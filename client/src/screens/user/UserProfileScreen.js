@@ -106,11 +106,11 @@ const UserProfileScreen = ({ history, match, location }) => {
 								render={({ match }) => <UserProjects match={match} />}
 							/>
 
-							{/* <Route
+							<Route
 								exact
 								path={`${path}/projects`}
 								render={({ match }) => <UserProjects match={match} />}
-							/> */}
+							/>
 						</Switch>
 					</Container>
 				</>

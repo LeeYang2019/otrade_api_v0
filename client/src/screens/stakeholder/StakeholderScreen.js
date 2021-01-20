@@ -7,9 +7,9 @@ import Loader from '../../components/Loader.js';
 import { getStakeholderDetails } from '../../actions/stakeholderActions';
 import Comments from '../stakeholder/Comments';
 import EditStakeholderScreen from './EditStakeholderScreen';
+import EditStakeholderPhoto from './EditStakeholderPhoto';
 import ListStakeholderOrganizations from '../organization/ListStakeholderOrganizations';
 import ListStakeholderActivities from '../activity/ListStakeholderActivities';
-import ProfilePic2 from '../../img/Nhialee_Yang2.jpg';
 
 const StakeholderScreen = ({ history, match }) => {
 	let stakeholderId = match.params.id;
@@ -56,7 +56,7 @@ const StakeholderScreen = ({ history, match }) => {
 								</Col>
 								<Col className="d-flex justify-content-end">
 									<Link
-										to="/admin/userList/add"
+										to={`${url}/photo`}
 										className="btn btn-primary my-3 mr-3"
 									>
 										<i className="fas fa-edit"></i> Photo
@@ -96,6 +96,11 @@ const StakeholderScreen = ({ history, match }) => {
 									render={({ match }) => (
 										<EditStakeholderScreen match={match} />
 									)}
+								/>
+								<Route
+									exact
+									path={`${path}/photo`}
+									render={({ match }) => <EditStakeholderPhoto match={match} />}
 								/>
 
 								<Route

@@ -85,7 +85,7 @@ label {
 	list-style: none;
 	display: inline;
 	margin-right: 10px;
-	margin-left: 13px;
+	margin-left: 14px;
 }
 
 .alert-box {
@@ -98,5 +98,5 @@ label {
 	height: auto;
 	margin-top: 1rem;
 	padding: 1.5rem 2rem;
-	border: 1px solid rgba(0, 0, 0, 0.1);
+	/* border: 1px solid rgba(0, 0, 0, 0.1); */
 }

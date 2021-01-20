@@ -100,7 +100,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 
 	return (
 		<div className="border-container">
-			<Form.Label>Client Information</Form.Label>
+			<Form.Label>Stakeholder</Form.Label>
 			<hr className="mt-4 mb-4" />
 			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
@@ -337,7 +337,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 							</Col>
 						</Row>
 					</Form.Group>
-					<Button type="submit" variant="primary" className="mt-5 px-5">
+					<Button type="submit" variant="primary" className="mt-3 px-5">
 						Update
 					</Button>
 				</Form>
