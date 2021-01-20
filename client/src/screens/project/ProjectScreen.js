@@ -82,7 +82,6 @@ const ProjectScreen = ({ match }) => {
 							</Row>
 						</Col>
 					</Row>
-
 					<Container>
 						<Switch>
 							<Route

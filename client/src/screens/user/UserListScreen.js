@@ -83,7 +83,7 @@ const UserListScreen = ({ history, match }) => {
 			) : (
 				<Row>
 					{message && <Message variant="danger">{message}</Message>}
-					<Table hover responsive className="table-sm mt-3">
+					<Table responsive className="table-sm mt-3">
 						<tbody>
 							{users &&
 								users.map((user) => (

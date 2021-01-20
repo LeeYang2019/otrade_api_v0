@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import Message from '../components/Message.js';
 import Loader from '../components/Loader.js';
-import { getUserDetails, updateUserProfile } from '../actions/userActions';
 
 const ProfileScreen = ({ location, history }) => {
+	//define states
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [email, setEmail] = useState('');
@@ -19,25 +20,17 @@ const ProfileScreen = ({ location, history }) => {
 	const userDetails = useSelector((state) => state.userDetails);
 	const { loading, error, user } = userDetails;
 
-	//call the userLogin reducer in the store
-	const userLogin = useSelector((state) => state.userLogin);
-	const { userInfo } = userLogin;
-
 	const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
 	const { success } = userUpdateProfile;
 
 	useEffect(() => {
-		if (!userInfo) {
-			history.push('/login');
+		if (!user.firstName) {
+			dispatch(getUserDetails('profile'));
 		} else {
-			if (!user.firstName) {
-				dispatch(getUserDetails('profile'));
-			} else {
-				setFirstName(user.firstName);
-				setLastName(user.email);
-			}
+			setFirstName(user.firstName);
+			setLastName(user.email);
 		}
-	}, [dispatch, history, userInfo, user]);
+	}, [dispatch, user]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();

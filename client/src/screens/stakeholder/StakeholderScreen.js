@@ -2,17 +2,20 @@ import React, { useEffect } from 'react';
 import { Route, Link, useRouteMatch, NavLink, Switch } from 'react-router-dom';
 import { Row, Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../../components/Message.js';
-import Loader from '../../components/Loader.js';
-import { getStakeholderDetails } from '../../actions/stakeholderActions';
 import Comments from '../stakeholder/Comments';
 import EditStakeholderScreen from './EditStakeholderScreen';
 import EditStakeholderPhoto from './EditStakeholderPhoto';
 import ListStakeholderOrganizations from '../organization/ListStakeholderOrganizations';
 import ListStakeholderActivities from '../activity/ListStakeholderActivities';
+import Message from '../../components/Message.js';
+import Loader from '../../components/Loader.js';
+import { getStakeholderDetails } from '../../actions/stakeholderActions';
 
-const StakeholderScreen = ({ history, match }) => {
+const StakeholderScreen = ({ match }) => {
+	//get the stakeholderId passed in
 	let stakeholderId = match.params.id;
+
+	//get path and url
 	const { path, url } = useRouteMatch();
 
 	const dispatch = useDispatch();
@@ -37,7 +40,6 @@ const StakeholderScreen = ({ history, match }) => {
 						<Col md={2}>
 							<img src={stakeholder.image} alt="profile" className="profile" />
 						</Col>
-
 						<Col md={10}>
 							<Row>
 								<Col>
@@ -89,7 +91,6 @@ const StakeholderScreen = ({ history, match }) => {
 					<Row>
 						<Container>
 							<Switch>
-								{/**Dashboard will load first */}
 								<Route
 									exact
 									path={path}
@@ -109,7 +110,11 @@ const StakeholderScreen = ({ history, match }) => {
 									path={`${path}/photo`}
 									render={({ match }) => <EditStakeholderPhoto match={match} />}
 								/>
-
+								<Route
+									exact
+									path={`${path}/comments`}
+									render={({ match }) => <Comments match={match} />}
+								/>
 								<Route
 									exact
 									path={`${path}/organizations`}
@@ -117,7 +122,6 @@ const StakeholderScreen = ({ history, match }) => {
 										<ListStakeholderOrganizations match={match} />
 									)}
 								/>
-
 								<Route
 									exact
 									path={`${path}/activities`}

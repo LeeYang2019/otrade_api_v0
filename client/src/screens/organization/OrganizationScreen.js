@@ -198,7 +198,7 @@ const OrganizationScreen = ({ history, match }) => {
 						</Col>
 					</Row>
 					<Row>
-						<Col md={12}>
+						<Col md={6}>
 							<Form.Group controlId="website">
 								<Form.Label>Website</Form.Label>
 								<Form.Control
