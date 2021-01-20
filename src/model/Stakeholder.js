@@ -38,6 +38,9 @@ const StakeholderSchema = new mongoose.Schema(
 				/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
 			],
 		},
+		image: {
+			type: String,
+		},
 		media: [
 			{
 				type: String,

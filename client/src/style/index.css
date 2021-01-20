@@ -87,3 +87,8 @@ label {
 	margin-right: 10px;
 	margin-left: 13px;
 }
+
+.alert-box {
+	width: 100%;
+	text-justify: center;
+}

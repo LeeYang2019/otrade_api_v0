@@ -24,6 +24,9 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 	const { previous, next } = navigation;
 
 	//define states
+	const [firstName, setFirstName] = useState(
+		stakeholderInfo.firstName || 'stakeholder'
+	);
 	const [organization, setOrganization] = useState(
 		stakeholderInfo.organization
 	);
@@ -61,7 +64,6 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 
 		if (organization === 'Yes') {
 			next();
-		} else {
 		}
 	};
 
@@ -73,7 +75,7 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 					<Row>
 						<Col md={10}>
 							<Form.Label>
-								Does the Stakeholder belong to an organization?
+								Does {firstName} belong to an organization?
 							</Form.Label>
 						</Col>
 						<Col md={2}>
@@ -94,7 +96,7 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 				<Form.Group controlId="position" className="mt-5">
 					<Row>
 						<Col md={8}>
-							<Form.Label>What is the stakeholder's position?</Form.Label>
+							<Form.Label>What is the {firstName}'s position?</Form.Label>
 						</Col>
 						<Col md={4}>
 							<Form.Control
@@ -124,7 +126,7 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 					<Row>
 						<Col md={8}>
 							<Form.Label>
-								What is the stakeholder's level of influence on the project?
+								What is the {firstName}'s level of influence on the project?
 							</Form.Label>
 						</Col>
 						<Col md={4}>
@@ -150,7 +152,7 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 					<Row>
 						<Col md={8}>
 							<Form.Label>
-								What is the stakeholder's level of impact on the project?
+								What is the {firstName}'s level of impact on the project?
 							</Form.Label>
 						</Col>
 						<Col md={4}>

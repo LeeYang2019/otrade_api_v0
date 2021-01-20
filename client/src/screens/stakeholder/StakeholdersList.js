@@ -47,7 +47,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 								)}
 							/>
 						</Col>
-						<Col>
+						<Col className="d-flex justify-content-end">
 							<Link
 								to={`${url}/addStakeholder`}
 								className="btn btn-primary my-3"
@@ -64,7 +64,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 										<tr key={person._id}>
 											<td>
 												<Row>
-													<Col>
+													<Col md={6}>
 														<p>
 															<strong>Name: </strong>
 															<Link to={`/stakeholder/${person._id}`}>
@@ -81,18 +81,17 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 															</strong>
 														</p>
 													</Col>
-													<Col md={3} className="mt-auto">
+													<Col className="d-flex justify-content-end">
 														<Link
 															to={`/project/${projectId}/addOrganization/stakeholder/${person._id}`}
-															className="btn btn-primary my-3"
+															className="btn btn-primary mt-5 my-3 mr-3"
 														>
 															<i className="fas fa-plus"></i> Organization
 														</Link>
-													</Col>
-													<Col md={2} className="mt-auto">
+
 														<Link
 															to={`/project/${projectId}/addActivity/stakeholder/${person._id}`}
-															className="btn btn-primary my-3"
+															className="btn btn-primary mt-5 my-3"
 														>
 															<i className="fas fa-plus"></i> Activity
 														</Link>

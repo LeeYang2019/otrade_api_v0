@@ -6,8 +6,8 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader.js';
 import { getUserDetails } from '../../actions/userActions';
 import EditUser from '../user/EditUser';
+import EditUserPhoto from '../user/EditUserPhoto';
 import UserProjects from '../project/UserProjects';
-import ProfilePic from '../../img/Nhialee_Yang.jpg';
 
 const UserProfileScreen = ({ history, match, location }) => {
 	let userId = match.params.id;
@@ -48,17 +48,30 @@ const UserProfileScreen = ({ history, match, location }) => {
 								</Col>
 							</Row>
 							<Row>
-								<Col md={10}>
+								<Col md={8}>
 									<strong>{user.email}</strong>
 									<br />
 									{user.telephone}
 									<br />
-									<strong>Status: </strong>
-									{user.status}
+									{user.status === 'active' ? (
+										<strong>
+											status: <em className="text-success">{user.status}</em>
+										</strong>
+									) : (
+										<strong>
+											status: <em className="text-danger">{user.status}</em>
+										</strong>
+									)}
 								</Col>
-								<Col md={2}>
-									<Link to={url} className="btn btn-primary my-3">
-										<i className="fas fa-edit"></i> Edit Profile
+								<Col className="d-flex justify-content-end">
+									<Link
+										to={`${url}/profile-photo`}
+										className="btn btn-primary my-3 mr-3"
+									>
+										<i className="fas fa-edit"></i> Photo
+									</Link>
+									<Link to={`${url}/profile`} className="btn btn-primary my-3">
+										<i className="fas fa-edit"></i> Profile
 									</Link>
 								</Col>
 							</Row>
@@ -76,19 +89,31 @@ const UserProfileScreen = ({ history, match, location }) => {
 						</Col>
 					</Row>
 					<Row>
-						<Switch>
-							<Route
-								exact
-								path={path}
-								render={({ match }) => <EditUser match={match} />}
-							/>
+						<Col>
+							<Switch>
+								<Route
+									exact
+									path={`${path}/profile`}
+									render={({ match }) => <EditUser match={match} />}
+								/>
+								<Route
+									exact
+									path={`${path}/profile-photo`}
+									render={({ match }) => <EditUserPhoto match={match} />}
+								/>
+								<Route
+									exact
+									path={path}
+									render={({ match }) => <UserProjects match={match} />}
+								/>
 
-							<Route
+								{/* <Route
 								exact
 								path={`${path}/projects`}
 								render={({ match }) => <UserProjects match={match} />}
-							/>
-						</Switch>
+							/> */}
+							</Switch>
+						</Col>
 					</Row>
 				</>
 			)}

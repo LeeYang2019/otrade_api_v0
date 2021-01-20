@@ -46,7 +46,7 @@ const ListStakeholderActivities = ({ match, keyword = '' }) => {
 								)}
 							/>
 						</Col>
-						<Col>
+						<Col className="d-flex justify-content-end">
 							<Link to={`${url}/addActivity`} className="btn btn-primary my-3">
 								<i className="fas fa-plus"></i> Register
 							</Link>

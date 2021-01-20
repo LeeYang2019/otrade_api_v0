@@ -50,6 +50,16 @@ const App = () => {
 					/>
 
 					<PrivateRoute path="/stakeholder/:id" component={StakeholderScreen} />
+					<PrivateRoute
+						exact
+						path="/stakeholder/:id/organizations/addOrganization"
+						component={AddOrganizationScreen}
+					/>
+					<PrivateRoute
+						exact
+						path="/stakeholder/:id/activities/addActivity"
+						component={ActivityForm}
+					/>
 
 					<Route component={AdminRoutes} />
 				</Container>

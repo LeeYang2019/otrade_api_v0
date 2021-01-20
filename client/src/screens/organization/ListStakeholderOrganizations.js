@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, Link, useRouteMatch } from 'react-router-dom';
 import { Table, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { listOrganizations } from '../../actions/organizationAction';
+import { listStakeholderOrganizations } from '../../actions/organizationAction';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import SearchBox from '../../components/SearchBox';
@@ -14,11 +14,13 @@ const ListStakeholderOrganizations = ({ match }) => {
 	const dispatch = useDispatch();
 
 	//get organizations for stakeholder
-	const organizationList = useSelector((state) => state.organizationList);
-	const { loading, error, organizations } = organizationList;
+	const organizationStakeholderList = useSelector(
+		(state) => state.organizationStakeholderList
+	);
+	const { loading, error, organizations } = organizationStakeholderList;
 
 	useEffect(() => {
-		dispatch(listOrganizations(projectId));
+		dispatch(listStakeholderOrganizations(projectId));
 	}, [dispatch, projectId]);
 
 	return (
@@ -43,7 +45,7 @@ const ListStakeholderOrganizations = ({ match }) => {
 								)}
 							/>
 						</Col>
-						<Col>
+						<Col className="d-flex justify-content-end">
 							<Link
 								to={`${url}/addOrganization`}
 								className="btn btn-primary my-3"

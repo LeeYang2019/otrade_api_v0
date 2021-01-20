@@ -9,7 +9,7 @@ import { listProjectDetails } from '../../actions/projectActions';
 import Dashboard from '../project/Dashboard';
 import ListOrganizations from '../organization/ListOrganizations';
 import ActivitiesList from '../activity/ActivitiesList';
-import BrazilPic from '../../img/Brazil.jpg';
+import ProjectDetails from '../project/ProjectDetailsScreen';
 
 const ProjectScreen = ({ match }) => {
 	const projectId = match.params.id;
@@ -36,10 +36,10 @@ const ProjectScreen = ({ match }) => {
 			) : (
 				<>
 					<Row>
-						<Col md={3}>
+						<Col md={2}>
 							<img src={project.image} alt="profile" className="profile" />
 						</Col>
-						<Col md={9}>
+						<Col md={10}>
 							<Row>
 								<Col>
 									<h1>
@@ -57,7 +57,7 @@ const ProjectScreen = ({ match }) => {
 									<strong>Location: </strong>
 									<strong>In Development</strong>
 								</Col>
-								<Col md={2}>
+								<Col md={2} className="d-flex justify-content-end">
 									<Link
 										to="/admin/userList/add"
 										className="btn btn-primary my-3"
@@ -70,7 +70,7 @@ const ProjectScreen = ({ match }) => {
 							<Row>
 								<ul className="my-navbar">
 									<li>
-										<NavLink to={`${url}`}>Dashboard</NavLink>
+										<NavLink to={`${url}/dashboard`}>Dashboard</NavLink>
 									</li>
 									<li>
 										<NavLink to={`${url}/stakeholders`}>Stakeholders</NavLink>
@@ -91,6 +91,11 @@ const ProjectScreen = ({ match }) => {
 							<Route
 								exact
 								path={path}
+								render={({ match }) => <ProjectDetails match={match} />}
+							/>
+							<Route
+								exact
+								path={`${path}/dashboard`}
 								render={({ match }) => <Dashboard match={match} />}
 							/>
 							<Route

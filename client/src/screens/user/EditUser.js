@@ -15,12 +15,10 @@ const EditUser = ({ match }) => {
 	const [lastName, setLastName] = useState('');
 	const [telephone, setTelephone] = useState('');
 	const [email, setEmail] = useState('');
-	const [image, setImage] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [message, setMessage] = useState(null);
 	const [updatedDate, setUpdatedDate] = useState('');
-	const [uploading, setUploading] = useState(false);
 
 	const dispatch = useDispatch();
 
@@ -42,35 +40,11 @@ const EditUser = ({ match }) => {
 		} else {
 			setFirstName(user.firstName);
 			setLastName(user.lastName);
-			setImage(user.image);
 			setTelephone(user.telephone);
 			setEmail(user.email);
 			setUpdatedDate(user.updatedAt);
 		}
 	}, [dispatch, userId, user, successUpdate]);
-
-	const uploadFileHandler = async (e) => {
-		const file = e.target.files[0];
-		const formData = new FormData();
-		formData.append('image', file);
-		setUploading(true);
-
-		try {
-			const config = {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			};
-
-			const { data } = await axios.post('/api/v1/uploads', formData, config);
-
-			setImage(data);
-			setUploading(false);
-		} catch (error) {
-			console.error(error);
-			setUploading(false);
-		}
-	};
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -85,7 +59,6 @@ const EditUser = ({ match }) => {
 					id: user._id,
 					firstName,
 					lastName,
-					image,
 					email,
 					telephone,
 					password,
@@ -146,36 +119,6 @@ const EditUser = ({ match }) => {
 									value={telephone}
 									onChange={(e) => setTelephone(e.target.value)}
 								></Form.Control>
-							</Form.Group>
-						</Col>
-					</Row>
-					<hr className="my-4" />
-					<Row>
-						<Col>
-							<Form.Group controlId="image">
-								<Form.Label>Image</Form.Label>
-								<Row className="mb-3">
-									<Col md={6}>
-										<Form.Control
-											type="text"
-											placeholder="Enter image url"
-											value={image}
-											onChange={(e) => setImage(e.target.value)}
-										></Form.Control>
-									</Col>
-								</Row>
-								<Row>
-									<Col md={6}>
-										<Form.File
-											id="image-file"
-											label="Choose File"
-											custom
-											onChange={uploadFileHandler}
-										>
-											{uploading && <Loader />}
-										</Form.File>
-									</Col>
-								</Row>
 							</Form.Group>
 						</Col>
 					</Row>

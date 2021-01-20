@@ -219,7 +219,7 @@ export const listStakeholderOrganizations = (
 			`/api/v1/stakeholders/${stakeholderId}/organizations?keyword=${keyword}`,
 			config
 		);
-
+		console.log('data', data);
 		dispatch({ type: ORGANIZATION_STAKEHOLDER_LIST_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({

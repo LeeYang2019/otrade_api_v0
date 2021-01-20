@@ -16,9 +16,17 @@ const router = express.Router({ mergeParams: true });
 
 //import resource routers
 const commentRouter = require('./comments');
+const organizationRouter = require('./organization');
+const activityRouter = require('./activities');
 
-//use with stakeholder route
+//use with comment routes
 router.use('/:stakeholderId/comments', commentRouter);
+
+//use with organization routes
+router.use('/:stakeholderId/organizations', organizationRouter);
+
+//use with activity routes
+router.use('/:stakeholderId/activities', activityRouter);
 
 // use with project route
 router.route('/').get(protect, getStakeholders).post(protect, addStakeholder);

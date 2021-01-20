@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route, Link, useRouteMatch, NavLink, Switch } from 'react-router-dom';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
@@ -35,7 +35,7 @@ const StakeholderScreen = ({ history, match }) => {
 				<>
 					<Row>
 						<Col md={2}>
-							<img src={ProfilePic2} alt="profile" className="profile" />
+							<img src={stakeholder.image} alt="profile" className="profile" />
 						</Col>
 
 						<Col md={10}>
@@ -54,17 +54,16 @@ const StakeholderScreen = ({ history, match }) => {
 									<br />
 									{stakeholder.telephone}
 								</Col>
-								<Col md={2}>
+								<Col className="d-flex justify-content-end">
 									<Link
 										to="/admin/userList/add"
-										className="btn btn-primary my-3"
+										className="btn btn-primary my-3 mr-3"
 									>
 										<i className="fas fa-edit"></i> Photo
 									</Link>
-								</Col>
-								<Col md={2}>
+
 									<Link to={url} className="btn btn-primary my-3">
-										<i className="fas fa-edit"></i> Edit Profile
+										<i className="fas fa-edit"></i> Profile
 									</Link>
 								</Col>
 							</Row>
@@ -88,29 +87,34 @@ const StakeholderScreen = ({ history, match }) => {
 						</Col>
 					</Row>
 					<Row>
-						<Switch>
-							<Route
-								exact
-								path={path}
-								render={({ match }) => <EditStakeholderScreen match={match} />}
-							/>
+						<Container>
+							<Switch>
+								{/**Dashboard will load first */}
+								<Route
+									exact
+									path={path}
+									render={({ match }) => (
+										<EditStakeholderScreen match={match} />
+									)}
+								/>
 
-							<Route
-								exact
-								path={`${path}/organizations`}
-								render={({ match }) => (
-									<ListStakeholderOrganizations match={match} />
-								)}
-							/>
+								<Route
+									exact
+									path={`${path}/organizations`}
+									render={({ match }) => (
+										<ListStakeholderOrganizations match={match} />
+									)}
+								/>
 
-							<Route
-								exact
-								path={`${path}/activities`}
-								render={({ match }) => (
-									<ListStakeholderActivities match={match} />
-								)}
-							/>
-						</Switch>
+								<Route
+									exact
+									path={`${path}/activities`}
+									render={({ match }) => (
+										<ListStakeholderActivities match={match} />
+									)}
+								/>
+							</Switch>
+						</Container>
 					</Row>
 				</>
 			)}
