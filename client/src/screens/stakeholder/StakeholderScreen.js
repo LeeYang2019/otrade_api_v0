@@ -70,9 +70,9 @@ const StakeholderScreen = ({ history, match }) => {
 							<hr />
 							<Row>
 								<ul className="my-navbar">
-									<li>
+									{/* <li>
 										<NavLink to={`${url}/dashboard`}>Dashboard</NavLink>
-									</li>
+									</li> */}
 									<li>
 										<NavLink to={`${url}/comments`}>Comments</NavLink>
 									</li>
@@ -93,6 +93,13 @@ const StakeholderScreen = ({ history, match }) => {
 								<Route
 									exact
 									path={path}
+									render={({ match }) => (
+										<EditStakeholderScreen match={match} />
+									)}
+								/>
+								<Route
+									exact
+									path={`${path}/profile`}
 									render={({ match }) => (
 										<EditStakeholderScreen match={match} />
 									)}

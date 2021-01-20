@@ -6,10 +6,10 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import ListStakeholders from './../stakeholder/StakeholdersList';
 import { listProjectDetails } from '../../actions/projectActions';
-import Dashboard from '../project/Dashboard';
+import Dashboard from '../../components/Dashboard';
 import ListOrganizations from '../organization/ListOrganizations';
 import ActivitiesList from '../activity/ActivitiesList';
-import ProjectDetails from '../project/ProjectDetailsScreen';
+import EditProjectPhoto from '../project/EditProjectPhoto';
 
 const ProjectScreen = ({ match }) => {
 	const projectId = match.params.id;
@@ -58,10 +58,7 @@ const ProjectScreen = ({ match }) => {
 									<strong>In Development</strong>
 								</Col>
 								<Col md={2} className="d-flex justify-content-end">
-									<Link
-										to="/admin/userList/add"
-										className="btn btn-primary my-3"
-									>
+									<Link to={`${url}/photo`} className="btn btn-primary my-3">
 										<i className="fas fa-edit"></i> Photo
 									</Link>
 								</Col>
@@ -69,9 +66,9 @@ const ProjectScreen = ({ match }) => {
 							<hr />
 							<Row>
 								<ul className="my-navbar">
-									<li>
+									{/* <li>
 										<NavLink to={`${url}/dashboard`}>Dashboard</NavLink>
-									</li>
+									</li> */}
 									<li>
 										<NavLink to={`${url}/stakeholders`}>Stakeholders</NavLink>
 									</li>
@@ -91,7 +88,7 @@ const ProjectScreen = ({ match }) => {
 							<Route
 								exact
 								path={path}
-								render={({ match }) => <ProjectDetails match={match} />}
+								render={({ match }) => <Dashboard match={match} />}
 							/>
 							<Route
 								exact
@@ -112,6 +109,11 @@ const ProjectScreen = ({ match }) => {
 								exact
 								path={`${path}/stakeholders`}
 								render={({ match }) => <ListStakeholders match={match} />}
+							/>
+							<Route
+								exact
+								path={`${path}/photo`}
+								render={({ match }) => <EditProjectPhoto match={match} />}
 							/>
 						</Switch>
 					</Container>

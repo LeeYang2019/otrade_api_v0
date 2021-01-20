@@ -8,6 +8,7 @@ import { getUserDetails } from '../../actions/userActions';
 import EditUser from '../user/EditUser';
 import EditUserPhoto from '../user/EditUserPhoto';
 import UserProjects from '../project/UserProjects';
+import Dashboard from '../../components/Dashboard';
 
 const UserProfileScreen = ({ history, match, location }) => {
 	let userId = match.params.id;
@@ -78,9 +79,9 @@ const UserProfileScreen = ({ history, match, location }) => {
 							<hr />
 							<Row>
 								<ul className="my-navbar">
-									<li>
+									{/* <li>
 										<NavLink to={`${url}/dashboard`}>Dashboard</NavLink>
-									</li>
+									</li> */}
 									<li>
 										<NavLink to={`${url}/projects`}>Projects</NavLink>
 									</li>
@@ -92,6 +93,16 @@ const UserProfileScreen = ({ history, match, location }) => {
 						<Switch>
 							<Route
 								exact
+								path={path}
+								render={({ match }) => <Dashboard match={match} />}
+							/>
+							<Route
+								exact
+								path={`${path}/projects`}
+								render={({ match }) => <UserProjects match={match} />}
+							/>
+							<Route
+								exact
 								path={`${path}/profile`}
 								render={({ match }) => <EditUser match={match} />}
 							/>
@@ -99,17 +110,6 @@ const UserProfileScreen = ({ history, match, location }) => {
 								exact
 								path={`${path}/profile-photo`}
 								render={({ match }) => <EditUserPhoto match={match} />}
-							/>
-							<Route
-								exact
-								path={path}
-								render={({ match }) => <UserProjects match={match} />}
-							/>
-
-							<Route
-								exact
-								path={`${path}/projects`}
-								render={({ match }) => <UserProjects match={match} />}
 							/>
 						</Switch>
 					</Container>
