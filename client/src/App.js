@@ -23,21 +23,25 @@ const App = () => {
 				<Container>
 					<Route exact path="/" component={HomeScreen} />
 					<Route exact path="/login" component={LoginScreen} />
+
+					{/*Project Routes*/}
 					<PrivateRoute path="/profile/:id" component={UserProfileScreen} />
 					<PrivateRoute path="/project/:id" component={ProjectScreen} />
-
-					<PrivateRoute
-						exact
-						path="/project/:id/activities/addActivity"
-						component={ActivityForm}
-					/>
-
 					<PrivateRoute
 						exact
 						path="/project/:id/stakeholders/addStakeholder"
 						component={StakeholderForm}
 					/>
-
+					<PrivateRoute
+						exact
+						path="/project/:id/stakeholders/addOrganization"
+						component={AddOrganizationScreen}
+					/>
+					<PrivateRoute
+						exact
+						path="/project/:id/stakeholders/addActivity"
+						component={ActivityForm}
+					/>
 					<PrivateRoute
 						exact
 						path="/project/:id/organizations/addOrganization"
@@ -45,16 +49,16 @@ const App = () => {
 					/>
 					<PrivateRoute
 						exact
-						path="/project/:id/stakeholders/addOrganization"
-						component={AddOrganizationScreen}
-					/>
-
-					<PrivateRoute
-						exact
 						path="/project/:id/organizations/:id/profile"
 						component={OrganizationScreen}
 					/>
+					<PrivateRoute
+						exact
+						path="/project/:id/activities/addActivity"
+						component={ActivityForm}
+					/>
 
+					{/*Stakholder Routes */}
 					<PrivateRoute path="/stakeholder/:id" component={StakeholderScreen} />
 					<PrivateRoute
 						exact
@@ -66,12 +70,8 @@ const App = () => {
 						path="/stakeholder/:id/activities/addActivity"
 						component={ActivityForm}
 					/>
-					<PrivateRoute
-						exact
-						path="/project/:id/stakeholders/addActivity"
-						component={ActivityForm}
-					/>
 
+					{/*Admin Routes */}
 					<Route component={AdminRoutes} />
 				</Container>
 			</main>

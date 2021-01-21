@@ -5,10 +5,7 @@ import {
 	addStakeholder,
 	saveStakeholderInfo,
 } from '../../actions/stakeholderActions';
-import {
-	STAKEHOLDER_ADD_RESET,
-	STAKEHOLDER_SAVE_RESET,
-} from '../../constants/stakeholderConstants';
+import { STAKEHOLDER_ADD_RESET } from '../../constants/stakeholderConstants';
 import Message from '../../components/Message.js';
 
 const AddStakeholderScreen = ({ navigation, match }) => {

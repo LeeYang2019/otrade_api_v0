@@ -16,10 +16,11 @@ const ProfileScreen = ({ location, history }) => {
 
 	const dispatch = useDispatch();
 
-	//call the userDetails reducer in the store
+	//userDetails reducer
 	const userDetails = useSelector((state) => state.userDetails);
 	const { loading, error, user } = userDetails;
 
+	//userUpdateProfile reducer
 	const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
 	const { success } = userUpdateProfile;
 

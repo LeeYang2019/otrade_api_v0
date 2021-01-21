@@ -164,7 +164,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 				Authorization: `Bearer ${userInfo.token}`,
 			},
 		};
-
+		console.log('inside update code');
 		const { data } = await axios.put(`/api/v1/users/profile`, user, config);
 
 		dispatch({

@@ -37,7 +37,11 @@ router
 	.post(protect, isAdmin, addProject);
 
 // define specific route
-router.route('/:id').get(getProject).put(updateProject).delete(deleteProject);
+router
+	.route('/:id')
+	.get(protect, getProject)
+	.put(protect, updateProject)
+	.delete(protect, deleteProject);
 
 router.route('/:projectId/assign').put(protect, isAdmin, assignUserToProject);
 

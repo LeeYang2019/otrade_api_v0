@@ -67,6 +67,7 @@ exports.updateMyUserProfile = asyncHandler(async (req, res) => {
 		user.firstName = req.body.firstName || user.firstName;
 		user.lastName = req.body.lastName || user.lastName;
 		user.telephone = req.body.telephone || user.telephone;
+		user.image = req.body.image || user.image;
 		user.email = req.body.email || user.email;
 
 		if (req.body.password) {
@@ -167,6 +168,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
 // @route   PUT /api/v1/admin/users/:id
 // @access  Private/admin
 exports.updateUser = asyncHandler(async (req, res) => {
+	console.log('code enters here');
 	const user = await User.findById(req.params.id);
 
 	//matches enteredPassword with db user password

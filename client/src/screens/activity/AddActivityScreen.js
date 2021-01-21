@@ -80,9 +80,11 @@ const AddActivityScreen = ({ match, navigation }) => {
 	};
 
 	return (
-		<>
+		<div className="border-container">
 			{message && <Message variant="success">{message}</Message>}
-			<Form onSubmit={submitHandler} className="my-5">
+			<Form.Label>Add Activity</Form.Label>
+			<hr className="mt-4 mb-4" />
+			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Row>
 					<Col md={8}>
 						<Form.Group controlId="activity">
@@ -181,7 +183,7 @@ const AddActivityScreen = ({ match, navigation }) => {
 					</Col>
 				</Row>
 			</Form>
-		</>
+		</div>
 	);
 };
 

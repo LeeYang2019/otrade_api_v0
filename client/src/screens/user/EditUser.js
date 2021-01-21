@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Form, Button, Row, Col, Container } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUserProfile, getUserDetails } from '../../actions/userActions';
 import { USER_PROFILE_UPDATE_RESET } from '../../constants/userConstants';
@@ -74,98 +73,96 @@ const EditUser = ({ match }) => {
 			{error && <Message variant="danger">{error}</Message>}
 			{successUpdate && <Message variant="success">{message}</Message>}
 			{loading && <Loader />}
-			<Container>
-				<Form onSubmit={submitHandler} className="mt-4 mb-3">
-					<Row>
-						<Col md={6}>
-							<Form.Group controlId="firstName">
-								<Form.Label>First Name</Form.Label>
-								<Form.Control
-									type="firstName"
-									placeholder="Enter name"
-									value={firstName}
-									onChange={(e) => setFirstName(e.target.value)}
-								></Form.Control>
-							</Form.Group>
-						</Col>
-						<Col md={6}>
-							<Form.Group controlId="lastName">
-								<Form.Label>Last Name</Form.Label>
-								<Form.Control
-									type="lastName"
-									placeholder="Enter name"
-									value={lastName}
-									onChange={(e) => setLastName(e.target.value)}
-								></Form.Control>
-							</Form.Group>
-						</Col>
-					</Row>
-					<Row>
-						<Col md={8}>
-							<Form.Group controlId="email">
-								<Form.Label>Email Address</Form.Label>
-								<Form.Control
-									type="email"
-									placeholder="Enter email"
-									value={email}
-									onChange={(e) => setEmail(e.target.value)}
-								></Form.Control>
-							</Form.Group>
-						</Col>
-						<Col md={4}>
-							<Form.Group controlId="telephone">
-								<Form.Label>Telephone</Form.Label>
-								<Form.Control
-									type="telephone"
-									placeholder="Enter telephone"
-									value={telephone}
-									onChange={(e) => setTelephone(e.target.value)}
-								></Form.Control>
-							</Form.Group>
-						</Col>
-					</Row>
-					<hr className="my-4" />
-					<Row>
-						<Col md={6}>
-							<Form.Group controlId="password">
-								<Form.Label>Password</Form.Label>
-								<Form.Control
-									type="password"
-									placeholder="Enter Password"
-									value={password}
-									onChange={(e) => setPassword(e.target.value)}
-								></Form.Control>
-							</Form.Group>
-						</Col>
-						<Col md={6}>
-							<Form.Group controlId="confirmPassword">
-								<Form.Label>Re-type Password</Form.Label>
-								<Form.Control
-									type="password"
-									placeholder="Re-type Password"
-									value={confirmPassword}
-									onChange={(e) => setConfirmPassword(e.target.value)}
-								></Form.Control>
-							</Form.Group>
-						</Col>
-					</Row>
-					<Row className="mt-3">
-						<Col>
-							<Button type="submit" variant="primary" className="px-5 mt-3">
-								Update
-							</Button>
-						</Col>
-						<Col className="text-right">
-							{/* <p>updated on: {updatedDate.substring(0, 10)}</p> */}
-						</Col>
-					</Row>
-				</Form>
-				{/* ) : (
+			<Form onSubmit={submitHandler} className="mt-4 mb-3">
+				<Row>
+					<Col md={6}>
+						<Form.Group controlId="firstName">
+							<Form.Label>First Name</Form.Label>
+							<Form.Control
+								type="text"
+								placeholder="Enter name"
+								value={firstName}
+								onChange={(e) => setFirstName(e.target.value)}
+							></Form.Control>
+						</Form.Group>
+					</Col>
+					<Col md={6}>
+						<Form.Group controlId="lastName">
+							<Form.Label>Last Name</Form.Label>
+							<Form.Control
+								type="text"
+								placeholder="Enter name"
+								value={lastName}
+								onChange={(e) => setLastName(e.target.value)}
+							></Form.Control>
+						</Form.Group>
+					</Col>
+				</Row>
+				<Row>
+					<Col md={8}>
+						<Form.Group controlId="email">
+							<Form.Label>Email Address</Form.Label>
+							<Form.Control
+								type="email"
+								placeholder="Enter email"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+							></Form.Control>
+						</Form.Group>
+					</Col>
+					<Col md={4}>
+						<Form.Group controlId="telephone">
+							<Form.Label>Telephone</Form.Label>
+							<Form.Control
+								type="text"
+								placeholder="Enter telephone"
+								value={telephone}
+								onChange={(e) => setTelephone(e.target.value)}
+							></Form.Control>
+						</Form.Group>
+					</Col>
+				</Row>
+				<hr className="my-4" />
+				<Row>
+					<Col md={6}>
+						<Form.Group controlId="password">
+							<Form.Label>Password</Form.Label>
+							<Form.Control
+								type="password"
+								placeholder="Enter Password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							></Form.Control>
+						</Form.Group>
+					</Col>
+					<Col md={6}>
+						<Form.Group controlId="confirmPassword">
+							<Form.Label>Re-type Password</Form.Label>
+							<Form.Control
+								type="password"
+								placeholder="Re-type Password"
+								value={confirmPassword}
+								onChange={(e) => setConfirmPassword(e.target.value)}
+							></Form.Control>
+						</Form.Group>
+					</Col>
+				</Row>
+				<Row className="mt-3">
+					<Col>
+						<Button type="submit" variant="primary" className="px-5 mt-3">
+							Update
+						</Button>
+					</Col>
+					<Col className="text-right">
+						{/* <p>updated on: {updatedDate.substring(0, 10)}</p> */}
+					</Col>
+				</Row>
+			</Form>
+			{/* ) : (
 					<Message variant="danger">
 						ADMIN NOT ALLOWED TO THIS PROTECTED ROUTE
 					</Message>
 				)} */}
-			</Container>
 		</div>
 	);
 };

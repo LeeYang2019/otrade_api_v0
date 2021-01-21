@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, Row, Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { listComments } from '../../actions/commentActions';
@@ -6,18 +6,33 @@ import CommentForm from '../../components/CommentForm';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 
-const Comments = ({ stakeholderId }) => {
+const Comments = ({ match }) => {
+	const stakeholderId = match.params.id;
+
 	const dispatch = useDispatch();
+
+	const [stakeholderComments, setStakeholderComments] = useState([]);
 
 	//get comments
 	const commentList = useSelector((state) => state.commentList);
 	const { loading, error, comments } = commentList;
 
-	useEffect(() => {
-		dispatch(listComments(stakeholderId));
-	}, [stakeholderId, listComments]);
+	const commentUpdate = useSelector((state) => state.commentUpdate);
+	const { success } = commentUpdate;
 
-	//dispatch, stakeholderId, commentList
+	console.log(comments);
+	console.log(success);
+
+	useEffect(() => {
+		if (success) {
+			dispatch(listComments(stakeholderId));
+		} else {
+			dispatch(listComments(stakeholderId));
+			setStakeholderComments(comments);
+		}
+	}, [dispatch, comments, stakeholderId, success]);
+
+	//dispatch, comments, stakeholderId, success
 
 	return loading ? (
 		<Loader />
@@ -31,8 +46,8 @@ const Comments = ({ stakeholderId }) => {
 			<Row className="mt-5">
 				<Table responsive className="table-sm mt-3 ml-3 mr-3">
 					<tbody>
-						{comments &&
-							comments.map((entry) => (
+						{stakeholderComments &&
+							stakeholderComments.map((entry) => (
 								<tr key={entry._id}>
 									<td>
 										<Row>

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Button, Row, Col, Container } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { addProject } from '../../actions/projectActions';
 import { PROJECT_ADD_RESET } from '../../constants/projectConstants';
 import Loader from '../../components/Loader';

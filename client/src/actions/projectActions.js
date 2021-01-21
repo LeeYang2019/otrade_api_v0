@@ -59,10 +59,22 @@ export const addProject = (project) => async (dispatch, getState) => {
 };
 
 //get the details of a project
-export const listProjectDetails = (id) => async (dispatch) => {
+export const listProjectDetails = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: PROJECT_DETAILS_REQUEST });
-		const { data } = await axios.get(`/api/v1/projects/${id}`);
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const { data } = await axios.get(`/api/v1/projects/${id}`, config);
 
 		dispatch({ type: PROJECT_DETAILS_SUCCESS, payload: data });
 	} catch (error) {

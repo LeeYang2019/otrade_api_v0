@@ -10,11 +10,12 @@ import { STAKEHOLDER_UPDATE_RESET } from '../../constants/stakeholderConstants';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 
-const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
+const EditStakeholderScreen = ({ projectId, match }) => {
+	const stakeholderId = match.params.id;
+
 	//define states
 	const [image, setImage] = useState('');
 	const [message, setMessage] = useState(null);
-
 	const [uploading, setUploading] = useState(false);
 
 	const dispatch = useDispatch();
@@ -23,13 +24,11 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 	const stakeholderDetails = useSelector((state) => state.stakeholderDetails);
 	const { loading, error, stakeholder } = stakeholderDetails;
 
-	//get project
-	const projectDetails = useSelector((state) => state.projectDetails);
-	const { project } = projectDetails;
-
 	//get success
 	const stakeholderUpdate = useSelector((state) => state.stakeholderUpdate);
 	const { success } = stakeholderUpdate;
+
+	console.log(match.params);
 
 	useEffect(() => {
 		if (success) {
@@ -59,7 +58,6 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 			setImage(data);
 			setUploading(false);
 		} catch (error) {
-			console.error(error);
 			setUploading(false);
 		}
 	};

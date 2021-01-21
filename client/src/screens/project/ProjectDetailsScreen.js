@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container } from 'react-bootstrap';
 import { listProjectDetails } from '../../actions/projectActions';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';

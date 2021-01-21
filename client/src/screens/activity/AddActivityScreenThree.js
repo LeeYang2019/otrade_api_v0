@@ -54,9 +54,10 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 	};
 
 	return (
-		<>
+		<div className="border-container">
 			{message && <Message variant="success">{message}</Message>}
-			<Form onSubmit={submitHandler} className="my-5">
+			<hr className="mt-4 mb-4" />
+			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Form.Group controlId="compromise">
 					<Form.Group controlId="discussion">
 						<Form.Label>Compromise Details</Form.Label>
@@ -105,7 +106,7 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 					</Col>
 				</Row>
 			</Form>
-		</>
+		</div>
 	);
 };
 

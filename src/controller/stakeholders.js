@@ -29,7 +29,6 @@ exports.getStakeholders = asyncHandler(async (req, res, next) => {
 // @access  Private
 exports.getStakeholder = asyncHandler(async (req, res, next) => {
 	const stakeholder = await Stakeholder.findById(req.params.id);
-	console.log(stakeholder);
 	res.status(200).json({ success: true, data: stakeholder });
 });
 
@@ -40,9 +39,6 @@ exports.addStakeholder = asyncHandler(async (req, res, next) => {
 	//get params and req.user
 	req.body.project = req.params.projectId;
 	req.body.user = req.user.id;
-
-	console.log(req.body);
-
 	const stakeholder = await Stakeholder.create(req.body);
 	res.status(200).json({ success: true, data: stakeholder });
 });
@@ -52,9 +48,6 @@ exports.addStakeholder = asyncHandler(async (req, res, next) => {
 // @access  Private
 exports.updateStakeholder = asyncHandler(async (req, res, next) => {
 	req.body.user = req.user.id;
-
-	console.log(req.body);
-
 	let stakeholder = await Stakeholder.findById(req.params.id);
 	stakeholder = await Stakeholder.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,

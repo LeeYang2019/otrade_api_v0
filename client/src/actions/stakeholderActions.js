@@ -113,6 +113,7 @@ export const updateStakeholder = (stakeholder, id) => async (
 		};
 
 		console.log(stakeholder);
+		console.log(id);
 
 		const {
 			data: { data },

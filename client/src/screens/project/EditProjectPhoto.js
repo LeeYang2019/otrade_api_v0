@@ -2,13 +2,18 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUserProfile, getUserDetails } from '../../actions/userActions';
-import { USER_PROFILE_UPDATE_RESET } from '../../constants/userConstants';
+import {
+	updateProject,
+	listProjectDetails,
+} from '../../actions/projectActions';
+import { PROJECT_UPDATE_RESET } from '../../constants/projectConstants';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 
 const EditProjectPhoto = ({ match }) => {
-	const userId = match.params.id;
+	const projectId = match.params.id;
+
+	console.log(projectId);
 
 	//define states
 	const [image, setImage] = useState('');
@@ -18,23 +23,23 @@ const EditProjectPhoto = ({ match }) => {
 
 	const dispatch = useDispatch();
 
-	//get the user
-	const userDetails = useSelector((state) => state.userDetails);
-	const { loading, error, user } = userDetails;
+	//get project details
+	const projectDetails = useSelector((state) => state.projectDetails);
+	const { loading, error, project } = projectDetails;
 
-	//get success from user update
-	const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
-	const { success: successUpdate } = userUpdateProfile;
+	//get success from project update
+	const projectUpdate = useSelector((state) => state.projectUpdate);
+	const { success: successUpdate } = projectUpdate;
 
 	useEffect(() => {
 		if (successUpdate) {
-			setMessage('User profile has successfully been updated.');
-			dispatch(getUserDetails(userId));
-			dispatch({ type: USER_PROFILE_UPDATE_RESET });
+			setMessage('Project profile has successfully been updated.');
+			dispatch(listProjectDetails(projectId));
+			dispatch({ type: PROJECT_UPDATE_RESET });
 		} else {
-			setImage(user.image);
+			setImage(project.image);
 		}
-	}, [dispatch, userId, user, successUpdate]);
+	}, [dispatch, projectId, project, successUpdate]);
 
 	const uploadFileHandler = async (e) => {
 		const file = e.target.files[0];
@@ -64,8 +69,8 @@ const EditProjectPhoto = ({ match }) => {
 		//check password against confirmPassword
 
 		dispatch(
-			updateUserProfile({
-				id: user._id,
+			updateProject({
+				_id: projectId,
 				image,
 			})
 		);
