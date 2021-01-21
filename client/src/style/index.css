@@ -55,6 +55,10 @@ td {
 	font-size: 1rem;
 }
 
+body {
+	/* background-color: rgb(215, 221, 221, 0.25) !important; */
+}
+
 /*customize the primary color for buttons*/
 .btn-primary {
 	background-color: #f26827 !important;
@@ -71,9 +75,10 @@ label {
 }
 
 .profile {
-	width: 100%;
+	margin-top: 0.5rem;
+	max-width: 100%;
 	height: auto;
-	/* border-radius: 10%; */
+	border-radius: 5%;
 }
 
 .profile_information {
@@ -84,8 +89,7 @@ label {
 .my-navbar li {
 	list-style: none;
 	display: inline;
-	margin-right: 10px;
-	margin-left: 14px;
+	margin-right: 14px;
 }
 
 .alert-box {
@@ -93,10 +97,36 @@ label {
 	text-justify: center;
 }
 
+.border-container,
+.profile-container {
+	border-radius: 10px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	background-color: white;
+}
+
+.profile-container {
+	padding-right: 1.5rem;
+	padding-left: 1.5rem;
+	padding-top: 1.5rem;
+}
+
+.image-container {
+	object-fit: cover;
+}
+
+.middle-row {
+	margin-left: 1rem;
+	margin-right: 1rem;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.lower-row {
+	margin-top: 0.5rem;
+}
+
 .border-container {
 	width: 100%;
 	height: auto;
 	margin-top: 1rem;
 	padding: 1.5rem 2rem;
-	/* border: 1px solid rgba(0, 0, 0, 0.1); */
 }

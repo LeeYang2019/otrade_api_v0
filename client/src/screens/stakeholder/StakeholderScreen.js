@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react';
-import { Route, Link, useRouteMatch, NavLink, Switch } from 'react-router-dom';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Route, useRouteMatch, Switch } from 'react-router-dom';
+import { Row, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Comments from '../stakeholder/Comments';
-import EditStakeholderScreen from './EditStakeholderScreen';
-import EditStakeholderPhoto from './EditStakeholderPhoto';
-import ListStakeholderOrganizations from '../organization/ListStakeholderOrganizations';
-import ListStakeholderActivities from '../activity/ListStakeholderActivities';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import { getStakeholderDetails } from '../../actions/stakeholderActions';
+import ProfileTop from '../../components/ProfileTop';
+import { btnlinks, navbarlinks, routes } from './utilities';
 
 const StakeholderScreen = ({ match }) => {
 	//get the stakeholderId passed in
@@ -36,99 +33,23 @@ const StakeholderScreen = ({ match }) => {
 				<Message variant="danger">{error}</Message>
 			) : (
 				<>
-					<Row>
-						<Col md={2}>
-							<img src={stakeholder.image} alt="profile" className="profile" />
-						</Col>
-						<Col md={10}>
-							<Row>
-								<Col>
-									<h1>
-										<strong>
-											{stakeholder.firstName} {stakeholder.lastName}
-										</strong>
-									</h1>
-								</Col>
-							</Row>
-							<Row>
-								<Col md={8}>
-									<strong>{stakeholder.email}</strong>
-									<br />
-									{stakeholder.telephone}
-								</Col>
-								<Col className="d-flex justify-content-end">
-									<Link
-										to={`${url}/photo`}
-										className="btn btn-primary my-3 mr-3"
-									>
-										<i className="fas fa-edit"></i> Photo
-									</Link>
-
-									<Link to={url} className="btn btn-primary my-3">
-										<i className="fas fa-edit"></i> Profile
-									</Link>
-								</Col>
-							</Row>
-							<hr />
-							<Row>
-								<ul className="my-navbar">
-									{/* <li>
-										<NavLink to={`${url}/dashboard`}>Dashboard</NavLink>
-									</li> */}
-									<li>
-										<NavLink to={`${url}/comments`}>Comments</NavLink>
-									</li>
-									<li>
-										<NavLink to={`${url}/organizations`}>Organizations</NavLink>
-									</li>
-									<li>
-										<NavLink to={`${url}/activities`}>Activities</NavLink>
-									</li>
-								</ul>
-							</Row>
-						</Col>
-					</Row>
+					<ProfileTop
+						url={url}
+						path={path}
+						profile={stakeholder}
+						btnlinks={btnlinks}
+						navbarlinks={navbarlinks}
+					/>
 					<Row>
 						<Container>
 							<Switch>
-								<Route
-									exact
-									path={path}
-									render={({ match }) => (
-										<EditStakeholderScreen match={match} />
-									)}
-								/>
-								<Route
-									exact
-									path={`${path}/profile`}
-									render={({ match }) => (
-										<EditStakeholderScreen match={match} />
-									)}
-								/>
-								<Route
-									exact
-									path={`${path}/photo`}
-									render={({ match }) => <EditStakeholderPhoto match={match} />}
-								/>
-								<Route
-									exact
-									path={`${path}/comments`}
-									render={({ match }) => <Comments match={match} />}
-								/>
-								<Route
-									exact
-									path={`${path}/organizations`}
-									render={({ match }) => (
-										<ListStakeholderOrganizations match={match} />
-									)}
-								/>
-								<Route
-									exact
-									path={`${path}/activities`}
-									render={({ match }) => (
-										<ListStakeholderActivities match={match} />
-									)}
-								/>
+								{routes.map((item) => (
+									<Route
+										exact
+										path={`${path}${item.path}`}
+										render={item.component}
+									/>
+								))}
 							</Switch>
 						</Container>
 					</Row>

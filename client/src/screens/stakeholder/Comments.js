@@ -30,7 +30,7 @@ const Comments = ({ match }) => {
 			dispatch(listComments(stakeholderId));
 			setStakeholderComments(comments);
 		}
-	}, [dispatch, comments, stakeholderId, success]);
+	}, []);
 
 	//dispatch, comments, stakeholderId, success
 

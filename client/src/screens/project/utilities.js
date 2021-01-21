@@ -1,0 +1,60 @@
+import Dashboard from '../../components/Dashboard';
+import ListOrganizations from '../organization/ListOrganizations';
+import ListStakeholders from './../stakeholder/StakeholdersList';
+import ActivitiesList from '../activity/ActivitiesList';
+import EditProjectPhoto from '../project/EditProjectPhoto';
+
+export const btnlinks = [
+	{
+		link: '/photo',
+		class: 'btn btn-primary my-3',
+		icon: 'fas fa-edit',
+		type: 'Photo',
+	},
+];
+
+export const navbarlinks = [
+	{
+		link: '/dashboard',
+		type: 'Dashboard',
+	},
+	{
+		link: '/stakeholders',
+		type: 'Stakeholders',
+	},
+	{
+		link: '/organizations',
+		type: 'Organizations',
+	},
+	{
+		link: '/activities',
+		type: 'Activities',
+	},
+];
+
+export const routes = [
+	{
+		path: '',
+		component: ({ match }) => <Dashboard match={match} />,
+	},
+	{
+		path: '/dashboard',
+		component: ({ match }) => <Dashboard match={match} />,
+	},
+	{
+		path: '/activities',
+		component: ({ match }) => <ActivitiesList match={match} />,
+	},
+	{
+		path: '/organizations',
+		component: ({ match }) => <ListOrganizations match={match} />,
+	},
+	{
+		path: '/stakeholders',
+		component: ({ match }) => <ListStakeholders match={match} />,
+	},
+	{
+		path: '/photo',
+		component: ({ match }) => <EditProjectPhoto match={match} />,
+	},
+];
