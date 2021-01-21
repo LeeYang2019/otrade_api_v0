@@ -100,14 +100,14 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 	};
 
 	return (
-		<>
+		<BorderContainer>
 			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
-				<BorderContainer>
+				<>
 					<Form onSubmit={submitHandler} className="mt-4 mb-3">
 						<Row>
 							<Col md={6}>
@@ -287,7 +287,6 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 								</Col>
 							</Row>
 						</Form.Group>
-
 						<Form.Group controlId="influence">
 							<Row>
 								<Col md={8}>
@@ -342,9 +341,9 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 							Update
 						</Button>
 					</Form>
-				</BorderContainer>
+				</>
 			)}
-		</>
+		</BorderContainer>
 	);
 };
 

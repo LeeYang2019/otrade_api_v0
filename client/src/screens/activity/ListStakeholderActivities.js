@@ -26,13 +26,13 @@ const ListStakeholderActivities = ({ match, keyword = '' }) => {
 	}, [dispatch, projectId]);
 
 	return (
-		<>
+		<BorderContainer>
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
-				<BorderContainer title={'Activity'}>
+				<>
 					<Row className="align-items-center mt-2 mb-3">
 						<Col md={2}></Col>
 						<Col md={8}>
@@ -95,9 +95,9 @@ const ListStakeholderActivities = ({ match, keyword = '' }) => {
 							</tbody>
 						</Table>
 					</Row>
-				</BorderContainer>
+				</>
 			)}
-		</>
+		</BorderContainer>
 	);
 };
 

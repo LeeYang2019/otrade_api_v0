@@ -25,13 +25,13 @@ const ListStakeholderOrganizations = ({ match }) => {
 	}, [dispatch, projectId]);
 
 	return (
-		<>
+		<BorderContainer>
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
-				<BorderContainer title={'Organizations'}>
+				<>
 					<Row className="align-items-center mt-2 mb-3">
 						<Col md={2}></Col>
 						<Col md={8}>
@@ -87,9 +87,9 @@ const ListStakeholderOrganizations = ({ match }) => {
 							</tbody>
 						</Table>
 					</Row>
-				</BorderContainer>
+				</>
 			)}
-		</>
+		</BorderContainer>
 	);
 };
 

@@ -163,9 +163,9 @@ const AddActivityScreen = ({ match, navigation }) => {
 													onChange={(e) => handleInputChange(e, i)}
 												></Form.Control>
 											</Col>
-											<Col className="flex-bottom">
+											<Col className="d-flex align-items-end mb-3">
 												<Button className="px-3" onClick={handleAdd}>
-													Add Additional
+													<i className="fas fa-plus"></i> Additional
 												</Button>
 											</Col>
 										</Row>

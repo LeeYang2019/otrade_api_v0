@@ -3,6 +3,7 @@ import { Route, Link } from 'react-router-dom';
 import { Tabs, Tab, Row, Col } from 'react-bootstrap';
 import ProjectEditScreen from './ProjectEditScreen';
 import Assigment from '../../components/Assignment';
+import BorderContainer from '../../components/BorderContainer';
 
 const ProjectUpdateScreen = ({ match, history }) => {
 	return (
@@ -10,7 +11,7 @@ const ProjectUpdateScreen = ({ match, history }) => {
 			<Link to="/admin/projects" className="btn btn-primary my-3">
 				Back to Project List
 			</Link>
-			<Row>
+			<BorderContainer title={''}>
 				<Col md={12} className="m-auto">
 					<Tabs defaultActiveKey="editProject" id="tabs" variant="tabs">
 						<Tab eventKey="editProject" title="Edit Project">
@@ -25,7 +26,7 @@ const ProjectUpdateScreen = ({ match, history }) => {
 						</Tab>
 					</Tabs>
 				</Col>
-			</Row>
+			</BorderContainer>
 		</>
 	);
 };

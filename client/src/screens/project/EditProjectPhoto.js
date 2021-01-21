@@ -80,54 +80,53 @@ const EditProjectPhoto = ({ match }) => {
 			{error && <Message variant="danger">{error}</Message>}
 			{successUpdate && <Message variant="success">{message}</Message>}
 			{loading && <Loader />}
-			<Container>
-				<Form onSubmit={submitHandler} className="my-5">
-					<Row>
-						<Col>
-							<Form.Group controlId="image">
-								<Form.Label>Image</Form.Label>
-								<Row className="mb-3">
-									<Col md={6}>
-										<Form.Control
-											type="text"
-											placeholder="Enter image url"
-											value={image}
-											onChange={(e) => setImage(e.target.value)}
-										></Form.Control>
-									</Col>
-								</Row>
-								<Row>
-									<Col md={6}>
-										<Form.File
-											id="image-file"
-											label="Choose File"
-											custom
-											onChange={uploadFileHandler}
-										>
-											{uploading && <Loader />}
-										</Form.File>
-									</Col>
-								</Row>
-							</Form.Group>
-						</Col>
-					</Row>
-					<Row className="mt-3">
-						<Col>
-							<Button type="submit" variant="primary" className="px-5 mt-3">
-								Update
-							</Button>
-						</Col>
-						<Col className="text-right">
-							{/* <p>updated on: {updatedDate.substring(0, 10)}</p> */}
-						</Col>
-					</Row>
-				</Form>
-				{/* ) : (
+
+			<Form onSubmit={submitHandler} className="my-5">
+				<Row>
+					<Col>
+						<Form.Group controlId="image">
+							<Form.Label>Image</Form.Label>
+							<Row className="mb-3">
+								<Col md={6}>
+									<Form.Control
+										type="text"
+										placeholder="Enter image url"
+										value={image}
+										onChange={(e) => setImage(e.target.value)}
+									></Form.Control>
+								</Col>
+							</Row>
+							<Row>
+								<Col md={6}>
+									<Form.File
+										id="image-file"
+										label="Choose File"
+										custom
+										onChange={uploadFileHandler}
+									>
+										{uploading && <Loader />}
+									</Form.File>
+								</Col>
+							</Row>
+						</Form.Group>
+					</Col>
+				</Row>
+				<Row className="mt-3">
+					<Col>
+						<Button type="submit" variant="primary" className="px-5 mt-3">
+							Update
+						</Button>
+					</Col>
+					<Col className="text-right">
+						{/* <p>updated on: {updatedDate.substring(0, 10)}</p> */}
+					</Col>
+				</Row>
+			</Form>
+			{/* ) : (
 					<Message variant="danger">
 						ADMIN NOT ALLOWED TO THIS PROTECTED ROUTE
 					</Message>
 				)} */}
-			</Container>
 		</BorderContainer>
 	);
 };

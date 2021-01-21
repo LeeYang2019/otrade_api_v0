@@ -3,7 +3,7 @@ import React from 'react';
 const BorderContainer = ({ title, children }) => {
 	return (
 		<div className="border-container">
-			<h1>{title}</h1>
+			<div className="title">{title}</div>
 			<hr />
 			{children}
 		</div>

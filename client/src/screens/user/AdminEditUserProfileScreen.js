@@ -6,6 +6,7 @@ import { getUserDetails, updateUser } from '../../actions/userActions';
 import { USER_UPDATE_RESET } from '../../constants/userConstants';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
+import BorderContainer from '../../components/BorderContainer';
 
 const AdminEditUserProfileScreen = ({ match, history }) => {
 	const userId = match.params.id;
@@ -84,12 +85,10 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 			<Link to="/admin/userList" className="btn btn-primary my-3">
 				Back to User List
 			</Link>
-			<div className="border-container">
+			<BorderContainer>
 				{loadingUpdate && <Loader />}
 				{errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
 				{successUpdate && <Message variant="success">Profile Update</Message>}
-				<h1>Update User</h1>
-				<hr className="mt-4 mb-4" />
 				{loading ? (
 					<Loader />
 				) : error ? (
@@ -190,7 +189,7 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 						</Row>
 					</Form>
 				)}
-			</div>
+			</BorderContainer>
 		</>
 	);
 };

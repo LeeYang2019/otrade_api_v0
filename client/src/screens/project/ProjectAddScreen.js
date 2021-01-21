@@ -6,6 +6,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { addProject } from '../../actions/projectActions';
 import { PROJECT_ADD_RESET } from '../../constants/projectConstants';
 import Loader from '../../components/Loader';
+import BorderContainer from '../../components/BorderContainer';
 
 const ProjectAddScreen = ({ history }) => {
 	const [projectName, setProjectName] = useState('');
@@ -72,9 +73,7 @@ const ProjectAddScreen = ({ history }) => {
 			<Link to="/admin/projects" className="btn btn-primary my-3">
 				Back to Project List
 			</Link>
-			<div className="border-container">
-				<h1>Add Project</h1>
-				<hr className="mt-4 mb-4" />
+			<BorderContainer title={'Project'}>
 				<Form onSubmit={submitHandler} className="mt-4 mb-3">
 					<Row>
 						<Col>
@@ -152,7 +151,7 @@ const ProjectAddScreen = ({ history }) => {
 						</Col>
 					</Row>
 				</Form>
-			</div>
+			</BorderContainer>
 		</>
 	);
 };

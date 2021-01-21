@@ -76,14 +76,14 @@ const EditStakeholderScreen = ({ projectId, match }) => {
 	};
 
 	return (
-		<>
+		<BorderContainer>
 			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
-				<BorderContainer>
+				<>
 					<Form onSubmit={submitHandler} className="mt-4 mb-3">
 						<Row>
 							<Col>
@@ -118,9 +118,9 @@ const EditStakeholderScreen = ({ projectId, match }) => {
 							Update
 						</Button>
 					</Form>
-				</BorderContainer>
+				</>
 			)}
-		</>
+		</BorderContainer>
 	);
 };
 

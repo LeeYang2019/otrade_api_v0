@@ -24,13 +24,13 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 	}, [dispatch, keyword, projectId]);
 
 	return (
-		<BorderContainer title={'Stakeholders'}>
+		<>
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
-				<>
+				<BorderContainer title={'Stakeholders'}>
 					<Row className="align-items-center mt-2 mb-3">
 						<Col md={2}></Col>
 						<Col md={8}>
@@ -98,9 +98,9 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 							</tbody>
 						</Table>
 					</Row>
-				</>
+				</BorderContainer>
 			)}
-		</BorderContainer>
+		</>
 	);
 };
 

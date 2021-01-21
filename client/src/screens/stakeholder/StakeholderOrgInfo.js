@@ -11,7 +11,6 @@ import BorderContainer from '../../components/BorderContainer';
 
 const AddStakeholderScreen = ({ navigation, match }) => {
 	//get projectDetails
-	//get project details
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { project } = projectDetails;
 
@@ -90,7 +89,6 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 						</Col>
 					</Row>
 				</Form.Group>
-
 				<Form.Group controlId="position" className="mt-5">
 					<Row>
 						<Col md={8}>
@@ -119,7 +117,6 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 						</Col>
 					</Row>
 				</Form.Group>
-
 				<Form.Group controlId="influence">
 					<Row>
 						<Col md={8}>
@@ -145,7 +142,6 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 						</Col>
 					</Row>
 				</Form.Group>
-
 				<Form.Group controlId="impact">
 					<Row>
 						<Col md={8}>
@@ -171,7 +167,6 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 						</Col>
 					</Row>
 				</Form.Group>
-
 				<Row className="mt-3">
 					<Col>
 						<Button

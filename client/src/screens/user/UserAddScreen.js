@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../actions/userActions';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
+import BorderContainer from '../../components/BorderContainer';
 
 const UserAddScreen = ({ history }) => {
 	//define states
@@ -98,9 +99,7 @@ const UserAddScreen = ({ history }) => {
 				Back to User List
 			</Link>
 
-			<div className="border-container">
-				<h1>Register User</h1>
-				<hr className="mt-4 mb-4" />
+			<BorderContainer>
 				{message && <Message variant="danger">{message}</Message>}
 				<Form onSubmit={submitHandler} className="mt-4 mb-3">
 					<Row>
@@ -254,7 +253,7 @@ const UserAddScreen = ({ history }) => {
 						</Col>
 					</Row>
 				</Form>
-			</div>
+			</BorderContainer>
 		</>
 	);
 };
