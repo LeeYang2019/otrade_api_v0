@@ -3,6 +3,7 @@ import EditStakeholderScreen from './EditStakeholderScreen';
 import EditStakeholderPhoto from './EditStakeholderPhoto';
 import ListStakeholderOrganizations from '../organization/ListStakeholderOrganizations';
 import ListStakeholderActivities from '../activity/ListStakeholderActivities';
+import Dashboard from '../../components/Dashboard';
 
 export const btnlinks = [
 	{
@@ -41,7 +42,11 @@ export const navbarlinks = [
 export const routes = [
 	{
 		path: '',
-		component: ({ match }) => <EditStakeholderScreen match={match} />,
+		component: ({ match }) => <Dashboard match={match} />,
+	},
+	{
+		path: '/dashboard',
+		component: ({ match }) => <Dashboard match={match} />,
 	},
 	{
 		path: '/profile',

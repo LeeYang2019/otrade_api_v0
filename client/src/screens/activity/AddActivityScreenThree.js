@@ -5,6 +5,7 @@ import { listStakeholders } from '../../actions/stakeholderActions';
 import { addActivity } from '../../actions/activityActions';
 import { ACTIVITY_ADD_RESET } from '../../constants/activityConstants';
 import Message from '../../components/Message.js';
+import BorderContainer from '../../components/BorderContainer';
 
 const AddActivityScreenTwo = ({ match, navigation }) => {
 	const projectId = match.params.projectId;
@@ -54,28 +55,24 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 	};
 
 	return (
-		<div className="border-container">
+		<BorderContainer title={'Activity'}>
 			{message && <Message variant="success">{message}</Message>}
-			<hr className="mt-4 mb-4" />
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
-				<Form.Group controlId="compromise">
-					<Form.Group controlId="discussion">
-						<Form.Label>Compromise Details</Form.Label>
-						<Row>
-							<Col md={8}>
-								<Form.Control
-									className="mb-3"
-									as="textarea"
-									rows="4"
-									placeholder="Enter Details"
-									value={comment}
-									onChange={(e) => setComment(e.target.value)}
-								></Form.Control>
-							</Col>
-						</Row>
-					</Form.Group>
+				<Form.Group controlId="discussion">
+					<Form.Label>Compromise Details</Form.Label>
+					<Row>
+						<Col md={8}>
+							<Form.Control
+								className="mb-3"
+								as="textarea"
+								rows="4"
+								placeholder="Enter Details"
+								value={comment}
+								onChange={(e) => setComment(e.target.value)}
+							></Form.Control>
+						</Col>
+					</Row>
 				</Form.Group>
-
 				<Form.Group controlId="date">
 					<Row>
 						<Col md={4}>
@@ -97,7 +94,6 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 						onChange={(e) => setIsComplete(e.target.checked)}
 					></Form.Check>
 				</Form.Group>
-
 				<Row>
 					<Col>
 						<Button type="submit" variant="primary" className="px-5 mt-3">
@@ -106,7 +102,7 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 					</Col>
 				</Row>
 			</Form>
-		</div>
+		</BorderContainer>
 	);
 };
 

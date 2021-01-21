@@ -5,6 +5,7 @@ import { listComments } from '../../actions/commentActions';
 import CommentForm from '../../components/CommentForm';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
+import BorderContainer from '../../components/BorderContainer';
 
 const Comments = ({ match }) => {
 	const stakeholderId = match.params.id;
@@ -39,7 +40,7 @@ const Comments = ({ match }) => {
 	) : error ? (
 		<Message>{error}</Message>
 	) : (
-		<Container className="my-5 px-4">
+		<BorderContainer title={'Comments'}>
 			<Row>
 				<CommentForm stakeholderId={stakeholderId} />
 			</Row>
@@ -77,7 +78,7 @@ const Comments = ({ match }) => {
 					</tbody>
 				</Table>
 			</Row>
-		</Container>
+		</BorderContainer>
 	);
 };
 

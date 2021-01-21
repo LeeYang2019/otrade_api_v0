@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addOrganization } from '../../actions/organizationAction';
 import Message from '../../components/Message.js';
 import { ORGANIZATION_ADD_RESET } from '../../constants/organizationConstants';
+import BorderContainer from '../../components/BorderContainer';
 
 const AddOrganizationScreen = ({ history, match }) => {
 	//define states
@@ -88,9 +89,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 	};
 
 	return (
-		<>
-			<Form.Label>Organization Information</Form.Label>
-			<hr className="mt-4 mb-4" />
+		<BorderContainer title={'Organization'}>
 			{message && <Message variant="success">{message}</Message>}
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Row>
@@ -225,7 +224,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 					</Col>
 				</Row>
 			</Form>
-		</>
+		</BorderContainer>
 	);
 };
 

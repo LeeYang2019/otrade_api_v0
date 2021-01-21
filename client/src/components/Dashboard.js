@@ -1,13 +1,10 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
+import BorderContainer from './BorderContainer';
 
 const Dashboard = () => {
 	return (
-		<>
-			<Row>
-				<h1>Dashboard</h1>
-				<hr />
-			</Row>
+		<BorderContainer title={'Dashboard'}>
 			<Row>
 				<Col md={6}>
 					<Row></Row>
@@ -16,7 +13,7 @@ const Dashboard = () => {
 					<Row></Row>
 				</Col>
 			</Row>
-		</>
+		</BorderContainer>
 	);
 };
 

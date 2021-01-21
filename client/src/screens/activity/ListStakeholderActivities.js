@@ -6,6 +6,7 @@ import { listActivities } from '../../actions/activityActions';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import SearchBox from '../../components/SearchBox';
+import BorderContainer from '../../components/BorderContainer';
 
 const ListStakeholderActivities = ({ match, keyword = '' }) => {
 	const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const ListStakeholderActivities = ({ match, keyword = '' }) => {
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
-				<>
+				<BorderContainer title={'Activity'}>
 					<Row className="align-items-center mt-2 mb-3">
 						<Col md={2}></Col>
 						<Col md={8}>
@@ -94,7 +95,7 @@ const ListStakeholderActivities = ({ match, keyword = '' }) => {
 							</tbody>
 						</Table>
 					</Row>
-				</>
+				</BorderContainer>
 			)}
 		</>
 	);

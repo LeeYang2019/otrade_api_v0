@@ -5,6 +5,7 @@ import { updateUserProfile, getUserDetails } from '../../actions/userActions';
 import { USER_PROFILE_UPDATE_RESET } from '../../constants/userConstants';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
+import BorderContainer from '../../components/BorderContainer';
 
 const EditUser = ({ match }) => {
 	const userId = match.params.id;
@@ -67,9 +68,7 @@ const EditUser = ({ match }) => {
 	};
 
 	return (
-		<>
-			<Form.Label>User Information</Form.Label>
-			<hr className="mt-4 mb-4" />
+		<BorderContainer title={'User Information'}>
 			{error && <Message variant="danger">{error}</Message>}
 			{successUpdate && <Message variant="success">{message}</Message>}
 			{loading && <Loader />}
@@ -163,7 +162,7 @@ const EditUser = ({ match }) => {
 						ADMIN NOT ALLOWED TO THIS PROTECTED ROUTE
 					</Message>
 				)} */}
-		</>
+		</BorderContainer>
 	);
 };
 

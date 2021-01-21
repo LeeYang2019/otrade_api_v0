@@ -6,6 +6,7 @@ import { listOrganizations } from '../../actions/organizationAction';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import SearchBox from '../../components/SearchBox';
+import BorderContainer from '../../components/BorderContainer';
 
 const ListOrganizations = ({ match }) => {
 	const projectId = match.params.id;
@@ -22,7 +23,7 @@ const ListOrganizations = ({ match }) => {
 	}, [dispatch, projectId]);
 
 	return (
-		<div className="border-container">
+		<BorderContainer title={'Organizations'}>
 			{loading ? (
 				<Loader />
 			) : error ? (
@@ -84,7 +85,7 @@ const ListOrganizations = ({ match }) => {
 					</Row>
 				</>
 			)}
-		</div>
+		</BorderContainer>
 	);
 };
 

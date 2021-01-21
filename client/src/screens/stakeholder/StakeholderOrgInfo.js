@@ -7,6 +7,7 @@ import {
 } from '../../actions/stakeholderActions';
 import { STAKEHOLDER_ADD_RESET } from '../../constants/stakeholderConstants';
 import Message from '../../components/Message.js';
+import BorderContainer from '../../components/BorderContainer';
 
 const AddStakeholderScreen = ({ navigation, match }) => {
 	//get projectDetails
@@ -65,9 +66,7 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 	};
 
 	return (
-		<>
-			<Form.Label>Client Information</Form.Label>
-			<hr className="mt-4 mb-4" />
+		<BorderContainer title={'Client'}>
 			{message && <Message variant="success">{message}</Message>}
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Form.Group controlId="organization">
@@ -188,7 +187,7 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 					</Col>
 				</Row>
 			</Form>
-		</>
+		</BorderContainer>
 	);
 };
 

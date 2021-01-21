@@ -6,6 +6,7 @@ import { listActivities } from '../../actions/activityActions';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import SearchBox from '../../components/SearchBox';
+import BorderContainer from '../../components/BorderContainer';
 
 const ActivitiesList = ({ match, keyword = '' }) => {
 	const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const ActivitiesList = ({ match, keyword = '' }) => {
 	}, [dispatch, projectId]);
 
 	return (
-		<>
+		<BorderContainer title={'Activities'}>
 			{loading ? (
 				<Loader />
 			) : error ? (
@@ -96,7 +97,7 @@ const ActivitiesList = ({ match, keyword = '' }) => {
 					</Row>
 				</>
 			)}
-		</>
+		</BorderContainer>
 	);
 };
 

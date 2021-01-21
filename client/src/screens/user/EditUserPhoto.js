@@ -6,6 +6,7 @@ import { updateUserProfile, getUserDetails } from '../../actions/userActions';
 import { USER_PROFILE_UPDATE_RESET } from '../../constants/userConstants';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
+import BorderContainer from '../../components/BorderContainer';
 
 const EditUserPhoto = ({ match }) => {
 	const userId = match.params.id;
@@ -70,7 +71,7 @@ const EditUserPhoto = ({ match }) => {
 	};
 
 	return (
-		<>
+		<BorderContainer title={'User Photo'}>
 			{error && <Message variant="danger">{error}</Message>}
 			{successUpdate && <Message variant="success">{message}</Message>}
 			{loading && <Loader />}
@@ -112,7 +113,7 @@ const EditUserPhoto = ({ match }) => {
 					</Col>
 				</Row>
 			</Form>
-		</>
+		</BorderContainer>
 	);
 };
 

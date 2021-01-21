@@ -9,6 +9,7 @@ import { ACTIVITY_ADD_RESET } from '../../constants/activityConstants';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import { Next } from 'react-bootstrap/esm/PageItem';
+import BorderContainer from '../../components/BorderContainer';
 
 const AddActivityScreenTwo = ({ match, navigation }) => {
 	const projectId = match.params.projectId;
@@ -54,7 +55,7 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 	};
 
 	return (
-		<div className="border-container">
+		<BorderContainer title={'Activity'}>
 			{message && <Message variant="success">{message}</Message>}
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Form.Group controlId="compromise">
@@ -83,7 +84,7 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 					</Col>
 				</Row>
 			</Form>
-		</div>
+		</BorderContainer>
 	);
 };
 

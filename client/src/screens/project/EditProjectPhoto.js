@@ -9,11 +9,10 @@ import {
 import { PROJECT_UPDATE_RESET } from '../../constants/projectConstants';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
+import BorderContainer from '../../components/BorderContainer';
 
 const EditProjectPhoto = ({ match }) => {
 	const projectId = match.params.id;
-
-	console.log(projectId);
 
 	//define states
 	const [image, setImage] = useState('');
@@ -77,7 +76,7 @@ const EditProjectPhoto = ({ match }) => {
 	};
 
 	return (
-		<>
+		<BorderContainer title="Photo">
 			{error && <Message variant="danger">{error}</Message>}
 			{successUpdate && <Message variant="success">{message}</Message>}
 			{loading && <Loader />}
@@ -129,7 +128,7 @@ const EditProjectPhoto = ({ match }) => {
 					</Message>
 				)} */}
 			</Container>
-		</>
+		</BorderContainer>
 	);
 };
 

@@ -6,6 +6,7 @@ import { listStakeholderOrganizations } from '../../actions/organizationAction';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import SearchBox from '../../components/SearchBox';
+import BorderContainer from '../../components/BorderContainer';
 
 const ListStakeholderOrganizations = ({ match }) => {
 	const projectId = match.params.id;
@@ -24,13 +25,13 @@ const ListStakeholderOrganizations = ({ match }) => {
 	}, [dispatch, projectId]);
 
 	return (
-		<div className="border-container">
+		<>
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
-				<>
+				<BorderContainer title={'Organizations'}>
 					<Row className="align-items-center mt-2 mb-3">
 						<Col md={2}></Col>
 						<Col md={8}>
@@ -86,9 +87,9 @@ const ListStakeholderOrganizations = ({ match }) => {
 							</tbody>
 						</Table>
 					</Row>
-				</>
+				</BorderContainer>
 			)}
-		</div>
+		</>
 	);
 };
 

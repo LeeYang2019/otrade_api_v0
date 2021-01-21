@@ -9,6 +9,7 @@ import {
 import { STAKEHOLDER_UPDATE_RESET } from '../../constants/stakeholderConstants';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
+import BorderContainer from '../../components/BorderContainer';
 
 const EditStakeholderScreen = ({ projectId, match }) => {
 	const stakeholderId = match.params.id;
@@ -76,48 +77,48 @@ const EditStakeholderScreen = ({ projectId, match }) => {
 
 	return (
 		<>
-			<Form.Label>Stakeholder</Form.Label>
-			<hr className="mt-4 mb-4" />
 			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
-				<Form onSubmit={submitHandler} className="mt-4 mb-3">
-					<Row>
-						<Col>
-							<Form.Group controlId="image">
-								<Form.Label>Image</Form.Label>
-								<Row className="mb-3">
-									<Col md={6}>
-										<Form.Control
-											type="text"
-											placeholder="Enter image url"
-											value={image}
-											onChange={(e) => setImage(e.target.value)}
-										></Form.Control>
-									</Col>
-								</Row>
-								<Row>
-									<Col md={6}>
-										<Form.File
-											id="image-file"
-											label="Choose File"
-											custom
-											onChange={uploadFileHandler}
-										>
-											{uploading && <Loader />}
-										</Form.File>
-									</Col>
-								</Row>
-							</Form.Group>
-						</Col>
-					</Row>
-					<Button type="submit" variant="primary" className="mt-3 px-5">
-						Update
-					</Button>
-				</Form>
+				<BorderContainer>
+					<Form onSubmit={submitHandler} className="mt-4 mb-3">
+						<Row>
+							<Col>
+								<Form.Group controlId="image">
+									<Form.Label>Image</Form.Label>
+									<Row className="mb-3">
+										<Col md={6}>
+											<Form.Control
+												type="text"
+												placeholder="Enter image url"
+												value={image}
+												onChange={(e) => setImage(e.target.value)}
+											></Form.Control>
+										</Col>
+									</Row>
+									<Row>
+										<Col md={6}>
+											<Form.File
+												id="image-file"
+												label="Choose File"
+												custom
+												onChange={uploadFileHandler}
+											>
+												{uploading && <Loader />}
+											</Form.File>
+										</Col>
+									</Row>
+								</Form.Group>
+							</Col>
+						</Row>
+						<Button type="submit" variant="primary" className="mt-3 px-5">
+							Update
+						</Button>
+					</Form>
+				</BorderContainer>
 			)}
 		</>
 	);

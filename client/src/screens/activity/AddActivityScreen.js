@@ -8,6 +8,7 @@ import { addActivity } from '../../actions/activityActions';
 import { ACTIVITY_ADD_RESET } from '../../constants/activityConstants';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
+import BorderContainer from '../../components/BorderContainer';
 
 const AddActivityScreen = ({ match, navigation }) => {
 	const projectId = match.params.projectId;
@@ -80,10 +81,8 @@ const AddActivityScreen = ({ match, navigation }) => {
 	};
 
 	return (
-		<div className="border-container">
+		<BorderContainer title={'Activity'}>
 			{message && <Message variant="success">{message}</Message>}
-			<Form.Label>Add Activity</Form.Label>
-			<hr className="mt-4 mb-4" />
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Row>
 					<Col md={8}>
@@ -183,7 +182,7 @@ const AddActivityScreen = ({ match, navigation }) => {
 					</Col>
 				</Row>
 			</Form>
-		</div>
+		</BorderContainer>
 	);
 };
 

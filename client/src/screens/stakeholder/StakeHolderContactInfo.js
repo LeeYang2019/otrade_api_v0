@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveStakeholderInfo } from '../../actions/stakeholderActions';
+import BorderContainer from '../../components/BorderContainer';
 
 const StakeholderContactInfo = ({ navigation }) => {
 	const stakeholder = useSelector((state) => state.stakeholderSave);
@@ -58,9 +59,7 @@ const StakeholderContactInfo = ({ navigation }) => {
 	};
 
 	return (
-		<>
-			<Form.Label>Client Information</Form.Label>
-			<hr className="mt-4 mb-4" />
+		<BorderContainer title={'Client'}>
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Row>
 					<Col md={6}>
@@ -205,7 +204,7 @@ const StakeholderContactInfo = ({ navigation }) => {
 					</Col>
 				</Row>
 			</Form>
-		</>
+		</BorderContainer>
 	);
 };
 

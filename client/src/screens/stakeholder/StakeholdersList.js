@@ -6,6 +6,7 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import SearchBox from '../../components/SearchBox';
 import { listStakeholders } from '../../actions/stakeholderActions';
+import BorderContainer from '../../components/BorderContainer';
 
 const StakeholdersList = ({ match, keyword = '' }) => {
 	const projectId = match.params.id;
@@ -23,7 +24,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 	}, [dispatch, keyword, projectId]);
 
 	return (
-		<>
+		<BorderContainer title={'Stakeholders'}>
 			{loading ? (
 				<Loader />
 			) : error ? (
@@ -99,7 +100,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 					</Row>
 				</>
 			)}
-		</>
+		</BorderContainer>
 	);
 };
 

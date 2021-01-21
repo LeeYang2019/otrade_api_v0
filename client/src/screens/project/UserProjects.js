@@ -5,6 +5,7 @@ import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import { listUserProjects } from '../../actions/projectActions';
 import Project from '../../components/Project';
+import BorderContainer from '../../components/BorderContainer';
 
 const UserProjects = ({ match }) => {
 	const userId = match.params.id;
@@ -21,7 +22,7 @@ const UserProjects = ({ match }) => {
 	}, []);
 
 	return (
-		<>
+		<BorderContainer title={'Projects'}>
 			{loading ? (
 				<Loader />
 			) : error ? (
@@ -40,7 +41,7 @@ const UserProjects = ({ match }) => {
 					</tbody>
 				</Table>
 			)}
-		</>
+		</BorderContainer>
 	);
 };
 
