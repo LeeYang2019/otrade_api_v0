@@ -25,15 +25,18 @@ const ProfileTop = ({ profile, btnlinks, navbarlinks, url }) => {
 									)}
 								</strong>
 							</h1>
-							{profile.projectClient && (
-								<strong>
-									<em>{profile.projectClient}</em>
-								</strong>
-							)}
 						</Col>
 					</Row>
 					<Row className="middle-row">
 						<Col md={8}>
+							{profile.projectClient && (
+								<strong>
+									<em>
+										{profile.projectClient}
+										<br />
+									</em>
+								</strong>
+							)}
 							{profile.email ? (
 								<>
 									<strong>{profile.email}</strong>
@@ -64,6 +67,7 @@ const ProfileTop = ({ profile, btnlinks, navbarlinks, url }) => {
 							))}
 						</Col>
 					</Row>
+					<hr />
 					<Row className="lower-row">
 						<Col>
 							<ul className="my-navbar">

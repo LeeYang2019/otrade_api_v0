@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouteMatch, Route, Switch } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader.js';
@@ -40,17 +40,15 @@ const UserProfileScreen = ({ match }) => {
 						btnlinks={btnlinks}
 						navbarlinks={navbarlinks}
 					/>
-					<Container>
-						<Switch>
-							{routes.map((item) => (
-								<Route
-									exact
-									path={`${path}${item.path}`}
-									render={item.component}
-								/>
-							))}
-						</Switch>
-					</Container>
+					<Switch>
+						{routes.map((item) => (
+							<Route
+								exact
+								path={`${path}${item.path}`}
+								render={item.component}
+							/>
+						))}
+					</Switch>
 				</>
 			)}
 		</>

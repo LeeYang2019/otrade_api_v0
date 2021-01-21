@@ -107,7 +107,7 @@ label {
 .profile-container {
 	padding-right: 1.5rem;
 	padding-left: 1.5rem;
-	padding-top: 1.5rem;
+	padding-top: 1rem;
 }
 
 .image-container {
@@ -117,7 +117,7 @@ label {
 .middle-row {
 	margin-left: 1rem;
 	margin-right: 1rem;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	/* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
 }
 
 .lower-row {
@@ -128,5 +128,5 @@ label {
 	width: 100%;
 	height: auto;
 	margin-top: 1rem;
-	padding: 1.5rem 2rem;
+	padding: 1.5rem 2.5rem;
 }

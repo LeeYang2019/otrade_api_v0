@@ -88,7 +88,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 	};
 
 	return (
-		<div className="border-container">
+		<>
 			<Form.Label>Organization Information</Form.Label>
 			<hr className="mt-4 mb-4" />
 			{message && <Message variant="success">{message}</Message>}
@@ -225,7 +225,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 					</Col>
 				</Row>
 			</Form>
-		</div>
+		</>
 	);
 };
 

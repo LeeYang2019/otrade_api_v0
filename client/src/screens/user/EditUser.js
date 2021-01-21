@@ -67,7 +67,7 @@ const EditUser = ({ match }) => {
 	};
 
 	return (
-		<div className="border-container">
+		<>
 			<Form.Label>User Information</Form.Label>
 			<hr className="mt-4 mb-4" />
 			{error && <Message variant="danger">{error}</Message>}
@@ -163,7 +163,7 @@ const EditUser = ({ match }) => {
 						ADMIN NOT ALLOWED TO THIS PROTECTED ROUTE
 					</Message>
 				)} */}
-		</div>
+		</>
 	);
 };
 

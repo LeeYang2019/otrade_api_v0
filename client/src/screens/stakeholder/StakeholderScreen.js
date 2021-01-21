@@ -40,19 +40,15 @@ const StakeholderScreen = ({ match }) => {
 						btnlinks={btnlinks}
 						navbarlinks={navbarlinks}
 					/>
-					<Row>
-						<Container>
-							<Switch>
-								{routes.map((item) => (
-									<Route
-										exact
-										path={`${path}${item.path}`}
-										render={item.component}
-									/>
-								))}
-							</Switch>
-						</Container>
-					</Row>
+					<Switch>
+						{routes.map((item) => (
+							<Route
+								exact
+								path={`${path}${item.path}`}
+								render={item.component}
+							/>
+						))}
+					</Switch>
 				</>
 			)}
 		</>

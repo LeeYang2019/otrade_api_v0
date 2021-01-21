@@ -58,7 +58,7 @@ const StakeholderContactInfo = ({ navigation }) => {
 	};
 
 	return (
-		<div className="border-container">
+		<>
 			<Form.Label>Client Information</Form.Label>
 			<hr className="mt-4 mb-4" />
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
@@ -205,7 +205,7 @@ const StakeholderContactInfo = ({ navigation }) => {
 					</Col>
 				</Row>
 			</Form>
-		</div>
+		</>
 	);
 };
 

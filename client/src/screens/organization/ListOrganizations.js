@@ -22,7 +22,7 @@ const ListOrganizations = ({ match }) => {
 	}, [dispatch, projectId]);
 
 	return (
-		<>
+		<div className="border-container">
 			{loading ? (
 				<Loader />
 			) : error ? (
@@ -84,7 +84,7 @@ const ListOrganizations = ({ match }) => {
 					</Row>
 				</>
 			)}
-		</>
+		</div>
 	);
 };
 

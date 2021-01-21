@@ -6,13 +6,13 @@ import Dashboard from '../../components/Dashboard';
 export const btnlinks = [
 	{
 		link: '/profile-photo',
-		class: 'btn btn-primary my-3 mr-3',
+		class: 'btn btn-primary mr-3',
 		icon: 'fas fa-edit',
 		type: 'Photo',
 	},
 	{
 		link: '/profile',
-		class: 'btn btn-primary my-3',
+		class: 'btn btn-primary',
 		icon: 'fas fa-edit',
 		type: 'Profile',
 	},

@@ -75,7 +75,7 @@ const EditStakeholderScreen = ({ projectId, match }) => {
 	};
 
 	return (
-		<div className="border-container">
+		<>
 			<Form.Label>Stakeholder</Form.Label>
 			<hr className="mt-4 mb-4" />
 			{message && <Message variant="success">{message}</Message>}
@@ -119,7 +119,7 @@ const EditStakeholderScreen = ({ projectId, match }) => {
 					</Button>
 				</Form>
 			)}
-		</div>
+		</>
 	);
 };
 

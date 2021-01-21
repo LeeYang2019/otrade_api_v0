@@ -7,13 +7,13 @@ import ListStakeholderActivities from '../activity/ListStakeholderActivities';
 export const btnlinks = [
 	{
 		link: '/photo',
-		class: 'btn btn-primary my-3 mr-3',
+		class: 'btn btn-primary mr-3',
 		icon: 'fas fa-edit',
 		type: 'Photo',
 	},
 	{
 		link: '/profile',
-		class: 'btn btn-primary my-3',
+		class: 'btn btn-primary',
 		icon: 'fas fa-edit',
 		type: 'Profile',
 	},
