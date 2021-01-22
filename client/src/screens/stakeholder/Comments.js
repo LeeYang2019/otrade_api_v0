@@ -29,7 +29,7 @@ const Comments = ({ match }) => {
 	}, []);
 
 	return (
-		<BorderContainer>
+		<BorderContainer title={'Comments'}>
 			{loading ? (
 				<Loader />
 			) : error ? (

@@ -59,7 +59,7 @@ const StakeholderContactInfo = ({ navigation }) => {
 	};
 
 	return (
-		<BorderContainer title={'Client'}>
+		<BorderContainer title={'Client (part 1)'}>
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Row>
 					<Col md={6}>

@@ -15,10 +15,6 @@ export const btnlinks = [
 
 export const navbarlinks = [
 	{
-		link: '/dashboard',
-		type: 'Dashboard',
-	},
-	{
 		link: '/stakeholders',
 		type: 'Stakeholders',
 	},
@@ -35,10 +31,6 @@ export const navbarlinks = [
 export const routes = [
 	{
 		path: '',
-		component: ({ match }) => <Dashboard match={match} />,
-	},
-	{
-		path: '/dashboard',
 		component: ({ match }) => <Dashboard match={match} />,
 	},
 	{

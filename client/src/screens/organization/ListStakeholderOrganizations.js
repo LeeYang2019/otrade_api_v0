@@ -26,7 +26,7 @@ const ListStakeholderOrganizations = ({ match }) => {
 	}, [dispatch, projectId]);
 
 	return (
-		<BorderContainer>
+		<BorderContainer title={'Organizations'}>
 			{loading ? (
 				<Loader />
 			) : error ? (

@@ -27,7 +27,7 @@ const ListStakeholderActivities = ({ match, keyword = '' }) => {
 	}, [dispatch, projectId]);
 
 	return (
-		<BorderContainer>
+		<BorderContainer title={'Activities'}>
 			{loading ? (
 				<Loader />
 			) : error ? (

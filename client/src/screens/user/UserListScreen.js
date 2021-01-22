@@ -127,8 +127,7 @@ const UserListScreen = ({ history, match }) => {
 															</strong>
 														)}
 														<br />
-														<br />
-														Created:{' '}
+														Joined:{' '}
 														<strong>
 															{user.createdAt.substring(0, 10)}
 														</strong>{' '}

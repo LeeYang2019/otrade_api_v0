@@ -55,7 +55,7 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 	};
 
 	return (
-		<BorderContainer title={'Activity'}>
+		<BorderContainer title={'Activity (part 2)'}>
 			{message && <Message variant="success">{message}</Message>}
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Form.Group controlId="compromise">

@@ -133,7 +133,7 @@ const ProjectEditScreen = ({ match, history }) => {
 							</Form.Group>
 						</Col>
 					</Row>
-					<Row className="mt-3">
+					<Row>
 						<Col>
 							<Button type="submit" variant="primary" className="px-5 mt-3">
 								Update

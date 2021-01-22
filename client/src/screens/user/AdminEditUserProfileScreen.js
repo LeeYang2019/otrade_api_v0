@@ -85,7 +85,7 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 			<Link to="/admin/userList" className="btn btn-primary my-3">
 				Back to User List
 			</Link>
-			<BorderContainer>
+			<BorderContainer title={'Update User'}>
 				{loadingUpdate && <Loader />}
 				{errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
 				{successUpdate && <Message variant="success">Profile Update</Message>}
@@ -177,7 +177,7 @@ const AdminEditUserProfileScreen = ({ match, history }) => {
 								</Form.Group>
 							</Col>
 						</Row>
-						<Row className="mt-3">
+						<Row>
 							<Col>
 								<Button type="submit" variant="primary" className="px-5 mt-3">
 									Update

@@ -73,7 +73,17 @@ const ProfileTop = ({ profile, btnlinks, navbarlinks, url }) => {
 							<ul className="my-navbar">
 								{navbarlinks.map((item) => (
 									<li>
-										<NavLink to={`${url}${item.link}`}>{item.type}</NavLink>
+										<NavLink
+											activeClassName="selected"
+											activeStyle={{
+												fontWeight: 'bold',
+												color: 'blue',
+												textDecoration: 'underline',
+											}}
+											to={`${url}${item.link}`}
+										>
+											{item.type}
+										</NavLink>
 									</li>
 								))}
 							</ul>

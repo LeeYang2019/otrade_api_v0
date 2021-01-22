@@ -61,7 +61,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 							stakeholders.map((person) => (
 								<tr key={person._id}>
 									<td>
-										<Row className="mt-3">
+										<Row>
 											<Col md={6}>
 												<p>
 													<strong>Name: </strong>
@@ -75,11 +75,11 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 
 											<Col
 												md={6}
-												className="d-flex justify-content-between align-items-center"
+												className="d-flex justify-content-start align-items-center"
 											>
 												<Link
 													to={`${url}/addOrganization`}
-													className="btn btn-primary"
+													className="btn btn-primary org-btn"
 												>
 													<i className="fas fa-plus"></i> Organization
 												</Link>

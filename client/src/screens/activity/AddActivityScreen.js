@@ -81,7 +81,7 @@ const AddActivityScreen = ({ match, navigation }) => {
 	};
 
 	return (
-		<BorderContainer title={'Activity'}>
+		<BorderContainer title={'Activity (part 1)'}>
 			{message && <Message variant="success">{message}</Message>}
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Row>
@@ -145,7 +145,8 @@ const AddActivityScreen = ({ match, navigation }) => {
 						</Form.Group>
 					</Col>
 				</Row>
-				<Row className="mt-5">
+				<hr />
+				<Row className="mt-3">
 					<Col md={12}>
 						<Form.Group controlId="discussion">
 							<Form.Label>Discussion Points</Form.Label>
@@ -155,7 +156,7 @@ const AddActivityScreen = ({ match, navigation }) => {
 										<Row>
 											<Col md={8}>
 												<Form.Control
-													className="mb-3"
+													className="mb-1"
 													as="textarea"
 													rows="4"
 													placeholder="Enter Discussion"
@@ -163,7 +164,9 @@ const AddActivityScreen = ({ match, navigation }) => {
 													onChange={(e) => handleInputChange(e, i)}
 												></Form.Control>
 											</Col>
-											<Col className="d-flex align-items-end mb-3">
+										</Row>
+										<Row>
+											<Col md={8} className="d-flex justify-content-end mb-3">
 												<Button className="px-3" onClick={handleAdd}>
 													<i className="fas fa-plus"></i> Additional
 												</Button>

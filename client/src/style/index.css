@@ -56,13 +56,17 @@ td {
 }
 
 body {
-	background-color: rgb(215, 221, 221, 0.25) !important;
+	background-color: rgba(189, 189, 189, 0.25) !important;
 }
 
 /*customize the primary color for buttons*/
 .btn-primary {
 	background-color: #f26827 !important;
 	border-color: #f26827 !important;
+}
+
+.form-control {
+	border-radius: 5px !important;
 }
 
 label {
@@ -133,4 +137,8 @@ label {
 .title {
 	font-size: 18px;
 	font-weight: 900;
+}
+
+.org-btn {
+	margin-right: 8rem;
 }
