@@ -19,6 +19,10 @@ import {
 	ORGANIZATION_STAKEHOLDER_LIST_REQUEST,
 	ORGANIZATION_STAKEHOLDER_LIST_SUCCESS,
 	ORGANIZATION_STAKEHOLDER_LIST_FAIL,
+	ORGANIZATION_PROJECT_FILTER,
+	ORGANIZATION_PROJECT_FILTER_CLEAR,
+	ORGANIZATION_STAKEHOLDER_FILTER,
+	ORGANIZATION_STAKEHOLDER_FILTER_CLEAR,
 } from '../constants/organizationConstants';
 
 //add organization reducer
@@ -89,7 +93,7 @@ export const organizationDeleteReducer = (state = {}, action) => {
 
 //get organization list reducer
 export const organizationListReducer = (
-	state = { organizations: [] },
+	state = { organizations: [], filtered: [] },
 	action
 ) => {
 	switch (action.type) {
@@ -102,6 +106,19 @@ export const organizationListReducer = (
 			};
 		case ORGANIZATION_LIST_FAIL:
 			return { loading: false, error: action.payload };
+		case ORGANIZATION_PROJECT_FILTER:
+			return {
+				...state,
+				filtered: state.organizations.filter((contact) => {
+					const regex = new RegExp(`${action.payload}`, 'gi');
+					return contact.name.match(regex);
+				}),
+			};
+		case ORGANIZATION_PROJECT_FILTER_CLEAR:
+			return {
+				...state,
+				filtered: null,
+			};
 		default:
 			return state;
 	}
@@ -109,7 +126,7 @@ export const organizationListReducer = (
 
 //get organization list reducer
 export const organizationStakeholderListReducer = (
-	state = { organizations: [] },
+	state = { organizations: [], filtered: [] },
 	action
 ) => {
 	switch (action.type) {
@@ -122,6 +139,19 @@ export const organizationStakeholderListReducer = (
 			};
 		case ORGANIZATION_STAKEHOLDER_LIST_FAIL:
 			return { loading: false, error: action.payload };
+		case ORGANIZATION_STAKEHOLDER_FILTER:
+			return {
+				...state,
+				filtered: state.organizations.filter((contact) => {
+					const regex = new RegExp(`${action.payload}`, 'gi');
+					return contact.name.match(regex);
+				}),
+			};
+		case ORGANIZATION_STAKEHOLDER_FILTER_CLEAR:
+			return {
+				...state,
+				filtered: null,
+			};
 		default:
 			return state;
 	}

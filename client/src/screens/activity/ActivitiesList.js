@@ -5,20 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listActivities } from '../../actions/activityActions';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
-import SearchBox from '../../components/SearchBox';
 import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
+import FilterBox from '../../components/FilterBox';
 
 const ActivitiesList = ({ match, keyword = '' }) => {
-	const dispatch = useDispatch();
-
 	const projectId = match.params.id;
-
 	const { url } = useRouteMatch();
 
-	console.log(url);
-
 	//get activities
+	const dispatch = useDispatch();
 	const activityList = useSelector((state) => state.activityList);
 	const { loading, error, activities } = activityList;
 
@@ -34,22 +30,15 @@ const ActivitiesList = ({ match, keyword = '' }) => {
 				<Message>{error}</Message>
 			) : (
 				<>
-					<Row className="align-items-center mt-2 mb-3">
-						<Col md={2}></Col>
-						<Col md={8}>
-							<Route
-								render={({ history }) => (
-									<SearchBox
-										history={history}
-										searchWord={'Activity'}
-										searchQueryPath={`/project/${projectId}/search/`}
-										searchQueryEmpty={`/project/${projectId}`}
-									/>
-								)}
-							/>
+					<Row className="align-items-center mb-3">
+						<Col md={8} className="d-flex justify-content-end">
+							<FilterBox searchWord={'Organizations'} />
 						</Col>
 						<Col>
-							<Link to={`${url}/addActivity`} className="btn btn-primary my-3">
+							<Link
+								to={`${url}/addActivity`}
+								className="btn btn-primary ml-5 mb-3"
+							>
 								<i className="fas fa-plus"></i> Register
 							</Link>
 						</Col>

@@ -23,6 +23,8 @@ import {
 	PROJECT_ADD_FAIL,
 	PROJECT_SAVE_REQUEST,
 	PROJECT_SAVE_RESET,
+	PROJECT_USER_FILTER,
+	PROJECT_USER_FILTER_CLEAR,
 } from '../constants/projectConstants';
 
 //add project
@@ -74,7 +76,10 @@ export const projectUpdateReducer = (state = { project: {} }, action) => {
 };
 
 //user projects
-export const projectUserReducer = (state = { projects: [] }, action) => {
+export const projectUserReducer = (
+	state = { projects: [], filtered: [] },
+	action
+) => {
 	switch (action.type) {
 		case PROJECT_USER_REQUEST:
 			return { loading: true, projects: [] };
@@ -82,6 +87,19 @@ export const projectUserReducer = (state = { projects: [] }, action) => {
 			return { loading: false, projects: action.payload };
 		case PROJECT_USER_FAIL:
 			return { loading: false, error: action.payload };
+		case PROJECT_USER_FILTER:
+			return {
+				...state,
+				filtered: state.projects.filter((contact) => {
+					const regex = new RegExp(`${action.payload}`, 'gi');
+					return contact.projectName.match(regex);
+				}),
+			};
+		case PROJECT_USER_FILTER_CLEAR:
+			return {
+				...state,
+				filtered: null,
+			};
 		default:
 			return state;
 	}

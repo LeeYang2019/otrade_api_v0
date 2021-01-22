@@ -16,6 +16,8 @@ import {
 	STAKEHOLDER_LIST_SUCCESS,
 	STAKEHOLDER_LIST_FAIL,
 	STAKEHOLDER_SAVE_REQUEST,
+	STAKEHOLDER_PROJECT_FILTER,
+	STAKEHOLDER_PROJECT_FILTER_CLEAR,
 } from '../constants/stakeholderConstants';
 
 //add stakeholder
@@ -205,4 +207,14 @@ export const saveStakeholderInfo = (data) => (dispatch) => {
 		payload: data,
 	});
 	localStorage.setItem('stakeholdersInfo', JSON.stringify(data));
+};
+
+//filter user projects
+export const filterProjectStakeholders = (text) => (dispatch) => {
+	dispatch({ type: STAKEHOLDER_PROJECT_FILTER, payload: text });
+};
+
+//clear user projects filter
+export const clearProjectStakeholdersFilter = () => (dispatch) => {
+	dispatch({ type: STAKEHOLDER_PROJECT_FILTER_CLEAR });
 };

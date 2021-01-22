@@ -42,3 +42,7 @@ export const PROJECT_ASSIGNMENT_RESET = 'PROJECT_ASSIGNMENT_RESET';
 //save stakeholderInfo in localStorage
 export const PROJECT_SAVE_REQUEST = 'PROJECT_SAVE_REQUEST';
 export const PROJECT_SAVE_RESET = 'PROJECT_SAVE_RESET';
+
+//filter user projects
+export const PROJECT_USER_FILTER = 'PROJECT_USER_FILTER';
+export const PROJECT_USER_FILTER_CLEAR = 'PROJECT_USER_FILTER_CLEAR';

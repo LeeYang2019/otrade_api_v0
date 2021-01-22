@@ -18,6 +18,10 @@ import {
 	ORGANIZATION_STAKEHOLDER_LIST_REQUEST,
 	ORGANIZATION_STAKEHOLDER_LIST_SUCCESS,
 	ORGANIZATION_STAKEHOLDER_LIST_FAIL,
+	ORGANIZATION_PROJECT_FILTER,
+	ORGANIZATION_PROJECT_FILTER_CLEAR,
+	ORGANIZATION_STAKEHOLDER_FILTER,
+	ORGANIZATION_STAKEHOLDER_FILTER_CLEAR,
 } from '../constants/organizationConstants';
 
 //add organization
@@ -230,4 +234,26 @@ export const listStakeholderOrganizations = (
 					: error.messsage,
 		});
 	}
+};
+
+//filter project Organizations
+export const filterProjectOrganizations = (text) => (dispatch) => {
+	console.log(text);
+	dispatch({ type: ORGANIZATION_PROJECT_FILTER, payload: text });
+};
+
+//clear project Organizations
+export const clearProjectOrganizationsFilter = () => (dispatch) => {
+	dispatch({ type: ORGANIZATION_PROJECT_FILTER_CLEAR });
+};
+
+//filter stakeholder Organizations
+export const filterStakeholderOrganizations = (text) => (dispatch) => {
+	console.log(text);
+	dispatch({ type: ORGANIZATION_STAKEHOLDER_FILTER, payload: text });
+};
+
+//clear stakeholder Organizations filter
+export const clearStakeholderOrganizationsFilter = () => (dispatch) => {
+	dispatch({ type: ORGANIZATION_STAKEHOLDER_FILTER_CLEAR });
 };

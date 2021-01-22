@@ -1,21 +1,22 @@
 import React, { useEffect } from 'react';
-import { Table, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { Row, Col } from 'react-bootstrap';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import { listUserProjects } from '../../actions/projectActions';
 import Project from '../../components/Project';
 import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
+import FilterBox from '../../components/FilterBox';
 
 const UserProjects = ({ match }) => {
 	const userId = match.params.id;
 
 	const dispatch = useDispatch();
-
-	//get projects of user
 	const projectUser = useSelector((state) => state.projectUser);
-	const { loading, error, projects } = projectUser;
+	const { loading, error, projects, filtered } = projectUser;
+
+	console.log(filtered);
 
 	useEffect(() => {
 		dispatch(listUserProjects(userId));
@@ -29,16 +30,31 @@ const UserProjects = ({ match }) => {
 			) : error ? (
 				<Message variant="light">{error}</Message>
 			) : (
-				<TableHelper>
-					{projects &&
-						projects.map((project) => (
-							<tr key={project._id}>
-								<td>
-									<Project project={project} userId={userId} />
-								</td>
-							</tr>
-						))}
-				</TableHelper>
+				<>
+					<Row className="align-items-center mb-3">
+						<Col md={8} className="d-flex justify-content-end">
+							<FilterBox searchWord={'Projects'} />
+						</Col>
+					</Row>
+					<TableHelper>
+						{filtered
+							? filtered.map((project) => (
+									<tr key={project._id}>
+										<td>
+											<Project project={project} userId={userId} />
+										</td>
+									</tr>
+							  ))
+							: projects &&
+							  projects.map((project) => (
+									<tr key={project._id}>
+										<td>
+											<Project project={project} userId={userId} />
+										</td>
+									</tr>
+							  ))}
+					</TableHelper>
+				</>
 			)}
 		</BorderContainer>
 	);

@@ -118,7 +118,7 @@ const OrganizationScreen = ({ history, match }) => {
 	};
 
 	return (
-		<BorderContainer title={''}>
+		<BorderContainer title={'Organization'}>
 			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
 				<Loader />

@@ -18,6 +18,8 @@ import {
 	STAKEHOLDER_LIST_FAIL,
 	STAKEHOLDER_SAVE_REQUEST,
 	STAKEHOLDER_SAVE_RESET,
+	STAKEHOLDER_PROJECT_FILTER,
+	STAKEHOLDER_PROJECT_FILTER_CLEAR,
 } from '../constants/stakeholderConstants';
 
 //add stakeholder
@@ -88,7 +90,7 @@ export const stakeholderDeleteReducer = (state = {}, action) => {
 
 //stakeholder list
 export const stakeholderListReducer = (
-	state = { stakeholders: [] },
+	state = { stakeholders: [], filtered: [] },
 	action
 ) => {
 	switch (action.type) {
@@ -96,6 +98,21 @@ export const stakeholderListReducer = (
 			return { loading: true, stakeholders: [] };
 		case STAKEHOLDER_LIST_SUCCESS:
 			return { loading: false, stakeholders: action.payload };
+		case STAKEHOLDER_PROJECT_FILTER:
+			return {
+				...state,
+				filtered: state.stakeholders.filter((contact) => {
+					const regex = new RegExp(`${action.payload}`, 'gi');
+					return (
+						contact.firstName.match(regex) || contact.lastName.match(regex)
+					);
+				}),
+			};
+		case STAKEHOLDER_PROJECT_FILTER_CLEAR:
+			return {
+				...state,
+				filtered: null,
+			};
 		case STAKEHOLDER_LIST_FAIL:
 			return { loading: false, error: action.payload };
 		default:

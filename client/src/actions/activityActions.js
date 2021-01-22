@@ -15,6 +15,10 @@ import {
 	ACTIVITY_LIST_REQUEST,
 	ACTIVITY_LIST_SUCCESS,
 	ACTIVITY_LIST_FAIL,
+	ACTIVITY_PROJECT_FILTER,
+	ACTIVITY_PROJECT_FILTER_CLEAR,
+	ACTIVITY_STAKEHOLDER_FILTER,
+	ACTIVITY_STAKEHOLDER_FILTER_CLEAR,
 } from '../constants/activityConstants';
 
 //add activity
@@ -183,4 +187,26 @@ export const listActivities = (projectId) => async (dispatch, getState) => {
 					: error.messsage,
 		});
 	}
+};
+
+//filter project activities
+export const filterProjectActivities = (text) => (dispatch) => {
+	console.log(text);
+	dispatch({ type: ACTIVITY_PROJECT_FILTER, payload: text });
+};
+
+//clear project activities
+export const clearProjectActivitiesFilter = () => (dispatch) => {
+	dispatch({ type: ACTIVITY_PROJECT_FILTER_CLEAR });
+};
+
+//filter stakeholder activities
+export const filterStakeholderActivities = (text) => (dispatch) => {
+	console.log(text);
+	dispatch({ type: ACTIVITY_STAKEHOLDER_FILTER, payload: text });
+};
+
+//clear stakeholder activities filter
+export const clearStakeholderActivitiesFilter = () => (dispatch) => {
+	dispatch({ type: ACTIVITY_STAKEHOLDER_FILTER_CLEAR });
 };

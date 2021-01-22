@@ -142,3 +142,8 @@ label {
 .org-btn {
 	margin-right: 8rem;
 }
+
+.filter-form {
+	width: 25rem;
+	margin-bottom: 1rem;
+}
