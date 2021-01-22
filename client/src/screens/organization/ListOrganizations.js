@@ -7,6 +7,7 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import SearchBox from '../../components/SearchBox';
 import BorderContainer from '../../components/BorderContainer';
+import TableHelper from '../../components/TableHelper';
 
 const ListOrganizations = ({ match }) => {
 	const projectId = match.params.id;
@@ -53,36 +54,32 @@ const ListOrganizations = ({ match }) => {
 							</Link>
 						</Col>
 					</Row>
-					<Row>
-						<Table responsive className="table-sm mt-3 overflow-scroll">
-							<tbody>
-								{organizations &&
-									organizations.map((organization) => (
-										<tr key={organization._id}>
-											<td>
-												<p className="mr-3">
-													<strong>Organization: </strong>
-													<Link to={`${url}/${organization._id}/profile`}>
-														{organization.name}
-													</Link>
-													<br />
-													Email: <em> {organization.email}</em>
-													<br />
-													Telephone: {organization.telephone}
-													<br />
-													Registered Date:{' '}
-													<strong>
-														{' '}
-														{organization.createdAt &&
-															organization.createdAt.substring(0, 10)}{' '}
-													</strong>
-												</p>
-											</td>
-										</tr>
-									))}
-							</tbody>
-						</Table>
-					</Row>
+					<TableHelper>
+						{organizations &&
+							organizations.map((organization) => (
+								<tr key={organization._id}>
+									<td>
+										<p className="mr-3">
+											<strong>Organization: </strong>
+											<Link to={`${url}/${organization._id}/profile`}>
+												{organization.name}
+											</Link>
+											<br />
+											Email: <em> {organization.email}</em>
+											<br />
+											Telephone: {organization.telephone}
+											<br />
+											Registered Date:{' '}
+											<strong>
+												{' '}
+												{organization.createdAt &&
+													organization.createdAt.substring(0, 10)}{' '}
+											</strong>
+										</p>
+									</td>
+								</tr>
+							))}
+					</TableHelper>
 				</>
 			)}
 		</BorderContainer>

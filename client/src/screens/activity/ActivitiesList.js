@@ -7,6 +7,7 @@ import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import SearchBox from '../../components/SearchBox';
 import BorderContainer from '../../components/BorderContainer';
+import TableHelper from '../../components/TableHelper';
 
 const ActivitiesList = ({ match, keyword = '' }) => {
 	const dispatch = useDispatch();
@@ -53,48 +54,41 @@ const ActivitiesList = ({ match, keyword = '' }) => {
 							</Link>
 						</Col>
 					</Row>
-					<Row>
-						<Table responsive className="table-sm mt-3 overflow-scroll">
-							<tbody>
-								{activities &&
-									activities.map((activity) => (
-										<tr key={activity._id}>
-											<td>
-												<p className="mr-3">
-													<strong>Activity: </strong>
-													<Link
-														to={`/project/${projectId}/activity/${activity._id}`}
-													>
-														{activity.activity}
-													</Link>
-													<br />
-													Stakeholders:{' '}
-													<em> {activity.stakeholders.join('')}</em>
-													<br />
-													Status:{' '}
-													<em>
-														{activity.isComplete === 'true' ? (
-															<strong className="text-success">Complete</strong>
-														) : (
-															<strong className="text-warning">
-																In Progress
-															</strong>
-														)}
-													</em>
-													<br />
-													Registered Date:{' '}
-													<strong>
-														{' '}
-														{activity.createdAt &&
-															activity.createdAt.substring(0, 10)}{' '}
-													</strong>
-												</p>
-											</td>
-										</tr>
-									))}
-							</tbody>
-						</Table>
-					</Row>
+					<TableHelper>
+						{activities &&
+							activities.map((activity) => (
+								<tr key={activity._id}>
+									<td>
+										<p className="mr-3">
+											<strong>Activity: </strong>
+											<Link
+												to={`/project/${projectId}/activity/${activity._id}`}
+											>
+												{activity.activity}
+											</Link>
+											<br />
+											Stakeholders: <em> {activity.stakeholders.join('')}</em>
+											<br />
+											Status:{' '}
+											<em>
+												{activity.isComplete === 'true' ? (
+													<strong className="text-success">Complete</strong>
+												) : (
+													<strong className="text-warning">In Progress</strong>
+												)}
+											</em>
+											<br />
+											Registered Date:{' '}
+											<strong>
+												{' '}
+												{activity.createdAt &&
+													activity.createdAt.substring(0, 10)}{' '}
+											</strong>
+										</p>
+									</td>
+								</tr>
+							))}
+					</TableHelper>
 				</>
 			)}
 		</BorderContainer>

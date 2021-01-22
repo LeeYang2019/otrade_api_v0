@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, useRouteMatch } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,7 +14,10 @@ const ListProjectScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
 
-	//const [message, setMessage] = useState(null);
+	const { url, path } = useRouteMatch();
+
+	console.log('url', url);
+	console.log('path', path);
 
 	const dispatch = useDispatch();
 

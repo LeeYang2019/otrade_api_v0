@@ -6,6 +6,7 @@ import Loader from '../../components/Loader.js';
 import { listUserProjects } from '../../actions/projectActions';
 import Project from '../../components/Project';
 import BorderContainer from '../../components/BorderContainer';
+import TableHelper from '../../components/TableHelper';
 
 const UserProjects = ({ match }) => {
 	const userId = match.params.id;
@@ -28,20 +29,16 @@ const UserProjects = ({ match }) => {
 			) : error ? (
 				<Message variant="light">{error}</Message>
 			) : (
-				<>
-					<Table responsive className="table-sm mt-4 overflow-scroll">
-						<tbody>
-							{projects &&
-								projects.map((project) => (
-									<tr key={project._id}>
-										<td>
-											<Project project={project} userId={userId} />
-										</td>
-									</tr>
-								))}
-						</tbody>
-					</Table>
-				</>
+				<TableHelper>
+					{projects &&
+						projects.map((project) => (
+							<tr key={project._id}>
+								<td>
+									<Project project={project} userId={userId} />
+								</td>
+							</tr>
+						))}
+				</TableHelper>
 			)}
 		</BorderContainer>
 	);
