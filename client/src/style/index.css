@@ -56,17 +56,14 @@ td {
 }
 
 body {
-	background-color: rgba(189, 189, 189, 0.25) !important;
+	/* background-color: rgba(189, 189, 189, 0.25) !important; */
+	/* background-color: rgba(214, 250, 125, 0.247) !important; */
 }
 
 /*customize the primary color for buttons*/
 .btn-primary {
 	background-color: #f26827 !important;
 	border-color: #f26827 !important;
-}
-
-.form-control {
-	border-radius: 5px !important;
 }
 
 label {
@@ -82,7 +79,6 @@ label {
 	margin-top: 0.5rem;
 	max-width: 100%;
 	height: auto;
-	border-radius: 5%;
 }
 
 .profile_information {
@@ -101,11 +97,21 @@ label {
 	text-justify: center;
 }
 
+/*border-radius for profile, containers, etc.*/
+/*input fields*/
+.form-control,
+.border-container,
+.profile-container,
+.profile {
+	border-radius: 5px;
+}
+
+/*inside color for containers*/
 .border-container,
 .profile-container {
-	border-radius: 10px;
-	/* border: 1px solid rgba(0, 0, 0, 0.1); */
-	background-color: white;
+	/* background-color: white; */
+	/* background-color: rgba(189, 189, 189, 0.25) !important; */
+	border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .profile-container {

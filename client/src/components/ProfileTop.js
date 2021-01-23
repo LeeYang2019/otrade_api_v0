@@ -28,7 +28,7 @@ const ProfileTop = ({ profile, btnlinks, navbarlinks, url }) => {
 						</Col>
 					</Row>
 					<Row className="middle-row">
-						<Col md={8}>
+						<Col md={6}>
 							{profile.projectClient && (
 								<strong>
 									<em>

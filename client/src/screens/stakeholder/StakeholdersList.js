@@ -32,14 +32,14 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 				<Message>{error}</Message>
 			) : (
 				<>
-					<Row className="align-items-center mb-3">
-						<Col md={8} className="d-flex justify-content-end">
+					<Row className="align-items-center mt-4 mb-3">
+						<Col md={8} className="d-flex justify-content-end mr-3">
 							<FilterBox searchWord={'Stakeholders'} />
 						</Col>
 						<Col>
 							<Link
 								to={`${url}/addStakeholder`}
-								className="btn btn-primary ml-5 mb-3"
+								className="btn btn-primary ml-2 mb-3"
 							>
 								<i className="fas fa-plus"></i> Register
 							</Link>
