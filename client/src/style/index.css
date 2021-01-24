@@ -56,8 +56,9 @@ td {
 }
 
 body {
-	/* background-color: rgba(189, 189, 189, 0.25) !important; */
+	/* background-color: rgba(119, 119, 119, 0.25) !important; */
 	/* background-color: rgba(214, 250, 125, 0.247) !important; */
+	background-color: white;
 }
 
 /*customize the primary color for buttons*/
@@ -108,10 +109,11 @@ label {
 
 /*inside color for containers*/
 .border-container,
-.profile-container {
+.profile-container,
+hr {
+	/* background-color: rgba(255, 255, 255, 0.5) !important; */
 	/* background-color: white; */
-	/* background-color: rgba(189, 189, 189, 0.25) !important; */
-	border: 1px solid rgba(0, 0, 0, 0.1);
+	border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .profile-container {
@@ -121,7 +123,7 @@ label {
 }
 
 .image-container {
-	object-fit: cover;
+	object-fit: none;
 }
 
 .middle-row {

@@ -31,7 +31,7 @@ const UserProjects = ({ match }) => {
 				<Message variant="light">{error}</Message>
 			) : (
 				<>
-					<Row className="align-items-center mb-3">
+					<Row className="align-items-center ml-2 mr-3">
 						<Col md={8} className="d-flex justify-content-end">
 							<FilterBox searchWord={'Projects'} />
 						</Col>

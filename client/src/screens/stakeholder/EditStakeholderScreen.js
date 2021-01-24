@@ -100,7 +100,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 	};
 
 	return (
-		<BorderContainer>
+		<BorderContainer title={'Profile'}>
 			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
 				<Loader />

@@ -33,7 +33,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 			) : (
 				<>
 					<Row className="align-items-center mt-4 mb-3">
-						<Col md={8} className="d-flex justify-content-end mr-3">
+						<Col md={8} className="d-flex justify-content-end ml-2 mr-3">
 							<FilterBox searchWord={'Stakeholders'} />
 						</Col>
 						<Col>
@@ -51,7 +51,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 									<tr key={person._id}>
 										<td>
 											<Row>
-												<Col md={6}>
+												<Col md={5}>
 													<p>
 														<strong>Name: </strong>
 														<Link to={`/stakeholder/${person._id}`}>
@@ -63,7 +63,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 												</Col>
 
 												<Col
-													md={6}
+													md={7}
 													className="d-flex justify-content-start align-items-center"
 												>
 													<Link
@@ -89,7 +89,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 									<tr key={person._id}>
 										<td>
 											<Row>
-												<Col md={6}>
+												<Col md={5}>
 													<p>
 														<strong>Name: </strong>
 														<Link to={`/stakeholder/${person._id}`}>
@@ -101,7 +101,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 												</Col>
 
 												<Col
-													md={6}
+													md={7}
 													className="d-flex justify-content-start align-items-center"
 												>
 													<Link

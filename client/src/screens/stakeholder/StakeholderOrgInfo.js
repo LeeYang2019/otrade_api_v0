@@ -65,7 +65,7 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 	};
 
 	return (
-		<BorderContainer title={'Client (part 2)'}>
+		<BorderContainer title={'Stakeholder (part 2)'}>
 			{message && <Message variant="success">{message}</Message>}
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Form.Group controlId="organization">
