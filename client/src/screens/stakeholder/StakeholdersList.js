@@ -8,6 +8,7 @@ import { listStakeholders } from '../../actions/stakeholderActions';
 import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';
+import Empty from '../../components/Empty';
 
 const StakeholdersList = ({ match, keyword = '' }) => {
 	const projectId = match.params.id;
@@ -32,19 +33,27 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 				<Message>{error}</Message>
 			) : (
 				<>
-					<Row className="align-items-center mt-4 mb-3">
-						<Col md={8} className="d-flex justify-content-end ml-2 mr-3">
-							<FilterBox searchWord={'Stakeholders'} />
-						</Col>
-						<Col>
-							<Link
-								to={`${url}/addStakeholder`}
-								className="btn btn-primary ml-2 mb-3"
-							>
-								<i className="fas fa-plus"></i> Register
-							</Link>
-						</Col>
-					</Row>
+					{!filtered && stakeholders && stakeholders.length === 0 ? (
+						<Empty
+							itemLink={'/addStakeholder'}
+							url={url}
+							type={'Register Stakeholder'}
+						/>
+					) : (
+						<Row className="align-items-center mt-4 mb-3">
+							<Col md={8} className="d-flex justify-content-end ml-2 mr-3">
+								<FilterBox searchWord={'Stakeholders'} />
+							</Col>
+							<Col>
+								<Link
+									to={`${url}/addStakeholder`}
+									className="btn btn-primary ml-2 mb-3"
+								>
+									<i className="fas fa-plus"></i> Register
+								</Link>
+							</Col>
+						</Row>
+					)}
 					<TableHelper>
 						{filtered
 							? filtered.map((person) => (

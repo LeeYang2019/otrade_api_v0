@@ -173,7 +173,7 @@ const OrganizationScreen = ({ history, match }) => {
 							</Col>
 						</Row>
 						<Row>
-							<Col md={8}>
+							<Col md={6}>
 								<Form.Group controlId="email">
 									<Form.Label>Email Address</Form.Label>
 									<Form.Control
@@ -214,7 +214,7 @@ const OrganizationScreen = ({ history, match }) => {
 							<Form.Label>Organization Members</Form.Label>
 						</Row>
 						<Row>
-							<Col md={12}>
+							<Col md={9}>
 								{stakeholders &&
 									stakeholders.map((assignee, i) => (
 										<>
@@ -224,7 +224,7 @@ const OrganizationScreen = ({ history, match }) => {
 														as="select"
 														value={assignee}
 														onChange={(e) => handleInputChange(e, i)}
-														className="px-5"
+														className="px-5 mb-3"
 													>
 														<option value="">--Select--</option>
 														{stakeholderList.stakeholders.map((stakeholder) => (

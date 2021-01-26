@@ -24,7 +24,7 @@ const UserProjects = ({ match }) => {
 	}, []);
 
 	return (
-		<BorderContainer title={'Projects'}>
+		<BorderContainer>
 			{loading ? (
 				<Loader />
 			) : error ? (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { listUsers } from '../actions/userActions';
 import {
 	assignProjectUser,
@@ -50,7 +50,6 @@ const Assignment = ({ history, match }) => {
 			if (success) {
 				setMessage('Project was successfully updated.');
 				dispatch(listProjectDetails(projectId));
-				//reset success to undefined; otherwise continous looping
 				dispatch({ type: PROJECT_ASSIGNMENT_RESET });
 			} else {
 				// if projectName undefined; initial value undefined
@@ -71,10 +70,9 @@ const Assignment = ({ history, match }) => {
 		setAssignments([...assignments, { assignee: '' }]);
 	};
 
-	//remove input field
+	//remove input field and update assignments
 	const removeHandler = (i) => {
 		const removeUser = assignments[i];
-		//filter out removeUser from current list and return new list
 		const list = assignments.filter((i) => i !== removeUser);
 		setAssignments(list);
 	};
@@ -111,7 +109,6 @@ const Assignment = ({ history, match }) => {
 				'Project assingment cannot be updated as the status is closed.'
 			);
 		} else {
-			console.log(assignments);
 			dispatch(assignProjectUser(projectId, assignments));
 		}
 	};
@@ -148,7 +145,7 @@ const Assignment = ({ history, match }) => {
 															value={assignee._id}
 															onChange={(e) => handleInputChange(e, i)}
 															required
-															className="px-5"
+															className="px-5 mb-3"
 														>
 															<option value="">--Select--</option>
 															{users.map((user) => (

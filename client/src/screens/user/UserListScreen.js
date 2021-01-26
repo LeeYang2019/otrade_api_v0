@@ -70,9 +70,9 @@ const UserListScreen = ({ history, match }) => {
 						)}
 					/>
 				</Col>
-				<Col className="text-right" md={2}>
+				<Col md={2} className="text-right">
 					<Link to="/admin/userList/add" className="btn btn-primary my-3">
-						<i className="fas fa-plus"></i> User
+						<i className="fas fa-plus"></i> Add User
 					</Link>
 				</Col>
 			</Row>
@@ -90,7 +90,7 @@ const UserListScreen = ({ history, match }) => {
 									<tr key={user._id}>
 										<td>
 											<Row>
-												<Col md={9}>
+												<Col md={6}>
 													<p>
 														<strong>User: </strong>
 														<Link to={`/profile/${user._id}`}>
@@ -114,7 +114,7 @@ const UserListScreen = ({ history, match }) => {
 														<br />
 													</p>
 												</Col>
-												<Col>
+												<Col md={3}>
 													<p>
 														<strong>Status: </strong>
 														{user.status === 'active' ? (

@@ -100,7 +100,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 	};
 
 	return (
-		<BorderContainer title={'Profile'}>
+		<BorderContainer title={''}>
 			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
 				<Loader />
@@ -172,7 +172,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 							</Col>
 						</Row>
 						<Row>
-							<Col md={8}>
+							<Col md={6}>
 								<Form.Group controlId="email">
 									<Form.Label>Email Address</Form.Label>
 									<Form.Control
@@ -196,7 +196,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 							</Col>
 						</Row>
 						<Row className="mt-4">
-							<Col md={12}>
+							<Col md={9}>
 								<Form.Group controlId="media">
 									<Form.Label>Social Media</Form.Label>
 									{media &&
@@ -214,7 +214,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 													{media.length !== 1 && (
 														<Button
 															variant="danger"
-															className="btn-md mr-3"
+															className="btn-md mr-3 mb-1"
 															onClick={() => removeHandler(i)}
 														>
 															<i className="fas fa-trash"></i>

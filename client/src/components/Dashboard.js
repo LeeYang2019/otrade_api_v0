@@ -7,10 +7,21 @@ const Dashboard = () => {
 		<BorderContainer title={'Dashboard'}>
 			<Row>
 				<Col md={6}>
-					<Row></Row>
+					<BorderContainer>
+						<div className="dashboard-container">In Development</div>
+					</BorderContainer>
 				</Col>
 				<Col md={6}>
-					<Row></Row>
+					<BorderContainer>
+						<div className="dashboard-container">In Development</div>
+					</BorderContainer>
+				</Col>
+			</Row>
+			<Row className="justify-content-center">
+				<Col>
+					<BorderContainer>
+						<div className="dashboard-container-bottom">In Development</div>
+					</BorderContainer>
 				</Col>
 			</Row>
 		</BorderContainer>

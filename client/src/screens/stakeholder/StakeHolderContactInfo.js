@@ -130,7 +130,7 @@ const StakeholderContactInfo = ({ navigation }) => {
 					</Col>
 				</Row>
 				<Row>
-					<Col md={8}>
+					<Col md={6}>
 						<Form.Group controlId="email">
 							<Form.Label>Email Address</Form.Label>
 							<Form.Control
@@ -155,7 +155,7 @@ const StakeholderContactInfo = ({ navigation }) => {
 					</Col>
 				</Row>
 				<Row className="mt-4">
-					<Col md={12}>
+					<Col md={9}>
 						<Form.Group controlId="media">
 							<Form.Label>Social Media</Form.Label>
 							{stakeholder &&

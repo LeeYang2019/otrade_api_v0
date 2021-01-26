@@ -6,12 +6,12 @@ const ProfileTop = ({ profile, btnlinks, navbarlinks, url }) => {
 	return (
 		<div className="profile-container mb-3">
 			<Row>
-				<Col md={2}>
+				<Col md={3}>
 					<div className="image-container">
 						<img src={profile.image} alt="profile" className="profile" />
 					</div>
 				</Col>
-				<Col md={10}>
+				<Col md={9}>
 					<Row>
 						<Col>
 							<h1>

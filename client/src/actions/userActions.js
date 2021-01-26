@@ -97,7 +97,6 @@ export const registerUser = (user) => async (dispatch, getState) => {
 //logs out the user
 export const logout = () => (dispatch) => {
 	localStorage.removeItem('userInfo');
-	localStorage.removeItem('usersInfo');
 	dispatch({ type: USER_LOGOUT });
 	dispatch({ type: USER_DETAILS_RESET });
 };

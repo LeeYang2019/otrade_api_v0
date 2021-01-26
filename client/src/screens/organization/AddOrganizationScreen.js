@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addOrganization } from '../../actions/organizationAction';
 import Message from '../../components/Message.js';
 import { ORGANIZATION_ADD_RESET } from '../../constants/organizationConstants';
+import { listStakeholders } from '../../actions/stakeholderActions';
 import BorderContainer from '../../components/BorderContainer';
 
-const AddOrganizationScreen = ({ history, match }) => {
+const AddOrganizationScreen = ({ keyword = '' }) => {
 	//define states
 	const [organization, setOrganization] = useState('');
 	const [division, setDivision] = useState('');
@@ -14,7 +15,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 	const [email, setEmail] = useState('');
 	const [telephone, setTelephone] = useState('');
 	const [website, setWebsite] = useState('');
-	const [stakeholders, setStakeholders] = useState([{ stakeholder: '' }]);
+	const [members, setMembers] = useState([{ member: '' }]);
 	const [message, setMessage] = useState(null);
 
 	const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 
 	//get stakeholders
 	const stakeholderList = useSelector((state) => state.stakeholderList);
-	const { stakeholders: stakeholdersList } = stakeholderList;
+	const { stakeholders } = stakeholderList;
 
 	//get addorganization success
 	const organizationAdd = useSelector((state) => state.organizationAdd);
@@ -35,35 +36,38 @@ const AddOrganizationScreen = ({ history, match }) => {
 		if (success) {
 			setMessage('Organization was successfully added.');
 			dispatch({ type: ORGANIZATION_ADD_RESET });
+		} else {
+			dispatch(listStakeholders(project._id, keyword));
 		}
-	}, [dispatch, success]);
+	}, [dispatch, success, project, keyword]);
 
 	//add select field
 	const addHandler = () => {
-		//spread in existing array and add an element
-		setStakeholders([...stakeholders, { stakeholder: '' }]);
+		setMembers([...members, { member: '' }]);
 	};
 
-	//filter out element i
+	//filter out element i and update members
 	const removeHandler = (i) => {
-		const stakeholderToRemove = stakeholders[i];
-		const list = stakeholders.filter((i) => i !== stakeholderToRemove);
-		setStakeholders(list);
+		const stakeholderToRemove = members[i];
+		const list = members.filter((i) => i !== stakeholderToRemove);
+		setMembers(list);
 	};
 
 	//add element to array && provide validation
 	const handleInputChange = (e, i) => {
 		e.preventDefault();
-		const list = [...stakeholders];
+
+		//spread all members into a list
+		const list = [...members];
 
 		if (
 			list.includes(e.target.value) ||
 			list.some((item) => item._id === e.target.value)
 		) {
-			setMessage('Please make sure the same user is not assigned twice.');
+			setMessage('Please make sure the same stakeholder is not added twice.');
 		} else {
 			list[i] = e.target.value;
-			setStakeholders(list);
+			setMembers(list);
 			setMessage('');
 		}
 	};
@@ -81,7 +85,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 					email,
 					telephone,
 					website,
-					stakeholders,
+					stakeholders: members,
 				},
 				project._id
 			)
@@ -138,7 +142,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 					</Col>
 				</Row>
 				<Row>
-					<Col md={8}>
+					<Col md={6}>
 						<Form.Group controlId="email">
 							<Form.Label>Email Address</Form.Label>
 							<Form.Control
@@ -162,7 +166,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 					</Col>
 				</Row>
 				<Row>
-					<Col md={8} className="mt-3">
+					<Col md={6} className="mt-3">
 						<Form.Group controlId="website">
 							<Form.Label>Social Media</Form.Label>
 							<Form.Control
@@ -176,28 +180,30 @@ const AddOrganizationScreen = ({ history, match }) => {
 				</Row>
 				<hr className="my-4" />
 				<Row className="mt-4">
-					<Col md={12}>
+					<Col md={8}>
 						<Form.Label>Organization Members</Form.Label>
-						{stakeholders &&
-							stakeholders.map((assignee, i) => (
-								<Row className="mb-3" key={assignee}>
+						{members &&
+							members.map((assignee, i) => (
+								<Row key={assignee}>
 									<Col md={7}>
 										<Form.Control
 											as="select"
 											value={assignee._id}
 											onChange={(e) => handleInputChange(e, i)}
-											className="px-5"
+											required
+											className="px-5 mb-3"
 										>
 											<option value="">--Select--</option>
-											{stakeholderList.stakeholders.map((stakeholder) => (
-												<option key={stakeholder._id} value={stakeholder._id}>
-													{stakeholder.firstName} {stakeholder.lastName}
-												</option>
-											))}
+											{stakeholders &&
+												stakeholders.map((stakeholder) => (
+													<option key={stakeholder._id} value={stakeholder._id}>
+														{stakeholder.firstName} {stakeholder.lastName}
+													</option>
+												))}
 										</Form.Control>
 									</Col>
 									<Col md={5}>
-										{stakeholders.length !== 1 && (
+										{stakeholders && stakeholders.length !== 1 && (
 											<Button
 												variant="danger"
 												className="btn-md mr-3"
@@ -206,7 +212,7 @@ const AddOrganizationScreen = ({ history, match }) => {
 												<i className="fas fa-trash"></i>
 											</Button>
 										)}
-										{stakeholders.length - 1 === i && (
+										{stakeholders && stakeholders.length - 1 === i && (
 											<Button className="px-3" onClick={() => addHandler(i)}>
 												<i className="fas fa-plus"></i> Stakeholder
 											</Button>

@@ -8,6 +8,7 @@ import Loader from '../../components/Loader';
 import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';
+import Empty from '../../components/Empty';
 
 const ListOrganizations = ({ match }) => {
 	const projectId = match.params.id;
@@ -31,19 +32,27 @@ const ListOrganizations = ({ match }) => {
 				<Message>{error}</Message>
 			) : (
 				<>
-					<Row className="align-items-center mt-4 mb-3">
-						<Col md={8} className="d-flex justify-content-end ml-2 mr-3">
-							<FilterBox searchWord={'Organizations'} />
-						</Col>
-						<Col>
-							<Link
-								to={`${url}/addOrganization`}
-								className="btn btn-primary ml-2 mb-3"
-							>
-								<i className="fas fa-plus"></i> Register
-							</Link>
-						</Col>
-					</Row>
+					{!filtered && organizations && organizations.length === 0 ? (
+						<Empty
+							itemLink={'/addOrganization'}
+							url={url}
+							type={'Register Organization'}
+						/>
+					) : (
+						<Row className="align-items-center mt-4 mb-3">
+							<Col md={8} className="d-flex justify-content-end ml-2 mr-3">
+								<FilterBox searchWord={'Organizations'} />
+							</Col>
+							<Col>
+								<Link
+									to={`${url}/addOrganization`}
+									className="btn btn-primary ml-2 mb-3"
+								>
+									<i className="fas fa-plus"></i> Register
+								</Link>
+							</Col>
+						</Row>
+					)}
 					<TableHelper>
 						{filtered
 							? filtered.map((organization) => (

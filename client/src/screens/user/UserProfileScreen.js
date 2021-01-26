@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouteMatch, Route, Switch } from 'react-router-dom';
-import { Container, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader.js';
@@ -40,6 +40,7 @@ const UserProfileScreen = ({ match }) => {
 						btnlinks={btnlinks}
 						navbarlinks={navbarlinks}
 					/>
+
 					<Switch>
 						{routes.map((item) => (
 							<Route
