@@ -23,7 +23,7 @@ const ActivitiesList = ({ match, keyword = '' }) => {
 	}, [dispatch, projectId]);
 
 	return (
-		<BorderContainer title={'Activities'}>
+		<BorderContainer>
 			{loading ? (
 				<Loader />
 			) : error ? (

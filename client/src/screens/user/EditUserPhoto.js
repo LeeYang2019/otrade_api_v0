@@ -71,7 +71,7 @@ const EditUserPhoto = ({ match }) => {
 	};
 
 	return (
-		<BorderContainer title={'User Photo'}>
+		<BorderContainer>
 			{error && <Message variant="danger">{error}</Message>}
 			{successUpdate && <Message variant="success">{message}</Message>}
 			{loading && <Loader />}

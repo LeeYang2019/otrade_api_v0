@@ -93,7 +93,7 @@ const AddOrganizationScreen = ({ keyword = '' }) => {
 	};
 
 	return (
-		<BorderContainer title={'Organization'}>
+		<BorderContainer>
 			{message && <Message variant="success">{message}</Message>}
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Row>

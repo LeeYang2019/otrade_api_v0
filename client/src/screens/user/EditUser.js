@@ -68,7 +68,7 @@ const EditUser = ({ match }) => {
 	};
 
 	return (
-		<BorderContainer title={'User Information'}>
+		<BorderContainer>
 			{error && <Message variant="danger">{error}</Message>}
 			{successUpdate && <Message variant="success">{message}</Message>}
 			{loading && <Loader />}

@@ -1,32 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Form, Button, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { listComments } from '../../actions/commentActions';
-import CommentForm from '../../components/CommentForm';
+import { addComment, listComments } from '../../actions/commentActions';
+import { COMMENT_ADD_RESET } from '../../constants/commentConstants';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import BorderContainer from '../../components/BorderContainer';
+import TableHelper from '../../components/TableHelper';
 
 const Comments = ({ match }) => {
 	const stakeholderId = match.params.id;
-	const [stakeholderComments, setStakeholderComments] = useState([]);
+	const [comment, setComment] = useState('');
 
 	const dispatch = useDispatch();
+	const commentAdd = useSelector((state) => state.commentAdd);
+	const { success } = commentAdd;
+
 	const commentList = useSelector((state) => state.commentList);
 	const { loading, error, comments } = commentList;
 
-	const commentUpdate = useSelector((state) => state.commentUpdate);
-	const { success } = commentUpdate;
+	console.log(comments);
 
 	useEffect(() => {
+		//if success re-render list
 		if (success) {
 			dispatch(listComments(stakeholderId));
+			dispatch({ type: COMMENT_ADD_RESET });
 		} else {
 			dispatch(listComments(stakeholderId));
-			setStakeholderComments(comments);
 		}
-		// eslint-disable-next-line
-	}, []);
+	}, [dispatch, stakeholderId, success]);
+
+	const submitHandler = (e) => {
+		e.preventDefault();
+		dispatch(addComment({ comment }, stakeholderId));
+		setComment('');
+	};
 
 	return (
 		<BorderContainer title={'Comments'}>
@@ -36,27 +45,47 @@ const Comments = ({ match }) => {
 				<Message>{error}</Message>
 			) : (
 				<>
-					<Row>
-						<CommentForm stakeholderId={stakeholderId} />
-					</Row>
-					<Table responsive className="table-sm mt-3 ml-3 mr-3">
-						<tbody>
-							{stakeholderComments &&
-								stakeholderComments.map((entry) => (
-									<tr key={entry._id}>
-										<td>
-											<Row>
-												<Col md={9}>
-													<p>
-														<strong>{entry.comment}</strong>
-													</p>
-												</Col>
-											</Row>
-										</td>
-									</tr>
-								))}
-						</tbody>
-					</Table>
+					<Container className="mb-3">
+						<Form onSubmit={submitHandler}>
+							<Form.Group controlId="comment">
+								<Form.Control
+									as="textarea"
+									rows="4"
+									value={comment}
+									placeholder="create a post"
+									onChange={(e) => setComment(e.target.value)}
+								></Form.Control>
+							</Form.Group>
+							<Button type="submit" variant="primary">
+								Submit
+							</Button>
+						</Form>
+					</Container>
+
+					{comments &&
+						comments.map((entry) => (
+							<div className="comment-container mx-3">
+								<div className="comment-header">
+									<div>
+										<img
+											src={entry.user.image}
+											alt="user"
+											className="comment-image mr-2"
+										/>
+									</div>
+									<div>
+										<strong>
+											{entry.user.firstName} {entry.user.lastName}
+										</strong>
+										<br />
+										<em>{entry.createdAt.substring(0, 10)}</em>
+									</div>
+								</div>
+								<div className="comment">
+									<strong>{entry.comment}</strong>
+								</div>
+							</div>
+						))}
 				</>
 			)}
 		</BorderContainer>

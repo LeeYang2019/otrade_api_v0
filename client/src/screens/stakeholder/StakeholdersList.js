@@ -26,7 +26,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 	}, [dispatch, keyword, projectId]);
 
 	return (
-		<BorderContainer title={'Stakeholders'}>
+		<BorderContainer>
 			{loading ? (
 				<Loader />
 			) : error ? (

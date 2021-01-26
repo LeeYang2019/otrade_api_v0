@@ -19,7 +19,6 @@ const CommentForm = ({ stakeholderId }) => {
 		<Container>
 			<Form onSubmit={submitHandler}>
 				<Form.Group controlId="comment">
-					<Form.Label>Summary</Form.Label>
 					<Form.Control
 						as="textarea"
 						rows="4"

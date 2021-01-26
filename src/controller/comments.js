@@ -8,13 +8,15 @@ const Comment = require('../model/Comment');
 // @route   GET /api/v1/stakeholders/:stakeholderId/comments
 // @access  Private
 exports.getComments = asyncHandler(async (req, res, next) => {
-	console.log('hello');
 	console.log(req.params.stakeholderId);
 	// if stakeholder is provided
 	if (req.params.stakeholderId) {
 		const comments = await Comment.find({
 			stakeholder: req.params.stakeholderId,
-		});
+		})
+			.populate('user')
+			.exec();
+
 		res
 			.status(200)
 			.json({ success: true, count: comments.length, data: comments });

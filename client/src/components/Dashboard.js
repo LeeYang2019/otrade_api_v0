@@ -4,7 +4,7 @@ import BorderContainer from './BorderContainer';
 
 const Dashboard = () => {
 	return (
-		<BorderContainer title={'Dashboard'}>
+		<BorderContainer>
 			<Row>
 				<Col md={6}>
 					<BorderContainer>
