@@ -4,7 +4,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProjectDetails } from '../../actions/projectActions';
 import { listStakeholders } from '../../actions/stakeholderActions';
-import { addActivity } from '../../actions/activityActions';
+import { addActivity, removeActivityInfo } from '../../actions/activityActions';
 import { ACTIVITY_ADD_RESET } from '../../constants/activityConstants';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
@@ -12,38 +12,26 @@ import { Next } from 'react-bootstrap/esm/PageItem';
 import BorderContainer from '../../components/BorderContainer';
 
 const AddActivityScreenTwo = ({ match, navigation }) => {
-	const projectId = match.params.projectId;
-
-	const { next, previous } = navigation;
-
-	//define states
-	const [stakeholders, setStakeholders] = useState([]);
-	const [disPoints, setDispoints] = useState([{ point: '' }]);
-	const [compromise, setcompromise] = useState('');
-	const [isComplete, setIsComplete] = useState(false);
-	const [message, setMessage] = useState(null);
-
-	const dispatch = useDispatch();
-
-	//get stakeholders
-	const stakeholderList = useSelector((state) => state.stakeholderList);
-	const { stakeholders: stakeholdersList } = stakeholderList;
+	const projectId = match.params.id;
+	const { previous, next } = navigation;
 
 	//get activity success
+	const dispatch = useDispatch();
 	const activityAdd = useSelector((state) => state.activityAdd);
 	const { success } = activityAdd;
+
+	const activity = useSelector((state) => state.activitySave);
+	const { activityInfo } = activity;
+
+	//define states
+	const [disPoints, setDispoints] = useState([{ point: '' }]);
+	const [compromise, setcompromise] = useState('');
+	const [message, setMessage] = useState(null);
 
 	// add input field
 	const handleAdd = () => {
 		//spread disPoints, add another object
 		setDispoints([...disPoints, { point: '' }]);
-	};
-
-	//filter out element i
-	const removeHandler = (i) => {
-		const stakeholderToRemove = stakeholders[i];
-		const list = stakeholders.filter((i) => i !== stakeholderToRemove);
-		setStakeholders(list);
 	};
 
 	//handle input change
@@ -58,9 +46,6 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 
-		// if (compromise === 'Yes') {
-		// 	next();
-		// }
 		// //dispatch
 		// dispatch(
 		// 	addActivity(
@@ -76,10 +61,17 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 		// 		projectId
 		// 	)
 		// );
+
+		//clear out localstorage
+		dispatch(removeActivityInfo());
+
+		if (compromise === 'Yes') {
+			next();
+		}
 	};
 
 	return (
-		<BorderContainer title={'Activity (part 2)'}>
+		<BorderContainer title={'(part 2)'}>
 			{message && <Message variant="success">{message}</Message>}
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Form.Group controlId="discussion">

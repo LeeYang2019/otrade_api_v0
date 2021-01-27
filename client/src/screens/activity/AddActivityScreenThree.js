@@ -10,7 +10,7 @@ import BorderContainer from '../../components/BorderContainer';
 const AddActivityScreenTwo = ({ match, navigation }) => {
 	const projectId = match.params.projectId;
 
-	const { next } = navigation;
+	const { previous, next } = navigation;
 
 	//define states
 	const [comment, setComment] = useState('');
@@ -95,11 +95,16 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 					></Form.Check>
 				</Form.Group>
 				<Row>
-					<Col>
-						<Button type="submit" variant="primary" className="px-5 mt-3">
-							Continue
-						</Button>
-					</Col>
+					<Button
+						onClick={previous}
+						variant="primary"
+						className="px-5 mt-3 mr-3"
+					>
+						Previous
+					</Button>
+					<Button type="submit" variant="primary" className="px-5 mt-3">
+						Continue
+					</Button>
 				</Row>
 			</Form>
 		</BorderContainer>

@@ -79,14 +79,15 @@ const AddActivityScreen = ({ match, navigation, keyword = '' }) => {
 				activity: activityType,
 				date,
 				hours: actHours,
-				stakeholders,
+				location,
+				members,
 			})
 		);
 		next();
 	};
 
 	return (
-		<BorderContainer title={'Activity (part 1)'}>
+		<BorderContainer title={'(part 1)'}>
 			{message && <Message variant="success">{message}</Message>}
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Row>

@@ -208,7 +208,6 @@ export const removeActivityInfo = () => (dispatch) => {
 
 //filter project activities
 export const filterProjectActivities = (text) => (dispatch) => {
-	console.log(text);
 	dispatch({ type: ACTIVITY_PROJECT_FILTER, payload: text });
 };
 
