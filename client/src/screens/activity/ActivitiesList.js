@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,7 +9,7 @@ import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';
 
-const ActivitiesList = ({ match, keyword = '' }) => {
+const ActivitiesList = memo(({ match, keyword = '' }) => {
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();
 
@@ -82,6 +82,6 @@ const ActivitiesList = ({ match, keyword = '' }) => {
 			)}
 		</BorderContainer>
 	);
-};
+});
 
 export default ActivitiesList;

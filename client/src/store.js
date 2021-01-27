@@ -43,6 +43,7 @@ import {
 	activityUpdateReducer,
 	activityDeleteReducer,
 	activityListReducer,
+	activitySaveReducer,
 } from './reducers/activityReducer';
 import {
 	commentAddReducer,
@@ -94,6 +95,7 @@ const reducer = combineReducers({
 	activityUpdate: activityUpdateReducer,
 	activityDelete: activityDeleteReducer,
 	activityList: activityListReducer,
+	activitySave: activitySaveReducer,
 
 	//comment reducers
 	commentAdd: commentAddReducer,
@@ -108,12 +110,16 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 	? JSON.parse(localStorage.getItem('userInfo'))
 	: null;
 
+const projectInfoFromStorage = localStorage.getItem('projectInfo')
+	? JSON.parse(localStorage.getItem('projectInfo'))
+	: null;
+
 const stakeholderInfoFromStorage = localStorage.getItem('stakeholdersInfo')
 	? JSON.parse(localStorage.getItem('stakeholdersInfo'))
 	: null;
 
-const projectInfoFromStorage = localStorage.getItem('projectInfo')
-	? JSON.parse(localStorage.getItem('projectInfo'))
+const activityInfoFromStorage = localStorage.getItem('activityInfo')
+	? JSON.parse(localStorage.getItem('activityInfo'))
 	: null;
 
 // initialState
@@ -121,6 +127,7 @@ const initialState = {
 	userLogin: { userInfo: userInfoFromStorage },
 	stakeholder: { stakeholderInfo: stakeholderInfoFromStorage },
 	project: { projectInfo: projectInfoFromStorage },
+	activity: { activityInfo: activityInfoFromStorage },
 };
 
 const middleware = [thunk];

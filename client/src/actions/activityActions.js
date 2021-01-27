@@ -19,6 +19,8 @@ import {
 	ACTIVITY_PROJECT_FILTER_CLEAR,
 	ACTIVITY_STAKEHOLDER_FILTER,
 	ACTIVITY_STAKEHOLDER_FILTER_CLEAR,
+	ACTIVITY_SAVE_REQUEST,
+	ACTIVITY_SAVE_RESET,
 } from '../constants/activityConstants';
 
 //add activity
@@ -189,6 +191,21 @@ export const listActivities = (projectId) => async (dispatch, getState) => {
 	}
 };
 
+//save stakeholder info to localstorage
+export const saveActivityInfo = (data) => (dispatch) => {
+	dispatch({
+		type: ACTIVITY_SAVE_REQUEST,
+		payload: data,
+	});
+	localStorage.setItem('activityInfo', JSON.stringify(data));
+};
+
+//remove stakeholder info from localstorage
+export const removeActivityInfo = () => (dispatch) => {
+	dispatch({ type: ACTIVITY_SAVE_RESET });
+	localStorage.removeItem('activityInfo');
+};
+
 //filter project activities
 export const filterProjectActivities = (text) => (dispatch) => {
 	console.log(text);
@@ -202,7 +219,6 @@ export const clearProjectActivitiesFilter = () => (dispatch) => {
 
 //filter stakeholder activities
 export const filterStakeholderActivities = (text) => (dispatch) => {
-	console.log(text);
 	dispatch({ type: ACTIVITY_STAKEHOLDER_FILTER, payload: text });
 };
 

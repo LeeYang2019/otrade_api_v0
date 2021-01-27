@@ -15,6 +15,8 @@ import {
 	ACTIVITY_LIST_REQUEST,
 	ACTIVITY_LIST_SUCCESS,
 	ACTIVITY_LIST_FAIL,
+	ACTIVITY_SAVE_REQUEST,
+	ACTIVITY_SAVE_RESET,
 } from '../constants/activityConstants';
 
 //add activity reducer
@@ -84,6 +86,17 @@ export const activityListReducer = (state = { activities: [] }, action) => {
 			return { loading: false, activities: action.payload };
 		case ACTIVITY_LIST_FAIL:
 			return { loading: false, error: action.payload };
+		default:
+			return state;
+	}
+};
+
+export const activitySaveReducer = (state = { activityInfo: {} }, action) => {
+	switch (action.type) {
+		case ACTIVITY_SAVE_REQUEST:
+			return { ...state, activityInfo: action.payload };
+		case ACTIVITY_SAVE_RESET:
+			return { activityInfo: {} };
 		default:
 			return state;
 	}

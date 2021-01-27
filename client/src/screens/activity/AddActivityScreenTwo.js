@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Button, Row, Col, Container } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProjectDetails } from '../../actions/projectActions';
 import { listStakeholders } from '../../actions/stakeholderActions';
@@ -57,9 +57,10 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 	//handle submit form
 	const submitHandler = (e) => {
 		e.preventDefault();
-		if (compromise === 'Yes') {
-			next();
-		}
+
+		// if (compromise === 'Yes') {
+		// 	next();
+		// }
 		// //dispatch
 		// dispatch(
 		// 	addActivity(
@@ -128,6 +129,13 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 				</Form.Group>
 				<Row>
 					<Col>
+						<Button
+							onClick={previous}
+							variant="primary"
+							className="px-5 mt-3 mr-3"
+						>
+							Previous
+						</Button>
 						<Button type="submit" variant="primary" className="px-5 mt-3">
 							Continue
 						</Button>

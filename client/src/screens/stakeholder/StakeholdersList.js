@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +10,7 @@ import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';
 import Empty from '../../components/Empty';
 
-const StakeholdersList = ({ match, keyword = '' }) => {
+const StakeholdersList = memo(({ match, keyword = '' }) => {
 	const projectId = match.params.id;
 
 	const { url } = useRouteMatch();
@@ -137,6 +137,6 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 			)}
 		</BorderContainer>
 	);
-};
+});
 
 export default StakeholdersList;

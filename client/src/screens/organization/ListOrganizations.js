@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +10,7 @@ import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';
 import Empty from '../../components/Empty';
 
-const ListOrganizations = ({ match }) => {
+const ListOrganizations = memo(({ match }) => {
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();
 
@@ -107,6 +107,6 @@ const ListOrganizations = ({ match }) => {
 			)}
 		</BorderContainer>
 	);
-};
+});
 
 export default ListOrganizations;
