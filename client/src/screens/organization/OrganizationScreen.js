@@ -256,7 +256,7 @@ const OrganizationScreen = ({ history, match }) => {
 						<Row className="mt-3">
 							<Col>
 								<Button type="submit" variant="primary" className="px-5 mt-3">
-									Register
+									Update
 								</Button>
 							</Col>
 						</Row>

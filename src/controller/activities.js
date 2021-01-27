@@ -59,3 +59,24 @@ exports.getActivities = asyncHandler(async (req, res, next) => {
 
 	res.status(200).json({ success: true, data: activities });
 });
+
+// @desc    GET all activities
+// @route   GET /api/v1/stakeholder/:stakeholderId/activities
+// @access  Private
+exports.getStakeholderActivities = asyncHandler(async (req, res, next) => {
+	const keyword = req.query.keyword
+		? { name: { $regex: req.query.keyword, $options: 'i' } }
+		: {};
+
+	const activities = await Activity.find({
+		project: req.params.projectId,
+		...keyword,
+	}).sort({ name: 1 });
+
+	if (!activities) {
+		res.status(401);
+		throw new Error('No resources found');
+	}
+
+	res.status(200).json({ success: true, data: activities });
+});

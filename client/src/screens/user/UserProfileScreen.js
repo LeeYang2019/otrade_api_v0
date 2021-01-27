@@ -7,6 +7,7 @@ import Loader from '../../components/Loader.js';
 import { getUserDetails } from '../../actions/userActions';
 import ProfileTop from '../../components/ProfileTop';
 import { btnlinks, navbarlinks, routes } from './utilities';
+import { PROJECT_DETAILS_RESET } from '../../constants/projectConstants';
 
 const UserProfileScreen = ({ match }) => {
 	const userId = match.params.id;
