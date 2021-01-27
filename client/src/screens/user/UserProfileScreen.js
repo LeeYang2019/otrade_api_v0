@@ -40,7 +40,6 @@ const UserProfileScreen = ({ match }) => {
 						btnlinks={btnlinks}
 						navbarlinks={navbarlinks}
 					/>
-
 					<Switch>
 						{routes.map((item) => (
 							<Route

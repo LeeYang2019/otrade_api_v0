@@ -54,11 +54,6 @@ const App = () => {
 					/>
 					<PrivateRoute
 						exact
-						path="/stakeholder/:id/organizations/:id/profile"
-						component={OrganizationScreen}
-					/>
-					<PrivateRoute
-						exact
 						path="/project/:id/activities/addActivity"
 						component={ActivityForm}
 					/>
@@ -69,6 +64,11 @@ const App = () => {
 						exact
 						path="/stakeholder/:id/organizations/addOrganization"
 						component={AddOrganizationScreen}
+					/>
+					<PrivateRoute
+						exact
+						path="/stakeholder/:id/organizations/:id/profile"
+						component={OrganizationScreen}
 					/>
 					<PrivateRoute
 						exact
