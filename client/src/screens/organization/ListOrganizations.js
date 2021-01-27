@@ -36,6 +36,7 @@ const ListOrganizations = ({ match }) => {
 							itemLink={'/addOrganization'}
 							url={url}
 							type={'Register Organization'}
+							group={'organizations'}
 						/>
 					) : (
 						<Row className="align-items-center mt-4 mb-3">

@@ -36,9 +36,13 @@ export const navbarlinks = [
 ];
 
 export const routes = [
+	// {
+	// 	path: '',
+	// 	component: ({ match }) => <Dashboard match={match} />,
+	// },
 	{
 		path: '',
-		component: ({ match }) => <Dashboard match={match} />,
+		component: ({ match }) => <EditStakeholderScreen match={match} />,
 	},
 	{
 		path: '/profile',

@@ -18,6 +18,7 @@ import {
 	STAKEHOLDER_SAVE_REQUEST,
 	STAKEHOLDER_PROJECT_FILTER,
 	STAKEHOLDER_PROJECT_FILTER_CLEAR,
+	STAKEHOLDER_SAVE_RESET,
 } from '../constants/stakeholderConstants';
 
 //add stakeholder
@@ -47,7 +48,7 @@ export const addStakeholder = (stakeholder, projectId) => async (
 			stakeholder,
 			config
 		);
-		console.log(stakeholder);
+
 		dispatch({ type: STAKEHOLDER_ADD_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
@@ -201,12 +202,19 @@ export const listStakeholders = (projectId, keyword = '') => async (
 	}
 };
 
+//save stakeholder info to localstorage
 export const saveStakeholderInfo = (data) => (dispatch) => {
 	dispatch({
 		type: STAKEHOLDER_SAVE_REQUEST,
 		payload: data,
 	});
 	localStorage.setItem('stakeholdersInfo', JSON.stringify(data));
+};
+
+//remove stakeholder info from localstorage
+export const removeStakeholderInfo = () => (dispatch) => {
+	dispatch({ type: STAKEHOLDER_SAVE_RESET });
+	localStorage.removeItem('stakeholdersInfo');
 };
 
 //filter user projects

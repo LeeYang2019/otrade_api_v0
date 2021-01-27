@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listProjectDetails } from '../../actions/projectActions';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
+import BorderContainer from '../../components/BorderContainer';
 
 const ProjectDetailsScreen = ({ history }) => {
 	const dispatch = useDispatch();
@@ -16,35 +17,20 @@ const ProjectDetailsScreen = ({ history }) => {
 	}, []);
 
 	return (
-		<>
+		<BorderContainer>
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<p>
-					<strong>Project: </strong>
-					{project.projectName}
-					<br />
-					<strong>Project Client: </strong>
-					{project.projectClient}
-					<br />
-					<strong>Status: </strong>
-					{project.status === 'open' ? (
-						<strong>
-							<em className="text-success">{project.status}</em>
-						</strong>
-					) : (
-						<strong>
-							<em className="text-danger">{project.status}</em>
-						</strong>
-					)}
-					<br />
-					<strong>Comment: </strong>
-					{project.comment}
-				</p>
+				<>
+					<h3>Comments:</h3>
+					<p>
+						<strong>{project.comment}</strong>
+					</p>
+				</>
 			)}
-		</>
+		</BorderContainer>
 	);
 };
 

@@ -3,6 +3,7 @@ import ListOrganizations from '../organization/ListOrganizations';
 import ListStakeholders from './../stakeholder/StakeholdersList';
 import ActivitiesList from '../activity/ActivitiesList';
 import EditProjectPhoto from '../project/EditProjectPhoto';
+import ProjectDetailsScreen from '../project/ProjectDetailsScreen';
 
 export const btnlinks = [
 	{
@@ -29,9 +30,13 @@ export const navbarlinks = [
 ];
 
 export const routes = [
+	// {
+	// 	path: '',
+	// 	component: ({ match }) => <Dashboard match={match} />,
+	// },
 	{
 		path: '',
-		component: ({ match }) => <Dashboard match={match} />,
+		component: ({ match }) => <ProjectDetailsScreen match={match} />,
 	},
 	{
 		path: '/activities',

@@ -38,6 +38,7 @@ const StakeholdersList = ({ match, keyword = '' }) => {
 							itemLink={'/addStakeholder'}
 							url={url}
 							type={'Register Stakeholder'}
+							group={'stakeholders'}
 						/>
 					) : (
 						<Row className="align-items-center mt-4 mb-3">

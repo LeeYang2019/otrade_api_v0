@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
 	addStakeholder,
 	saveStakeholderInfo,
+	removeStakeholderInfo,
 } from '../../actions/stakeholderActions';
 import { STAKEHOLDER_ADD_RESET } from '../../constants/stakeholderConstants';
 import Message from '../../components/Message.js';
@@ -58,6 +59,9 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 
 		//save to database
 		dispatch(addStakeholder(stakeholderInfo, project._id));
+
+		//clear out localstorage
+		dispatch(removeStakeholderInfo());
 
 		if (organization === 'Yes') {
 			next();

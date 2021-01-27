@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { NavLink, Link } from 'react-router-dom';
+import Placeholder from '../img/placeholder.jpg';
 
 const ProfileTop = ({ profile, btnlinks, navbarlinks, url }) => {
 	return (
@@ -8,7 +9,11 @@ const ProfileTop = ({ profile, btnlinks, navbarlinks, url }) => {
 			<Row>
 				<Col md={3}>
 					<div className="image-container">
-						<img src={profile.image} alt="profile" className="profile" />
+						{!profile.image ? (
+							<img src={Placeholder} alt="profile" className="profile" />
+						) : (
+							<img src={profile.image} alt="profile" className="profile" />
+						)}
 					</div>
 				</Col>
 				<Col md={9}>

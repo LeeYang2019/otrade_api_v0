@@ -38,27 +38,6 @@ const AddActivityScreen = ({ match, navigation }) => {
 	const stakeholderList = useSelector((state) => state.stakeholderList);
 	const { stakeholders: stakeholdersList } = stakeholderList;
 
-	// add input field
-	const handleAdd = () => {
-		//spread disPoints, add another object
-		setDispoints([...disPoints, { point: '' }]);
-	};
-
-	//filter out element i
-	const removeHandler = (i) => {
-		const stakeholderToRemove = stakeholders[i];
-		const list = stakeholders.filter((i) => i !== stakeholderToRemove);
-		setStakeholders(list);
-	};
-
-	//handle input change
-	const handleInputChange = (e, i) => {
-		e.preventDefault();
-		const list = [...disPoints];
-		list[i] = e.target.value;
-		setDispoints(list);
-	};
-
 	//handle submit form
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -147,35 +126,7 @@ const AddActivityScreen = ({ match, navigation }) => {
 				</Row>
 				<hr />
 				<Row className="mt-3">
-					<Col md={12}>
-						<Form.Group controlId="discussion">
-							<Form.Label>Discussion Points</Form.Label>
-							{disPoints &&
-								disPoints.map((point, i) => (
-									<>
-										<Row>
-											<Col md={8}>
-												<Form.Control
-													className="mb-1"
-													as="textarea"
-													rows="4"
-													placeholder="Enter Discussion"
-													value={point.point}
-													onChange={(e) => handleInputChange(e, i)}
-												></Form.Control>
-											</Col>
-										</Row>
-										<Row>
-											<Col md={8} className="d-flex justify-content-end mb-3">
-												<Button className="px-3" onClick={handleAdd}>
-													<i className="fas fa-plus"></i> Additional
-												</Button>
-											</Col>
-										</Row>
-									</>
-								))}
-						</Form.Group>
-					</Col>
+					<Col md={12}></Col>
 				</Row>
 				<Row>
 					<Col>
