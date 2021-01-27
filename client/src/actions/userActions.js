@@ -17,7 +17,6 @@ import {
 	USER_LIST_REQUEST,
 	USER_LIST_SUCCESS,
 	USER_LIST_FAIL,
-	USER_LIST_RESET,
 	USER_DELETE_REQUEST,
 	USER_DELETE_SUCCESS,
 	USER_DELETE_FAIL,
@@ -25,7 +24,11 @@ import {
 	USER_UPDATE_SUCCESS,
 	USER_UPDATE_FAIL,
 } from '../constants/userConstants';
+
 import { PROJECT_LIST_RESET } from '../constants/projectConstants';
+import { STAKEHOLDER_LIST_RESET } from '../constants/stakeholderConstants';
+import { ORGANIZATION_LIST_RESET } from '../constants/organizationConstants';
+import { ACTIVITY_LIST_RESET } from '../constants/activityConstants';
 
 //logs in the user
 export const login = (email, password) => async (dispatch) => {
@@ -99,6 +102,10 @@ export const logout = () => (dispatch) => {
 	localStorage.removeItem('userInfo');
 	dispatch({ type: USER_LOGOUT });
 	dispatch({ type: USER_DETAILS_RESET });
+	dispatch({ type: PROJECT_LIST_RESET });
+	dispatch({ type: STAKEHOLDER_LIST_RESET });
+	dispatch({ type: ORGANIZATION_LIST_RESET });
+	dispatch({ type: ACTIVITY_LIST_RESET });
 };
 
 //gets the user details
@@ -125,8 +132,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 		const {
 			data: { data },
 		} = await axios.get(`/api/v1/users/${id}`, config);
-
-		console.log(data);
 
 		//dispatch
 		dispatch({

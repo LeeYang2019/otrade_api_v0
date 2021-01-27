@@ -160,38 +160,33 @@ const StakeholderContactInfo = ({ navigation }) => {
 							<Form.Label>Social Media</Form.Label>
 							{stakeholder &&
 								media.map((site, i) => (
-									<>
-										<Row>
-											<Col md={8}>
-												<Form.Control
-													className="mb-3"
-													placeholder="Add Website"
-													value={site.website}
-													required
-													onChange={(e) => handleInputChange(e, i)}
-												></Form.Control>
-											</Col>
-											<Col>
-												{media.length !== 1 && (
-													<Button
-														variant="danger"
-														className="btn-md mr-3"
-														onClick={() => removeHandler(i)}
-													>
-														<i className="fas fa-trash"></i>
-													</Button>
-												)}
-												{media.length - 1 === i && (
-													<Button
-														className="px-3"
-														onClick={() => addHandler(i)}
-													>
-														<i className="fas fa-plus"></i> Add
-													</Button>
-												)}
-											</Col>
-										</Row>
-									</>
+									<Row key={i}>
+										<Col md={8}>
+											<Form.Control
+												className="mb-3"
+												placeholder="Add Website"
+												value={site.website}
+												required
+												onChange={(e) => handleInputChange(e, i)}
+											></Form.Control>
+										</Col>
+										<Col>
+											{media.length !== 1 && (
+												<Button
+													variant="danger"
+													className="btn-md mr-3"
+													onClick={() => removeHandler(i)}
+												>
+													<i className="fas fa-trash"></i>
+												</Button>
+											)}
+											{media.length - 1 === i && (
+												<Button className="px-3" onClick={() => addHandler(i)}>
+													<i className="fas fa-plus"></i> Add
+												</Button>
+											)}
+										</Col>
+									</Row>
 								))}
 						</Form.Group>
 					</Col>

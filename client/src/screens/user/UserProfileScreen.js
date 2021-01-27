@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { useRouteMatch, Route, Switch } from 'react-router-dom';
-import { Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader.js';
 import { getUserDetails } from '../../actions/userActions';
 import ProfileTop from '../../components/ProfileTop';
 import { btnlinks, navbarlinks, routes } from './utilities';
-import { PROJECT_DETAILS_RESET } from '../../constants/projectConstants';
 
-const UserProfileScreen = ({ match }) => {
+const UserProfileScreen = memo(({ match }) => {
 	const userId = match.params.id;
 
 	const { path, url } = useRouteMatch();
@@ -42,8 +40,9 @@ const UserProfileScreen = ({ match }) => {
 						navbarlinks={navbarlinks}
 					/>
 					<Switch>
-						{routes.map((item) => (
+						{routes.map((item, index) => (
 							<Route
+								key={index}
 								exact
 								path={`${path}${item.path}`}
 								render={item.component}
@@ -54,6 +53,6 @@ const UserProfileScreen = ({ match }) => {
 			)}
 		</>
 	);
-};
+});
 
 export default UserProfileScreen;

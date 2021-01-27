@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import Message from '../../components/Message.js';
@@ -9,14 +9,12 @@ import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';
 
-const UserProjects = ({ match }) => {
+const UserProjects = memo(({ match }) => {
 	const userId = match.params.id;
 
 	const dispatch = useDispatch();
 	const projectUser = useSelector((state) => state.projectUser);
 	const { loading, error, projects, filtered } = projectUser;
-
-	console.log(filtered);
 
 	useEffect(() => {
 		dispatch(listUserProjects(userId));
@@ -58,6 +56,6 @@ const UserProjects = ({ match }) => {
 			)}
 		</BorderContainer>
 	);
-};
+});
 
 export default UserProjects;

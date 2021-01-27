@@ -41,7 +41,6 @@ export const addProject = (project) => async (dispatch, getState) => {
 			},
 		};
 
-		//pass id, project, and config file to api
 		const {
 			data: { data },
 		} = await axios.post(`/api/v1/projects/`, project, config);
@@ -247,8 +246,6 @@ export const assignProjectUser = (projectId, assignments) => async (
 			config
 		);
 
-		console.log(data);
-
 		dispatch({ type: PROJECT_ASSIGNMENT_SUCCESS, payload: data });
 	} catch (error) {
 		const message =
@@ -273,7 +270,6 @@ export const saveProjectInfo = (data) => (dispatch) => {
 
 //filter user projects
 export const filterProjects = (text) => (dispatch) => {
-	console.log(text);
 	dispatch({ type: PROJECT_USER_FILTER, payload: text });
 };
 

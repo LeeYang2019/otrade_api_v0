@@ -9,14 +9,10 @@ import SearchBox from '../../components/SearchBox';
 import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
 
-const ListStakeholderActivities = ({ match, keyword = '' }) => {
-	const dispatch = useDispatch();
-
+const ListStakeholderActivities = ({ match }) => {
 	const projectId = match.params.id;
-
 	const { url } = useRouteMatch();
-
-	console.log(url);
+	const dispatch = useDispatch();
 
 	//get activities
 	const activityList = useSelector((state) => state.activityList);

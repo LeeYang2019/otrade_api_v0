@@ -29,8 +29,6 @@ const EditStakeholderScreen = ({ projectId, match }) => {
 	const stakeholderUpdate = useSelector((state) => state.stakeholderUpdate);
 	const { success } = stakeholderUpdate;
 
-	console.log(match.params);
-
 	useEffect(() => {
 		if (success) {
 			setMessage('Stakeholder was successfully updated.');

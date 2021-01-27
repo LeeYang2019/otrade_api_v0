@@ -59,8 +59,12 @@ const ProfileTop = ({ profile, btnlinks, navbarlinks, url }) => {
 							{profile.location && <strong>{profile.location}</strong>}
 						</Col>
 						<Col className="d-flex justify-content-end align-items-start">
-							{btnlinks.map((item) => (
-								<Link to={`${url}${item.link}`} className={item.class}>
+							{btnlinks.map((item, index) => (
+								<Link
+									key={index}
+									to={`${url}${item.link}`}
+									className={item.class}
+								>
 									<i className={item.icon}></i>
 									{item.type}
 								</Link>
@@ -71,8 +75,8 @@ const ProfileTop = ({ profile, btnlinks, navbarlinks, url }) => {
 					<Row className="lower-row">
 						<Col>
 							<ul className="my-navbar">
-								{navbarlinks.map((item) => (
-									<li>
+								{navbarlinks.map((item, index) => (
+									<li key={index}>
 										<NavLink
 											activeClassName="selected"
 											activeStyle={{

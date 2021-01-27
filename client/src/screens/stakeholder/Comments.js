@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Form, Button, Container } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addComment, listComments } from '../../actions/commentActions';
 import { COMMENT_ADD_RESET } from '../../constants/commentConstants';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import BorderContainer from '../../components/BorderContainer';
-import TableHelper from '../../components/TableHelper';
 
 const Comments = ({ match }) => {
 	const stakeholderId = match.params.id;
@@ -18,8 +17,6 @@ const Comments = ({ match }) => {
 
 	const commentList = useSelector((state) => state.commentList);
 	const { loading, error, comments } = commentList;
-
-	console.log(comments);
 
 	useEffect(() => {
 		//if success re-render list
@@ -38,7 +35,7 @@ const Comments = ({ match }) => {
 	};
 
 	return (
-		<BorderContainer title={'Comments'}>
+		<BorderContainer>
 			{loading ? (
 				<Loader />
 			) : error ? (

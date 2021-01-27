@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Route, Link, useRouteMatch } from 'react-router-dom';
-import { Table, Row, Col } from 'react-bootstrap';
+import { Link, useRouteMatch } from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { listActivities } from '../../actions/activityActions';
 import Message from '../../components/Message.js';

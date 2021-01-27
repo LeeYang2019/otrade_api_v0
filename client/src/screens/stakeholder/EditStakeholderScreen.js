@@ -201,7 +201,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 									<Form.Label>Social Media</Form.Label>
 									{media &&
 										media.map((site, i) => (
-											<Row>
+											<Row key={i}>
 												<Col md={6}>
 													<Form.Control
 														className="mb-3"

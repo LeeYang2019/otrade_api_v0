@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Form, Button, Row, Col, Container } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	updateProject,
@@ -58,14 +58,12 @@ const EditProjectPhoto = ({ match }) => {
 			setImage(data);
 			setUploading(false);
 		} catch (error) {
-			console.error(error);
 			setUploading(false);
 		}
 	};
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		//check password against confirmPassword
 
 		dispatch(
 			updateProject({
@@ -76,7 +74,7 @@ const EditProjectPhoto = ({ match }) => {
 	};
 
 	return (
-		<BorderContainer title="Photo">
+		<BorderContainer>
 			{error && <Message variant="danger">{error}</Message>}
 			{successUpdate && <Message variant="success">{message}</Message>}
 			{loading && <Loader />}
@@ -122,11 +120,6 @@ const EditProjectPhoto = ({ match }) => {
 					</Col>
 				</Row>
 			</Form>
-			{/* ) : (
-					<Message variant="danger">
-						ADMIN NOT ALLOWED TO THIS PROTECTED ROUTE
-					</Message>
-				)} */}
 		</BorderContainer>
 	);
 };

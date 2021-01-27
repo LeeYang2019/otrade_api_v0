@@ -14,11 +14,8 @@ const ListOrganizations = ({ match }) => {
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();
 
-	console.log('url', url);
-
-	const dispatch = useDispatch();
-
 	//get organizations
+	const dispatch = useDispatch();
 	const organizationList = useSelector((state) => state.organizationList);
 	const { loading, error, organizations, filtered } = organizationList;
 

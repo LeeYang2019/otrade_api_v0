@@ -14,11 +14,6 @@ const ListProjectScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
 
-	const { url, path } = useRouteMatch();
-
-	console.log('url', url);
-	console.log('path', path);
-
 	const dispatch = useDispatch();
 
 	//get logged in user
