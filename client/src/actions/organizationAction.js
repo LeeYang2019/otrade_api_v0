@@ -217,6 +217,8 @@ export const listStakeholderOrganizations = (
 			},
 		};
 
+		console.log('stakeholderId: ', stakeholderId);
+
 		const {
 			data: { data },
 		} = await axios.get(

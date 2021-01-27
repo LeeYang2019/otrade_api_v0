@@ -24,12 +24,6 @@ const activityRouter = require('./activities');
 //use with comment routes
 router.use('/:stakeholderId/comments', commentRouter);
 
-//use with organization routes
-router.use('/:stakeholderId/organizations', organizationRouter);
-
-//use with activity routes
-router.use('/:stakeholderId/activities', activityRouter);
-
 // use with project route
 router.route('/').get(protect, getStakeholders).post(protect, addStakeholder);
 
@@ -40,7 +34,11 @@ router
 	.put(protect, updateStakeholder)
 	.delete(protect, isAdmin, deleteStakeholder);
 
+//get stakeholder organizations
 router.route('/:id/organizations').get(protect, getStakeholderOrganizations);
+
+//get stakeholder activities
+// router.route('/:id/activities').get(protect, getStakeholderActivities);
 
 // export router
 module.exports = router;

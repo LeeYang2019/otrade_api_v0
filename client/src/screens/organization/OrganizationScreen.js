@@ -26,10 +26,6 @@ const OrganizationScreen = ({ history, match }) => {
 
 	const dispatch = useDispatch();
 
-	//get logged-in user
-	const userLogin = useSelector((state) => state.userLogin);
-	const { userInfo } = userLogin;
-
 	//get stakeholders
 	const stakeholderList = useSelector((state) => state.stakeholderList);
 	const { stakeholders: stakeholdersList } = stakeholderList;
@@ -43,28 +39,24 @@ const OrganizationScreen = ({ history, match }) => {
 	const { success } = organizationUpdate;
 
 	useEffect(() => {
-		if (!userInfo) {
-			history.pushState('/login');
+		if (success) {
+			setMessage('Organization was successfully updated.');
+			dispatch(getOrganizationDetails(organizationId));
+			dispatch({ type: ORGANIZATION_UPDATE_RESET });
 		} else {
-			if (success) {
-				setMessage('Organization was successfully updated.');
+			if (!orgDetails.name || orgDetails._id !== organizationId) {
 				dispatch(getOrganizationDetails(organizationId));
-				dispatch({ type: ORGANIZATION_UPDATE_RESET });
 			} else {
-				if (!orgDetails.name || orgDetails._id !== organizationId) {
-					dispatch(getOrganizationDetails(organizationId));
-				} else {
-					setOrganization(orgDetails.name);
-					setDivision(orgDetails.division);
-					setLocation(orgDetails.address);
-					setEmail(orgDetails.email);
-					setTelephone(orgDetails.telephone);
-					setWebsite(orgDetails.website);
-					setStakeholders(orgDetails.stakeholders);
-				}
+				setOrganization(orgDetails.name);
+				setDivision(orgDetails.division);
+				setLocation(orgDetails.address);
+				setEmail(orgDetails.email);
+				setTelephone(orgDetails.telephone);
+				setWebsite(orgDetails.website);
+				setStakeholders(orgDetails.stakeholders);
 			}
 		}
-	}, [dispatch, history, userInfo, orgDetails, organizationId, success]);
+	}, [dispatch, history, orgDetails, organizationId, success]);
 
 	//add select field
 	const addHandler = () => {
@@ -118,7 +110,7 @@ const OrganizationScreen = ({ history, match }) => {
 	};
 
 	return (
-		<BorderContainer title={'Organization'}>
+		<BorderContainer>
 			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
 				<Loader />

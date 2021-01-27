@@ -31,13 +31,14 @@ exports.getOrganizations = asyncHandler(async (req, res, next) => {
 // @access  Private
 exports.getStakeholderOrganizations = asyncHandler(async (req, res, next) => {
 	console.log('code entered here');
-	console.log(req.params);
+	console.log('req.params: ', req.params);
+
 	const keyword = req.query.keyword
 		? { name: { $regex: req.query.keyword, $options: 'i' } }
 		: {};
 
 	const organizations = await Organization.find({
-		stakeholders: mongoose.Types.ObjectId(req.params.stakeholderId),
+		stakeholders: mongoose.Types.ObjectId(req.params.id),
 		...keyword,
 	});
 

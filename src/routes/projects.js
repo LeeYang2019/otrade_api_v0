@@ -12,7 +12,6 @@ const {
 	assignUserToProject,
 } = require('../controller/projects');
 
-const advancedResults = require('../middleware/advancedResuts');
 const { protect, isAdmin } = require('../middleware/auth');
 const Project = require('../model/Project');
 

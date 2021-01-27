@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-const { protect, isAdmin } = require('../middleware/auth');
+const { protect } = require('../middleware/auth');
 
 //import Comment  controller functions
 const {
@@ -13,6 +13,7 @@ const {
 
 const Comment = require('../model/Comment');
 
+//use with stakeholder route
 router.route('/').get(protect, getComments).post(protect, addComment);
 
 router

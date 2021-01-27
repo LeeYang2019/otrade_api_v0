@@ -16,11 +16,7 @@ const { protect } = require('../middleware/auth');
 const router = express.Router({ mergeParams: true });
 
 //use with project route
-router
-	.route('/')
-	.get(protect, getOrganizations)
-	//.get(protect, getStakeholderOrganizations)
-	.post(protect, addOrganization);
+router.route('/').get(protect, getOrganizations).post(protect, addOrganization);
 
 //specific organization routes
 router

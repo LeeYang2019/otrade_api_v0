@@ -8,8 +8,10 @@ import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
 
 const ListStakeholderOrganizations = ({ match }) => {
-	const projectId = match.params.id;
+	const stakeholderId = match.params.id;
 	const { url } = useRouteMatch();
+
+	console.log('url', url);
 
 	const dispatch = useDispatch();
 
@@ -20,8 +22,8 @@ const ListStakeholderOrganizations = ({ match }) => {
 	const { loading, error, organizations } = organizationStakeholderList;
 
 	useEffect(() => {
-		dispatch(listStakeholderOrganizations(projectId));
-	}, [dispatch, projectId]);
+		dispatch(listStakeholderOrganizations(stakeholderId));
+	}, [dispatch, stakeholderId]);
 
 	return (
 		<BorderContainer>
@@ -38,9 +40,7 @@ const ListStakeholderOrganizations = ({ match }) => {
 									<td>
 										<p className="mr-3">
 											<strong>Organization: </strong>
-											<Link
-												to={`/project/${projectId}/organization/${organization._id}`}
-											>
+											<Link to={`${url}/${organization._id}/profile`}>
 												{organization.name}
 											</Link>
 											<br />

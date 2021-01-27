@@ -64,7 +64,7 @@ const Comments = ({ match }) => {
 
 					{comments &&
 						comments.map((entry) => (
-							<div className="comment-container mx-3">
+							<div className="comment-container">
 								<div className="comment-header">
 									<div>
 										<img
