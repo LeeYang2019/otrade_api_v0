@@ -8,6 +8,7 @@ import Loader from '../../components/Loader.js';
 import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';
+import Empty from '../../components/Empty';
 
 const ActivitiesList = memo(({ match, keyword = '' }) => {
 	const projectId = match.params.id;
@@ -16,7 +17,7 @@ const ActivitiesList = memo(({ match, keyword = '' }) => {
 	//get activities
 	const dispatch = useDispatch();
 	const activityList = useSelector((state) => state.activityList);
-	const { loading, error, activities } = activityList;
+	const { loading, error, activities, filtered } = activityList;
 
 	useEffect(() => {
 		dispatch(listActivities(projectId));
@@ -30,19 +31,28 @@ const ActivitiesList = memo(({ match, keyword = '' }) => {
 				<Message>{error}</Message>
 			) : (
 				<>
-					<Row className="align-items-center mt-4 mb-3">
-						<Col md={8} className="d-flex justify-content-end ml-2 mr-3">
-							<FilterBox searchWord={'Organizations'} />
-						</Col>
-						<Col>
-							<Link
-								to={`${url}/addActivity`}
-								className="btn btn-primary ml-2 mb-3"
-							>
-								<i className="fas fa-plus"></i> Register
-							</Link>
-						</Col>
-					</Row>
+					{!filtered && activities && activities.length === 0 ? (
+						<Empty
+							itemLink={'/addActivity'}
+							url={url}
+							type={'Register Activity'}
+							group={'activities'}
+						/>
+					) : (
+						<Row className="align-items-center mt-4 mb-3">
+							<Col md={8} className="d-flex justify-content-end ml-2 mr-3">
+								<FilterBox searchWord={'Organizations'} />
+							</Col>
+							<Col>
+								<Link
+									to={`${url}/addActivity`}
+									className="btn btn-primary ml-2 mb-3"
+								>
+									<i className="fas fa-plus"></i> Register
+								</Link>
+							</Col>
+						</Row>
+					)}
 					<TableHelper>
 						{activities &&
 							activities.map((activity) => (

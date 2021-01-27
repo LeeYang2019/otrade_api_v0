@@ -91,7 +91,7 @@ const AddActivityScreen = ({ match, navigation, keyword = '' }) => {
 			{message && <Message variant="success">{message}</Message>}
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Row>
-					<Col md={8}>
+					<Col md={4}>
 						<Form.Group controlId="activity">
 							<Form.Label>Activity</Form.Label>
 							<Form.Control
@@ -115,12 +115,23 @@ const AddActivityScreen = ({ match, navigation, keyword = '' }) => {
 					</Col>
 					<Col md={4}>
 						<Form.Group controlId="hours">
-							<Form.Label>Activity Hours</Form.Label>
+							<Form.Label>Hours</Form.Label>
 							<Form.Control
 								type="number"
 								placeholder="Enter activity hours"
 								value={actHours}
 								onChange={(e) => setActHours(e.target.value)}
+							></Form.Control>
+						</Form.Group>
+					</Col>
+					<Col md={4}>
+						<Form.Group controlId="date">
+							<Form.Label>Current Date</Form.Label>
+							<Form.Control
+								type="date"
+								placeholder="Enter Date"
+								value={date}
+								onChange={(e) => setDate(e.target.value)}
 							></Form.Control>
 						</Form.Group>
 					</Col>
@@ -138,23 +149,10 @@ const AddActivityScreen = ({ match, navigation, keyword = '' }) => {
 						</Form.Group>
 					</Col>
 				</Row>
-				<Row>
-					<Col md={4}>
-						<Form.Group controlId="date">
-							<Form.Label>Current Date</Form.Label>
-							<Form.Control
-								type="date"
-								placeholder="Enter Date"
-								value={date}
-								onChange={(e) => setDate(e.target.value)}
-							></Form.Control>
-						</Form.Group>
-					</Col>
-				</Row>
 				<hr />
 				<Row className="mt-3">
-					<Col md={12}>
-						<Form.Label>Organization Members</Form.Label>
+					<Col md={8}>
+						<Form.Label>Parties Involved</Form.Label>
 						{members &&
 							members.map((assignee, i) => (
 								<Row key={assignee}>

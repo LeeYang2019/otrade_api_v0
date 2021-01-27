@@ -48,6 +48,7 @@ const StakeholderSchema = new mongoose.Schema(
 		],
 		organization: {
 			type: String,
+			enum: ['yes', 'no'],
 		},
 		position: {
 			type: String,

@@ -1,6 +1,7 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
@@ -12,18 +13,27 @@ import Empty from '../../components/Empty';
 
 const StakeholdersList = memo(({ match, keyword = '' }) => {
 	const projectId = match.params.id;
-
 	const { url } = useRouteMatch();
 
-	const dispatch = useDispatch();
-
 	//get stakeholders
+	const dispatch = useDispatch();
 	const stakeholderList = useSelector((state) => state.stakeholderList);
 	const { loading, error, filtered, stakeholders } = stakeholderList;
+
+	//use state
+	const [message, setMessage] = useState(null);
 
 	useEffect(() => {
 		dispatch(listStakeholders(projectId, keyword));
 	}, [dispatch, keyword, projectId]);
+
+	//delete user
+	const deleteHandler = (id) => {
+		if (window.confirm('Are you sure?')) {
+			//dispatch(deleteUser(id));
+			setMessage(null);
+		}
+	};
 
 	return (
 		<BorderContainer>
@@ -33,6 +43,7 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 				<Message>{error}</Message>
 			) : (
 				<>
+					{message && <Message>{message}</Message>}
 					{!filtered && stakeholders && stakeholders.length === 0 ? (
 						<Empty
 							itemLink={'/addStakeholder'}
@@ -99,7 +110,7 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 									<tr key={person._id}>
 										<td>
 											<Row>
-												<Col md={5}>
+												<Col md={4}>
 													<p>
 														<strong>Name: </strong>
 														<Link to={`/stakeholder/${person._id}`}>
@@ -109,24 +120,36 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 														Email: <em> {person.email}</em>
 													</p>
 												</Col>
-
 												<Col
-													md={7}
-													className="d-flex justify-content-start align-items-center"
+													md={8}
+													className="d-flex align-items-center justify-content-end"
 												>
 													<Link
 														to={`${url}/addOrganization`}
-														className="btn btn-primary org-btn"
+														className="btn btn-primary mr-3"
 													>
 														<i className="fas fa-plus"></i> Organization
 													</Link>
 
 													<Link
 														to={`${url}/addActivity`}
-														className="btn btn-primary"
+														className="btn btn-primary mr-5"
 													>
 														<i className="fas fa-plus"></i> Activity
 													</Link>
+
+													<LinkContainer to={``}>
+														<Button variant="light" className="btn-md ml-3">
+															<i className="fas fa-edit"></i> Profile
+														</Button>
+													</LinkContainer>
+													<Button
+														variant="danger"
+														className="btn-md ml-3"
+														onClick={() => deleteHandler(person._id)}
+													>
+														<i className="fas fa-trash"></i> Profile
+													</Button>
 												</Col>
 											</Row>
 										</td>

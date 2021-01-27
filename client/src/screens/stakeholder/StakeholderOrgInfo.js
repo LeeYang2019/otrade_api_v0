@@ -87,8 +87,8 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 								onChange={(e) => setOrganization(e.target.value)}
 							>
 								<option value="">--Select--</option>
-								<option value="Yes">Yes</option>
-								<option value="No">No</option>
+								<option value="yes">Yes</option>
+								<option value="no">No</option>
 							</Form.Control>
 						</Col>
 					</Row>

@@ -80,19 +80,20 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 						disPoints.map((point, i) => (
 							<>
 								<Row>
-									<Col md={8}>
+									<Col md={10}>
 										<Form.Control
-											className="mb-1"
+											className="mb-3"
 											as="textarea"
-											rows="4"
+											rows="2"
 											placeholder="Enter Discussion"
 											value={point.point}
 											onChange={(e) => handleInputChange(e, i)}
 										></Form.Control>
 									</Col>
-								</Row>
-								<Row>
-									<Col md={8} className="d-flex justify-content-end mb-3">
+									<Col
+										md={2}
+										className="d-flex align-items-center justify-content-end mb-3"
+									>
 										<Button className="px-3" onClick={handleAdd}>
 											<i className="fas fa-plus"></i> Additional
 										</Button>
@@ -101,7 +102,8 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 							</>
 						))}
 				</Form.Group>
-				<Form.Group controlId="compromise">
+				<hr className="my-5" />
+				<Form.Group controlId="compromise" className="mb-5">
 					<Row>
 						<Col md={10}>
 							<Form.Label>Is there a compromise?</Form.Label>
@@ -119,7 +121,7 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 						</Col>
 					</Row>
 				</Form.Group>
-				<Row>
+				<Row className="mt-5">
 					<Col>
 						<Button
 							onClick={previous}
