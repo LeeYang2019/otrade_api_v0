@@ -84,22 +84,35 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 												</Col>
 
 												<Col
-													md={7}
-													className="d-flex justify-content-start align-items-center"
+													md={8}
+													className="d-flex align-items-center justify-content-end"
 												>
 													<Link
 														to={`${url}/addOrganization`}
-														className="btn btn-primary org-btn"
+														className="btn btn-primary mr-3"
 													>
 														<i className="fas fa-plus"></i> Organization
 													</Link>
 
 													<Link
 														to={`${url}/addActivity`}
-														className="btn btn-primary"
+														className="btn btn-primary mr-5"
 													>
 														<i className="fas fa-plus"></i> Activity
 													</Link>
+
+													<LinkContainer to={``}>
+														<Button variant="light" className="btn-md ml-3">
+															<i className="fas fa-edit"></i> Profile
+														</Button>
+													</LinkContainer>
+													<Button
+														variant="danger"
+														className="btn-md ml-3"
+														onClick={() => deleteHandler(person._id)}
+													>
+														<i className="fas fa-trash"></i> Profile
+													</Button>
 												</Col>
 											</Row>
 										</td>

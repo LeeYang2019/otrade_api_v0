@@ -29,11 +29,11 @@ const UserProjects = memo(({ match }) => {
 				<Message variant="light">{error}</Message>
 			) : (
 				<>
-					<Row className="align-items-center ml-2 mr-3">
+					{/* <Row className="align-items-center ml-2 mr-3">
 						<Col md={8} className="d-flex justify-content-end">
 							<FilterBox searchWord={'Projects'} />
 						</Col>
-					</Row>
+					</Row> */}
 					<TableHelper>
 						{filtered
 							? filtered.map((project) => (

@@ -57,7 +57,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 			setPosition(stakeholder.position);
 			setInfluence(stakeholder.influence);
 			setProjImpact(stakeholder.projImpact);
-			setOrganization();
+			setOrganization(stakeholder.organization);
 		}
 	}, [dispatch, stakeholder, stakeholderId, success, project, projectId]);
 

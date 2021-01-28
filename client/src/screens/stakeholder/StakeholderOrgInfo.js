@@ -69,7 +69,7 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 	};
 
 	return (
-		<BorderContainer title={'Stakeholder (part 2)'}>
+		<BorderContainer title={'(part 2)'}>
 			{message && <Message variant="success">{message}</Message>}
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Form.Group controlId="organization">
@@ -103,7 +103,7 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 								as="select"
 								value={position}
 								required
-								disabled={!organization || organization === 'No'}
+								disabled={!organization || organization === 'no'}
 								onChange={(e) => setPosition(e.target.value)}
 							>
 								<option value="">--Select--</option>
@@ -133,7 +133,7 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 								as="select"
 								value={influence}
 								required
-								disabled={!organization || organization === 'No'}
+								disabled={!organization || organization === 'no'}
 								onChange={(e) => setInfluence(e.target.value)}
 							>
 								<option value="">--Select--</option>
@@ -158,7 +158,7 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 								as="select"
 								value={projImpact}
 								required
-								disabled={!organization || organization === 'No'}
+								disabled={!organization || organization === 'no'}
 								onChange={(e) => setProjImpact(e.target.value)}
 							>
 								<option value="">--Select--</option>
