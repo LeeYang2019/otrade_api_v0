@@ -72,7 +72,7 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 									<tr key={person._id}>
 										<td>
 											<Row>
-												<Col md={5}>
+												<Col md={8}>
 													<p>
 														<strong>Name: </strong>
 														<Link to={`/stakeholder/${person._id}`}>
@@ -84,10 +84,10 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 												</Col>
 
 												<Col
-													md={8}
-													className="d-flex align-items-center justify-content-end"
+													md={4}
+													className="d-flex align-items-center justify-content-around"
 												>
-													<Link
+													{/* <Link
 														to={`${url}/addOrganization`}
 														className="btn btn-primary mr-3"
 													>
@@ -99,10 +99,10 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 														className="btn btn-primary mr-5"
 													>
 														<i className="fas fa-plus"></i> Activity
-													</Link>
+													</Link> */}
 
 													<LinkContainer to={``}>
-														<Button variant="light" className="btn-md ml-3">
+														<Button variant="light" className="btn-md mr-5">
 															<i className="fas fa-edit"></i> Profile
 														</Button>
 													</LinkContainer>
@@ -123,7 +123,7 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 									<tr key={person._id}>
 										<td>
 											<Row>
-												<Col md={4}>
+												<Col md={8}>
 													<p>
 														<strong>Name: </strong>
 														<Link to={`/stakeholder/${person._id}`}>
@@ -134,10 +134,10 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 													</p>
 												</Col>
 												<Col
-													md={8}
-													className="d-flex align-items-center justify-content-end"
+													md={4}
+													className="d-flex align-items-center justify-content-around"
 												>
-													<Link
+													{/* <Link
 														to={`${url}/addOrganization`}
 														className="btn btn-primary mr-3"
 													>
@@ -149,10 +149,10 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 														className="btn btn-primary mr-5"
 													>
 														<i className="fas fa-plus"></i> Activity
-													</Link>
+													</Link> */}
 
 													<LinkContainer to={``}>
-														<Button variant="light" className="btn-md ml-3">
+														<Button variant="light" className="btn-md mr-5">
 															<i className="fas fa-edit"></i> Profile
 														</Button>
 													</LinkContainer>
