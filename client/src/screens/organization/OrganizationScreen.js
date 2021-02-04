@@ -28,7 +28,6 @@ const OrganizationScreen = ({ history, match }) => {
 
 	//get stakeholders
 	const stakeholderList = useSelector((state) => state.stakeholderList);
-	const { stakeholders: stakeholdersList } = stakeholderList;
 
 	//get organization
 	const organzationDetails = useSelector((state) => state.organizationDetails);
@@ -210,7 +209,7 @@ const OrganizationScreen = ({ history, match }) => {
 								{stakeholders &&
 									stakeholders.map((assignee, i) => (
 										<>
-											<Row className="mb-3">
+											<Row className="mb-3" key={assignee._id}>
 												<Col md={7}>
 													<Form.Control
 														as="select"

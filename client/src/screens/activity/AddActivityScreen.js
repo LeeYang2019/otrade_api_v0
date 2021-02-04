@@ -31,7 +31,7 @@ const AddActivityScreen = ({ match, navigation, keyword = '' }) => {
 
 	useEffect(() => {
 		if (success) {
-			setMessage('Organization was successfully added.');
+			setMessage('Activity was successfully added.');
 			dispatch({ type: ACTIVITY_ADD_RESET });
 		} else {
 			dispatch(listStakeholders(projectId, keyword));

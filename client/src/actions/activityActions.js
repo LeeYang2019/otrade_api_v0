@@ -28,6 +28,8 @@ export const addActivity = (activity, projectId) => async (
 	dispatch,
 	getState
 ) => {
+	console.log('activityAction activity: ', activity);
+
 	try {
 		dispatch({ type: ACTIVITY_ADD_REQUEST });
 

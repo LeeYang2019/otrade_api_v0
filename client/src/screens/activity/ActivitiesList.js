@@ -61,7 +61,7 @@ const ActivitiesList = memo(({ match, keyword = '' }) => {
 										<p className="mr-3">
 											<strong>Activity: </strong>
 											<Link
-												to={`/project/${projectId}/activity/${activity._id}`}
+												to={`/project/${projectId}/activities/${activity._id}/profile`}
 											>
 												{activity.activity}
 											</Link>

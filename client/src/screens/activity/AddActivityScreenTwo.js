@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { listProjectDetails } from '../../actions/projectActions';
-import { listStakeholders } from '../../actions/stakeholderActions';
 import { addActivity, removeActivityInfo } from '../../actions/activityActions';
 import { ACTIVITY_ADD_RESET } from '../../constants/activityConstants';
 import Message from '../../components/Message.js';
-import Loader from '../../components/Loader.js';
-import { Next } from 'react-bootstrap/esm/PageItem';
 import BorderContainer from '../../components/BorderContainer';
 
 const AddActivityScreenTwo = ({ match, navigation }) => {
@@ -28,6 +23,13 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 	const [compromise, setcompromise] = useState('');
 	const [message, setMessage] = useState(null);
 
+	useEffect(() => {
+		if (success) {
+			setMessage('Activity was successfully added to the database.');
+			dispatch({ type: ACTIVITY_ADD_RESET });
+		}
+	}, [dispatch, success]);
+
 	// add input field
 	const handleAdd = () => {
 		//spread disPoints, add another object
@@ -46,21 +48,11 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 
-		// //dispatch
-		// dispatch(
-		// 	addActivity(
-		// 		{
-		// 			activity,
-		// 			date,
-		// 			hours: actHours,
-		// 			compromise,
-		// 			isComplete,
-		// 			discussPoints: disPoints,
-		// 			stakeholders,
-		// 		},
-		// 		projectId
-		// 	)
-		// );
+		activityInfo.disPoints = disPoints;
+		activityInfo.compromise = compromise;
+
+		//save to database
+		dispatch(addActivity(activityInfo, projectId));
 
 		//clear out localstorage
 		dispatch(removeActivityInfo());

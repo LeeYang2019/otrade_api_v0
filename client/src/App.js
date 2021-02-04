@@ -14,6 +14,7 @@ import OrganizationScreen from './screens/organization/OrganizationScreen';
 import StakeholderForm from './screens/stakeholder/StakeHolderForm';
 import AdminRoutes from './components/Routing/AdminRoutes';
 import ActivityForm from './screens/activity/ActivityForm';
+import ActivityScreen from './screens/activity/ActivityScreen';
 
 const App = () => {
 	return (
@@ -49,13 +50,18 @@ const App = () => {
 					/>
 					<PrivateRoute
 						exact
+						path="/project/:id/activities/addActivity"
+						component={ActivityForm}
+					/>
+					<PrivateRoute
+						exact
 						path="/project/:id/organizations/:id/profile"
 						component={OrganizationScreen}
 					/>
 					<PrivateRoute
 						exact
-						path="/project/:id/activities/addActivity"
-						component={ActivityForm}
+						path="/project/:id/activities/:id/profile"
+						component={ActivityScreen}
 					/>
 
 					{/*Stakholder Routes */}
