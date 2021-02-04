@@ -70,19 +70,40 @@ const ListOrganizations = memo(({ match }) => {
 							? filtered.map((organization) => (
 									<tr key={organization._id}>
 										<td>
-											<p className="mr-3">
-												<strong>Organization: </strong>
-												<Link to={`${url}/${organization._id}/profile`}>
-													{organization.name}
-												</Link>
-												<br />
-												Registered Date:{' '}
-												<strong>
-													{' '}
-													{organization.createdAt &&
-														organization.createdAt.substring(0, 10)}{' '}
-												</strong>
-											</p>
+											<Row>
+												<Col md={8}>
+													<p className="mr-3">
+														<strong>Organization: </strong>
+														<Link to={`${url}/${organization._id}/profile`}>
+															{organization.name}
+														</Link>
+														<br />
+														Registered Date:{' '}
+														<strong>
+															{' '}
+															{organization.createdAt &&
+																organization.createdAt.substring(0, 10)}{' '}
+														</strong>
+													</p>
+												</Col>
+												<Col
+													md={4}
+													className="d-flex align-items-center justify-content-around"
+												>
+													<LinkContainer to={``}>
+														<Button variant="light" className="btn-md mr-5">
+															<i className="fas fa-edit"></i> Profile
+														</Button>
+													</LinkContainer>
+													<Button
+														variant="danger"
+														className="btn-md ml-3"
+														onClick={() => deleteHandler(organization._id)}
+													>
+														<i className="fas fa-trash"></i> Profile
+													</Button>
+												</Col>
+											</Row>
 										</td>
 									</tr>
 							  ))

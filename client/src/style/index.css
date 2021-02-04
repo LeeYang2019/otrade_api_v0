@@ -118,6 +118,7 @@ hr {
 	background-color: white;
 }
 
+/*container for the top*/
 .profile-container {
 	padding-right: 1.5rem;
 	padding-left: 1.5rem;
@@ -141,7 +142,7 @@ hr {
 .border-container {
 	width: 100%;
 	height: auto;
-	padding: 1rem 1.5rem;
+	padding: 1.5rem 1.5rem;
 }
 
 .dashboard-container {
@@ -215,7 +216,7 @@ hr {
 /*Media Queries*/
 @media (min-width: 771px) {
 	.image-container {
-		max-height: 175px;
+		max-height: 170px;
 		overflow: hidden;
 	}
 }

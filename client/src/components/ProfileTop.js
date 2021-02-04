@@ -5,7 +5,7 @@ import Placeholder from '../img/placeholder.jpg';
 
 const ProfileTop = ({ profile, btnlinks, navbarlinks, url }) => {
 	return (
-		<div className="profile-container mb-3">
+		<div className="profile-container mb-2">
 			<Row>
 				<Col md={3}>
 					<div className="image-container">

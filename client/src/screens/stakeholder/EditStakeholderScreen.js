@@ -260,7 +260,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 						<Form.Group controlId="position" className="mt-5">
 							<Row>
 								<Col md={8}>
-									<Form.Label>What is the {firstName}'s position?</Form.Label>
+									<Form.Label>What is {firstName}'s position?</Form.Label>
 								</Col>
 								<Col md={4}>
 									<Form.Control
@@ -291,7 +291,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 							<Row>
 								<Col md={8}>
 									<Form.Label>
-										What is the {firstName}'s level of influence on the project?
+										What is {firstName}'s level of influence on the project?
 									</Form.Label>
 								</Col>
 								<Col md={4}>
@@ -316,7 +316,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 							<Row>
 								<Col md={8}>
 									<Form.Label>
-										What is the {firstName}'s level of impact on the project?
+										What is {firstName}'s level of impact on the project?
 									</Form.Label>
 								</Col>
 								<Col md={4}>

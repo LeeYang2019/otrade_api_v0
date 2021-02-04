@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listActivities } from '../../actions/activityActions';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
-import SearchBox from '../../components/SearchBox';
+import FilterBox from '../../components/FilterBox';
+import Empty from '../../components/Empty';
 import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
 
@@ -30,26 +31,28 @@ const ListStakeholderActivities = ({ match }) => {
 				<Message>{error}</Message>
 			) : (
 				<>
-					<Row className="align-items-center mt-2 mb-3">
-						<Col md={2}></Col>
-						<Col md={8}>
-							<Route
-								render={({ history }) => (
-									<SearchBox
-										history={history}
-										searchWord={'Activity'}
-										searchQueryPath={`/project/${projectId}/search/`}
-										searchQueryEmpty={`/project/${projectId}`}
-									/>
-								)}
-							/>
-						</Col>
-						<Col className="d-flex justify-content-end">
-							<Link to={`${url}/addActivity`} className="btn btn-primary my-3">
-								<i className="fas fa-plus"></i> Register
-							</Link>
-						</Col>
-					</Row>
+					{activities && activities.length === 0 ? (
+						<Empty
+							itemLink={'/addActivity'}
+							url={url}
+							type={'Register Activity'}
+							group={'activities'}
+						/>
+					) : (
+						<Row className="align-items-center">
+							<Col md={8} className="d-flex justify-content-end ml-2 mr-3">
+								<FilterBox searchWord={'Organizations'} />
+							</Col>
+							<Col>
+								<Link
+									to={`${url}/addActivity`}
+									className="btn btn-primary ml-2 mb-3"
+								>
+									<i className="fas fa-plus"></i> Register
+								</Link>
+							</Col>
+						</Row>
+					)}
 					<TableHelper>
 						{activities &&
 							activities.map((activity) => (
