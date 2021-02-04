@@ -40,8 +40,6 @@ export const addStakeholder = (stakeholder, projectId) => async (
 			},
 		};
 
-		console.log(stakeholder);
-
 		//pass id, project, and config file to api
 		const {
 			data: { data },
@@ -116,9 +114,6 @@ export const updateStakeholder = (stakeholder, id) => async (
 				Authorization: `Bearer ${userInfo.token}`,
 			},
 		};
-
-		console.log(stakeholder);
-		console.log(id);
 
 		const {
 			data: { data },

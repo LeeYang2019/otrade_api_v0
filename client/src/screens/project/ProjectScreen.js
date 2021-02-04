@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
-import { Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';

@@ -9,8 +9,8 @@ const Project = ({ project, userId = '' }) => {
 				<p>
 					<strong>Project: </strong>
 					<Link to={`/project/${project._id}`}>{project.projectName}</Link>
-					<br />
-					Client: <em>{project.projectClient}</em>
+					{/* <br />
+					Client: <em>{project.projectClient}</em> */}
 					<br />
 					Created Date: <strong>{project.createdAt.substring(0, 10)}</strong>
 				</p>

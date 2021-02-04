@@ -1,9 +1,20 @@
 const asyncHandler = require('express-async-handler');
 const generateToken = require('../utils/generateToken');
-const gravatar = require('gravatar');
 const User = require('../model/User');
 const Project = require('../model/Project');
 const mongoose = require('mongoose');
+const Joi = require('@hapi/joi');
+
+/**
+ * JOI userSchema
+ */
+const userSchema = Joi.object().keys({
+	firstName: Joi.string().required(),
+	lastName: Joi.string().required(),
+	image: Joi.string().optional(),
+	email: Joi.string().required(),
+	telephone: Joi.string().optional(),
+});
 
 /**
  * USER Routes
@@ -147,7 +158,7 @@ exports.getUser = asyncHandler(async (req, res) => {
 
 		if (!user) {
 			res.status(401);
-			throw new Error('No resource found');
+			throw new Error('User not found');
 		}
 
 		//return the user
@@ -231,82 +242,11 @@ exports.updateUser = asyncHandler(async (req, res) => {
 // @route   DELETE /api/v1/users/:id
 // @access  Private/admin
 exports.deleteUser = asyncHandler(async (req, res) => {
-	await User.findByIdAndDelete(req.params.id);
-	res.status(200).json({ success: true });
+	try {
+		//find user by id and delete
+		await User.findByIdAndDelete(req.params.id);
+		res.status(200).json({ success: true });
+	} catch (error) {
+		res.status(500).json(error.message);
+	}
 });
-
-/**
- * USER Assignment Routes
- */
-
-// @desc	Assign user to project
-// @route	/api/v1/users/:id/projects/:projectId/assign
-// @access	Private/admin
-exports.assignUserToProject = async (req, res) => {
-	//find user and project
-	const user = await User.findById(req.params.id);
-	const project = await Project.findById(req.params.projectId);
-
-	//if neither are found throw an error
-	if (!user || !project) {
-		res.status(404);
-		throw new Error('No Resources Found');
-	}
-
-	// if assignee array is empty, just push user onto assignee array, and save
-	if (project.assignees.length === 0) {
-		project.assignees.push(req.params.id);
-		await project.save();
-		res.status(200).json({ success: true, data: project });
-	} else {
-		// if assignee array not empty and user not assigned, push user onto array and save
-		if (!project.assignees.includes(req.params.id)) {
-			project.assignees.push(req.params.id);
-			await project.save();
-			res.status(200).json({ success: true, data: project });
-		} else {
-			//throw error
-			res.status(401);
-			throw new Error(
-				`${user.firstName} has already been assigned to this project`
-			);
-		}
-	}
-};
-
-// @desc	Remove user from project
-// @route	/api/v1/users/:id/projects/:projectId/remove
-// @access	private/admin
-exports.removeUserFromProject = async (req, res) => {
-	//find user and project
-	const user = await User.findById(req.params.id);
-	const project = await Project.findById(req.params.projectId);
-
-	//if neither are found
-	if (!user || !project) {
-		res.status(404);
-		throw new Error('No Resources Found');
-	}
-
-	//is user assigned to project?
-	if (project.assignees.includes(req.params.id)) {
-		//if array length is 1, set to empty array
-		if (project.assignees.length === 1) {
-			project.assignees = [];
-		} else {
-			// filter out user from array
-			const newUpdate = project.assignees.filter(
-				(item) => item != req.params.id
-			);
-			// set array
-			project.assignees = newUpdate;
-		}
-	} else {
-		res.status(404);
-		throw new Error(`There are no assignments for ${user.firstName}`);
-	}
-
-	//save project
-	await project.save();
-	res.status(200).json({ success: true });
-};

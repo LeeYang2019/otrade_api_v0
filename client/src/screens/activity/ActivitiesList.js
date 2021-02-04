@@ -39,7 +39,7 @@ const ActivitiesList = memo(({ match, keyword = '' }) => {
 							group={'activities'}
 						/>
 					) : (
-						<Row className="align-items-center mt-4 mb-3">
+						<Row className="align-items-center">
 							<Col md={8} className="d-flex justify-content-end ml-2 mr-3">
 								<FilterBox searchWord={'Organizations'} />
 							</Col>

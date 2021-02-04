@@ -166,7 +166,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 				Authorization: `Bearer ${userInfo.token}`,
 			},
 		};
-		console.log('inside update code');
+
 		const { data } = await axios.put(`/api/v1/users/profile`, user, config);
 
 		dispatch({
@@ -230,6 +230,7 @@ export const listUsers = (keyword = '', pageNumber = '') => async (
 	}
 };
 
+//delete a user
 export const deleteUser = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -268,7 +269,6 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 
 //update user
 export const updateUser = (user) => async (dispatch, getState) => {
-	console.log('updateUser action');
 	try {
 		dispatch({
 			type: USER_UPDATE_REQUEST,

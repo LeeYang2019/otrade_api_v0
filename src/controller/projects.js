@@ -21,14 +21,20 @@ exports.getProjects = asyncHandler(async (req, res) => {
 		  }
 		: {};
 
-	const count = await Project.countDocuments({ ...keyword });
-	const projects = await Project.find({ ...keyword })
-		.sort({ projectName: 1 })
-		.limit(pageSize)
-		.skip(pageSize * (page - 1))
-		.populate('assignees')
-		.exec();
-	res.status(200).json({ projects, page, pages: Math.ceil(count / pageSize) });
+	try {
+		const count = await Project.countDocuments({ ...keyword });
+		const projects = await Project.find({ ...keyword })
+			.sort({ projectName: 1 })
+			.limit(pageSize)
+			.skip(pageSize * (page - 1))
+			.populate('assignees')
+			.exec();
+		res
+			.status(200)
+			.json({ projects, page, pages: Math.ceil(count / pageSize) });
+	} catch (error) {
+		res.status(500).json(error.message);
+	}
 });
 
 // @desc    GET all projects for a user

@@ -48,7 +48,14 @@ const ProfileTop = ({ profile, btnlinks, navbarlinks, url }) => {
 									<br />
 								</>
 							) : null}
-							{profile.status === 'active' || profile.status === 'open' ? (
+							{profile.telephone ? (
+								<>
+									<strong>{profile.telephone}</strong>
+									<br />
+								</>
+							) : null}
+							{(profile.status && profile.status === 'active') ||
+							profile.status === 'open' ? (
 								<>
 									<strong>
 										status: <em className="text-success">{profile.status}</em>

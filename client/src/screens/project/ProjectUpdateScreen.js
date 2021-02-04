@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import { Tabs, Tab, Row, Col } from 'react-bootstrap';
+import { Tabs, Tab, Col } from 'react-bootstrap';
 import ProjectEditScreen from './ProjectEditScreen';
 import Assigment from '../../components/Assignment';
 import BorderContainer from '../../components/BorderContainer';

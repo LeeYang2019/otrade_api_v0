@@ -58,7 +58,7 @@ td {
 body {
 	/* background-color: rgba(119, 119, 119, 0.25) !important; */
 	/* background-color: rgba(214, 250, 125, 0.247) !important; */
-	/* background-color: rgba(10, 10, 10, 0.25) !important; */
+	background-color: rgba(10, 10, 10, 0.1) !important;
 }
 
 /*customize the primary color for buttons*/
@@ -141,7 +141,7 @@ hr {
 .border-container {
 	width: 100%;
 	height: auto;
-	padding: 0 1.5rem;
+	padding: 1rem 1.5rem;
 }
 
 .dashboard-container {
@@ -215,7 +215,7 @@ hr {
 /*Media Queries*/
 @media (min-width: 771px) {
 	.image-container {
-		max-height: 200px;
+		max-height: 175px;
 		overflow: hidden;
 	}
 }

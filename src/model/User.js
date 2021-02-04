@@ -31,9 +31,6 @@ const UserSchema = new mongoose.Schema(
 			enum: ['surveyor', 'client', 'admin'],
 			default: 'surveyor',
 		},
-		avatar: {
-			type: String,
-		},
 		status: {
 			type: String,
 			enum: ['active', 'inactive'],
