@@ -69,9 +69,11 @@ exports.getStakeholderActivities = asyncHandler(async (req, res, next) => {
 		: {};
 
 	const activities = await Activity.find({
-		project: req.params.projectId,
+		stakeholders: mongoose.Types.ObjectId(req.params.id),
 		...keyword,
 	}).sort({ name: 1 });
+
+	console.log(activities);
 
 	if (!activities) {
 		res.status(401);

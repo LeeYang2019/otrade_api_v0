@@ -3,6 +3,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getActivityDetails } from '../../actions/activityActions';
+import { ACTIVITY_UPDATE_RESET } from '../../constants/activityConstants';
 import BorderContainer from '../../components/BorderContainer';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
@@ -18,6 +19,9 @@ const ActivityScreen = ({ match }) => {
 	const activityDetails = useSelector((state) => state.activityDetails);
 	const { loading, error, activity } = activityDetails;
 
+	const activityUpdate = useSelector((state) => state.activityUpdate);
+	const { success } = activityUpdate;
+
 	//define state
 	const [activityType, setActivityType] = useState();
 	const [date, setDate] = useState();
@@ -26,28 +30,34 @@ const ActivityScreen = ({ match }) => {
 	const [location, setLocation] = useState();
 	const [disPoints, setDispoints] = useState([{ point: '' }]);
 	const [compromise, setcompromise] = useState('');
-
 	const [message, setMessage] = useState(null);
 
 	console.log(activity);
 
 	useEffect(() => {
-		if (!activity.activity || activity._id !== activityId) {
+		if (success) {
+			setMessage('Activity was successfully updated');
 			dispatch(getActivityDetails(activityId));
+			dispatch({ type: ACTIVITY_UPDATE_RESET });
 		} else {
-			setActivityType(activity.activity);
-			setActHours(activity.hours);
-			setDate(activity.date.substring(0, 10));
-			setLocation(activity.location);
-			setMembers(activity.members);
-
-			if (activity.dicussPoints && activity.dicussPoints.legnth === 0) {
-				setDispoints([{ point: '' }]);
+			if (!activity.activity || activity._id !== activityId) {
+				dispatch(getActivityDetails(activityId));
 			} else {
-				setDispoints(activity.disPoints);
+				setActivityType(activity.activity);
+				setActHours(activity.hours);
+				setDate(activity.date.substring(0, 10));
+				setLocation(activity.location);
+				setMembers(activity.stakeholders);
+				setcompromise(activity.compromise);
+
+				if (activity.discussPoints && activity.discussPoints.legnth === 0) {
+					setDispoints([{ point: '' }]);
+				} else {
+					setDispoints(activity.discussPoints);
+				}
 			}
 		}
-	}, [dispatch, activity, activityId]);
+	}, [dispatch, activity, activityId, success]);
 
 	//add select field
 	const addHandler = () => {
@@ -93,6 +103,7 @@ const ActivityScreen = ({ match }) => {
 
 	return (
 		<BorderContainer>
+			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
@@ -226,7 +237,7 @@ const ActivityScreen = ({ match }) => {
 															as="textarea"
 															rows="2"
 															placeholder="Enter Discussion"
-															value={point.point}
+															value={point}
 															onChange={(e) => handleInputChange(e, i)}
 														></Form.Control>
 													</Col>

@@ -17,6 +17,11 @@ import {
 	ACTIVITY_LIST_FAIL,
 	ACTIVITY_SAVE_REQUEST,
 	ACTIVITY_SAVE_RESET,
+	ACTIVITY_STAKEHOLDER_LIST_REQUEST,
+	ACTIVITY_STAKEHOLDER_LIST_SUCCESS,
+	ACTIVITY_STAKEHOLDER_LIST_FAIL,
+	ACTIVITY_STAKEHOLDER_FILTER,
+	ACTIVITY_STAKEHOLDER_FILTER_CLEAR,
 } from '../constants/activityConstants';
 
 //add activity reducer
@@ -86,6 +91,39 @@ export const activityListReducer = (state = { activities: [] }, action) => {
 			return { loading: false, activities: action.payload };
 		case ACTIVITY_LIST_FAIL:
 			return { loading: false, error: action.payload };
+		default:
+			return state;
+	}
+};
+
+//get organization list reducer
+export const organizationStakeholderListReducer = (
+	state = { activities: [], filtered: [] },
+	action
+) => {
+	switch (action.type) {
+		case ACTIVITY_STAKEHOLDER_LIST_REQUEST:
+			return { loading: true, activities: [] };
+		case ACTIVITY_STAKEHOLDER_LIST_SUCCESS:
+			return {
+				loading: false,
+				activities: action.payload,
+			};
+		case ACTIVITY_STAKEHOLDER_LIST_FAIL:
+			return { loading: false, error: action.payload };
+		case ACTIVITY_STAKEHOLDER_FILTER:
+			return {
+				...state,
+				filtered: state.activities.filter((contact) => {
+					const regex = new RegExp(`${action.payload}`, 'gi');
+					return contact.activity.match(regex);
+				}),
+			};
+		case ACTIVITY_STAKEHOLDER_FILTER_CLEAR:
+			return {
+				...state,
+				filtered: null,
+			};
 		default:
 			return state;
 	}

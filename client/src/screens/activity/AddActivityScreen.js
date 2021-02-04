@@ -80,7 +80,7 @@ const AddActivityScreen = ({ match, navigation, keyword = '' }) => {
 				date,
 				hours: actHours,
 				location,
-				members,
+				stakeholders: members,
 			})
 		);
 		next();

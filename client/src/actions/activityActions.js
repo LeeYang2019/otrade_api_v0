@@ -17,6 +17,9 @@ import {
 	ACTIVITY_LIST_FAIL,
 	ACTIVITY_PROJECT_FILTER,
 	ACTIVITY_PROJECT_FILTER_CLEAR,
+	ACTIVITY_STAKEHOLDER_LIST_REQUEST,
+	ACTIVITY_STAKEHOLDER_LIST_SUCCESS,
+	ACTIVITY_STAKEHOLDER_LIST_FAIL,
 	ACTIVITY_STAKEHOLDER_FILTER,
 	ACTIVITY_STAKEHOLDER_FILTER_CLEAR,
 	ACTIVITY_SAVE_REQUEST,
@@ -185,6 +188,45 @@ export const listActivities = (projectId) => async (dispatch, getState) => {
 	} catch (error) {
 		dispatch({
 			type: ACTIVITY_LIST_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.messsage,
+		});
+	}
+};
+
+export const listStakeholderActivities = (stakeholderId) => async (
+	dispatch,
+	getState
+) => {
+	console.log('entered listStakeholderActivities');
+	try {
+		dispatch({ ACTIVITY_STAKEHOLDER_LIST_REQUEST });
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const {
+			data: { data },
+		} = await axios.get(
+			`/api/v1/stakeholders/${stakeholderId}/activities`,
+			config
+		);
+
+		console.log('data: ', data);
+
+		dispatch({ ACTIVITY_STAKEHOLDER_LIST_SUCCESS, payload: data });
+	} catch (error) {
+		dispatch({
+			type: ACTIVITY_STAKEHOLDER_LIST_FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message

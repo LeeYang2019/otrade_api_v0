@@ -5,6 +5,7 @@ const ActivitySchema = mongoose.Schema(
 	{
 		activity: {
 			type: String,
+			required: true,
 			enum: [
 				'consulta informal',
 				'reunion formal',
@@ -20,6 +21,9 @@ const ActivitySchema = mongoose.Schema(
 		},
 		hours: {
 			type: Number,
+		},
+		location: {
+			type: String,
 		},
 		compromise: {
 			type: String,

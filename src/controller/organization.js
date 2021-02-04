@@ -42,8 +42,6 @@ exports.getStakeholderOrganizations = asyncHandler(async (req, res, next) => {
 		...keyword,
 	});
 
-	console.log(organizations);
-
 	if (!organizations) {
 		res.status(401);
 		throw new Error('No resources found');

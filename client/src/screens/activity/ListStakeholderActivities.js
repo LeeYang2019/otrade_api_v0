@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, Link, useRouteMatch } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { listActivities } from '../../actions/activityActions';
+import { listStakeholderActivities } from '../../actions/activityActions';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import FilterBox from '../../components/FilterBox';
@@ -11,7 +11,10 @@ import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
 
 const ListStakeholderActivities = ({ match }) => {
-	const projectId = match.params.id;
+	const stakeholderId = match.params.id;
+
+	console.log(match);
+
 	const { url } = useRouteMatch();
 	const dispatch = useDispatch();
 
@@ -19,9 +22,11 @@ const ListStakeholderActivities = ({ match }) => {
 	const activityList = useSelector((state) => state.activityList);
 	const { loading, error, activities } = activityList;
 
+	console.log(activities);
+
 	useEffect(() => {
-		dispatch(listActivities(projectId));
-	}, [dispatch, projectId]);
+		dispatch(listStakeholderActivities(stakeholderId));
+	}, [dispatch, stakeholderId]);
 
 	return (
 		<BorderContainer>
@@ -61,7 +66,7 @@ const ListStakeholderActivities = ({ match }) => {
 										<p className="mr-3">
 											<strong>Activity: </strong>
 											<Link
-												to={`/project/${projectId}/activity/${activity._id}`}
+												to={`/project/${stakeholderId}/activity/${activity._id}`}
 											>
 												{activity.activity}
 											</Link>

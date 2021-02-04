@@ -48,7 +48,7 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 
-		activityInfo.disPoints = disPoints;
+		activityInfo.discussPoints = disPoints;
 		activityInfo.compromise = compromise;
 
 		//save to database

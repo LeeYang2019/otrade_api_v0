@@ -27,7 +27,7 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 		dispatch(listStakeholders(projectId, keyword));
 	}, [dispatch, keyword, projectId]);
 
-	//delete user
+	//delete stakeholder
 	const deleteHandler = (id) => {
 		if (window.confirm('Are you sure?')) {
 			//dispatch(deleteUser(id));
@@ -78,8 +78,6 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 														<Link to={`/stakeholder/${person._id}`}>
 															{person.firstName} {person.lastName}
 														</Link>
-														<br />
-														Email: <em> {person.email}</em>
 													</p>
 												</Col>
 
@@ -87,20 +85,6 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 													md={4}
 													className="d-flex align-items-center justify-content-around"
 												>
-													{/* <Link
-														to={`${url}/addOrganization`}
-														className="btn btn-primary mr-3"
-													>
-														<i className="fas fa-plus"></i> Organization
-													</Link>
-
-													<Link
-														to={`${url}/addActivity`}
-														className="btn btn-primary mr-5"
-													>
-														<i className="fas fa-plus"></i> Activity
-													</Link> */}
-
 													<LinkContainer to={``}>
 														<Button variant="light" className="btn-md mr-5">
 															<i className="fas fa-edit"></i> Profile
@@ -123,34 +107,24 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 									<tr key={person._id}>
 										<td>
 											<Row>
-												<Col md={8}>
+												<Col md={4}>
 													<p>
-														<strong>Name: </strong>
 														<Link to={`/stakeholder/${person._id}`}>
 															{person.firstName} {person.lastName}
 														</Link>
 														<br />
-														Email: <em> {person.email}</em>
+														{person.email}
+														<br />
+														{person.telephone}
 													</p>
+												</Col>
+												<Col md={4}>
+													<p>{person.createdAt}</p>
 												</Col>
 												<Col
 													md={4}
 													className="d-flex align-items-center justify-content-around"
 												>
-													{/* <Link
-														to={`${url}/addOrganization`}
-														className="btn btn-primary mr-3"
-													>
-														<i className="fas fa-plus"></i> Organization
-													</Link>
-
-													<Link
-														to={`${url}/addActivity`}
-														className="btn btn-primary mr-5"
-													>
-														<i className="fas fa-plus"></i> Activity
-													</Link> */}
-
 													<LinkContainer to={``}>
 														<Button variant="light" className="btn-md mr-5">
 															<i className="fas fa-edit"></i> Profile
