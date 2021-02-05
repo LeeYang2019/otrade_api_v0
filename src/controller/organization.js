@@ -30,9 +30,6 @@ exports.getOrganizations = asyncHandler(async (req, res, next) => {
 // @route   GET /api/v1/stakeholders/stakeholderId/organizations
 // @access  Private
 exports.getStakeholderOrganizations = asyncHandler(async (req, res, next) => {
-	console.log('code entered here');
-	console.log('req.params: ', req.params);
-
 	const keyword = req.query.keyword
 		? { name: { $regex: req.query.keyword, $options: 'i' } }
 		: {};

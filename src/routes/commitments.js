@@ -17,7 +17,7 @@ const router = express.Router({ mergeParams: true });
 //use with activity route
 router.route('/').get(protect, getCommitments).post(protect, addCommitment);
 
-//specific organization routes
+// specific commitment route
 router
 	.route('/:id')
 	.get(protect, getCommitment)

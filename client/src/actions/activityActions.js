@@ -200,7 +200,7 @@ export const listStakeholderActivities = (stakeholderId) => async (
 	dispatch,
 	getState
 ) => {
-	console.log('entered listStakeholderActivities');
+	console.log(stakeholderId);
 	try {
 		dispatch({ ACTIVITY_STAKEHOLDER_LIST_REQUEST });
 

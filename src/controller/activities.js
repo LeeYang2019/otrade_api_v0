@@ -57,6 +57,8 @@ exports.getActivities = asyncHandler(async (req, res, next) => {
 		throw new Error('No resources found');
 	}
 
+	console.log('getActivities');
+
 	res.status(200).json({ success: true, data: activities });
 });
 
@@ -68,17 +70,19 @@ exports.getStakeholderActivities = asyncHandler(async (req, res, next) => {
 		? { name: { $regex: req.query.keyword, $options: 'i' } }
 		: {};
 
+	console.log('getStakeholderActivities');
+
 	const activities = await Activity.find({
 		stakeholders: mongoose.Types.ObjectId(req.params.id),
 		...keyword,
 	}).sort({ name: 1 });
 
-	console.log(activities);
-
 	if (!activities) {
 		res.status(401);
 		throw new Error('No resources found');
 	}
+
+	console.log('getStakeholderActivities');
 
 	res.status(200).json({ success: true, data: activities });
 });
