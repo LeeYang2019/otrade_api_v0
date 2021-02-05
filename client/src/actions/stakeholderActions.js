@@ -21,7 +21,7 @@ import {
 	STAKEHOLDER_SAVE_RESET,
 } from '../constants/stakeholderConstants';
 
-//add stakeholder
+// add stakeholder
 export const addStakeholder = (stakeholder, projectId) => async (
 	dispatch,
 	getState
@@ -61,7 +61,7 @@ export const addStakeholder = (stakeholder, projectId) => async (
 	}
 };
 
-//get stakeholder details
+// get stakeholder details
 export const getStakeholderDetails = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: STAKEHOLDER_DETAILS_REQUEST });
@@ -94,7 +94,7 @@ export const getStakeholderDetails = (id) => async (dispatch, getState) => {
 	}
 };
 
-//update stakeholder
+// update stakeholder
 export const updateStakeholder = (stakeholder, id) => async (
 	dispatch,
 	getState
@@ -131,7 +131,7 @@ export const updateStakeholder = (stakeholder, id) => async (
 	}
 };
 
-//delete stakeholder
+// delete stakeholder
 export const deleteStakeholder = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: STAKEHOLDER_DELETE_REQUEST });
@@ -160,7 +160,7 @@ export const deleteStakeholder = (id) => async (dispatch, getState) => {
 	}
 };
 
-//list all stakeholders
+// list all stakeholders
 export const listStakeholders = (projectId, keyword = '') => async (
 	dispatch,
 	getState
@@ -199,7 +199,7 @@ export const listStakeholders = (projectId, keyword = '') => async (
 	}
 };
 
-//save stakeholder info to localstorage
+// save stakeholder info to localstorage
 export const saveStakeholderInfo = (data) => (dispatch) => {
 	dispatch({
 		type: STAKEHOLDER_SAVE_REQUEST,
@@ -208,18 +208,18 @@ export const saveStakeholderInfo = (data) => (dispatch) => {
 	localStorage.setItem('stakeholdersInfo', JSON.stringify(data));
 };
 
-//remove stakeholder info from localstorage
+// remove stakeholder info from localstorage
 export const removeStakeholderInfo = () => (dispatch) => {
 	dispatch({ type: STAKEHOLDER_SAVE_RESET });
 	localStorage.removeItem('stakeholdersInfo');
 };
 
-//filter user projects
+// filter user projects
 export const filterProjectStakeholders = (text) => (dispatch) => {
 	dispatch({ type: STAKEHOLDER_PROJECT_FILTER, payload: text });
 };
 
-//clear user projects filter
+// clear user projects filter
 export const clearProjectStakeholdersFilter = () => (dispatch) => {
 	dispatch({ type: STAKEHOLDER_PROJECT_FILTER_CLEAR });
 };

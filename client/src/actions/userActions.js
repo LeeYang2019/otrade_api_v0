@@ -66,6 +66,7 @@ export const login = (email, password) => async (dispatch) => {
 	}
 };
 
+// register a user
 export const registerUser = (user) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: USER_REGISTER_REQUEST });
@@ -97,7 +98,7 @@ export const registerUser = (user) => async (dispatch, getState) => {
 	}
 };
 
-//logs out the user
+// logs out the user
 export const logout = () => (dispatch) => {
 	localStorage.removeItem('userInfo');
 	dispatch({ type: USER_LOGOUT });
@@ -108,7 +109,7 @@ export const logout = () => (dispatch) => {
 	dispatch({ type: ACTIVITY_LIST_RESET });
 };
 
-//gets the user details
+// gets the user details
 export const getUserDetails = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -149,7 +150,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 	}
 };
 
-//update a user
+// update a user
 export const updateUserProfile = (user) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -195,7 +196,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 	}
 };
 
-//list all users
+// list all users
 export const listUsers = (keyword = '', pageNumber = '') => async (
 	dispatch,
 	getState
@@ -230,7 +231,7 @@ export const listUsers = (keyword = '', pageNumber = '') => async (
 	}
 };
 
-//delete a user
+// delete a user
 export const deleteUser = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -267,7 +268,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 	}
 };
 
-//update user
+// update user
 export const updateUser = (user) => async (dispatch, getState) => {
 	try {
 		dispatch({

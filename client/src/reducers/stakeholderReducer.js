@@ -22,7 +22,7 @@ import {
 	STAKEHOLDER_PROJECT_FILTER_CLEAR,
 } from '../constants/stakeholderConstants';
 
-//add stakeholder
+// add stakeholder
 export const stakeholderAddReducer = (state = {}, action) => {
 	switch (action.type) {
 		case STAKEHOLDER_ADD_REQUEST:
@@ -38,7 +38,7 @@ export const stakeholderAddReducer = (state = {}, action) => {
 	}
 };
 
-//get stakeholder details
+// get stakeholder details
 export const stakeholderDetailsReducer = (
 	state = { stakeholder: {} },
 	action
@@ -55,7 +55,7 @@ export const stakeholderDetailsReducer = (
 	}
 };
 
-//update stakeholder details
+// update stakeholder details
 export const stakeholderUpdateReducer = (
 	state = { stakeholder: {} },
 	action
@@ -74,7 +74,7 @@ export const stakeholderUpdateReducer = (
 	}
 };
 
-//delete stakeholder
+// delete stakeholder
 export const stakeholderDeleteReducer = (state = {}, action) => {
 	switch (action.type) {
 		case STAKEHOLDER_DELETE_REQUEST:
@@ -88,7 +88,7 @@ export const stakeholderDeleteReducer = (state = {}, action) => {
 	}
 };
 
-//stakeholder list
+// stakeholder list
 export const stakeholderListReducer = (
 	state = { stakeholders: [], filtered: [] },
 	action
@@ -120,6 +120,7 @@ export const stakeholderListReducer = (
 	}
 };
 
+// save stakeholder to localStorage
 export const stakeholderSaveReducer = (
 	state = { stakeholderInfo: {} },
 	action

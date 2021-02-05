@@ -26,7 +26,7 @@ import {
 	PROJECT_USER_FILTER_CLEAR,
 } from '../constants/projectConstants';
 
-//add project
+// add project
 export const projectAddReducer = (state = {}, action) => {
 	switch (action.type) {
 		case PROJECT_ADD_REQUEST:
@@ -40,7 +40,7 @@ export const projectAddReducer = (state = {}, action) => {
 	}
 };
 
-//project list
+// project list
 export const projectDetailsReducer = (state = { project: {} }, action) => {
 	switch (action.type) {
 		case PROJECT_DETAILS_REQUEST:
@@ -58,7 +58,7 @@ export const projectDetailsReducer = (state = { project: {} }, action) => {
 	}
 };
 
-//projectUpdate
+// projectUpdate
 export const projectUpdateReducer = (state = { project: {} }, action) => {
 	switch (action.type) {
 		case PROJECT_UPDATE_REQUEST:
@@ -74,7 +74,7 @@ export const projectUpdateReducer = (state = { project: {} }, action) => {
 	}
 };
 
-//user projects
+// user projects
 export const projectUserReducer = (
 	state = { projects: [], filtered: [] },
 	action
@@ -104,7 +104,7 @@ export const projectUserReducer = (
 	}
 };
 
-//project assignments
+// project assignments
 export const projectUserAssignmentReducer = (
 	state = { project: {} },
 	action
@@ -127,7 +127,7 @@ export const projectUserAssignmentReducer = (
 	}
 };
 
-//project list
+// project list
 export const projectListReducer = (state = { projects: [] }, action) => {
 	switch (action.type) {
 		case PROJECT_LIST_REQUEST:

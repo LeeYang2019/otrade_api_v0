@@ -24,7 +24,7 @@ import {
 	ACTIVITY_STAKEHOLDER_FILTER_CLEAR,
 } from '../constants/activityConstants';
 
-//add activity reducer
+// add activity reducer
 export const activityAddReducer = (state = {}, action) => {
 	switch (action.type) {
 		case ACTIVITY_ADD_REQUEST:
@@ -40,7 +40,7 @@ export const activityAddReducer = (state = {}, action) => {
 	}
 };
 
-//get activity details reducer
+// get activity details reducer
 export const activityDetailsReducer = (state = { activity: {} }, action) => {
 	switch (action.type) {
 		case ACTIVITY_DETAILS_REQUEST:
@@ -54,7 +54,7 @@ export const activityDetailsReducer = (state = { activity: {} }, action) => {
 	}
 };
 
-//update activity reducer
+// update activity reducer
 export const activityUpdateReducer = (state = { activity: {} }, action) => {
 	switch (action.type) {
 		case ACTIVITY_UPDATE_REQUEST:
@@ -68,7 +68,7 @@ export const activityUpdateReducer = (state = { activity: {} }, action) => {
 	}
 };
 
-//delete activity reducer
+// delete activity reducer
 export const activityDeleteReducer = (state = {}, action) => {
 	switch (action.type) {
 		case ACTIVITY_DELETE_REQUEST:
@@ -82,7 +82,7 @@ export const activityDeleteReducer = (state = {}, action) => {
 	}
 };
 
-//get activity list reducer
+// get activity list reducer
 export const activityListReducer = (state = { activities: [] }, action) => {
 	switch (action.type) {
 		case ACTIVITY_LIST_REQUEST:
@@ -96,7 +96,7 @@ export const activityListReducer = (state = { activities: [] }, action) => {
 	}
 };
 
-//get organization list reducer
+// get organization list reducer
 export const activityStakeholderListReducer = (
 	state = { stakeholderactivities: [], filtered: [] },
 	action
@@ -129,6 +129,7 @@ export const activityStakeholderListReducer = (
 	}
 };
 
+// save activity to localstorage
 export const activitySaveReducer = (state = { activityInfo: {} }, action) => {
 	switch (action.type) {
 		case ACTIVITY_SAVE_REQUEST:

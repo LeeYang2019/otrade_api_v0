@@ -10,6 +10,7 @@ import {
 	PROJECT_UPDATE_SUCCESS,
 	PROJECT_UPDATE_FAIL,
 	PROJECT_DELETE_REQUEST,
+	PROJECT_DELETE_SUCCESS,
 	PROJECT_DELETE_FAIL,
 	PROJECT_LIST_REQUEST,
 	PROJECT_LIST_SUCCESS,
@@ -139,10 +140,10 @@ export const deleteProject = (id) => async (dispatch, getState) => {
 				Authorization: `Bearer ${userInfo.token}`,
 			},
 		};
-
+		//pass id, project, and config file to api
 		await axios.delete(`/api/v1/projects/${id}`, config);
 
-		dispatch({ type: PROJECT_DELETE_REQUEST });
+		dispatch({ type: PROJECT_DELETE_SUCCESS });
 	} catch (error) {
 		dispatch({
 			type: PROJECT_DELETE_FAIL,
@@ -172,6 +173,7 @@ export const listProjects = (keyword = '', pageNumber = '') => async (
 			},
 		};
 
+		//pass keyword and pageNumber, along with config to api
 		const { data } = await axios.get(
 			`/api/v1/projects?keyword=${keyword}&pageNumber=${pageNumber}`,
 			config
@@ -260,6 +262,7 @@ export const assignProjectUser = (projectId, assignments) => async (
 	}
 };
 
+// save projectInfo
 export const saveProjectInfo = (data) => (dispatch) => {
 	dispatch({
 		type: PROJECT_SAVE_REQUEST,

@@ -25,7 +25,7 @@ import {
 	ORGANIZATION_STAKEHOLDER_FILTER_CLEAR,
 } from '../constants/organizationConstants';
 
-//add organization reducer
+// add organization reducer
 export const organizationAddReducer = (state = {}, action) => {
 	switch (action.type) {
 		case ORGANIZATION_ADD_REQUEST:
@@ -41,7 +41,7 @@ export const organizationAddReducer = (state = {}, action) => {
 	}
 };
 
-//get organization details reducer
+// get organization details reducer
 export const organizationDetailsReducer = (
 	state = { organization: {} },
 	action
@@ -58,7 +58,7 @@ export const organizationDetailsReducer = (
 	}
 };
 
-//update organization reducer
+// update organization reducer
 export const organizationUpdateReducer = (
 	state = { organization: {} },
 	action
@@ -77,7 +77,7 @@ export const organizationUpdateReducer = (
 	}
 };
 
-//delete organization reducer
+// delete organization reducer
 export const organizationDeleteReducer = (state = {}, action) => {
 	switch (action.type) {
 		case ORGANIZATION_DELETE_REQUEST:
@@ -91,7 +91,7 @@ export const organizationDeleteReducer = (state = {}, action) => {
 	}
 };
 
-//get organization list reducer
+// get organization list reducer
 export const organizationListReducer = (
 	state = { organizations: [], filtered: [] },
 	action
@@ -124,7 +124,7 @@ export const organizationListReducer = (
 	}
 };
 
-//get organization list reducer
+// get organization list reducer
 export const organizationStakeholderListReducer = (
 	state = { organizations: [], filtered: [] },
 	action

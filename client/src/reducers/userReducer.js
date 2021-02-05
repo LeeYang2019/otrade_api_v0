@@ -28,7 +28,7 @@ import {
 	USER_DETAILS_RESET,
 } from '../constants/userConstants';
 
-//logs in a user
+// logs in a user
 export const userLoginReducer = (state = {}, action) => {
 	switch (action.type) {
 		case USER_LOGIN_REQUEST:
@@ -44,7 +44,7 @@ export const userLoginReducer = (state = {}, action) => {
 	}
 };
 
-//registers a user
+// registers a user
 export const userRegisterReducer = (state = {}, action) => {
 	switch (action.type) {
 		case USER_REGISTER_REQUEST:
@@ -58,7 +58,7 @@ export const userRegisterReducer = (state = {}, action) => {
 	}
 };
 
-//update my profile
+// update my profile
 export const userUpdateProfileReducer = (state = { user: {} }, action) => {
 	switch (action.type) {
 		case USER_PROFILE_UPDATE_REQUEST:
@@ -74,7 +74,7 @@ export const userUpdateProfileReducer = (state = { user: {} }, action) => {
 	}
 };
 
-//return a list of users
+// return a list of users
 export const userListReducer = (state = { users: [] }, action) => {
 	switch (action.type) {
 		case USER_LIST_REQUEST:
@@ -95,7 +95,7 @@ export const userListReducer = (state = { users: [] }, action) => {
 	}
 };
 
-//return a users profile information
+// return a users profile information
 export const userDetailsReducer = (state = { user: {} }, action) => {
 	switch (action.type) {
 		case USER_DETAILS_REQUEST:
@@ -111,7 +111,7 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
 	}
 };
 
-//update a user profile
+// update a user profile
 export const userUpdateReducer = (state = { user: {} }, action) => {
 	switch (action.type) {
 		case USER_UPDATE_REQUEST:
@@ -127,7 +127,7 @@ export const userUpdateReducer = (state = { user: {} }, action) => {
 	}
 };
 
-//delete a user
+// delete a user
 export const userDeleteReducer = (state = {}, action) => {
 	switch (action.type) {
 		case USER_DELETE_REQUEST:
