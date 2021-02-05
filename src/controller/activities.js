@@ -1,5 +1,6 @@
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
+const mongoose = require('mongoose');
 
 //import activity model
 const model = require('../model/Activity');
@@ -73,9 +74,9 @@ exports.getStakeholderActivities = asyncHandler(async (req, res, next) => {
 	console.log('getStakeholderActivities');
 
 	const activities = await Activity.find({
-		stakeholders: mongoose.Types.ObjectId(req.params.id),
+		stakeholders: mongoose.Types.ObjectId(req.params.stakeholderId),
 		...keyword,
-	}).sort({ name: 1 });
+	});
 
 	if (!activities) {
 		res.status(401);

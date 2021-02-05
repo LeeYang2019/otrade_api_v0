@@ -24,7 +24,7 @@ import {
 	ORGANIZATION_STAKEHOLDER_FILTER_CLEAR,
 } from '../constants/organizationConstants';
 
-//add organization
+// add an organization to a project
 export const addOrganization = (organization, projectId) => async (
 	dispatch,
 	getState
@@ -65,7 +65,7 @@ export const addOrganization = (organization, projectId) => async (
 	}
 };
 
-//get organization details
+// get organization details
 export const getOrganizationDetails = (orgId) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ORGANIZATION_DETAILS_REQUEST });
@@ -98,7 +98,7 @@ export const getOrganizationDetails = (orgId) => async (dispatch, getState) => {
 	}
 };
 
-//update organization
+// update organization
 export const updateOrganization = (org, orgId) => async (
 	dispatch,
 	getState
@@ -133,7 +133,7 @@ export const updateOrganization = (org, orgId) => async (
 	}
 };
 
-//delete organization
+// delete organization
 export const deleteOrganization = (orgId) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ORGANIZATION_DELETE_REQUEST });
@@ -162,7 +162,7 @@ export const deleteOrganization = (orgId) => async (dispatch, getState) => {
 	}
 };
 
-//list all organizations for a project
+// list all organizations for a project
 export const listOrganizations = (projectId, keyword = '') => async (
 	dispatch,
 	getState
@@ -199,7 +199,7 @@ export const listOrganizations = (projectId, keyword = '') => async (
 	}
 };
 
-//list all organizations for a stakeholder
+// list all organizations for a stakeholder
 export const listStakeholderOrganizations = (
 	stakeholderId,
 	keyword = ''
@@ -238,24 +238,24 @@ export const listStakeholderOrganizations = (
 	}
 };
 
-//filter project Organizations
+// filter project Organizations
 export const filterProjectOrganizations = (text) => (dispatch) => {
 	console.log(text);
 	dispatch({ type: ORGANIZATION_PROJECT_FILTER, payload: text });
 };
 
-//clear project Organizations
+// clear project Organizations
 export const clearProjectOrganizationsFilter = () => (dispatch) => {
 	dispatch({ type: ORGANIZATION_PROJECT_FILTER_CLEAR });
 };
 
-//filter stakeholder Organizations
+// filter stakeholder Organizations
 export const filterStakeholderOrganizations = (text) => (dispatch) => {
 	console.log(text);
 	dispatch({ type: ORGANIZATION_STAKEHOLDER_FILTER, payload: text });
 };
 
-//clear stakeholder Organizations filter
+// clear stakeholder Organizations filter
 export const clearStakeholderOrganizationsFilter = () => (dispatch) => {
 	dispatch({ type: ORGANIZATION_STAKEHOLDER_FILTER_CLEAR });
 };

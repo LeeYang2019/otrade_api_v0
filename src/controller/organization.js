@@ -35,7 +35,7 @@ exports.getStakeholderOrganizations = asyncHandler(async (req, res, next) => {
 		: {};
 
 	const organizations = await Organization.find({
-		stakeholders: mongoose.Types.ObjectId(req.params.id),
+		stakeholders: mongoose.Types.ObjectId(req.params.stakeholderId),
 		...keyword,
 	});
 

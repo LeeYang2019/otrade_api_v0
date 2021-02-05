@@ -97,24 +97,24 @@ export const activityListReducer = (state = { activities: [] }, action) => {
 };
 
 //get organization list reducer
-export const organizationStakeholderListReducer = (
-	state = { activities: [], filtered: [] },
+export const activityStakeholderListReducer = (
+	state = { stakeholderactivities: [], filtered: [] },
 	action
 ) => {
 	switch (action.type) {
 		case ACTIVITY_STAKEHOLDER_LIST_REQUEST:
-			return { loading: true, activities: [] };
+			return { loading: true, stakeholderactivities: [] };
 		case ACTIVITY_STAKEHOLDER_LIST_SUCCESS:
 			return {
 				loading: false,
-				activities: action.payload,
+				stakeholderactivities: action.payload,
 			};
 		case ACTIVITY_STAKEHOLDER_LIST_FAIL:
 			return { loading: false, error: action.payload };
 		case ACTIVITY_STAKEHOLDER_FILTER:
 			return {
 				...state,
-				filtered: state.activities.filter((contact) => {
+				filtered: state.stakeholderactivities.filter((contact) => {
 					const regex = new RegExp(`${action.payload}`, 'gi');
 					return contact.activity.match(regex);
 				}),

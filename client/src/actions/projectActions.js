@@ -25,7 +25,7 @@ import {
 	PROJECT_USER_FILTER_CLEAR,
 } from '../constants/projectConstants';
 
-//add project
+// add project
 export const addProject = (project) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: PROJECT_ADD_REQUEST });
@@ -59,7 +59,7 @@ export const addProject = (project) => async (dispatch, getState) => {
 	}
 };
 
-//get the details of a project
+// get the details of a project
 export const listProjectDetails = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: PROJECT_DETAILS_REQUEST });
@@ -89,7 +89,7 @@ export const listProjectDetails = (id) => async (dispatch, getState) => {
 	}
 };
 
-//update project
+// update project
 export const updateProject = (project) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: PROJECT_UPDATE_REQUEST });
@@ -124,7 +124,7 @@ export const updateProject = (project) => async (dispatch, getState) => {
 	}
 };
 
-//delete a project
+// delete a project
 export const deleteProject = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: PROJECT_DELETE_REQUEST });
@@ -154,7 +154,7 @@ export const deleteProject = (id) => async (dispatch, getState) => {
 	}
 };
 
-//get all projects
+// get all projects
 export const listProjects = (keyword = '', pageNumber = '') => async (
 	dispatch,
 	getState
@@ -189,7 +189,7 @@ export const listProjects = (keyword = '', pageNumber = '') => async (
 	}
 };
 
-//list all projects for a user
+// list all projects for a user
 export const listUserProjects = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: PROJECT_USER_REQUEST });
@@ -268,12 +268,12 @@ export const saveProjectInfo = (data) => (dispatch) => {
 	localStorage.setItem('projectInfo', JSON.stringify(data));
 };
 
-//filter user projects
+// filter user projects
 export const filterProjects = (text) => (dispatch) => {
 	dispatch({ type: PROJECT_USER_FILTER, payload: text });
 };
 
-//clear user projects filter
+// clear user projects filter
 export const clearProjectsFilter = () => (dispatch) => {
 	dispatch({ type: PROJECT_USER_FILTER_CLEAR });
 };

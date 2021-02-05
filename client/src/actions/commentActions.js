@@ -17,7 +17,7 @@ import {
 	COMMENT_LIST_FAIL,
 } from '../constants/commentConstants';
 
-//add comment
+// add comment
 export const addComment = (comment, stakeholderId) => async (
 	dispatch,
 	getState
@@ -58,7 +58,7 @@ export const addComment = (comment, stakeholderId) => async (
 	}
 };
 
-//get a comment
+// get a comment
 export const getComment = (commentId) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: COMMENT_DETAILS_REQUEST });
@@ -91,7 +91,7 @@ export const getComment = (commentId) => async (dispatch, getState) => {
 	}
 };
 
-//update a comment
+// update a comment
 export const updateComment = (comment, commentId) => async (
 	dispatch,
 	getState
@@ -128,7 +128,7 @@ export const updateComment = (comment, commentId) => async (
 	}
 };
 
-//delete a comment
+// delete a comment
 export const deleteComment = (commentId) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: COMMENT_DELETE_REQUEST });
@@ -161,7 +161,7 @@ export const deleteComment = (commentId) => async (dispatch, getState) => {
 	}
 };
 
-//get a list of comments
+// get a list of comments
 export const listComments = (stakeholderId) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: COMMENT_LIST_REQUEST });

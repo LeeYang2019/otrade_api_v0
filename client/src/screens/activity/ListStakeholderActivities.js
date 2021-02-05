@@ -13,16 +13,17 @@ import TableHelper from '../../components/TableHelper';
 const ListStakeholderActivities = ({ match }) => {
 	const stakeholderId = match.params.id;
 
-	console.log(match);
-
 	const { url } = useRouteMatch();
-	const dispatch = useDispatch();
 
 	//get activities
-	const activityList = useSelector((state) => state.activityList);
-	const { loading, error, activities } = activityList;
+	const dispatch = useDispatch();
+	const activityStakeholderList = useSelector(
+		(state) => state.activityStakeholderList
+	);
+	const { loading, error, stakeholderactivities } = activityStakeholderList;
 
-	console.log(activities);
+	console.log(stakeholderactivities);
+	console.log(error);
 
 	useEffect(() => {
 		dispatch(listStakeholderActivities(stakeholderId));
@@ -36,7 +37,7 @@ const ListStakeholderActivities = ({ match }) => {
 				<Message>{error}</Message>
 			) : (
 				<>
-					{activities && activities.length === 0 ? (
+					{stakeholderactivities && stakeholderactivities.length === 0 ? (
 						<Empty
 							itemLink={'/addActivity'}
 							url={url}
@@ -59,8 +60,8 @@ const ListStakeholderActivities = ({ match }) => {
 						</Row>
 					)}
 					<TableHelper>
-						{activities &&
-							activities.map((activity) => (
+						{stakeholderactivities &&
+							stakeholderactivities.map((activity) => (
 								<tr key={activity._id}>
 									<td>
 										<p className="mr-3">

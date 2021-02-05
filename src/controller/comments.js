@@ -8,7 +8,6 @@ const Comment = require('../model/Comment');
 // @route   GET /api/v1/stakeholders/:stakeholderId/comments
 // @access  Private
 exports.getComments = asyncHandler(async (req, res, next) => {
-	console.log(req.params.stakeholderId);
 	// if stakeholder is provided
 	if (req.params.stakeholderId) {
 		const comments = await Comment.find({
@@ -40,8 +39,6 @@ exports.addComment = asyncHandler(async (req, res, next) => {
 	//get stakeholder and user
 	req.body.stakeholder = req.params.stakeholderId;
 	req.body.user = req.user.id;
-
-	console.log(req.body);
 
 	const comment = await Comment.create(req.body);
 	res.status(200).json({ success: true, data: comment });

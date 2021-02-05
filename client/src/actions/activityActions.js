@@ -26,13 +26,11 @@ import {
 	ACTIVITY_SAVE_RESET,
 } from '../constants/activityConstants';
 
-//add activity
+// add activity to a project
 export const addActivity = (activity, projectId) => async (
 	dispatch,
 	getState
 ) => {
-	console.log('activityAction activity: ', activity);
-
 	try {
 		dispatch({ type: ACTIVITY_ADD_REQUEST });
 
@@ -67,7 +65,7 @@ export const addActivity = (activity, projectId) => async (
 	}
 };
 
-//get activity details
+// get activity details
 export const getActivityDetails = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ACTIVITY_DETAILS_REQUEST });
@@ -100,7 +98,7 @@ export const getActivityDetails = (id) => async (dispatch, getState) => {
 	}
 };
 
-//update activity
+// update activity
 export const updateActivity = (id, activity) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ACTIVITY_UPDATE_REQUEST });
@@ -134,7 +132,7 @@ export const updateActivity = (id, activity) => async (dispatch, getState) => {
 	}
 };
 
-//delete activity
+// delete activity
 export const deleteActivity = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ACTIVITY_DELETE_REQUEST });
@@ -165,7 +163,7 @@ export const deleteActivity = (id) => async (dispatch, getState) => {
 	}
 };
 
-//get all activities
+// get all activities belonging to a project
 export const listActivities = (projectId) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ACTIVITY_LIST_REQUEST });
@@ -196,18 +194,20 @@ export const listActivities = (projectId) => async (dispatch, getState) => {
 	}
 };
 
-export const listStakeholderActivities = (stakeholderId) => async (
-	dispatch,
-	getState
-) => {
-	console.log(stakeholderId);
+// get all activities belonging to a stakeholder
+export const listStakeholderActivities = (
+	stakeholderId,
+	keyword = ''
+) => async (dispatch, getState) => {
 	try {
-		dispatch({ ACTIVITY_STAKEHOLDER_LIST_REQUEST });
+		dispatch({ type: ACTIVITY_STAKEHOLDER_LIST_REQUEST });
 
+		//get logged in user
 		const {
 			userLogin: { userInfo },
 		} = getState();
 
+		//create config object
 		const config = {
 			headers: {
 				Authorization: `Bearer ${userInfo.token}`,
@@ -217,13 +217,11 @@ export const listStakeholderActivities = (stakeholderId) => async (
 		const {
 			data: { data },
 		} = await axios.get(
-			`/api/v1/stakeholders/${stakeholderId}/activities`,
+			`/api/v1/stakeholders/${stakeholderId}/activities?keywords=${keyword}`,
 			config
 		);
 
-		console.log('data: ', data);
-
-		dispatch({ ACTIVITY_STAKEHOLDER_LIST_SUCCESS, payload: data });
+		dispatch({ type: ACTIVITY_STAKEHOLDER_LIST_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
 			type: ACTIVITY_STAKEHOLDER_LIST_FAIL,
@@ -235,7 +233,7 @@ export const listStakeholderActivities = (stakeholderId) => async (
 	}
 };
 
-//save stakeholder info to localstorage
+// save stakeholder info to localstorage
 export const saveActivityInfo = (data) => (dispatch) => {
 	dispatch({
 		type: ACTIVITY_SAVE_REQUEST,
@@ -244,28 +242,28 @@ export const saveActivityInfo = (data) => (dispatch) => {
 	localStorage.setItem('activityInfo', JSON.stringify(data));
 };
 
-//remove stakeholder info from localstorage
+// remove stakeholder info from localstorage
 export const removeActivityInfo = () => (dispatch) => {
 	dispatch({ type: ACTIVITY_SAVE_RESET });
 	localStorage.removeItem('activityInfo');
 };
 
-//filter project activities
+// filter project activities
 export const filterProjectActivities = (text) => (dispatch) => {
 	dispatch({ type: ACTIVITY_PROJECT_FILTER, payload: text });
 };
 
-//clear project activities
+// clear project activities
 export const clearProjectActivitiesFilter = () => (dispatch) => {
 	dispatch({ type: ACTIVITY_PROJECT_FILTER_CLEAR });
 };
 
-//filter stakeholder activities
+// filter stakeholder activities
 export const filterStakeholderActivities = (text) => (dispatch) => {
 	dispatch({ type: ACTIVITY_STAKEHOLDER_FILTER, payload: text });
 };
 
-//clear stakeholder activities filter
+// clear stakeholder activities filter
 export const clearStakeholderActivitiesFilter = () => (dispatch) => {
 	dispatch({ type: ACTIVITY_STAKEHOLDER_FILTER_CLEAR });
 };

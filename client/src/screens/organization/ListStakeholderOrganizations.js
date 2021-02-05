@@ -14,9 +14,8 @@ const ListStakeholderOrganizations = ({ match }) => {
 	const stakeholderId = match.params.id;
 	const { url } = useRouteMatch();
 
-	const dispatch = useDispatch();
-
 	//get organizations for stakeholder
+	const dispatch = useDispatch();
 	const organizationStakeholderList = useSelector(
 		(state) => state.organizationStakeholderList
 	);

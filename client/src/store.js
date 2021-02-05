@@ -44,6 +44,7 @@ import {
 	activityDeleteReducer,
 	activityListReducer,
 	activitySaveReducer,
+	activityStakeholderListReducer,
 } from './reducers/activityReducer';
 import {
 	commentAddReducer,
@@ -96,6 +97,7 @@ const reducer = combineReducers({
 	activityDelete: activityDeleteReducer,
 	activityList: activityListReducer,
 	activitySave: activitySaveReducer,
+	activityStakeholderList: activityStakeholderListReducer,
 
 	//comment reducers
 	commentAdd: commentAddReducer,

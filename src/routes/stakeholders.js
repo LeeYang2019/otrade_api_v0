@@ -30,10 +30,14 @@ router
 	.delete(protect, isAdmin, deleteStakeholder);
 
 // get stakeholder organizations
-router.route('/:id/organizations').get(protect, getStakeholderOrganizations);
+router
+	.route('/:stakeholderId/organizations')
+	.get(protect, getStakeholderOrganizations);
 
 // get stakeholder activities
-router.route('/:id/activities').get(protect, getStakeholderActivities);
+router
+	.route('/:stakeholderId/activities')
+	.get(protect, getStakeholderActivities);
 
 // get stakeholder comments
 router
