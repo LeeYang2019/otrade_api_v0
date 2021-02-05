@@ -90,12 +90,19 @@ exports.addProject = asyncHandler(async (req, res) => {
 // @access  Private
 exports.updateProject = asyncHandler(async (req, res) => {
 	req.body.user = req.user.id;
-	console.log('user', req.user.id);
+
 	let project = await Project.findById(req.params.id);
+
+	if (!project) {
+		res.status(400);
+		throw new Error('No project found');
+	}
+
 	project = await Project.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,
 		runValidators: true,
 	});
+
 	res.status(200).json({ success: true, data: project });
 });
 

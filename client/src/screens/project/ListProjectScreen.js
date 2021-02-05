@@ -34,7 +34,6 @@ const ListProjectScreen = ({ history, match }) => {
 
 	const deleteHandler = (id) => {
 		if (window.confirm('Are you sure?')) {
-			console.log('project delete');
 			//dispatch(deleteProject(id))
 			//setMessage(null)
 		}

@@ -15,6 +15,8 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();
 
+	console.log(url);
+
 	//get stakeholders
 	const dispatch = useDispatch();
 	const stakeholderList = useSelector((state) => state.stakeholderList);
@@ -72,24 +74,24 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 									<tr key={person._id}>
 										<td>
 											<Row>
-												<Col md={8}>
+												<Col md={4}>
 													<p>
-														<strong>Name: </strong>
 														<Link to={`/stakeholder/${person._id}`}>
 															{person.firstName} {person.lastName}
 														</Link>
+														<br />
+														{person.email}
+														<br />
+														{person.telephone}
 													</p>
 												</Col>
-
+												<Col md={4}>
+													<p>{person.createdAt.substring(0, 10)}</p>
+												</Col>
 												<Col
 													md={4}
-													className="d-flex align-items-center justify-content-around"
+													className="d-flex align-items-center justify-content-end"
 												>
-													<LinkContainer to={``}>
-														<Button variant="light" className="btn-md mr-5">
-															<i className="fas fa-edit"></i> Profile
-														</Button>
-													</LinkContainer>
 													<Button
 														variant="danger"
 														className="btn-md ml-3"
@@ -119,23 +121,18 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 													</p>
 												</Col>
 												<Col md={4}>
-													<p>{person.createdAt}</p>
+													<p>Created: {person.createdAt.substring(0, 10)}</p>
 												</Col>
 												<Col
 													md={4}
-													className="d-flex align-items-center justify-content-around"
+													className="d-flex align-items-center justify-content-end"
 												>
-													<LinkContainer to={``}>
-														<Button variant="light" className="btn-md mr-5">
-															<i className="fas fa-edit"></i> Profile
-														</Button>
-													</LinkContainer>
 													<Button
 														variant="danger"
 														className="btn-md ml-3"
 														onClick={() => deleteHandler(person._id)}
 													>
-														<i className="fas fa-trash"></i> Profile
+														<i className="fas fa-trash"></i> Delete
 													</Button>
 												</Col>
 											</Row>

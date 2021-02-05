@@ -38,7 +38,17 @@ exports.updateActivity = asyncHandler(async (req, res, next) => {});
 // @desc    DELETE an activity
 // @route   DELETE /api/v1/activities/:id
 // @access  Private
-exports.deleteActivity = asyncHandler(async (req, res, next) => {});
+exports.deleteActivity = asyncHandler(async (req, res, next) => {
+	const deletedActivity = await Activity.findById(req.params.id);
+
+	if (!deletedActivity) {
+		res.status(400);
+		throw new Error('Activity does not exist');
+	}
+
+	deletedActivity.deleteOne();
+	res.status(200).json({ success: true });
+});
 
 // @desc    GET all activities
 // @route   GET /api/v1/project/:projectId/activities
@@ -58,8 +68,6 @@ exports.getActivities = asyncHandler(async (req, res, next) => {
 		throw new Error('No resources found');
 	}
 
-	console.log('getActivities');
-
 	res.status(200).json({ success: true, data: activities });
 });
 
@@ -71,8 +79,6 @@ exports.getStakeholderActivities = asyncHandler(async (req, res, next) => {
 		? { name: { $regex: req.query.keyword, $options: 'i' } }
 		: {};
 
-	console.log('getStakeholderActivities');
-
 	const activities = await Activity.find({
 		stakeholders: mongoose.Types.ObjectId(req.params.stakeholderId),
 		...keyword,
@@ -82,8 +88,6 @@ exports.getStakeholderActivities = asyncHandler(async (req, res, next) => {
 		res.status(401);
 		throw new Error('No resources found');
 	}
-
-	console.log('getStakeholderActivities');
 
 	res.status(200).json({ success: true, data: activities });
 });

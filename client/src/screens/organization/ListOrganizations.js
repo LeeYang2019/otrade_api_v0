@@ -1,9 +1,11 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Row, Col, Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { listOrganizations } from '../../actions/organizationAction';
+import {
+	listOrganizations,
+	deleteOrganization,
+} from '../../actions/organizationAction';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import BorderContainer from '../../components/BorderContainer';
@@ -20,23 +22,31 @@ const ListOrganizations = memo(({ match }) => {
 	const organizationList = useSelector((state) => state.organizationList);
 	const { loading, error, organizations, filtered } = organizationList;
 
+	const organizationDelete = useSelector((state) => state.organizationDelete);
+	const { success } = organizationDelete;
+
 	//use state
 	const [message, setMessage] = useState(null);
 
 	useEffect(() => {
-		dispatch(listOrganizations(projectId));
-	}, [dispatch, projectId]);
+		if (success) {
+			dispatch(listOrganizations(projectId));
+		} else {
+			dispatch(listOrganizations(projectId));
+		}
+	}, [dispatch, projectId, success]);
 
 	//delete user
 	const deleteHandler = (id) => {
 		if (window.confirm('Are you sure?')) {
-			//dispatch(deleteUser(id));
-			setMessage(null);
+			dispatch(deleteOrganization(id));
+			setMessage('Organization has been successfully deleted.');
 		}
 	};
 
 	return (
 		<BorderContainer>
+			{message && <Message>{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
@@ -73,12 +83,11 @@ const ListOrganizations = memo(({ match }) => {
 											<Row>
 												<Col md={8}>
 													<p className="mr-3">
-														<strong>Organization: </strong>
 														<Link to={`${url}/${organization._id}/profile`}>
 															{organization.name}
 														</Link>
 														<br />
-														Registered Date:{' '}
+														Created:
 														<strong>
 															{' '}
 															{organization.createdAt &&
@@ -88,13 +97,8 @@ const ListOrganizations = memo(({ match }) => {
 												</Col>
 												<Col
 													md={4}
-													className="d-flex align-items-center justify-content-around"
+													className="d-flex align-items-center justify-content-end"
 												>
-													<LinkContainer to={``}>
-														<Button variant="light" className="btn-md mr-5">
-															<i className="fas fa-edit"></i> Profile
-														</Button>
-													</LinkContainer>
 													<Button
 														variant="danger"
 														className="btn-md ml-3"
@@ -114,12 +118,11 @@ const ListOrganizations = memo(({ match }) => {
 											<Row>
 												<Col md={8}>
 													<p className="mr-3">
-														<strong>Organization: </strong>
 														<Link to={`${url}/${organization._id}/profile`}>
 															{organization.name}
 														</Link>
 														<br />
-														Registered Date:{' '}
+														Created:{' '}
 														<strong>
 															{' '}
 															{organization.createdAt &&
@@ -129,13 +132,8 @@ const ListOrganizations = memo(({ match }) => {
 												</Col>
 												<Col
 													md={4}
-													className="d-flex align-items-center justify-content-around"
+													className="d-flex align-items-center justify-content-end"
 												>
-													<LinkContainer to={``}>
-														<Button variant="light" className="btn-md mr-5">
-															<i className="fas fa-edit"></i> Profile
-														</Button>
-													</LinkContainer>
 													<Button
 														variant="danger"
 														className="btn-md ml-3"

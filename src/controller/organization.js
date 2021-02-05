@@ -86,6 +86,13 @@ exports.updateOrganization = asyncHandler(async (req, res, next) => {
 // @route   DELETE /api/v1/organizations/:id
 // @access  Private
 exports.deleteOrganization = asyncHandler(async (req, res, next) => {
-	await Organization.findByIdAndDelete(req.params.id);
+	const deletedOrganization = await Organization.findById(req.params.id);
+
+	if (!deletedOrganization) {
+		res.status(400);
+		throw new Error('Organization does not exist');
+	}
+
+	deletedOrganization.deleteOne();
 	res.status(200).json({ success: true });
 });

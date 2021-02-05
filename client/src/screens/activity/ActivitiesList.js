@@ -1,9 +1,8 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Row, Col, Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { listActivities } from '../../actions/activityActions';
+import { listActivities, deleteActivity } from '../../actions/activityActions';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import BorderContainer from '../../components/BorderContainer';
@@ -20,23 +19,31 @@ const ActivitiesList = memo(({ match, keyword = '' }) => {
 	const activityList = useSelector((state) => state.activityList);
 	const { loading, error, activities, filtered } = activityList;
 
+	const activityDelete = useSelector((state) => state.activityDelete);
+	const { success } = activityDelete;
+
 	//useState
 	const [message, setMessage] = useState(null);
 
 	useEffect(() => {
-		dispatch(listActivities(projectId));
-	}, [dispatch, projectId]);
+		if (success) {
+			dispatch(listActivities(projectId));
+		} else {
+			dispatch(listActivities(projectId));
+		}
+	}, [dispatch, projectId, success]);
 
 	//delete activity
 	const deleteHandler = (id) => {
 		if (window.confirm('Are you sure?')) {
-			//dispatch(deleteUser(id));
-			setMessage(null);
+			dispatch(deleteActivity(id));
+			setMessage('Activity has been successfully deleted');
 		}
 	};
 
 	return (
 		<BorderContainer>
+			{message && <Message variant="primary">{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
@@ -100,19 +107,14 @@ const ActivitiesList = memo(({ match, keyword = '' }) => {
 											</Col>
 											<Col
 												md={4}
-												className="d-flex align-items-center justify-content-around"
+												className="d-flex align-items-center justify-content-end"
 											>
-												<LinkContainer to={``}>
-													<Button variant="light" className="btn-md mr-5">
-														<i className="fas fa-edit"></i> Profile
-													</Button>
-												</LinkContainer>
 												<Button
 													variant="danger"
 													className="btn-md ml-3"
 													onClick={() => deleteHandler(activity._id)}
 												>
-													<i className="fas fa-trash"></i> Profile
+													<i className="fas fa-trash"></i> Delete
 												</Button>
 											</Col>
 										</Row>

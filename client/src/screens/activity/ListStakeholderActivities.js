@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { listStakeholderActivities } from '../../actions/activityActions';

@@ -4,7 +4,7 @@ import BorderContainer from './BorderContainer';
 
 const Dashboard = () => {
 	return (
-		<BorderContainer>
+		<>
 			<Row>
 				<Col md={6}>
 					<BorderContainer>
@@ -17,14 +17,14 @@ const Dashboard = () => {
 					</BorderContainer>
 				</Col>
 			</Row>
-			<Row className="justify-content-center">
+			<Row className="justify-content-center mt-2">
 				<Col>
 					<BorderContainer>
 						<div className="dashboard-container-bottom">In Development</div>
 					</BorderContainer>
 				</Col>
 			</Row>
-		</BorderContainer>
+		</>
 	);
 };
 
