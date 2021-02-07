@@ -21,37 +21,36 @@ exports.getProjects = asyncHandler(async (req, res) => {
 		  }
 		: {};
 
-	try {
-		const count = await Project.countDocuments({ ...keyword });
-		const projects = await Project.find({ ...keyword })
-			.sort({ projectName: 1 })
-			.limit(pageSize)
-			.skip(pageSize * (page - 1))
-			.populate('assignees')
-			.exec();
-		res
-			.status(200)
-			.json({ projects, page, pages: Math.ceil(count / pageSize) });
-	} catch (error) {
-		res.status(500).json(error.message);
-	}
+	const count = await Project.countDocuments({ ...keyword });
+	const projects = await Project.find({ ...keyword })
+		.sort({ projectName: 1 })
+		.limit(pageSize)
+		.skip(pageSize * (page - 1))
+		.populate('assignees')
+		.exec();
+
+	// return projects
+	res.status(200).json({ projects, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc    GET all projects for a user
 // @route   GET /api/v1/projects/user/:id
 // @access  private
 exports.getUserProjects = asyncHandler(async (req, res) => {
+	// find project by id
 	const projects = await Project.find({
 		assignees: mongoose.Types.ObjectId(req.params.id),
 	})
 		.populate('assignees')
 		.exec();
 
+	// if there are no projects
 	if (projects.length === 0) {
 		res.status(404);
 		throw new Error('There are no projects assigned.');
 	}
 
+	// return projects
 	res.status(200).json(projects);
 });
 
@@ -59,26 +58,32 @@ exports.getUserProjects = asyncHandler(async (req, res) => {
 // @route   GET /api/v1/project/:id
 // @access  Private
 exports.getProject = asyncHandler(async (req, res) => {
+	// find project by id
 	const project = await Project.findById(req.params.id)
 		.populate('assignees')
 		.exec();
 
+	// throw error is not found
 	if (!project) {
 		res.status(404);
-		throw new Error('Project not found.');
+		throw new Error('No project found.');
 	}
 
-	res.json(project);
+	// return the project
+	res.status(200).json(project);
 });
 
 // @desc    POST a project
 // @route   POST /api/v1/project
 // @access  Public
 exports.addProject = asyncHandler(async (req, res) => {
-	//get the user
+	// get the user
 	req.body.user = req.user;
-	console.log(req.body);
+
+	// create a project
 	const project = await Project.create(req.body);
+
+	// return a success update
 	res.status(200).json({
 		success: true,
 		data: project,
@@ -89,20 +94,25 @@ exports.addProject = asyncHandler(async (req, res) => {
 // @route   PUT /api/v1/project/:id
 // @access  Private
 exports.updateProject = asyncHandler(async (req, res) => {
+	// add req.user.id to req.body
 	req.body.user = req.user.id;
 
+	// find project by id
 	let project = await Project.findById(req.params.id);
 
+	// if there is no project
 	if (!project) {
 		res.status(400);
 		throw new Error('No project found');
 	}
 
+	// update project
 	project = await Project.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,
 		runValidators: true,
 	});
 
+	// return updated project
 	res.status(200).json({ success: true, data: project });
 });
 
@@ -113,10 +123,10 @@ exports.assignUserToProject = async (req, res) => {
 	// //find user and project
 	const project = await Project.findById(req.params.projectId);
 
-	// //if neither are found throw an error
+	//if neither are found throw an error
 	if (!project) {
 		res.status(404);
-		throw new Error('No Resources Found');
+		throw new Error('No project Found');
 	}
 
 	project.assignees = req.body;
@@ -130,6 +140,18 @@ exports.assignUserToProject = async (req, res) => {
 // @route   DELETE /api/v1/project/:id
 // @access  Private
 exports.deleteProject = asyncHandler(async (req, res) => {
-	await Project.findByIdAndDelete(req.params.id);
-	res.status(200).json({ success: true, data: {} });
+	// find project by id
+	const deleteProject = Project.findById(req.params.id);
+
+	// if there is no project
+	if (!deleteProject) {
+		res.status(404);
+		throw new Error('No project found');
+	}
+
+	// delete project
+	await deleteProject.deleteOne();
+
+	// return success status
+	res.status(200).json({ success: true });
 });

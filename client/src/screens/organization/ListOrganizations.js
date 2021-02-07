@@ -31,16 +31,16 @@ const ListOrganizations = memo(({ match }) => {
 	useEffect(() => {
 		if (success) {
 			dispatch(listOrganizations(projectId));
+			setMessage('Organization has been successfully deleted.');
 		} else {
 			dispatch(listOrganizations(projectId));
 		}
-	}, [dispatch, projectId, success]);
+	}, [dispatch, projectId, success, message]);
 
 	//delete user
 	const deleteHandler = (id) => {
 		if (window.confirm('Are you sure?')) {
 			dispatch(deleteOrganization(id));
-			setMessage('Organization has been successfully deleted.');
 		}
 	};
 

@@ -1,11 +1,13 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Row, Col, Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
-import { listStakeholders } from '../../actions/stakeholderActions';
+import {
+	listStakeholders,
+	deleteStakeholder,
+} from '../../actions/stakeholderActions';
 import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';
@@ -22,18 +24,25 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 	const stakeholderList = useSelector((state) => state.stakeholderList);
 	const { loading, error, filtered, stakeholders } = stakeholderList;
 
+	const stakeholderDelete = useSelector((state) => state.stakeholderDelete);
+	const { success } = stakeholderDelete;
+
 	//use state
 	const [message, setMessage] = useState(null);
 
 	useEffect(() => {
-		dispatch(listStakeholders(projectId, keyword));
-	}, [dispatch, keyword, projectId]);
+		if (success) {
+			dispatch(listStakeholders(projectId, keyword));
+			setMessage('Stakeholder was successfully deleted.');
+		} else {
+			dispatch(listStakeholders(projectId, keyword));
+		}
+	}, [dispatch, keyword, projectId, success, message]);
 
 	//delete stakeholder
 	const deleteHandler = (id) => {
 		if (window.confirm('Are you sure?')) {
-			//dispatch(deleteUser(id));
-			setMessage(null);
+			dispatch(deleteStakeholder(id));
 		}
 	};
 

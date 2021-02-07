@@ -190,7 +190,6 @@ const AddOrganizationScreen = ({ keyword = '' }) => {
 											as="select"
 											value={assignee._id}
 											onChange={(e) => handleInputChange(e, i)}
-											required
 											className="px-5 mb-3"
 										>
 											<option value="">--Select--</option>

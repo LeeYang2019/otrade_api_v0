@@ -28,16 +28,16 @@ const ActivitiesList = memo(({ match, keyword = '' }) => {
 	useEffect(() => {
 		if (success) {
 			dispatch(listActivities(projectId));
+			setMessage('Activity has been successfully deleted');
 		} else {
 			dispatch(listActivities(projectId));
 		}
-	}, [dispatch, projectId, success]);
+	}, [dispatch, projectId, success, message]);
 
 	//delete activity
 	const deleteHandler = (id) => {
 		if (window.confirm('Are you sure?')) {
 			dispatch(deleteActivity(id));
-			setMessage('Activity has been successfully deleted');
 		}
 	};
 

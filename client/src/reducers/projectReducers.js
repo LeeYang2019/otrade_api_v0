@@ -10,6 +10,9 @@ import {
 	PROJECT_UPDATE_SUCCESS,
 	PROJECT_UPDATE_FAIL,
 	PROJECT_UPDATE_RESET,
+	PROJECT_DELETE_REQUEST,
+	PROJECT_DELETE_SUCCESS,
+	PROJECT_DELETE_FAIL,
 	PROJECT_USER_REQUEST,
 	PROJECT_USER_SUCCESS,
 	PROJECT_USER_FAIL,
@@ -69,6 +72,20 @@ export const projectUpdateReducer = (state = { project: {} }, action) => {
 			return { loading: false, error: action.payload };
 		case PROJECT_UPDATE_RESET:
 			return { project: {} };
+		default:
+			return state;
+	}
+};
+
+// projectDelete
+export const projectDeleteReducer = (state = {}, action) => {
+	switch (action.type) {
+		case PROJECT_DELETE_REQUEST:
+			return { loading: true, ...state };
+		case PROJECT_DELETE_SUCCESS:
+			return { loading: false, success: true };
+		case PROJECT_DELETE_FAIL:
+			return { loading: false, error: action.payload };
 		default:
 			return state;
 	}
@@ -146,6 +163,7 @@ export const projectListReducer = (state = { projects: [] }, action) => {
 	}
 };
 
+// save project to localstorage
 export const projectSaveReducer = (state = { projectInfo: {} }, action) => {
 	switch (action.type) {
 		case PROJECT_SAVE_REQUEST:

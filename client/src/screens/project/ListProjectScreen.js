@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { Route, Link, useRouteMatch } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Route, Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
-import { listProjects } from '../../actions/projectActions';
+import { listProjects, deleteProject } from '../../actions/projectActions';
 import SearchBox from '../../components/SearchBox';
 import Paginate from '../../components/Paginate';
 import Project from '../../components/Project';
@@ -14,9 +14,8 @@ const ListProjectScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
 
-	const dispatch = useDispatch();
-
 	//get logged in user
+	const dispatch = useDispatch();
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
@@ -24,18 +23,28 @@ const ListProjectScreen = ({ history, match }) => {
 	const projectList = useSelector((state) => state.projectList);
 	const { loading, error, projects, page, pages } = projectList;
 
+	const projectDelete = useSelector((state) => state.projectDelete);
+	const { success } = projectDelete;
+
+	//define state
+	const [message, setMessage] = useState(null);
+
 	useEffect(() => {
 		if (!userInfo) {
 			history.push('/login');
 		} else {
-			dispatch(listProjects(keyword, pageNumber));
+			if (success) {
+				dispatch(listProjects(keyword, pageNumber));
+			} else {
+				dispatch(listProjects(keyword, pageNumber));
+			}
 		}
-	}, [dispatch, history, userInfo, keyword, pageNumber]);
+	}, [dispatch, history, userInfo, keyword, pageNumber, success]);
 
 	const deleteHandler = (id) => {
 		if (window.confirm('Are you sure?')) {
-			//dispatch(deleteProject(id))
-			//setMessage(null)
+			dispatch(deleteProject(id));
+			setMessage('Project successfully deleted');
 		}
 	};
 
@@ -63,6 +72,7 @@ const ListProjectScreen = ({ history, match }) => {
 					</Link>
 				</Col>
 			</Row>
+			{message && <Message>{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (

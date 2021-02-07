@@ -9,6 +9,7 @@ const {
 	addProject,
 	updateProject,
 	deleteProject,
+	assignUserToProject,
 } = require('../controller/projects');
 
 // import stakeholder controller methods
@@ -62,5 +63,8 @@ router
 	.route('/:projectId/activities')
 	.get(protect, getActivities)
 	.post(protect, addActivity);
+
+// assign a user to a project
+router.route('/:projectId/assign').put(protect, assignUserToProject);
 
 module.exports = router;
