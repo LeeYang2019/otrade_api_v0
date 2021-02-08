@@ -2,11 +2,12 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 import UserListScreen from '../../screens/user/UserListScreen';
 import ListProjectScreen from '../../screens/project/ListProjectScreen';
-import ProjectUpdateScreen from '../../screens/project/ProjectUpdateScreen';
+import ProjectEditScreen from '../../screens/project/ProjectEditScreen';
 import AdminEditUserProfileScreen from '../../screens/user/AdminEditUserProfileScreen';
 import UserAddScreen from '../../screens/user/UserAddScreen';
 import ProjectAddScreen from '../../screens/project/ProjectAddScreen';
 import AdminPrivateRoute from '../Routing/AdminPrivateRoute';
+import Assignment from '../Assignment';
 
 const AdminRoutes = () => {
 	return (
@@ -72,7 +73,12 @@ const AdminRoutes = () => {
 			<AdminPrivateRoute
 				exact
 				path="/admin/project/:id/edit"
-				component={ProjectUpdateScreen}
+				component={ProjectEditScreen}
+			/>
+			<AdminPrivateRoute
+				exact
+				path="/admin/project/:id/assign"
+				component={Assignment}
 			/>
 		</Switch>
 	);

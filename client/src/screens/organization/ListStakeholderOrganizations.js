@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Row, Col, Button } from 'react-bootstrap';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { listStakeholderOrganizations } from '../../actions/organizationAction';
+import {
+	listStakeholderOrganizations,
+	deleteOrganization,
+} from '../../actions/organizationAction';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import BorderContainer from '../../components/BorderContainer';
@@ -21,12 +24,31 @@ const ListStakeholderOrganizations = ({ match }) => {
 	);
 	const { loading, error, organizations } = organizationStakeholderList;
 
+	const organizationDelete = useSelector((state) => state.organizationDelete);
+	const { success } = organizationDelete;
+
+	//use state
+	const [message, setMessage] = useState(null);
+
 	useEffect(() => {
-		dispatch(listStakeholderOrganizations(stakeholderId));
-	}, [dispatch, stakeholderId]);
+		if (success) {
+			dispatch(listStakeholderOrganizations(stakeholderId));
+			setMessage('Organization has been successfully deleted.');
+		} else {
+			dispatch(listStakeholderOrganizations(stakeholderId));
+		}
+	}, [dispatch, stakeholderId, success, message]);
+
+	//delete user
+	const deleteHandler = (id) => {
+		if (window.confirm('Are you sure?')) {
+			dispatch(deleteOrganization(id));
+		}
+	};
 
 	return (
 		<BorderContainer>
+			{message && <Message>{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
@@ -60,23 +82,34 @@ const ListStakeholderOrganizations = ({ match }) => {
 							organizations.map((organization) => (
 								<tr key={organization._id}>
 									<td>
-										<p className="mr-3">
-											<strong>Organization: </strong>
-											<Link to={`${url}/${organization._id}/profile`}>
-												{organization.name}
-											</Link>
-											<br />
-											Email: <em> {organization.email}</em>
-											<br />
-											Telephone: {organization.telephone}
-											<br />
-											Registered Date:{' '}
-											<strong>
-												{' '}
-												{organization.createdAt &&
-													organization.createdAt.substring(0, 10)}{' '}
-											</strong>
-										</p>
+										<Row>
+											<Col md={8}>
+												<p className="mr-3">
+													<Link to={`${url}/${organization._id}/profile`}>
+														{organization.name}
+													</Link>
+													<br />
+													Created:{' '}
+													<strong>
+														{' '}
+														{organization.createdAt &&
+															organization.createdAt.substring(0, 10)}{' '}
+													</strong>
+												</p>
+											</Col>
+											<Col
+												md={4}
+												className="d-flex align-items-center justify-content-end"
+											>
+												<Button
+													variant="danger"
+													className="btn-md ml-3"
+													onClick={() => deleteHandler(organization._id)}
+												>
+													<i className="fas fa-trash"></i> Delete
+												</Button>
+											</Col>
+										</Row>
 									</td>
 								</tr>
 							))}

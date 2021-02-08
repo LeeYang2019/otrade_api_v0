@@ -9,6 +9,7 @@ import {
 import { PROJECT_ASSIGNMENT_RESET } from '../constants/projectConstants';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import BorderContainer from '../components/BorderContainer';
 
 const Assignment = ({ history, match }) => {
 	const projectId = match.params.id;
@@ -114,9 +115,7 @@ const Assignment = ({ history, match }) => {
 	};
 
 	return (
-		<div className="border-container">
-			<h1>Project Assignment</h1>
-			<hr className="mt-4 mb-4" />
+		<BorderContainer title={'Assignment'}>
 			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
 				<Loader />
@@ -139,7 +138,7 @@ const Assignment = ({ history, match }) => {
 										{assignments &&
 											assignments.map((assignee, i) => (
 												<Row className="mb-3">
-													<Col md={7}>
+													<Col md={4}>
 														<Form.Control
 															as="select"
 															value={assignee._id}
@@ -190,7 +189,7 @@ const Assignment = ({ history, match }) => {
 					</Row>
 				</Form>
 			)}
-		</div>
+		</BorderContainer>
 	);
 };
 

@@ -88,9 +88,16 @@ const ListProjectScreen = ({ history, match }) => {
 											<Project project={project} />
 										</td>
 										<td className="text-right pr-4 align-middle">
+											<LinkContainer
+												to={`/admin/project/${project._id}/assign`}
+											>
+												<Button variant="light" className="btn-md ml-3">
+													<i className="fas fa-edit"> Assign</i>
+												</Button>
+											</LinkContainer>
 											<LinkContainer to={`/admin/project/${project._id}/edit`}>
 												<Button variant="light" className="btn-md ml-3">
-													<i className="fas fa-edit"></i>
+													<i className="fas fa-edit"> Update</i>
 												</Button>
 											</LinkContainer>
 											<Button
@@ -98,7 +105,7 @@ const ListProjectScreen = ({ history, match }) => {
 												className="btn-md ml-3 "
 												onClick={() => deleteHandler(project._id)}
 											>
-												<i className="fas fa-trash"></i>
+												<i className="fas fa-trash"> Delete</i>
 											</Button>
 										</td>
 									</tr>

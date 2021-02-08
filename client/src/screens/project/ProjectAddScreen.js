@@ -70,9 +70,9 @@ const ProjectAddScreen = ({ history }) => {
 
 	return (
 		<>
-			<Link to="/admin/projects" className="btn btn-primary my-3">
+			{/* <Link to="/admin/projects" className="btn btn-primary my-3">
 				Back to Project List
-			</Link>
+			</Link> */}
 			<BorderContainer title={'Project'}>
 				<Form onSubmit={submitHandler} className="mt-4 mb-3">
 					<Row>

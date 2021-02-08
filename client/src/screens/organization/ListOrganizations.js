@@ -104,7 +104,7 @@ const ListOrganizations = memo(({ match }) => {
 														className="btn-md ml-3"
 														onClick={() => deleteHandler(organization._id)}
 													>
-														<i className="fas fa-trash"></i> Profile
+														<i className="fas fa-trash"></i> Delete
 													</Button>
 												</Col>
 											</Row>
@@ -139,7 +139,7 @@ const ListOrganizations = memo(({ match }) => {
 														className="btn-md ml-3"
 														onClick={() => deleteHandler(organization._id)}
 													>
-														<i className="fas fa-trash"></i> Profile
+														<i className="fas fa-trash"></i> Delete
 													</Button>
 												</Col>
 											</Row>
