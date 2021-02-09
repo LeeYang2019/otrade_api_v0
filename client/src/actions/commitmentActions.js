@@ -1,26 +1,26 @@
 import axios from 'axios';
 import {
-	COMMUNITY_ADD_REQUEST,
-	COMMUNITY_ADD_SUCCESS,
-	COMMUNITY_ADD_FAIL,
-	COMMUNITY_DETAILS_REQUEST,
-	COMMUNITY_DETAILS_SUCCESS,
-	COMMUNITY_DETAILS_FAIL,
-	COMMUNITY_UPDATE_REQUEST,
-	COMMUNITY_UPDATE_SUCCESS,
-	COMMUNITY_UPDATE_FAIL,
-	COMMUNITY_DELETE_REQUEST,
-	COMMUNITY_DELETE_SUCCESS,
-	COMMUNITY_DELETE_FAIL,
-	COMMUNITY_LIST_REQUEST,
-	COMMUNITY_LIST_SUCCESS,
-	COMMUNITY_LIST_FAIL,
-} from '../constants/communityConstants';
+	COMMITMENT_ADD_REQUEST,
+	COMMITMENT_ADD_SUCCESS,
+	COMMITMENT_ADD_FAIL,
+	COMMITMENT_DETAILS_REQUEST,
+	COMMITMENT_DETAILS_SUCCESS,
+	COMMITMENT_DETAILS_FAIL,
+	COMMITMENT_UPDATE_REQUEST,
+	COMMITMENT_UPDATE_SUCCESS,
+	COMMITMENT_UPDATE_FAIL,
+	COMMITMENT_DELETE_REQUEST,
+	COMMITMENT_DELETE_SUCCESS,
+	COMMITMENT_DELETE_FAIL,
+	COMMITMENT_LIST_REQUEST,
+	COMMITMENT_LIST_SUCCESS,
+	COMMITMENT_LIST_FAIL,
+} from '../constants/commitmentConstants';
 
-// add community
-export const addCommunity = () => async (dispatch, getState) => {
+// add commitment
+export const addCommitment = () => async (dispatch, getState) => {
 	try {
-		dispatch({ type: COMMUNITY_ADD_REQUEST });
+		dispatch({ type: COMMITMENT_ADD_REQUEST });
 
 		//get logged in user
 		const {
@@ -39,10 +39,10 @@ export const addCommunity = () => async (dispatch, getState) => {
 			data: { data },
 		} = await axios.post(``, config);
 
-		dispatch({ type: COMMUNITY_ADD_SUCCESS, payload: data });
+		dispatch({ type: COMMITMENT_ADD_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
-			type: COMMUNITY_ADD_FAIL,
+			type: COMMITMENT_ADD_FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message
@@ -51,10 +51,10 @@ export const addCommunity = () => async (dispatch, getState) => {
 	}
 };
 
-// get community details
-export const getCommunity = () => async (dispatch, getState) => {
+// get commitment details
+export const getCommitment = () => async (dispatch, getState) => {
 	try {
-		dispatch({ type: COMMUNITY_DETAILS_REQUEST });
+		dispatch({ type: COMMITMENT_DETAILS_REQUEST });
 
 		//get logged in user
 		const {
@@ -72,10 +72,10 @@ export const getCommunity = () => async (dispatch, getState) => {
 			data: { data },
 		} = await axios.get(``, config);
 
-		dispatch({ type: COMMUNITY_DETAILS_SUCCESS, payload: data });
+		dispatch({ type: COMMITMENT_DETAILS_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
-			type: COMMUNITY_DETAILS_FAIL,
+			type: COMMITMENT_DETAILS_FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message
@@ -84,10 +84,10 @@ export const getCommunity = () => async (dispatch, getState) => {
 	}
 };
 
-// update community
-export const updateCommunity = () => async (dispatch, getState) => {
+// update commitment
+export const updateCommitment = () => async (dispatch, getState) => {
 	try {
-		dispatch({ type: COMMUNITY_UPDATE_REQUEST });
+		dispatch({ type: COMMITMENT_UPDATE_REQUEST });
 
 		//get logged in user
 		const {
@@ -106,10 +106,10 @@ export const updateCommunity = () => async (dispatch, getState) => {
 			data: { data },
 		} = await axios.put(``, config);
 
-		dispatch({ type: COMMUNITY_UPDATE_SUCCESS, payload: data });
+		dispatch({ type: COMMITMENT_UPDATE_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
-			type: COMMUNITY_UPDATE_FAIL,
+			type: COMMITMENT_UPDATE_FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message
@@ -118,10 +118,10 @@ export const updateCommunity = () => async (dispatch, getState) => {
 	}
 };
 
-// delete community
-export const deleteCommunity = () => async (dispatch, getState) => {
+// delete commitment
+export const deleteCommitment = () => async (dispatch, getState) => {
 	try {
-		dispatch({ type: COMMUNITY_DELETE_REQUEST });
+		dispatch({ type: COMMITMENT_DELETE_REQUEST });
 
 		//get logged in user
 		const {
@@ -139,10 +139,10 @@ export const deleteCommunity = () => async (dispatch, getState) => {
 			data: { data },
 		} = await axios.delete(``, config);
 
-		dispatch({ type: COMMUNITY_DELETE_SUCCESS, payload: data });
+		dispatch({ type: COMMITMENT_DELETE_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
-			type: COMMUNITY_DELETE_FAIL,
+			type: COMMITMENT_DELETE_FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message
@@ -151,10 +151,10 @@ export const deleteCommunity = () => async (dispatch, getState) => {
 	}
 };
 
-// get list of communities
+// get list of commitments
 export const listCommitments = () => async (dispatch, getState) => {
 	try {
-		dispatch({ type: COMMUNITY_LIST_REQUEST });
+		dispatch({ type: COMMITMENT_LIST_REQUEST });
 
 		//get logged in user
 		const {
@@ -172,10 +172,10 @@ export const listCommitments = () => async (dispatch, getState) => {
 			data: { data },
 		} = await axios.get(``, config);
 
-		dispatch({ type: COMMUNITY_LIST_SUCCESS, payload: data });
+		dispatch({ type: COMMITMENT_LIST_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
-			type: COMMUNITY_LIST_FAIL,
+			type: COMMITMENT_LIST_FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message
