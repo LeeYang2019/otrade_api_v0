@@ -54,10 +54,31 @@ import {
 	commentDeleteReducer,
 	commentListReducer,
 } from './reducers/commentReducer';
+import {
+	commitmentAddReducer,
+	commitmentDetailsReducer,
+	commitmentUpdateReducer,
+	commitmentDeleteReducer,
+	commitmentListReducer,
+} from './reducers/commitmentReducer';
+import {
+	communityAddReducer,
+	communityDetailsReducer,
+	communityUpdateReducer,
+	communityDeleteReducer,
+	communityListReducer,
+} from './reducers/communityReducer';
+import {
+	landownershipAddReducer,
+	landownershipDetailsReducer,
+	landownershipUpdateReducer,
+	landownershipDeleteReducer,
+	landownershipListReducer,
+} from './reducers/landownershipReducer';
 
 // useSelector calls
 const reducer = combineReducers({
-	//user reducers
+	// user reducers
 	userLogin: userLoginReducer,
 	userRegister: userRegisterReducer,
 	userDetails: userDetailsReducer,
@@ -66,7 +87,7 @@ const reducer = combineReducers({
 	userDelete: userDeleteReducer,
 	userList: userListReducer,
 
-	//project reducers
+	// project reducers
 	projectAdd: projectAddReducer,
 	projectDetails: projectDetailsReducer,
 	projectUpdate: projectUpdateReducer,
@@ -76,7 +97,7 @@ const reducer = combineReducers({
 	projectUserAssignment: projectUserAssignmentReducer,
 	projectSave: projectSaveReducer,
 
-	//stakeholder reducers
+	// stakeholder reducers
 	stakeholderAdd: stakeholderAddReducer,
 	stakeholderDetails: stakeholderDetailsReducer,
 	stakeholderUpdate: stakeholderUpdateReducer,
@@ -84,7 +105,7 @@ const reducer = combineReducers({
 	stakeholderList: stakeholderListReducer,
 	stakeholderSave: stakeholderSaveReducer,
 
-	//organization reducers
+	// organization reducers
 	organizationAdd: organizationAddReducer,
 	organizationDetails: organizationDetailsReducer,
 	organizationUpdate: organizationUpdateReducer,
@@ -92,7 +113,7 @@ const reducer = combineReducers({
 	organizationList: organizationListReducer,
 	organizationStakeholderList: organizationStakeholderListReducer,
 
-	//activity reducers
+	// activity reducers
 	activityAdd: activityAddReducer,
 	activityDetails: activityDetailsReducer,
 	activityUpdate: activityUpdateReducer,
@@ -101,12 +122,33 @@ const reducer = combineReducers({
 	activitySave: activitySaveReducer,
 	activityStakeholderList: activityStakeholderListReducer,
 
-	//comment reducers
+	// comment reducers
 	commentAdd: commentAddReducer,
 	commentDetails: commentDetailsReducer,
 	commentUpdate: commentUpdateReducer,
 	commentDelete: commentDeleteReducer,
 	commentList: commentListReducer,
+
+	// commitment reducers
+	commitmentAdd: commitmentAddReducer,
+	commitmentDetails: commitmentDetailsReducer,
+	commitmentUpdate: commitmentUpdateReducer,
+	commitmentDelete: commitmentDeleteReducer,
+	commitmentList: commitmentListReducer,
+
+	// community reducers
+	communityAdd: communityAddReducer,
+	communityDetails: communityDetailsReducer,
+	communityUpdate: communityUpdateReducer,
+	communityDelete: communityDeleteReducer,
+	communityList: communityListReducer,
+
+	// landownership reducers
+	landownershipAdd: landownershipAddReducer,
+	landownershipDetails: landownershipDetailsReducer,
+	landownershipUpdate: landownershipUpdateReducer,
+	landownershipDelete: landownershipDeleteReducer,
+	landownershipList: landownershipListReducer,
 });
 
 // localStorages

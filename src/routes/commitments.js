@@ -9,7 +9,7 @@ const {
 	getCommitments,
 } = require('../controller/commitments');
 
-const { protect, isAdmin } = require('../middleware/auth');
+const { protect } = require('../middleware/auth');
 
 //create router
 const router = express.Router({ mergeParams: true });
