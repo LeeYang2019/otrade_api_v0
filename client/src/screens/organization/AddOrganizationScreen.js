@@ -4,10 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addOrganization } from '../../actions/organizationAction';
 import Message from '../../components/Message.js';
 import { ORGANIZATION_ADD_RESET } from '../../constants/organizationConstants';
-import {
-	listStakeholders,
-	assignStakeholder,
-} from '../../actions/stakeholderActions';
+import { listStakeholders } from '../../actions/stakeholderActions';
 import BorderContainer from '../../components/BorderContainer';
 import MemberDropdown from '../../components/MemberDropdown';
 
@@ -33,8 +30,6 @@ const AddOrganizationScreen = ({ keyword = '' }) => {
 
 	const stakeholderAssign = useSelector((state) => state.stakeholderAssign);
 	const { members } = stakeholderAssign;
-
-	console.log('member', members);
 
 	useEffect(() => {
 		if (success) {
@@ -152,7 +147,7 @@ const AddOrganizationScreen = ({ keyword = '' }) => {
 					</Col>
 				</Row>
 				<hr className="my-4" />
-				<MemberDropdown projectId={project._id} setMessage={setMessage} />
+				<MemberDropdown setMessage={setMessage} label={'Organization'} />
 				<Row className="mt-3">
 					<Col>
 						<Button type="submit" variant="primary" className="px-5 mt-3">

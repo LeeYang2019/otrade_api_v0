@@ -21,6 +21,7 @@ import {
 	STAKEHOLDER_PROJECT_FILTER,
 	STAKEHOLDER_PROJECT_FILTER_CLEAR,
 	STAKEHOLDER_ASSIGN_REQUEST,
+	STAKEHOLDER_ASSIGN_SUCCESS,
 	STAKEHOLDER_ASSIGN_RESET,
 } from '../constants/stakeholderConstants';
 
@@ -125,7 +126,9 @@ export const stakeholderListReducer = (
 export const stakeholderAssignReducer = (state = { members: [] }, action) => {
 	switch (action.type) {
 		case STAKEHOLDER_ASSIGN_REQUEST:
-			return { ...state, members: action.payload };
+			return { loading: true, ...state };
+		case STAKEHOLDER_ASSIGN_SUCCESS:
+			return { loading: false, success: true, members: action.payload };
 		case STAKEHOLDER_ASSIGN_RESET:
 			return { members: [] };
 		default:

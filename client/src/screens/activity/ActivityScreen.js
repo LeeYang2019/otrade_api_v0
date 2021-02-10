@@ -178,47 +178,45 @@ const ActivityScreen = ({ match }) => {
 								<Form.Label>Parties Involved</Form.Label>
 								{members &&
 									members.map((assignee, i) => (
-										<>
-											<Row className="mb-3" key={assignee._id}>
-												<Col md={7}>
-													<Form.Control
-														as="select"
-														value={assignee}
-														onChange={(e) => handleInputChange(e, i)}
-														className="px-5 mb-3"
+										<Row key={assignee._id}>
+											<Col md={7}>
+												<Form.Control
+													as="select"
+													value={assignee}
+													onChange={(e) => handleInputChange(e, i)}
+													className="px-5 mb-3"
+												>
+													<option value="">--Select--</option>
+													{stakeholderList.stakeholders.map((stakeholder) => (
+														<option
+															key={stakeholder._id}
+															value={stakeholder._id}
+														>
+															{stakeholder.firstName} {stakeholder.lastName}
+														</option>
+													))}
+												</Form.Control>
+											</Col>
+											<Col md={5}>
+												{members.length !== 1 && (
+													<Button
+														variant="danger"
+														className="btn-md mr-3"
+														onClick={() => removeHandler(i)}
 													>
-														<option value="">--Select--</option>
-														{stakeholderList.stakeholders.map((stakeholder) => (
-															<option
-																key={stakeholder._id}
-																value={stakeholder._id}
-															>
-																{stakeholder.firstName} {stakeholder.lastName}
-															</option>
-														))}
-													</Form.Control>
-												</Col>
-												<Col md={5}>
-													{members.length !== 1 && (
-														<Button
-															variant="danger"
-															className="btn-md mr-3"
-															onClick={() => removeHandler(i)}
-														>
-															<i className="fas fa-trash"></i>
-														</Button>
-													)}
-													{members.length - 1 === i && (
-														<Button
-															className="px-3"
-															onClick={() => addHandler(i)}
-														>
-															<i className="fas fa-plus"></i> Stakeholder
-														</Button>
-													)}
-												</Col>
-											</Row>
-										</>
+														<i className="fas fa-trash"></i>
+													</Button>
+												)}
+												{members.length - 1 === i && (
+													<Button
+														className="px-3"
+														onClick={() => addHandler(i)}
+													>
+														<i className="fas fa-plus"></i> Stakeholder
+													</Button>
+												)}
+											</Col>
+										</Row>
 									))}
 							</Col>
 						</Row>
@@ -231,7 +229,7 @@ const ActivityScreen = ({ match }) => {
 										disPoints.map((point, i) => (
 											<>
 												<Row key={i}>
-													<Col md={10}>
+													<Col md={8}>
 														<Form.Control
 															className="mb-3"
 															as="textarea"
@@ -242,8 +240,8 @@ const ActivityScreen = ({ match }) => {
 														></Form.Control>
 													</Col>
 													<Col
-														md={2}
-														className="d-flex align-items-center justify-content-end mb-3"
+														md={4}
+														className="d-flex align-items-center justify-content-start mb-3"
 													>
 														<Button className="px-3" onClick={handleAdd}>
 															<i className="fas fa-plus"></i> Additional

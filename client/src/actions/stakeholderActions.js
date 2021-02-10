@@ -203,8 +203,8 @@ export const listStakeholders = (projectId, keyword = '') => async (
 };
 
 export const assignStakeholder = (data) => (dispatch) => {
-	console.log('data', data);
-	dispatch({ type: STAKEHOLDER_ASSIGN_REQUEST, payload: data });
+	dispatch({ type: STAKEHOLDER_ASSIGN_REQUEST });
+	dispatch({ type: STAKEHOLDER_ASSIGN_SUCCESS, payload: data });
 };
 
 // save stakeholder info to localstorage
