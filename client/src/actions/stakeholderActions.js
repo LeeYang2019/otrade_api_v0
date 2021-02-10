@@ -19,6 +19,9 @@ import {
 	STAKEHOLDER_PROJECT_FILTER,
 	STAKEHOLDER_PROJECT_FILTER_CLEAR,
 	STAKEHOLDER_SAVE_RESET,
+	STAKEHOLDER_ASSIGN_REQUEST,
+	STAKEHOLDER_ASSIGN_SUCCESS,
+	STAKEHOLDER_ASSIGN_FAIL,
 } from '../constants/stakeholderConstants';
 
 // add stakeholder
@@ -197,6 +200,11 @@ export const listStakeholders = (projectId, keyword = '') => async (
 					: error.messsage,
 		});
 	}
+};
+
+export const assignStakeholder = (data) => (dispatch) => {
+	console.log('data', data);
+	dispatch({ type: STAKEHOLDER_ASSIGN_REQUEST, payload: data });
 };
 
 // save stakeholder info to localstorage

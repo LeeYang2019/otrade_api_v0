@@ -20,6 +20,8 @@ import {
 	STAKEHOLDER_SAVE_RESET,
 	STAKEHOLDER_PROJECT_FILTER,
 	STAKEHOLDER_PROJECT_FILTER_CLEAR,
+	STAKEHOLDER_ASSIGN_REQUEST,
+	STAKEHOLDER_ASSIGN_RESET,
 } from '../constants/stakeholderConstants';
 
 // add stakeholder
@@ -115,6 +117,17 @@ export const stakeholderListReducer = (
 			};
 		case STAKEHOLDER_LIST_FAIL:
 			return { loading: false, error: action.payload };
+		default:
+			return state;
+	}
+};
+
+export const stakeholderAssignReducer = (state = { members: [] }, action) => {
+	switch (action.type) {
+		case STAKEHOLDER_ASSIGN_REQUEST:
+			return { ...state, members: action.payload };
+		case STAKEHOLDER_ASSIGN_RESET:
+			return { members: [] };
 		default:
 			return state;
 	}

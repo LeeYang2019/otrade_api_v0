@@ -22,6 +22,9 @@ import {
 	ORGANIZATION_PROJECT_FILTER_CLEAR,
 	ORGANIZATION_STAKEHOLDER_FILTER,
 	ORGANIZATION_STAKEHOLDER_FILTER_CLEAR,
+	ORGANIZATION_ASSIGNMENT_REQUEST,
+	ORGANIZATION_ASSIGNMENT_SUCCESS,
+	ORGANIZATION_ASSIGNMENT_FAIL,
 } from '../constants/organizationConstants';
 
 // add an organization to a project
@@ -234,6 +237,48 @@ export const listStakeholderOrganizations = (
 				error.response && error.response.data.message
 					? error.response.data.message
 					: error.messsage,
+		});
+	}
+};
+
+// assign stakeholder to organization
+export const assignStakeholder = (organizationId, assignments) => async (
+	dispatch,
+	getState
+) => {
+	try {
+		dispatch({ type: ORGANIZATION_ASSIGNMENT_REQUEST });
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		//pass id, project, and config file to api
+		const {
+			data: { data },
+		} = await axios.put(
+			`/api/v1/organizations/${organizationId}/assign`,
+			assignments,
+			config
+		);
+
+		dispatch({ type: ORGANIZATION_ASSIGNMENT_SUCCESS, payload: data });
+	} catch (error) {
+		const message =
+			error.response && error.response.data.message
+				? error.response.data.message
+				: error.message;
+
+		dispatch({
+			type: ORGANIZATION_ASSIGNMENT_FAIL,
+			payload: message,
 		});
 	}
 };

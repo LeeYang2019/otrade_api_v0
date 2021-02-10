@@ -117,10 +117,10 @@ exports.updateProject = asyncHandler(async (req, res) => {
 });
 
 // @desc	Assign user to project
-// @route	/api/v1/projects/:projectId/assign
+// @route	PUT /api/v1/projects/:projectId/assign
 // @access	Private/admin
 exports.assignUserToProject = async (req, res) => {
-	// //find user and project
+	// project
 	const project = await Project.findById(req.params.projectId);
 
 	//if neither are found throw an error

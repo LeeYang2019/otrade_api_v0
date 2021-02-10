@@ -23,6 +23,10 @@ import {
 	ORGANIZATION_PROJECT_FILTER_CLEAR,
 	ORGANIZATION_STAKEHOLDER_FILTER,
 	ORGANIZATION_STAKEHOLDER_FILTER_CLEAR,
+	ORGANIZATION_ASSIGNMENT_REQUEST,
+	ORGANIZATION_ASSIGNMENT_SUCCESS,
+	ORGANIZATION_ASSIGNMENT_FAIL,
+	ORGANIZATION_ASSIGNMENT_RESET,
 } from '../constants/organizationConstants';
 
 // add organization reducer
@@ -152,6 +156,29 @@ export const organizationStakeholderListReducer = (
 				...state,
 				filtered: null,
 			};
+		default:
+			return state;
+	}
+};
+
+// organization assignments
+export const organizationAssignmentReducer = (
+	state = { organization: {} },
+	action
+) => {
+	switch (action.type) {
+		case ORGANIZATION_ASSIGNMENT_REQUEST:
+			return { loading: true };
+		case ORGANIZATION_ASSIGNMENT_SUCCESS:
+			return {
+				loading: false,
+				success: true,
+				organization: action.payload,
+			};
+		case ORGANIZATION_ASSIGNMENT_FAIL:
+			return { loading: false, error: action.payload };
+		case ORGANIZATION_ASSIGNMENT_RESET:
+			return { organization: {} };
 		default:
 			return state;
 	}

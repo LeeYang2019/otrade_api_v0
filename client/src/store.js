@@ -29,6 +29,7 @@ import {
 	stakeholderDeleteReducer,
 	stakeholderListReducer,
 	stakeholderSaveReducer,
+	stakeholderAssignReducer,
 } from './reducers/stakeholderReducer';
 import {
 	organizationAddReducer,
@@ -37,6 +38,7 @@ import {
 	organizationDeleteReducer,
 	organizationListReducer,
 	organizationStakeholderListReducer,
+	organizationAssignmentReducer,
 } from './reducers/organizationReducer';
 import {
 	activityAddReducer,
@@ -104,6 +106,7 @@ const reducer = combineReducers({
 	stakeholderDelete: stakeholderDeleteReducer,
 	stakeholderList: stakeholderListReducer,
 	stakeholderSave: stakeholderSaveReducer,
+	stakeholderAssign: stakeholderAssignReducer,
 
 	// organization reducers
 	organizationAdd: organizationAddReducer,
@@ -112,6 +115,7 @@ const reducer = combineReducers({
 	organizationDelete: organizationDeleteReducer,
 	organizationList: organizationListReducer,
 	organizationStakeholderList: organizationStakeholderListReducer,
+	organizationAssignment: organizationAssignmentReducer,
 
 	// activity reducers
 	activityAdd: activityAddReducer,

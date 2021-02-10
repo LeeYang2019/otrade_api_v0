@@ -96,3 +96,26 @@ exports.deleteOrganization = asyncHandler(async (req, res, next) => {
 	deletedOrganization.deleteOne();
 	res.status(200).json({ success: true });
 });
+
+// @desc	Assign stakeholder to organization
+// @route	PUT /api/v1/organizations/:organizationId/assign
+// @access	Private
+exports.assignOrganization = asyncHandler(async (req, res, next) => {
+	// find organization
+	const organization = await Organization.findById(req.params.organizationId);
+
+	console.log(organization);
+
+	// if organization does not exist
+	if (!organization) {
+		res.status(401);
+		throw new Error('Organization not found');
+	}
+
+	// update stakeholders
+	organization.stakeholders = req.body;
+	organization.user = req.user.id;
+
+	await organization.save();
+	res.status(200).json({ success: true, data: organization });
+});
