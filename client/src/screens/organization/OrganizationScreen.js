@@ -200,55 +200,53 @@ const OrganizationScreen = ({ history, match }) => {
 								</Form.Group>
 							</Col>
 						</Row>
-						<hr className="my-4" />
-						<Row className="mt-5 pl-3">
+						<hr />
+						<Row className="mt-3 pl-3">
 							<Form.Label>Organization Members</Form.Label>
 						</Row>
 						<Row>
 							<Col md={9}>
 								{stakeholders &&
 									stakeholders.map((assignee, i) => (
-										<>
-											<Row className="mb-3" key={assignee._id}>
-												<Col md={7}>
-													<Form.Control
-														as="select"
-														value={assignee}
-														onChange={(e) => handleInputChange(e, i)}
-														className="px-5 mb-3"
+										<Row key={assignee._id}>
+											<Col md={7}>
+												<Form.Control
+													as="select"
+													value={assignee}
+													onChange={(e) => handleInputChange(e, i)}
+													className="px-5 mb-3"
+												>
+													<option value="">--Select--</option>
+													{stakeholderList.stakeholders.map((stakeholder) => (
+														<option
+															key={stakeholder._id}
+															value={stakeholder._id}
+														>
+															{stakeholder.firstName} {stakeholder.lastName}
+														</option>
+													))}
+												</Form.Control>
+											</Col>
+											<Col md={5}>
+												{stakeholders.length !== 1 && (
+													<Button
+														variant="danger"
+														className="btn-md mr-3"
+														onClick={() => removeHandler(i)}
 													>
-														<option value="">--Select--</option>
-														{stakeholderList.stakeholders.map((stakeholder) => (
-															<option
-																key={stakeholder._id}
-																value={stakeholder._id}
-															>
-																{stakeholder.firstName} {stakeholder.lastName}
-															</option>
-														))}
-													</Form.Control>
-												</Col>
-												<Col md={5}>
-													{stakeholders.length !== 1 && (
-														<Button
-															variant="danger"
-															className="btn-md mr-3"
-															onClick={() => removeHandler(i)}
-														>
-															<i className="fas fa-trash"></i>
-														</Button>
-													)}
-													{stakeholders.length - 1 === i && (
-														<Button
-															className="px-3"
-															onClick={() => addHandler(i)}
-														>
-															<i className="fas fa-plus"></i> Stakeholder
-														</Button>
-													)}
-												</Col>
-											</Row>
-										</>
+														<i className="fas fa-trash"></i>
+													</Button>
+												)}
+												{stakeholders.length - 1 === i && (
+													<Button
+														className="px-3"
+														onClick={() => addHandler(i)}
+													>
+														<i className="fas fa-plus"></i> Stakeholder
+													</Button>
+												)}
+											</Col>
+										</Row>
 									))}
 							</Col>
 						</Row>

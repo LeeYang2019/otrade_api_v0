@@ -22,7 +22,12 @@ const ListStakeholderOrganizations = ({ match }) => {
 	const organizationStakeholderList = useSelector(
 		(state) => state.organizationStakeholderList
 	);
-	const { loading, error, organizations } = organizationStakeholderList;
+	const {
+		loading,
+		error,
+		organizations,
+		filtered,
+	} = organizationStakeholderList;
 
 	const organizationDelete = useSelector((state) => state.organizationDelete);
 	const { success } = organizationDelete;
@@ -65,7 +70,7 @@ const ListStakeholderOrganizations = ({ match }) => {
 					) : (
 						<Row className="align-items-center">
 							<Col md={8} className="d-flex justify-content-end ml-2 mr-3">
-								<FilterBox searchWord={'Organizations'} />
+								<FilterBox searchWord={'StakeholderOrganizations'} />
 							</Col>
 							<Col>
 								<Link
@@ -78,41 +83,76 @@ const ListStakeholderOrganizations = ({ match }) => {
 						</Row>
 					)}
 					<TableHelper>
-						{organizations &&
-							organizations.map((organization) => (
-								<tr key={organization._id}>
-									<td>
-										<Row>
-											<Col md={8}>
-												<p className="mr-3">
-													<Link to={`${url}/${organization._id}/profile`}>
-														{organization.name}
-													</Link>
-													<br />
-													Created:{' '}
-													<strong>
-														{' '}
-														{organization.createdAt &&
-															organization.createdAt.substring(0, 10)}{' '}
-													</strong>
-												</p>
-											</Col>
-											<Col
-												md={4}
-												className="d-flex align-items-center justify-content-end"
-											>
-												<Button
-													variant="danger"
-													className="btn-md ml-3"
-													onClick={() => deleteHandler(organization._id)}
+						{filtered
+							? filtered.map((organization) => (
+									<tr key={organization._id}>
+										<td>
+											<Row>
+												<Col md={8}>
+													<p className="mr-3">
+														<Link to={`${url}/${organization._id}/profile`}>
+															{organization.name}
+														</Link>
+														<br />
+														Created:{' '}
+														<strong>
+															{' '}
+															{organization.createdAt &&
+																organization.createdAt.substring(0, 10)}{' '}
+														</strong>
+													</p>
+												</Col>
+												<Col
+													md={4}
+													className="d-flex align-items-center justify-content-end"
 												>
-													<i className="fas fa-trash"></i> Delete
-												</Button>
-											</Col>
-										</Row>
-									</td>
-								</tr>
-							))}
+													<Button
+														variant="danger"
+														className="btn-md ml-3"
+														onClick={() => deleteHandler(organization._id)}
+													>
+														<i className="fas fa-trash"></i> Delete
+													</Button>
+												</Col>
+											</Row>
+										</td>
+									</tr>
+							  ))
+							: organizations &&
+							  organizations.map((organization) => (
+									<tr key={organization._id}>
+										<td>
+											<Row>
+												<Col md={8}>
+													<p className="mr-3">
+														<Link to={`${url}/${organization._id}/profile`}>
+															{organization.name}
+														</Link>
+														<br />
+														Created:{' '}
+														<strong>
+															{' '}
+															{organization.createdAt &&
+																organization.createdAt.substring(0, 10)}{' '}
+														</strong>
+													</p>
+												</Col>
+												<Col
+													md={4}
+													className="d-flex align-items-center justify-content-end"
+												>
+													<Button
+														variant="danger"
+														className="btn-md ml-3"
+														onClick={() => deleteHandler(organization._id)}
+													>
+														<i className="fas fa-trash"></i> Delete
+													</Button>
+												</Col>
+											</Row>
+										</td>
+									</tr>
+							  ))}
 					</TableHelper>
 				</>
 			)}

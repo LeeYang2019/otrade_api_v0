@@ -23,7 +23,12 @@ const ListStakeholderActivities = ({ match }) => {
 	const activityStakeholderList = useSelector(
 		(state) => state.activityStakeholderList
 	);
-	const { loading, error, stakeholderactivities } = activityStakeholderList;
+	const {
+		loading,
+		error,
+		stakeholderactivities,
+		filtered,
+	} = activityStakeholderList;
 
 	const activityDelete = useSelector((state) => state.activityDelete);
 	const { success } = activityDelete;
@@ -65,7 +70,7 @@ const ListStakeholderActivities = ({ match }) => {
 					) : (
 						<Row className="align-items-center">
 							<Col md={8} className="d-flex justify-content-end ml-2 mr-3">
-								<FilterBox searchWord={'Organizations'} />
+								<FilterBox searchWord={'StakeholderActivities'} />
 							</Col>
 							<Col>
 								<Link
@@ -78,58 +83,114 @@ const ListStakeholderActivities = ({ match }) => {
 						</Row>
 					)}
 					<TableHelper>
-						{stakeholderactivities &&
-							stakeholderactivities.map((activity) => (
-								<tr key={activity._id}>
-									<td>
-										<Row>
-											<Col>
-												<p className="mr-3">
-													<strong>Activity: </strong>
-													<Link
-														to={`/project/${stakeholderId}/activity/${activity._id}`}
-													>
-														{activity.activity}
-													</Link>
-													<br />
-													Stakeholders:{' '}
-													<em> {activity.stakeholders.join('')}</em>
-													<br />
-													Status:{' '}
-													<em>
-														{activity.isComplete === 'true' ? (
-															<strong className="text-success">Complete</strong>
-														) : (
-															<strong className="text-warning">
-																In Progress
-															</strong>
-														)}
-													</em>
-													<br />
-													Registered Date:{' '}
-													<strong>
-														{' '}
-														{activity.createdAt &&
-															activity.createdAt.substring(0, 10)}{' '}
-													</strong>
-												</p>
-											</Col>
-											<Col
-												md={4}
-												className="d-flex align-items-center justify-content-end"
-											>
-												<Button
-													variant="danger"
-													className="btn-md ml-3"
-													onClick={() => deleteHandler(activity._id)}
+						{filtered
+							? filtered.map((activity) => (
+									<tr key={activity._id}>
+										<td>
+											<Row>
+												<Col>
+													<p className="mr-3">
+														<strong>Activity: </strong>
+														<Link
+															to={`/project/${stakeholderId}/activity/${activity._id}`}
+														>
+															{activity.activity}
+														</Link>
+														<br />
+														Stakeholders:{' '}
+														<em> {activity.stakeholders.join('')}</em>
+														<br />
+														Status:{' '}
+														<em>
+															{activity.isComplete === 'true' ? (
+																<strong className="text-success">
+																	Complete
+																</strong>
+															) : (
+																<strong className="text-warning">
+																	In Progress
+																</strong>
+															)}
+														</em>
+														<br />
+														Registered Date:{' '}
+														<strong>
+															{' '}
+															{activity.createdAt &&
+																activity.createdAt.substring(0, 10)}{' '}
+														</strong>
+													</p>
+												</Col>
+												<Col
+													md={4}
+													className="d-flex align-items-center justify-content-end"
 												>
-													<i className="fas fa-trash"></i> Delete
-												</Button>
-											</Col>
-										</Row>
-									</td>
-								</tr>
-							))}
+													<Button
+														variant="danger"
+														className="btn-md ml-3"
+														onClick={() => deleteHandler(activity._id)}
+													>
+														<i className="fas fa-trash"></i> Delete
+													</Button>
+												</Col>
+											</Row>
+										</td>
+									</tr>
+							  ))
+							: stakeholderactivities &&
+							  stakeholderactivities.map((activity) => (
+									<tr key={activity._id}>
+										<td>
+											<Row>
+												<Col>
+													<p className="mr-3">
+														<strong>Activity: </strong>
+														<Link
+															to={`/project/${stakeholderId}/activity/${activity._id}`}
+														>
+															{activity.activity}
+														</Link>
+														<br />
+														Stakeholders:{' '}
+														<em> {activity.stakeholders.join('')}</em>
+														<br />
+														Status:{' '}
+														<em>
+															{activity.isComplete === 'true' ? (
+																<strong className="text-success">
+																	Complete
+																</strong>
+															) : (
+																<strong className="text-warning">
+																	In Progress
+																</strong>
+															)}
+														</em>
+														<br />
+														Registered Date:{' '}
+														<strong>
+															{' '}
+															{activity.createdAt &&
+																activity.createdAt.substring(0, 10)}{' '}
+														</strong>
+													</p>
+												</Col>
+												<Col
+													md={4}
+													className="d-flex align-items-center justify-content-end"
+												>
+													<Button
+														variant="danger"
+														className="btn-md ml-3"
+														onClick={() => deleteHandler(activity._id)}
+													>
+														<i className="fas fa-trash"></i> Delete
+													</Button>
+												</Col>
+											</Row>
+										</td>
+									</tr>
+							  ))}
 					</TableHelper>
 				</>
 			)}

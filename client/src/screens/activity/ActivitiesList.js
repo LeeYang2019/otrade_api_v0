@@ -22,6 +22,8 @@ const ActivitiesList = memo(({ match, keyword = '' }) => {
 	const activityDelete = useSelector((state) => state.activityDelete);
 	const { success } = activityDelete;
 
+	console.log(filtered);
+
 	//useState
 	const [message, setMessage] = useState(null);
 
@@ -60,7 +62,7 @@ const ActivitiesList = memo(({ match, keyword = '' }) => {
 					) : (
 						<Row className="align-items-center">
 							<Col md={8} className="d-flex justify-content-end ml-2 mr-3">
-								<FilterBox searchWord={'Organizations'} />
+								<FilterBox searchWord={'Activities'} />
 							</Col>
 							<Col>
 								<Link
@@ -73,54 +75,106 @@ const ActivitiesList = memo(({ match, keyword = '' }) => {
 						</Row>
 					)}
 					<TableHelper>
-						{activities &&
-							activities.map((activity) => (
-								<tr key={activity._id}>
-									<td>
-										<Row>
-											<Col>
-												<p className="mr-3">
-													<strong>Activity: </strong>
-													<Link
-														to={`/project/${projectId}/activities/${activity._id}/profile`}
-													>
-														{activity.activity}
-													</Link>
-													<br />
-													Created:{' '}
-													<strong>
-														{activity.createdAt &&
-															activity.createdAt.substring(0, 10)}{' '}
-													</strong>
-													<br />
-													Status:{' '}
-													<em>
-														{activity.isComplete === 'true' ? (
-															<strong className="text-success">Complete</strong>
-														) : (
-															<strong className="text-warning">
-																In Progress
-															</strong>
-														)}
-													</em>
-												</p>
-											</Col>
-											<Col
-												md={4}
-												className="d-flex align-items-center justify-content-end"
-											>
-												<Button
-													variant="danger"
-													className="btn-md ml-3"
-													onClick={() => deleteHandler(activity._id)}
+						{filtered
+							? filtered.map((activity) => (
+									<tr key={activity._id}>
+										<td>
+											<Row>
+												<Col>
+													<p className="mr-3">
+														<strong>Activity: </strong>
+														<Link
+															to={`/project/${projectId}/activities/${activity._id}/profile`}
+														>
+															{activity.activity}
+														</Link>
+														<br />
+														Created:{' '}
+														<strong>
+															{activity.createdAt &&
+																activity.createdAt.substring(0, 10)}{' '}
+														</strong>
+														<br />
+														Status:{' '}
+														<em>
+															{activity.isComplete === 'true' ? (
+																<strong className="text-success">
+																	Complete
+																</strong>
+															) : (
+																<strong className="text-warning">
+																	In Progress
+																</strong>
+															)}
+														</em>
+													</p>
+												</Col>
+												<Col
+													md={4}
+													className="d-flex align-items-center justify-content-end"
 												>
-													<i className="fas fa-trash"></i> Delete
-												</Button>
-											</Col>
-										</Row>
-									</td>
-								</tr>
-							))}
+													<Button
+														variant="danger"
+														className="btn-md ml-3"
+														onClick={() => deleteHandler(activity._id)}
+													>
+														<i className="fas fa-trash"></i> Delete
+													</Button>
+												</Col>
+											</Row>
+										</td>
+									</tr>
+							  ))
+							: activities &&
+							  activities.map((activity) => (
+									<tr key={activity._id}>
+										<td>
+											<Row>
+												<Col>
+													<p className="mr-3">
+														<strong>Activity: </strong>
+														<Link
+															to={`/project/${projectId}/activities/${activity._id}/profile`}
+														>
+															{activity.activity}
+														</Link>
+														<br />
+														Created:{' '}
+														<strong>
+															{activity.createdAt &&
+																activity.createdAt.substring(0, 10)}{' '}
+														</strong>
+														<br />
+														Status:{' '}
+														<em>
+															{activity.isComplete === 'true' ? (
+																<strong className="text-success">
+																	Complete
+																</strong>
+															) : (
+																<strong className="text-warning">
+																	In Progress
+																</strong>
+															)}
+														</em>
+													</p>
+												</Col>
+												<Col
+													md={4}
+													className="d-flex align-items-center justify-content-end"
+												>
+													<Button
+														variant="danger"
+														className="btn-md ml-3"
+														onClick={() => deleteHandler(activity._id)}
+													>
+														<i className="fas fa-trash"></i> Delete
+													</Button>
+												</Col>
+											</Row>
+										</td>
+									</tr>
+							  ))}
 					</TableHelper>
 				</>
 			)}

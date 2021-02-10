@@ -15,6 +15,8 @@ import {
 import {
 	filterProjectActivities,
 	clearProjectActivitiesFilter,
+	filterStakeholderActivities,
+	clearStakeholderActivitiesFilter,
 } from '../actions/activityActions';
 
 const FilterBox = ({ searchWord }) => {
@@ -34,8 +36,12 @@ const FilterBox = ({ searchWord }) => {
 				return dispatch(filterProjectStakeholders(keyword));
 			case 'Organizations':
 				return dispatch(filterProjectOrganizations(keyword));
+			case 'StakeholderOrganizations':
+				return dispatch(filterStakeholderOrganizations(keyword));
 			case 'Activities':
 				return dispatch(filterProjectActivities(keyword));
+			case 'StakeholderActivities':
+				return dispatch(filterStakeholderActivities(keyword));
 			default:
 		}
 	};
@@ -50,8 +56,12 @@ const FilterBox = ({ searchWord }) => {
 				return dispatch(clearProjectStakeholdersFilter());
 			case 'Organizations':
 				return dispatch(clearProjectOrganizationsFilter());
+			case 'StakeholderOrganizations':
+				return dispatch(clearStakeholderOrganizationsFilter());
 			case 'Activities':
 				return dispatch(clearProjectActivitiesFilter());
+			case 'StakeholderActivities':
+				return dispatch(clearStakeholderActivitiesFilter());
 			default:
 		}
 	};

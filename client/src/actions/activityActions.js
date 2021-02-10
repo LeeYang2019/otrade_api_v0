@@ -15,8 +15,8 @@ import {
 	ACTIVITY_LIST_REQUEST,
 	ACTIVITY_LIST_SUCCESS,
 	ACTIVITY_LIST_FAIL,
-	ACTIVITY_PROJECT_FILTER,
-	ACTIVITY_PROJECT_FILTER_CLEAR,
+	ACTIVITY_LIST_FILTER,
+	ACTIVITY_LIST_FILTER_CLEAR,
 	ACTIVITY_STAKEHOLDER_LIST_REQUEST,
 	ACTIVITY_STAKEHOLDER_LIST_SUCCESS,
 	ACTIVITY_STAKEHOLDER_LIST_FAIL,
@@ -250,12 +250,12 @@ export const removeActivityInfo = () => (dispatch) => {
 
 // filter project activities
 export const filterProjectActivities = (text) => (dispatch) => {
-	dispatch({ type: ACTIVITY_PROJECT_FILTER, payload: text });
+	dispatch({ type: ACTIVITY_LIST_FILTER, payload: text });
 };
 
 // clear project activities
 export const clearProjectActivitiesFilter = () => (dispatch) => {
-	dispatch({ type: ACTIVITY_PROJECT_FILTER_CLEAR });
+	dispatch({ type: ACTIVITY_LIST_FILTER_CLEAR });
 };
 
 // filter stakeholder activities
