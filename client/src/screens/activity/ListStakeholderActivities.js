@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	listStakeholderActivities,
@@ -12,10 +12,10 @@ import FilterBox from '../../components/FilterBox';
 import Empty from '../../components/Empty';
 import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
+import Activity from '../../components/Activity';
 
 const ListStakeholderActivities = ({ match }) => {
 	const stakeholderId = match.params.id;
-
 	const { url } = useRouteMatch();
 
 	//get activities
@@ -23,6 +23,7 @@ const ListStakeholderActivities = ({ match }) => {
 	const activityStakeholderList = useSelector(
 		(state) => state.activityStakeholderList
 	);
+
 	const {
 		loading,
 		error,
@@ -87,53 +88,11 @@ const ListStakeholderActivities = ({ match }) => {
 							? filtered.map((activity) => (
 									<tr key={activity._id}>
 										<td>
-											<Row>
-												<Col>
-													<p className="mr-3">
-														<strong>Activity: </strong>
-														<Link
-															to={`/project/${stakeholderId}/activity/${activity._id}`}
-														>
-															{activity.activity}
-														</Link>
-														<br />
-														Stakeholders:{' '}
-														<em> {activity.stakeholders.join('')}</em>
-														<br />
-														Status:{' '}
-														<em>
-															{activity.isComplete === 'true' ? (
-																<strong className="text-success">
-																	Complete
-																</strong>
-															) : (
-																<strong className="text-warning">
-																	In Progress
-																</strong>
-															)}
-														</em>
-														<br />
-														Registered Date:{' '}
-														<strong>
-															{' '}
-															{activity.createdAt &&
-																activity.createdAt.substring(0, 10)}{' '}
-														</strong>
-													</p>
-												</Col>
-												<Col
-													md={4}
-													className="d-flex align-items-center justify-content-end"
-												>
-													<Button
-														variant="danger"
-														className="btn-md ml-3"
-														onClick={() => deleteHandler(activity._id)}
-													>
-														<i className="fas fa-trash"></i> Delete
-													</Button>
-												</Col>
-											</Row>
+											<Activity
+												url={url}
+												entity={activity}
+												deleteHandler={deleteHandler}
+											/>
 										</td>
 									</tr>
 							  ))
@@ -141,53 +100,11 @@ const ListStakeholderActivities = ({ match }) => {
 							  stakeholderactivities.map((activity) => (
 									<tr key={activity._id}>
 										<td>
-											<Row>
-												<Col>
-													<p className="mr-3">
-														<strong>Activity: </strong>
-														<Link
-															to={`/project/${stakeholderId}/activity/${activity._id}`}
-														>
-															{activity.activity}
-														</Link>
-														<br />
-														Stakeholders:{' '}
-														<em> {activity.stakeholders.join('')}</em>
-														<br />
-														Status:{' '}
-														<em>
-															{activity.isComplete === 'true' ? (
-																<strong className="text-success">
-																	Complete
-																</strong>
-															) : (
-																<strong className="text-warning">
-																	In Progress
-																</strong>
-															)}
-														</em>
-														<br />
-														Registered Date:{' '}
-														<strong>
-															{' '}
-															{activity.createdAt &&
-																activity.createdAt.substring(0, 10)}{' '}
-														</strong>
-													</p>
-												</Col>
-												<Col
-													md={4}
-													className="d-flex align-items-center justify-content-end"
-												>
-													<Button
-														variant="danger"
-														className="btn-md ml-3"
-														onClick={() => deleteHandler(activity._id)}
-													>
-														<i className="fas fa-trash"></i> Delete
-													</Button>
-												</Col>
-											</Row>
+											<Activity
+												url={url}
+												entity={activity}
+												deleteHandler={deleteHandler}
+											/>
 										</td>
 									</tr>
 							  ))}

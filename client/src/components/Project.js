@@ -1,4 +1,5 @@
 import React from 'react';
+import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
@@ -9,7 +10,10 @@ const Project = ({ project, userId = '' }) => {
 				<p>
 					<Link to={`/project/${project._id}`}>{project.projectName}</Link>
 					<br />
-					Created: <strong>{project.createdAt.substring(0, 10)}</strong>
+					Created:{' '}
+					<strong>
+						<Moment format="MM-DD-YYYY">{project.createdAt}</Moment>
+					</strong>
 				</p>
 			</Col>
 			<Col className="text-left" md={3}>

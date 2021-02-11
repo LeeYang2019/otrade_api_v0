@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import Moment from 'react-moment';
 import {
 	listStakeholderOrganizations,
 	deleteOrganization,
@@ -96,9 +97,9 @@ const ListStakeholderOrganizations = ({ match }) => {
 														<br />
 														Created:{' '}
 														<strong>
-															{' '}
-															{organization.createdAt &&
-																organization.createdAt.substring(0, 10)}{' '}
+															<Moment format="MM-DD-YYYY">
+																{organization.createdAt}
+															</Moment>
 														</strong>
 													</p>
 												</Col>
@@ -131,9 +132,9 @@ const ListStakeholderOrganizations = ({ match }) => {
 														<br />
 														Created:{' '}
 														<strong>
-															{' '}
-															{organization.createdAt &&
-																organization.createdAt.substring(0, 10)}{' '}
+															<Moment format="MM-DD-YYYY">
+																{organization.createdAt}
+															</Moment>
 														</strong>
 													</p>
 												</Col>

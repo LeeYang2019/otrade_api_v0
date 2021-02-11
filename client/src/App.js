@@ -81,6 +81,16 @@ const App = () => {
 						path="/stakeholder/:id/activities/addActivity"
 						component={ActivityForm}
 					/>
+					<PrivateRoute
+						exact
+						path="/stakeholder/:id/organizations/:id/profile"
+						component={OrganizationScreen}
+					/>
+					<PrivateRoute
+						exact
+						path="/stakeholder/:id/activities/:id/profile"
+						component={ActivityScreen}
+					/>
 
 					{/*Admin Routes */}
 					<Route component={AdminRoutes} />

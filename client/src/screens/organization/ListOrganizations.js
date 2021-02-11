@@ -2,6 +2,7 @@ import React, { memo, useEffect, useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Row, Col, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import Moment from 'react-moment';
 import {
 	listOrganizations,
 	deleteOrganization,
@@ -12,6 +13,7 @@ import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';
 import Empty from '../../components/Empty';
+import Organization from '../../components/Organization';
 
 const ListOrganizations = memo(({ match }) => {
 	const projectId = match.params.id;
@@ -80,34 +82,11 @@ const ListOrganizations = memo(({ match }) => {
 							? filtered.map((organization) => (
 									<tr key={organization._id}>
 										<td>
-											<Row>
-												<Col md={8}>
-													<p className="mr-3">
-														<Link to={`${url}/${organization._id}/profile`}>
-															{organization.name}
-														</Link>
-														<br />
-														Created:
-														<strong>
-															{' '}
-															{organization.createdAt &&
-																organization.createdAt.substring(0, 10)}{' '}
-														</strong>
-													</p>
-												</Col>
-												<Col
-													md={4}
-													className="d-flex align-items-center justify-content-end"
-												>
-													<Button
-														variant="danger"
-														className="btn-md ml-3"
-														onClick={() => deleteHandler(organization._id)}
-													>
-														<i className="fas fa-trash"></i> Delete
-													</Button>
-												</Col>
-											</Row>
+											<Organization
+												url={url}
+												entity={organization}
+												deleteHandler={deleteHandler}
+											/>
 										</td>
 									</tr>
 							  ))
@@ -115,34 +94,11 @@ const ListOrganizations = memo(({ match }) => {
 							  organizations.map((organization) => (
 									<tr key={organization._id}>
 										<td>
-											<Row>
-												<Col md={8}>
-													<p className="mr-3">
-														<Link to={`${url}/${organization._id}/profile`}>
-															{organization.name}
-														</Link>
-														<br />
-														Created:{' '}
-														<strong>
-															{' '}
-															{organization.createdAt &&
-																organization.createdAt.substring(0, 10)}{' '}
-														</strong>
-													</p>
-												</Col>
-												<Col
-													md={4}
-													className="d-flex align-items-center justify-content-end"
-												>
-													<Button
-														variant="danger"
-														className="btn-md ml-3"
-														onClick={() => deleteHandler(organization._id)}
-													>
-														<i className="fas fa-trash"></i> Delete
-													</Button>
-												</Col>
-											</Row>
+											<Organization
+												url={url}
+												entity={organization}
+												deleteHandler={deleteHandler}
+											/>
 										</td>
 									</tr>
 							  ))}

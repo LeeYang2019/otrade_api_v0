@@ -1,4 +1,5 @@
 import React, { memo, useEffect, useState } from 'react';
+import Moment from 'react-moment';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Row, Col, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +13,7 @@ import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';
 import Empty from '../../components/Empty';
+import Stakeholder from '../../components/Stakeholder';
 
 const StakeholdersList = memo(({ match, keyword = '' }) => {
 	const projectId = match.params.id;
@@ -82,34 +84,10 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 							? filtered.map((person) => (
 									<tr key={person._id}>
 										<td>
-											<Row>
-												<Col md={4}>
-													<p>
-														<Link to={`/stakeholder/${person._id}`}>
-															{person.firstName} {person.lastName}
-														</Link>
-														<br />
-														{person.email}
-														<br />
-														{person.telephone}
-													</p>
-												</Col>
-												<Col md={4}>
-													<p>{person.createdAt.substring(0, 10)}</p>
-												</Col>
-												<Col
-													md={4}
-													className="d-flex align-items-center justify-content-end"
-												>
-													<Button
-														variant="danger"
-														className="btn-md ml-3"
-														onClick={() => deleteHandler(person._id)}
-													>
-														<i className="fas fa-trash"></i> Profile
-													</Button>
-												</Col>
-											</Row>
+											<Stakeholder
+												entity={person}
+												deleteHandler={deleteHandler}
+											/>
 										</td>
 									</tr>
 							  ))
@@ -117,34 +95,10 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 							  stakeholders.map((person) => (
 									<tr key={person._id}>
 										<td>
-											<Row>
-												<Col md={4}>
-													<p>
-														<Link to={`/stakeholder/${person._id}`}>
-															{person.firstName} {person.lastName}
-														</Link>
-														<br />
-														{person.email}
-														<br />
-														{person.telephone}
-													</p>
-												</Col>
-												<Col md={4}>
-													<p>Created: {person.createdAt.substring(0, 10)}</p>
-												</Col>
-												<Col
-													md={4}
-													className="d-flex align-items-center justify-content-end"
-												>
-													<Button
-														variant="danger"
-														className="btn-md ml-3"
-														onClick={() => deleteHandler(person._id)}
-													>
-														<i className="fas fa-trash"></i> Delete
-													</Button>
-												</Col>
-											</Row>
+											<Stakeholder
+												entity={person}
+												deleteHandler={deleteHandler}
+											/>
 										</td>
 									</tr>
 							  ))}
