@@ -8,7 +8,7 @@ import Loader from '../../components/Loader.js';
 import { listProjects, deleteProject } from '../../actions/projectActions';
 import SearchBox from '../../components/SearchBox';
 import Paginate from '../../components/Paginate';
-import Project from '../../components/Project';
+import Project from '../../components/Entity/Project';
 
 const ListProjectScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
@@ -16,8 +16,6 @@ const ListProjectScreen = ({ history, match }) => {
 
 	//get logged in user
 	const dispatch = useDispatch();
-	const userLogin = useSelector((state) => state.userLogin);
-	const { userInfo } = userLogin;
 
 	//get projects
 	const projectList = useSelector((state) => state.projectList);
@@ -30,16 +28,12 @@ const ListProjectScreen = ({ history, match }) => {
 	const [message, setMessage] = useState(null);
 
 	useEffect(() => {
-		if (!userInfo) {
-			history.push('/login');
+		if (success) {
+			dispatch(listProjects(keyword, pageNumber));
 		} else {
-			if (success) {
-				dispatch(listProjects(keyword, pageNumber));
-			} else {
-				dispatch(listProjects(keyword, pageNumber));
-			}
+			dispatch(listProjects(keyword, pageNumber));
 		}
-	}, [dispatch, history, userInfo, keyword, pageNumber, success]);
+	}, [dispatch, history, keyword, pageNumber, success]);
 
 	const deleteHandler = (id) => {
 		if (window.confirm('Are you sure?')) {

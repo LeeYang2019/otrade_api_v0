@@ -1,7 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
-import Moment from 'react-moment';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
@@ -13,13 +12,11 @@ import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';
 import Empty from '../../components/Empty';
-import Stakeholder from '../../components/Stakeholder';
+import Stakeholder from '../../components/Entity/Stakeholder';
 
 const StakeholdersList = memo(({ match, keyword = '' }) => {
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();
-
-	console.log(url);
 
 	//get stakeholders
 	const dispatch = useDispatch();

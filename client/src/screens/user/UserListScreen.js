@@ -30,15 +30,11 @@ const UserListScreen = ({ history, match }) => {
 	const { success } = userDelete;
 
 	useEffect(() => {
-		if (userInfo && userInfo.role !== 'admin') {
-			history.push('/login');
-		} else {
-			if (success) {
-				history.push('/admin/userList');
-			}
-			dispatch(listUsers(keyword, pageNumber));
+		if (success) {
+			history.push('/admin/userList');
 		}
-	}, [dispatch, history, userInfo, keyword, pageNumber, success]);
+		dispatch(listUsers(keyword, pageNumber));
+	}, [dispatch, history, keyword, pageNumber, success]);
 
 	//delete user
 	const deleteHandler = (id) => {

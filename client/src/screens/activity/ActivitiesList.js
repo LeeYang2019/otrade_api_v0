@@ -9,7 +9,7 @@ import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';
 import Empty from '../../components/Empty';
-import Activity from '../../components/Activity';
+import Activity from '../../components/Entity/Activity';
 
 const ActivitiesList = memo(({ match, keyword = '' }) => {
 	const projectId = match.params.id;

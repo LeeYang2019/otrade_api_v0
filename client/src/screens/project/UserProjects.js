@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import { listUserProjects } from '../../actions/projectActions';
-import Project from '../../components/Project';
+import Project from '../../components/Entity/Project';
 import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';

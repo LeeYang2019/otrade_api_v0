@@ -12,7 +12,7 @@ import FilterBox from '../../components/FilterBox';
 import Empty from '../../components/Empty';
 import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
-import Activity from '../../components/Activity';
+import Activity from '../../components/Entity/Activity';
 
 const ListStakeholderActivities = ({ match }) => {
 	const stakeholderId = match.params.id;

@@ -1,8 +1,7 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Moment from 'react-moment';
 import {
 	listOrganizations,
 	deleteOrganization,
@@ -13,7 +12,7 @@ import BorderContainer from '../../components/BorderContainer';
 import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';
 import Empty from '../../components/Empty';
-import Organization from '../../components/Organization';
+import Organization from '../../components/Entity/Organization';
 
 const ListOrganizations = memo(({ match }) => {
 	const projectId = match.params.id;
