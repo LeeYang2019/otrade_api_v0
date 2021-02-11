@@ -13,7 +13,6 @@ const EditUserPhoto = ({ match }) => {
 
 	//define states
 	const [image, setImage] = useState('');
-	const [message, setMessage] = useState(null);
 	const [uploading, setUploading] = useState(false);
 
 	const dispatch = useDispatch();
@@ -28,7 +27,6 @@ const EditUserPhoto = ({ match }) => {
 
 	useEffect(() => {
 		if (successUpdate) {
-			setMessage('User profile has successfully been updated.');
 			dispatch(getUserDetails(userId));
 			dispatch({ type: USER_PROFILE_UPDATE_RESET });
 		} else {
@@ -73,7 +71,6 @@ const EditUserPhoto = ({ match }) => {
 	return (
 		<BorderContainer>
 			{error && <Message variant="danger">{error}</Message>}
-			{successUpdate && <Message variant="success">{message}</Message>}
 			{loading && <Loader />}
 			<Form onSubmit={submitHandler} className="my-5">
 				<Row>

@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { listStakeholders } from '../../actions/stakeholderActions';
 import { saveActivityInfo } from '../../actions/activityActions';
-import { ACTIVITY_ADD_RESET } from '../../constants/activityConstants';
-import Message from '../../components/Message.js';
 import BorderContainer from '../../components/BorderContainer';
 import MemberDropdown from '../../components/MemberDropdown';
 
-const AddActivityScreen = ({ match, navigation, keyword = '' }) => {
-	const projectId = match.params.id;
+const AddActivityScreen = ({ navigation, keyword = '' }) => {
 	const { next } = navigation;
 
 	const dispatch = useDispatch();
-	const organizationAdd = useSelector((state) => state.organizationAdd);
-	const { success } = organizationAdd;
 
 	const activity = useSelector((state) => state.activitySave);
 	const { activityInfo } = activity;
@@ -27,16 +21,6 @@ const AddActivityScreen = ({ match, navigation, keyword = '' }) => {
 	const [date, setDate] = useState(activityInfo.date);
 	const [actHours, setActHours] = useState(activityInfo.hours);
 	const [location, setLocation] = useState(activityInfo.location);
-	const [message, setMessage] = useState(null);
-
-	useEffect(() => {
-		if (success) {
-			setMessage('Activity was successfully added.');
-			dispatch({ type: ACTIVITY_ADD_RESET });
-		} else {
-			dispatch(listStakeholders(projectId, keyword));
-		}
-	}, [dispatch, success, projectId, keyword]);
 
 	//handle submit form
 	const submitHandler = (e) => {
@@ -57,7 +41,6 @@ const AddActivityScreen = ({ match, navigation, keyword = '' }) => {
 
 	return (
 		<BorderContainer title={'(part 1)'}>
-			{message && <Message variant="success">{message}</Message>}
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Row>
 					<Col md={4}>
@@ -119,7 +102,7 @@ const AddActivityScreen = ({ match, navigation, keyword = '' }) => {
 					</Col>
 				</Row>
 				<hr />
-				<MemberDropdown setMessage={setMessage} label={'Parties Involved'} />
+				<MemberDropdown label={'Parties Involved'} />
 				<Row>
 					<Col>
 						<Button type="submit" variant="primary" className="px-5 mt-3">

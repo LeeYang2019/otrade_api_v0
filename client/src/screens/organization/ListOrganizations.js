@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +13,7 @@ import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';
 import Empty from '../../components/Empty';
 import Organization from '../../components/Entity/Organization';
+import { ORGANIZATION_DELETE_RESET } from '../../constants/organizationConstants';
 
 const ListOrganizations = memo(({ match }) => {
 	const projectId = match.params.id;
@@ -26,17 +27,14 @@ const ListOrganizations = memo(({ match }) => {
 	const organizationDelete = useSelector((state) => state.organizationDelete);
 	const { success } = organizationDelete;
 
-	//use state
-	const [message, setMessage] = useState(null);
-
 	useEffect(() => {
 		if (success) {
 			dispatch(listOrganizations(projectId));
-			setMessage('Organization has been successfully deleted.');
+			dispatch({ type: ORGANIZATION_DELETE_RESET });
 		} else {
 			dispatch(listOrganizations(projectId));
 		}
-	}, [dispatch, projectId, success, message]);
+	}, [dispatch, projectId, success]);
 
 	//delete user
 	const deleteHandler = (id) => {
@@ -47,7 +45,6 @@ const ListOrganizations = memo(({ match }) => {
 
 	return (
 		<BorderContainer>
-			{message && <Message>{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (

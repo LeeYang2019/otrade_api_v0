@@ -10,6 +10,7 @@ import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';
 import Empty from '../../components/Empty';
 import Activity from '../../components/Entity/Activity';
+import { ACTIVITY_DELETE_RESET } from '../../constants/activityConstants';
 
 const ActivitiesList = memo(({ match, keyword = '' }) => {
 	const projectId = match.params.id;
@@ -23,17 +24,14 @@ const ActivitiesList = memo(({ match, keyword = '' }) => {
 	const activityDelete = useSelector((state) => state.activityDelete);
 	const { success } = activityDelete;
 
-	//useState
-	const [message, setMessage] = useState(null);
-
 	useEffect(() => {
 		if (success) {
 			dispatch(listActivities(projectId));
-			setMessage('Activity has been successfully deleted');
+			dispatch({ type: ACTIVITY_DELETE_RESET });
 		} else {
 			dispatch(listActivities(projectId));
 		}
-	}, [dispatch, projectId, success, message]);
+	}, [dispatch, projectId, success]);
 
 	//delete activity
 	const deleteHandler = (id) => {
@@ -44,7 +42,6 @@ const ActivitiesList = memo(({ match, keyword = '' }) => {
 
 	return (
 		<BorderContainer>
-			{message && <Message variant="primary">{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
@@ -75,25 +72,27 @@ const ActivitiesList = memo(({ match, keyword = '' }) => {
 					)}
 					<TableHelper>
 						{filtered
-							? filtered.map((activity) => (
+							? filtered.map((activity, i) => (
 									<tr key={activity._id}>
 										<td>
 											<Activity
 												url={url}
 												entity={activity}
 												deleteHandler={deleteHandler}
+												index={i}
 											/>
 										</td>
 									</tr>
 							  ))
 							: activities &&
-							  activities.map((activity) => (
+							  activities.map((activity, i) => (
 									<tr key={activity._id}>
 										<td>
 											<Activity
 												url={url}
 												entity={activity}
 												deleteHandler={deleteHandler}
+												index={i}
 											/>
 										</td>
 									</tr>

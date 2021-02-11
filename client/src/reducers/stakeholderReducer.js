@@ -13,6 +13,7 @@ import {
 	STAKEHOLDER_DELETE_REQUEST,
 	STAKEHOLDER_DELETE_SUCCESS,
 	STAKEHOLDER_DELETE_FAIL,
+	STAKEHOLDER_DELETE_RESET,
 	STAKEHOLDER_LIST_REQUEST,
 	STAKEHOLDER_LIST_SUCCESS,
 	STAKEHOLDER_LIST_FAIL,
@@ -86,6 +87,8 @@ export const stakeholderDeleteReducer = (state = {}, action) => {
 			return { loading: false, success: true };
 		case STAKEHOLDER_DELETE_FAIL:
 			return { loading: false, error: action.payload };
+		case STAKEHOLDER_DELETE_RESET:
+			return {};
 		default:
 			return state;
 	}

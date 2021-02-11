@@ -25,6 +25,7 @@ import {
 	ACTIVITY_SAVE_REQUEST,
 	ACTIVITY_SAVE_RESET,
 } from '../constants/activityConstants';
+import { setAlert } from '../actions/alertActions';
 
 // add activity to a project
 export const addActivity = (activity, projectId) => async (
@@ -54,6 +55,7 @@ export const addActivity = (activity, projectId) => async (
 		);
 
 		dispatch({ type: ACTIVITY_ADD_SUCCESS, payload: data });
+		dispatch(setAlert('Activity successfully added', 'success'));
 	} catch (error) {
 		dispatch({
 			type: ACTIVITY_ADD_FAIL,
@@ -121,6 +123,7 @@ export const updateActivity = (id, activity) => async (dispatch, getState) => {
 		} = await axios.put(`/api/v1/activities/${id}`, activity, config);
 
 		dispatch({ type: ACTIVITY_UPDATE_SUCCESS, payload: data });
+		dispatch(setAlert('Activity successfully updated', 'success'));
 	} catch (error) {
 		dispatch({
 			type: ACTIVITY_UPDATE_FAIL,
@@ -152,6 +155,7 @@ export const deleteActivity = (id) => async (dispatch, getState) => {
 		await axios.delete(`/api/v1/activities/${id}`, config);
 
 		dispatch({ type: ACTIVITY_DELETE_SUCCESS });
+		dispatch(setAlert('Activity successfully deleted', 'success'));
 	} catch (error) {
 		dispatch({
 			type: ACTIVITY_DELETE_FAIL,

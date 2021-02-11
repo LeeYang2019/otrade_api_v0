@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { Route, useRouteMatch, Switch } from 'react-router-dom';
-import { Row, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import { getStakeholderDetails } from '../../actions/stakeholderActions';
 import ProfileTop from '../../components/ProfileTop';
 import { btnlinks, navbarlinks, routes } from './utilities';
+import Alert from '../../components/Layout/Alert';
 
 const StakeholderScreen = ({ match }) => {
 	//get the stakeholderId passed in
@@ -40,6 +40,7 @@ const StakeholderScreen = ({ match }) => {
 						btnlinks={btnlinks}
 						navbarlinks={navbarlinks}
 					/>
+					<Alert />
 					<Switch>
 						{routes.map((item, index) => (
 							<Route

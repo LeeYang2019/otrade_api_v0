@@ -21,8 +21,8 @@ import {
 	STAKEHOLDER_SAVE_RESET,
 	STAKEHOLDER_ASSIGN_REQUEST,
 	STAKEHOLDER_ASSIGN_SUCCESS,
-	STAKEHOLDER_ASSIGN_FAIL,
 } from '../constants/stakeholderConstants';
+import { setAlert } from '../actions/alertActions';
 
 // add stakeholder
 export const addStakeholder = (stakeholder, projectId) => async (
@@ -53,6 +53,7 @@ export const addStakeholder = (stakeholder, projectId) => async (
 		);
 
 		dispatch({ type: STAKEHOLDER_ADD_SUCCESS, payload: data });
+		dispatch(setAlert('Stakeholder successfully added', 'success'));
 	} catch (error) {
 		dispatch({
 			type: STAKEHOLDER_ADD_FAIL,
@@ -123,6 +124,7 @@ export const updateStakeholder = (stakeholder, id) => async (
 		} = await axios.put(`/api/v1/stakeholders/${id}`, stakeholder, config);
 
 		dispatch({ type: STAKEHOLDER_UPDATE_SUCCESS, payload: data });
+		dispatch(setAlert('Stakeholder successfully updated', 'success'));
 	} catch (error) {
 		dispatch({
 			type: STAKEHOLDER_UPDATE_FAIL,
@@ -152,6 +154,7 @@ export const deleteStakeholder = (id) => async (dispatch, getState) => {
 		await axios.delete(`/api/v1/stakeholders/${id}`, config);
 
 		dispatch({ type: STAKEHOLDER_DELETE_SUCCESS });
+		dispatch(setAlert('Stakeholder successfully deleted', 'success'));
 	} catch (error) {
 		dispatch({
 			type: STAKEHOLDER_DELETE_FAIL,

@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrganization } from '../../actions/organizationAction';
-import Message from '../../components/Message.js';
-import { ORGANIZATION_ADD_RESET } from '../../constants/organizationConstants';
-import { listStakeholders } from '../../actions/stakeholderActions';
 import BorderContainer from '../../components/BorderContainer';
 import MemberDropdown from '../../components/MemberDropdown';
 
 const AddOrganizationScreen = ({ keyword = '' }) => {
+	const dispatch = useDispatch();
+
+	//get project details
+	const projectDetails = useSelector((state) => state.projectDetails);
+	const { project } = projectDetails;
+
+	const stakeholderAssign = useSelector((state) => state.stakeholderAssign);
+	const { members } = stakeholderAssign;
+
 	//define states
 	const [organization, setOrganization] = useState('');
 	const [division, setDivision] = useState('');
@@ -16,29 +22,6 @@ const AddOrganizationScreen = ({ keyword = '' }) => {
 	const [email, setEmail] = useState('');
 	const [telephone, setTelephone] = useState('');
 	const [website, setWebsite] = useState('');
-	const [message, setMessage] = useState(null);
-
-	const dispatch = useDispatch();
-
-	//get project details
-	const projectDetails = useSelector((state) => state.projectDetails);
-	const { project } = projectDetails;
-
-	//get addorganization success
-	const organizationAdd = useSelector((state) => state.organizationAdd);
-	const { success } = organizationAdd;
-
-	const stakeholderAssign = useSelector((state) => state.stakeholderAssign);
-	const { members } = stakeholderAssign;
-
-	useEffect(() => {
-		if (success) {
-			setMessage('Organization was successfully added.');
-			dispatch({ type: ORGANIZATION_ADD_RESET });
-		} else {
-			dispatch(listStakeholders(project._id, keyword));
-		}
-	}, [dispatch, success, project, keyword]);
 
 	//submit form
 	const submitHandler = (e) => {
@@ -62,7 +45,6 @@ const AddOrganizationScreen = ({ keyword = '' }) => {
 
 	return (
 		<BorderContainer>
-			{message && <Message variant="success">{message}</Message>}
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Row>
 					<Col md={6}>
@@ -147,7 +129,7 @@ const AddOrganizationScreen = ({ keyword = '' }) => {
 					</Col>
 				</Row>
 				<hr className="my-4" />
-				<MemberDropdown setMessage={setMessage} label={'Organization'} />
+				<MemberDropdown label={'Organization'} />
 				<Row className="mt-3">
 					<Col>
 						<Button type="submit" variant="primary" className="px-5 mt-3">

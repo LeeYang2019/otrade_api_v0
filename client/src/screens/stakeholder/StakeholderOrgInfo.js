@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -6,8 +6,6 @@ import {
 	saveStakeholderInfo,
 	removeStakeholderInfo,
 } from '../../actions/stakeholderActions';
-import { STAKEHOLDER_ADD_RESET } from '../../constants/stakeholderConstants';
-import Message from '../../components/Message.js';
 import BorderContainer from '../../components/BorderContainer';
 
 const AddStakeholderScreen = ({ navigation, match }) => {
@@ -29,19 +27,8 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 	const [position, setPosition] = useState(stakeholderInfo.position);
 	const [influence, setInfluence] = useState(stakeholderInfo.influence);
 	const [projImpact, setProjImpact] = useState(stakeholderInfo.projImpact);
-	const [message, setMessage] = useState(null);
 
 	const dispatch = useDispatch();
-
-	const stakeholderAdd = useSelector((state) => state.stakeholderAdd);
-	const { success } = stakeholderAdd;
-
-	useEffect(() => {
-		if (success) {
-			setMessage('Stakeholder was successfully added to the database.');
-			dispatch({ type: STAKEHOLDER_ADD_RESET });
-		}
-	}, [dispatch, success]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -68,7 +55,6 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 
 	return (
 		<BorderContainer title={'(part 2)'}>
-			{message && <Message variant="success">{message}</Message>}
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Form.Group controlId="organization">
 					<Row>

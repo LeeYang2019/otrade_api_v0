@@ -29,6 +29,7 @@ import { PROJECT_LIST_RESET } from '../constants/projectConstants';
 import { STAKEHOLDER_LIST_RESET } from '../constants/stakeholderConstants';
 import { ORGANIZATION_LIST_RESET } from '../constants/organizationConstants';
 import { ACTIVITY_LIST_RESET } from '../constants/activityConstants';
+import { setAlert } from '../actions/alertActions';
 
 //logs in the user
 export const login = (email, password) => async (dispatch) => {
@@ -169,7 +170,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 		};
 
 		const { data } = await axios.put(`/api/v1/users/profile`, user, config);
-
+		dispatch(setAlert('User successfully updated', 'success'));
 		dispatch({
 			type: USER_PROFILE_UPDATE_SUCCESS,
 			payload: data,
@@ -292,6 +293,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
 			type: USER_UPDATE_SUCCESS,
 		});
 		dispatch({ type: USER_DELETE_SUCCESS, payload: data });
+		dispatch(setAlert('User successfully registered', 'success'));
 	} catch (error) {
 		const message =
 			error.response && error.response.data.message

@@ -16,7 +16,6 @@ const EditStakeholderScreen = ({ projectId, match }) => {
 
 	//define states
 	const [image, setImage] = useState('');
-	const [message, setMessage] = useState(null);
 	const [uploading, setUploading] = useState(false);
 
 	const dispatch = useDispatch();
@@ -31,7 +30,6 @@ const EditStakeholderScreen = ({ projectId, match }) => {
 
 	useEffect(() => {
 		if (success) {
-			setMessage('Stakeholder was successfully updated.');
 			dispatch(getStakeholderDetails(stakeholderId));
 			dispatch({ type: STAKEHOLDER_UPDATE_RESET });
 		} else {
@@ -75,7 +73,6 @@ const EditStakeholderScreen = ({ projectId, match }) => {
 
 	return (
 		<BorderContainer>
-			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (

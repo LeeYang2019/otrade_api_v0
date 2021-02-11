@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Button } from 'react-bootstrap';
 import Moment from 'react-moment';
 
-const Activity = ({ url, entity, deleteHandler }) => {
+const Activity = ({ url, entity, deleteHandler, index }) => {
 	return (
 		<Row>
 			<Col>
 				<p className="mr-3">
+					<strong>No: {index + 1}</strong> <br />
 					<strong>Activity: </strong>
 					<Link to={`${url}/${entity._id}/profile`}>{entity.activity}</Link>
 					<br />

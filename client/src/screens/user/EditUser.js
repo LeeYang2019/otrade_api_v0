@@ -6,19 +6,10 @@ import { USER_PROFILE_UPDATE_RESET } from '../../constants/userConstants';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import BorderContainer from '../../components/BorderContainer';
+import { setAlert } from '../../actions/alertActions';
 
 const EditUser = ({ match }) => {
 	const userId = match.params.id;
-
-	//define states
-	const [firstName, setFirstName] = useState('');
-	const [lastName, setLastName] = useState('');
-	const [telephone, setTelephone] = useState('');
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [confirmPassword, setConfirmPassword] = useState('');
-	const [message, setMessage] = useState(null);
-	const [updatedDate, setUpdatedDate] = useState('');
 
 	const dispatch = useDispatch();
 
@@ -30,9 +21,17 @@ const EditUser = ({ match }) => {
 	const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
 	const { success: successUpdate } = userUpdateProfile;
 
+	//define states
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
+	const [telephone, setTelephone] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
+	const [updatedDate, setUpdatedDate] = useState('');
+
 	useEffect(() => {
 		if (successUpdate) {
-			setMessage('User profile has successfully been updated.');
 			dispatch(getUserDetails(userId));
 			dispatch({ type: USER_PROFILE_UPDATE_RESET });
 			setPassword('');
@@ -51,7 +50,7 @@ const EditUser = ({ match }) => {
 		//check password against confirmPassword
 		if (password !== confirmPassword) {
 			//set new message if not matched
-			setMessage('Passwords do not match');
+			dispatch(setAlert('Passwords do not match', 'danger'));
 		} else {
 			//otherwise, dispatch
 			dispatch(
@@ -70,7 +69,6 @@ const EditUser = ({ match }) => {
 	return (
 		<BorderContainer>
 			{error && <Message variant="danger">{error}</Message>}
-			{successUpdate && <Message variant="success">{message}</Message>}
 			{loading && <Loader />}
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Row>
@@ -157,11 +155,6 @@ const EditUser = ({ match }) => {
 					</Col>
 				</Row>
 			</Form>
-			{/* ) : (
-					<Message variant="danger">
-						ADMIN NOT ALLOWED TO THIS PROTECTED ROUTE
-					</Message>
-				)} */}
 		</BorderContainer>
 	);
 };

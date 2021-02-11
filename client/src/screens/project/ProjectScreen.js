@@ -6,6 +6,7 @@ import Loader from '../../components/Loader';
 import { listProjectDetails } from '../../actions/projectActions';
 import ProfileTop from '../../components/ProfileTop';
 import { btnlinks, navbarlinks, routes } from './utilities';
+import Alert from '../../components/Layout/Alert';
 
 const ProjectScreen = ({ match }) => {
 	const projectId = match.params.id;
@@ -38,6 +39,7 @@ const ProjectScreen = ({ match }) => {
 						btnlinks={btnlinks}
 						navbarlinks={navbarlinks}
 					/>
+					<Alert />
 					<Switch>
 						{routes.map((item, index) => (
 							<Route

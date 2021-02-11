@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +13,7 @@ import TableHelper from '../../components/TableHelper';
 import FilterBox from '../../components/FilterBox';
 import Empty from '../../components/Empty';
 import Stakeholder from '../../components/Entity/Stakeholder';
+import { STAKEHOLDER_DELETE_RESET } from '../../constants/stakeholderConstants';
 
 const StakeholdersList = memo(({ match, keyword = '' }) => {
 	const projectId = match.params.id;
@@ -26,17 +27,14 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 	const stakeholderDelete = useSelector((state) => state.stakeholderDelete);
 	const { success } = stakeholderDelete;
 
-	//use state
-	const [message, setMessage] = useState(null);
-
 	useEffect(() => {
 		if (success) {
 			dispatch(listStakeholders(projectId, keyword));
-			setMessage('Stakeholder was successfully deleted.');
+			dispatch({ type: STAKEHOLDER_DELETE_RESET });
 		} else {
 			dispatch(listStakeholders(projectId, keyword));
 		}
-	}, [dispatch, keyword, projectId, success, message]);
+	}, [dispatch, keyword, projectId, success]);
 
 	//delete stakeholder
 	const deleteHandler = (id) => {
@@ -53,7 +51,6 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 				<Message>{error}</Message>
 			) : (
 				<>
-					{message && <Message>{message}</Message>}
 					{!filtered && stakeholders && stakeholders.length === 0 ? (
 						<Empty
 							itemLink={'/addStakeholder'}

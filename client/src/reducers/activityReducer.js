@@ -12,6 +12,7 @@ import {
 	ACTIVITY_DELETE_REQUEST,
 	ACTIVITY_DELETE_SUCCESS,
 	ACTIVITY_DELETE_FAIL,
+	ACTIVITY_DELETE_RESET,
 	ACTIVITY_LIST_REQUEST,
 	ACTIVITY_LIST_SUCCESS,
 	ACTIVITY_LIST_FAIL,
@@ -79,6 +80,8 @@ export const activityDeleteReducer = (state = {}, action) => {
 			return { loading: false, success: true };
 		case ACTIVITY_DELETE_FAIL:
 			return { loading: false, error: action.payload };
+		case ACTIVITY_DELETE_RESET:
+			return {};
 		default:
 			return state;
 	}

@@ -26,6 +26,7 @@ import {
 	ORGANIZATION_ASSIGNMENT_SUCCESS,
 	ORGANIZATION_ASSIGNMENT_FAIL,
 } from '../constants/organizationConstants';
+import { setAlert } from '../actions/alertActions';
 
 // add an organization to a project
 export const addOrganization = (organization, projectId) => async (
@@ -57,6 +58,7 @@ export const addOrganization = (organization, projectId) => async (
 		);
 
 		dispatch({ type: ORGANIZATION_ADD_SUCCESS, payload: data });
+		dispatch(setAlert('Organization successfully added', 'success'));
 	} catch (error) {
 		dispatch({
 			type: ORGANIZATION_ADD_FAIL,
@@ -125,6 +127,7 @@ export const updateOrganization = (org, orgId) => async (
 		await axios.put(`/api/v1/organizations/${orgId}`, org, config);
 
 		dispatch({ type: ORGANIZATION_UPDATE_SUCCESS });
+		dispatch(setAlert('Organization successfully updated', 'success'));
 	} catch (error) {
 		dispatch({
 			type: ORGANIZATION_UPDATE_FAIL,
@@ -154,6 +157,7 @@ export const deleteOrganization = (orgId) => async (dispatch, getState) => {
 		await axios.delete(`/api/v1/organizations/${orgId}`, config);
 
 		dispatch({ type: ORGANIZATION_DELETE_SUCCESS });
+		dispatch(setAlert('Organization successfully deleted', 'success'));
 	} catch (error) {
 		dispatch({
 			type: ORGANIZATION_DELETE_FAIL,

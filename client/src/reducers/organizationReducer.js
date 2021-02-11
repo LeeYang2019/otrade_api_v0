@@ -13,6 +13,7 @@ import {
 	ORGANIZATION_DELETE_REQUEST,
 	ORGANIZATION_DELETE_SUCCESS,
 	ORGANIZATION_DELETE_FAIL,
+	ORGANIZATION_DELETE_RESET,
 	ORGANIZATION_LIST_REQUEST,
 	ORGANIZATION_LIST_SUCCESS,
 	ORGANIZATION_LIST_FAIL,
@@ -90,6 +91,8 @@ export const organizationDeleteReducer = (state = {}, action) => {
 			return { loading: false, success: true };
 		case ORGANIZATION_DELETE_FAIL:
 			return { loading: false, error: action.payload };
+		case ORGANIZATION_DELETE_RESET:
+			return {};
 		default:
 			return state;
 	}

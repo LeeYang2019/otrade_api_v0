@@ -77,6 +77,7 @@ import {
 	landownershipDeleteReducer,
 	landownershipListReducer,
 } from './reducers/landownershipReducer';
+import { alertReducer } from './reducers/alertReducer';
 
 // useSelector calls
 const reducer = combineReducers({
@@ -153,6 +154,9 @@ const reducer = combineReducers({
 	landownershipUpdate: landownershipUpdateReducer,
 	landownershipDelete: landownershipDeleteReducer,
 	landownershipList: landownershipListReducer,
+
+	// alert reducer
+	alertReducer,
 });
 
 // localStorages

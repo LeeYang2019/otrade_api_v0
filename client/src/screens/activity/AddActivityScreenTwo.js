@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addActivity, removeActivityInfo } from '../../actions/activityActions';
-import { ACTIVITY_ADD_RESET } from '../../constants/activityConstants';
-import Message from '../../components/Message.js';
 import BorderContainer from '../../components/BorderContainer';
 
 const AddActivityScreenTwo = ({ match, navigation }) => {
@@ -12,23 +10,12 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 
 	//get activity success
 	const dispatch = useDispatch();
-	const activityAdd = useSelector((state) => state.activityAdd);
-	const { success } = activityAdd;
-
 	const activity = useSelector((state) => state.activitySave);
 	const { activityInfo } = activity;
 
 	//define states
 	const [disPoints, setDispoints] = useState([{ point: '' }]);
 	const [compromise, setcompromise] = useState('');
-	const [message, setMessage] = useState(null);
-
-	useEffect(() => {
-		if (success) {
-			setMessage('Activity was successfully added to the database.');
-			dispatch({ type: ACTIVITY_ADD_RESET });
-		}
-	}, [dispatch, success]);
 
 	// add input field
 	const handleAdd = () => {
@@ -64,7 +51,6 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 
 	return (
 		<BorderContainer title={'(part 2)'}>
-			{message && <Message variant="success">{message}</Message>}
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Form.Group controlId="discussion">
 					<Form.Label>Discussion Points</Form.Label>

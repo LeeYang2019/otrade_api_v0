@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { assignStakeholder } from '../actions/stakeholderActions';
+import { setAlert } from '../actions/alertActions';
 
 const MemberDropdown = ({ setMessage, label }) => {
 	// get list of stakeholders
@@ -37,12 +38,16 @@ const MemberDropdown = ({ setMessage, label }) => {
 			list.includes(e.target.value) ||
 			list.some((item) => item._id === e.target.value)
 		) {
-			setMessage('Please make sure the same stakeholder is not added twice.');
+			dispatch(
+				setAlert(
+					'Please make sure not to add the same stakeholder twice',
+					'danger'
+				)
+			);
 		} else {
 			list[i] = e.target.value;
 			dispatch(assignStakeholder(list)); // add to state
 			setMembers(list); // add selected drop down to list
-			setMessage('');
 		}
 	};
 

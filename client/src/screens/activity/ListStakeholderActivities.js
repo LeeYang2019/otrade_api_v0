@@ -85,25 +85,27 @@ const ListStakeholderActivities = ({ match }) => {
 					)}
 					<TableHelper>
 						{filtered
-							? filtered.map((activity) => (
+							? filtered.map((activity, i) => (
 									<tr key={activity._id}>
 										<td>
 											<Activity
 												url={url}
 												entity={activity}
 												deleteHandler={deleteHandler}
+												index={i}
 											/>
 										</td>
 									</tr>
 							  ))
 							: stakeholderactivities &&
-							  stakeholderactivities.map((activity) => (
+							  stakeholderactivities.map((activity, i) => (
 									<tr key={activity._id}>
 										<td>
 											<Activity
 												url={url}
 												entity={activity}
 												deleteHandler={deleteHandler}
+												index={i}
 											/>
 										</td>
 									</tr>

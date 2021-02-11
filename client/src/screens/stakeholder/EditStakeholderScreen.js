@@ -11,6 +11,19 @@ import Loader from '../../components/Loader';
 import BorderContainer from '../../components/BorderContainer';
 
 const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
+	//get the stakeholder
+	const dispatch = useDispatch();
+	const stakeholderDetails = useSelector((state) => state.stakeholderDetails);
+	const { loading, error, stakeholder } = stakeholderDetails;
+
+	//get project
+	const projectDetails = useSelector((state) => state.projectDetails);
+	const { project } = projectDetails;
+
+	//get success
+	const stakeholderUpdate = useSelector((state) => state.stakeholderUpdate);
+	const { success } = stakeholderUpdate;
+
 	//define states
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -24,27 +37,9 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 	const [position, setPosition] = useState();
 	const [influence, setInfluence] = useState();
 	const [projImpact, setProjImpact] = useState();
-	const [message, setMessage] = useState(null);
-
-	const dispatch = useDispatch();
-
-	//get the stakeholder
-	const stakeholderDetails = useSelector((state) => state.stakeholderDetails);
-	const { loading, error, stakeholder } = stakeholderDetails;
-
-	console.log(stakeholder);
-
-	//get project
-	const projectDetails = useSelector((state) => state.projectDetails);
-	const { project } = projectDetails;
-
-	//get success
-	const stakeholderUpdate = useSelector((state) => state.stakeholderUpdate);
-	const { success } = stakeholderUpdate;
 
 	useEffect(() => {
 		if (success) {
-			setMessage('Stakeholder was successfully updated.');
 			dispatch(getStakeholderDetails(stakeholderId));
 			dispatch({ type: STAKEHOLDER_UPDATE_RESET });
 		} else {
@@ -103,7 +98,6 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 
 	return (
 		<BorderContainer title={''}>
-			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
