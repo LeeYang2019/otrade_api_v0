@@ -123,7 +123,7 @@ const AddActivityScreen = ({ match, navigation, keyword = '' }) => {
 				<Row>
 					<Col>
 						<Button type="submit" variant="primary" className="px-5 mt-3">
-							Continue
+							Update
 						</Button>
 					</Col>
 				</Row>
