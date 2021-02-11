@@ -32,6 +32,8 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 	const stakeholderDetails = useSelector((state) => state.stakeholderDetails);
 	const { loading, error, stakeholder } = stakeholderDetails;
 
+	console.log(stakeholder);
+
 	//get project
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { project } = projectDetails;
@@ -201,7 +203,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 									<Form.Label>Social Media</Form.Label>
 									{media &&
 										media.map((site, i) => (
-											<Row>
+											<Row key={i}>
 												<Col md={6}>
 													<Form.Control
 														className="mb-3"
@@ -250,8 +252,8 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 										onChange={(e) => setOrganization(e.target.value)}
 									>
 										<option value="">--Select--</option>
-										<option value="Yes">Yes</option>
-										<option value="No">No</option>
+										<option value="yes">Yes</option>
+										<option value="no">No</option>
 									</Form.Control>
 								</Col>
 							</Row>
@@ -267,7 +269,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 										as="select"
 										value={position}
 										required
-										disabled={!organization || organization === 'No'}
+										disabled={!organization || organization === 'no'}
 										onChange={(e) => setPosition(e.target.value)}
 									>
 										<option value="">--Select--</option>
@@ -299,7 +301,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 										as="select"
 										value={influence}
 										required
-										disabled={!organization || organization === 'No'}
+										disabled={!organization || organization === 'no'}
 										onChange={(e) => setInfluence(e.target.value)}
 									>
 										<option value="">--Select--</option>
@@ -324,7 +326,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 										as="select"
 										value={projImpact}
 										required
-										disabled={!organization || organization === 'No'}
+										disabled={!organization || organization === 'no'}
 										onChange={(e) => setProjImpact(e.target.value)}
 									>
 										<option value="">--Select--</option>

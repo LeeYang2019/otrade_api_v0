@@ -22,9 +22,7 @@ const AddStakeholderScreen = ({ navigation, match }) => {
 	const { previous, next } = navigation;
 
 	//define states
-	const [firstName, setFirstName] = useState(
-		stakeholderInfo.firstName || 'stakeholder'
-	);
+	const [firstName] = useState(stakeholderInfo.firstName || 'stakeholder');
 	const [organization, setOrganization] = useState(
 		stakeholderInfo.organization
 	);
