@@ -60,7 +60,7 @@ const ActivityScreen = ({ match }) => {
 	}, [dispatch, activity, activityId, success]);
 
 	//add select field
-	const addHandler = () => {
+	const addDisPointsHandler = () => {
 		setMembers([...members, { member: '' }]);
 	};
 
@@ -210,7 +210,7 @@ const ActivityScreen = ({ match }) => {
 												{members.length - 1 === i && (
 													<Button
 														className="px-3"
-														onClick={() => addHandler(i)}
+														onClick={() => addDisPointsHandler(i)}
 													>
 														<i className="fas fa-plus"></i> Stakeholder
 													</Button>

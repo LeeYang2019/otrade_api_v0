@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { listProjectDetails } from '../../actions/projectActions';
+import { listStakeholders } from '../../actions/stakeholderActions';
 import ProfileTop from '../../components/ProfileTop';
 import { btnlinks, navbarlinks, routes } from './utilities';
 import Alert from '../../components/Layout/Alert';
@@ -22,6 +23,7 @@ const ProjectScreen = ({ match }) => {
 
 	useEffect(() => {
 		dispatch(listProjectDetails(projectId));
+		dispatch(listStakeholders(projectId));
 	}, [dispatch, projectId]);
 
 	return (

@@ -9,6 +9,7 @@ import { ORGANIZATION_UPDATE_RESET } from '../../constants/organizationConstants
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
 import BorderContainer from '../../components/BorderContainer';
+import { setAlert } from '../../actions/alertActions';
 
 const OrganizationScreen = ({ history, match }) => {
 	const projectId = match.params.projectId;
@@ -22,7 +23,6 @@ const OrganizationScreen = ({ history, match }) => {
 	const [telephone, setTelephone] = useState('');
 	const [website, setWebsite] = useState('');
 	const [stakeholders, setStakeholders] = useState([{ stakeholder: '' }]);
-	const [message, setMessage] = useState(null);
 
 	const dispatch = useDispatch();
 
@@ -39,7 +39,6 @@ const OrganizationScreen = ({ history, match }) => {
 
 	useEffect(() => {
 		if (success) {
-			setMessage('Organization was successfully updated.');
 			dispatch(getOrganizationDetails(organizationId));
 			dispatch({ type: ORGANIZATION_UPDATE_RESET });
 		} else {
@@ -79,11 +78,13 @@ const OrganizationScreen = ({ history, match }) => {
 			list.includes(e.target.value) ||
 			list.some((item) => item._id === e.target.value)
 		) {
-			setMessage('Please make sure the same user is not assigned twice.');
+			setAlert(
+				'Please make sure the same user is not assigned twice.',
+				'danger'
+			);
 		} else {
 			list[i] = e.target.value;
 			setStakeholders(list);
-			setMessage('');
 		}
 	};
 
@@ -110,7 +111,6 @@ const OrganizationScreen = ({ history, match }) => {
 
 	return (
 		<BorderContainer>
-			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
