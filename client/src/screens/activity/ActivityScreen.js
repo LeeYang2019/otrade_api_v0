@@ -14,17 +14,19 @@ import { setAlert } from '../../actions/alertActions';
 const ActivityScreen = ({ match }) => {
 	const activityId = match.params.id;
 
-	//get activity details
+	// get activity details
 	const dispatch = useDispatch();
 	const stakeholderList = useSelector((state) => state.stakeholderList);
 
+	// get activityDetails
 	const activityDetails = useSelector((state) => state.activityDetails);
 	const { loading, error, activity } = activityDetails;
 
+	// get success on update
 	const activityUpdate = useSelector((state) => state.activityUpdate);
 	const { success } = activityUpdate;
 
-	//define state
+	// define state
 	const [activityType, setActivityType] = useState();
 	const [date, setDate] = useState();
 	const [members, setMembers] = useState([{ member: '' }]);

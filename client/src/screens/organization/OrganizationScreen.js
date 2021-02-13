@@ -11,24 +11,23 @@ import Loader from '../../components/Loader.js';
 import BorderContainer from '../../components/BorderContainer';
 import { setAlert } from '../../actions/alertActions';
 
-const OrganizationScreen = ({ history, match }) => {
+const OrganizationScreen = ({ match }) => {
 	const projectId = match.params.projectId;
 	const organizationId = match.params.id;
 
+	// get stakeholderList
 	const dispatch = useDispatch();
-
-	//get stakeholders
 	const stakeholderList = useSelector((state) => state.stakeholderList);
 
-	//get organization
+	// get organization
 	const organzationDetails = useSelector((state) => state.organizationDetails);
 	const { loading, error, organization: orgDetails } = organzationDetails;
 
-	//get success
+	// get success on update
 	const organizationUpdate = useSelector((state) => state.organizationUpdate);
 	const { success } = organizationUpdate;
 
-	//define states
+	// define states
 	const [organization, setOrganization] = useState('');
 	const [division, setDivision] = useState('');
 	const [location, setLocation] = useState('');
