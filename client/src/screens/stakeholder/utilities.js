@@ -22,16 +22,16 @@ export const btnlinks = [
 
 export const navbarlinks = [
 	{
-		link: '/comments',
-		type: 'Notes',
-	},
-	{
 		link: '/organizations',
 		type: 'Organizations',
 	},
 	{
 		link: '/activities',
 		type: 'Activities',
+	},
+	{
+		link: '/comments',
+		type: 'Discussion',
 	},
 ];
 

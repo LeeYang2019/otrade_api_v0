@@ -78,7 +78,7 @@ const AddActivityScreen = ({ navigation, keyword = '' }) => {
 					</Col>
 					<Col md={4}>
 						<Form.Group controlId="date">
-							<Form.Label>Current Date</Form.Label>
+							<Form.Label>Activity Date</Form.Label>
 							<Form.Control
 								type="date"
 								placeholder="Enter Date"
@@ -106,7 +106,7 @@ const AddActivityScreen = ({ navigation, keyword = '' }) => {
 				<Row>
 					<Col>
 						<Button type="submit" variant="primary" className="px-5 mt-3">
-							Update
+							Continue
 						</Button>
 					</Col>
 				</Row>

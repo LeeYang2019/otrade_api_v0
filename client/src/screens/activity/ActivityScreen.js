@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import { useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getActivityDetails } from '../../actions/activityActions';
 import { ACTIVITY_UPDATE_RESET } from '../../constants/activityConstants';
@@ -10,7 +9,6 @@ import Loader from '../../components/Loader';
 
 const ActivityScreen = ({ match }) => {
 	const activityId = match.params.id;
-	const { url } = useRouteMatch();
 
 	//get activity details
 	const dispatch = useDispatch();
@@ -60,14 +58,8 @@ const ActivityScreen = ({ match }) => {
 	}, [dispatch, activity, activityId, success]);
 
 	//add select field
-	const addDisPointsHandler = () => {
+	const addHandler = () => {
 		setMembers([...members, { member: '' }]);
-	};
-
-	// add input field
-	const handleAdd = () => {
-		//spread disPoints, add another object
-		setDispoints([...disPoints, { point: '' }]);
 	};
 
 	//filter out element i and update members
@@ -147,7 +139,7 @@ const ActivityScreen = ({ match }) => {
 							</Col>
 							<Col md={4}>
 								<Form.Group controlId="date">
-									<Form.Label>Current Date</Form.Label>
+									<Form.Label>Activity Date</Form.Label>
 									<Form.Control
 										type="date"
 										placeholder="Enter Date"
@@ -210,7 +202,7 @@ const ActivityScreen = ({ match }) => {
 												{members.length - 1 === i && (
 													<Button
 														className="px-3"
-														onClick={() => addDisPointsHandler(i)}
+														onClick={() => addHandler(i)}
 													>
 														<i className="fas fa-plus"></i> Stakeholder
 													</Button>
@@ -224,32 +216,15 @@ const ActivityScreen = ({ match }) => {
 						<Row>
 							<Col>
 								<Form.Group controlId="discussion">
-									<Form.Label>Discussion Points</Form.Label>
-									{disPoints &&
-										disPoints.map((point, i) => (
-											<>
-												<Row key={i}>
-													<Col md={8}>
-														<Form.Control
-															className="mb-3"
-															as="textarea"
-															rows="2"
-															placeholder="Enter Discussion"
-															value={point}
-															onChange={(e) => handleInputChange(e, i)}
-														></Form.Control>
-													</Col>
-													<Col
-														md={4}
-														className="d-flex align-items-center justify-content-start mb-3"
-													>
-														<Button className="px-3" onClick={handleAdd}>
-															<i className="fas fa-plus"></i> Additional
-														</Button>
-													</Col>
-												</Row>
-											</>
-										))}
+									<Form.Label>Discussion</Form.Label>
+									<Form.Group controlId="dispoints">
+										<Form.Control
+											as="textarea"
+											rows="4"
+											value={disPoints}
+											onChange={(e) => setDispoints(e.target.value)}
+										></Form.Control>
+									</Form.Group>
 								</Form.Group>
 								<hr className="my-5" />
 								<Form.Group controlId="compromise" className="mb-5">
@@ -275,7 +250,7 @@ const ActivityScreen = ({ match }) => {
 						<Row>
 							<Col>
 								<Button type="submit" variant="primary" className="px-5 mt-3">
-									Continue
+									Update
 								</Button>
 							</Col>
 						</Row>

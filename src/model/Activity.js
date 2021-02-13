@@ -32,11 +32,9 @@ const ActivitySchema = mongoose.Schema(
 		isComplete: {
 			type: Boolean,
 		},
-		discussPoints: [
-			{
-				type: String,
-			},
-		],
+		discussPoints: {
+			type: String,
+		},
 		stakeholders: [
 			{
 				type: mongoose.Schema.ObjectId,

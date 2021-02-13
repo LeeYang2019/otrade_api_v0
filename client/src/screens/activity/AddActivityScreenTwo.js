@@ -14,22 +14,8 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 	const { activityInfo } = activity;
 
 	//define states
-	const [disPoints, setDispoints] = useState([{ point: '' }]);
+	const [disPoints, setDispoints] = useState('');
 	const [compromise, setcompromise] = useState('');
-
-	// add input field
-	const handleAdd = () => {
-		//spread disPoints, add another object
-		setDispoints([...disPoints, { point: '' }]);
-	};
-
-	//handle input change
-	const handleInputChange = (e, i) => {
-		e.preventDefault();
-		const list = [...disPoints];
-		list[i] = e.target.value;
-		setDispoints(list);
-	};
 
 	//handle submit form
 	const submitHandler = (e) => {
@@ -53,32 +39,15 @@ const AddActivityScreenTwo = ({ match, navigation }) => {
 		<BorderContainer title={'(part 2)'}>
 			<Form onSubmit={submitHandler} className="mt-4 mb-3">
 				<Form.Group controlId="discussion">
-					<Form.Label>Discussion Points</Form.Label>
-					{disPoints &&
-						disPoints.map((point, i) => (
-							<>
-								<Row>
-									<Col md={10}>
-										<Form.Control
-											className="mb-3"
-											as="textarea"
-											rows="2"
-											placeholder="Enter Discussion"
-											value={point.point}
-											onChange={(e) => handleInputChange(e, i)}
-										></Form.Control>
-									</Col>
-									<Col
-										md={2}
-										className="d-flex align-items-center justify-content-end mb-3"
-									>
-										<Button className="px-3" onClick={handleAdd}>
-											<i className="fas fa-plus"></i> Additional
-										</Button>
-									</Col>
-								</Row>
-							</>
-						))}
+					<Form.Label>Discussion</Form.Label>
+					<Form.Group controlId="dispoints">
+						<Form.Control
+							as="textarea"
+							rows="4"
+							value={disPoints}
+							onChange={(e) => setDispoints(e.target.value)}
+						></Form.Control>
+					</Form.Group>
 				</Form.Group>
 				<hr className="my-5" />
 				<Form.Group controlId="compromise" className="mb-5">
