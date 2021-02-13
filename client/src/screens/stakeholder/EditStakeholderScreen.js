@@ -10,7 +10,9 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import BorderContainer from '../../components/BorderContainer';
 
-const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
+const EditStakeholderScreen = ({ match }) => {
+	const stakeholderId = match.params.id;
+
 	//get the stakeholder
 	const dispatch = useDispatch();
 	const stakeholderDetails = useSelector((state) => state.stakeholderDetails);
@@ -56,7 +58,7 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 			setProjImpact(stakeholder.projImpact);
 			setOrganization(stakeholder.organization);
 		}
-	}, [dispatch, stakeholder, stakeholderId, success, project, projectId]);
+	}, [dispatch, stakeholder, stakeholderId, success, project]);
 
 	//add input field
 	const addHandler = (i) => {
@@ -90,6 +92,10 @@ const EditStakeholderScreen = ({ projectId, stakeholderId }) => {
 					email,
 					ethnicity,
 					media,
+					position,
+					influence,
+					projImpact,
+					organization,
 				},
 				stakeholderId
 			)
