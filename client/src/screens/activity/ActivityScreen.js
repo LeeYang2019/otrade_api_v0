@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getActivityDetails } from '../../actions/activityActions';
+import {
+	getActivityDetails,
+	updateActivity,
+} from '../../actions/activityActions';
 import { ACTIVITY_UPDATE_RESET } from '../../constants/activityConstants';
 import BorderContainer from '../../components/BorderContainer';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
+import { setAlert } from '../../actions/alertActions';
 
 const ActivityScreen = ({ match }) => {
 	const activityId = match.params.id;
@@ -28,13 +32,9 @@ const ActivityScreen = ({ match }) => {
 	const [location, setLocation] = useState();
 	const [disPoints, setDispoints] = useState([{ point: '' }]);
 	const [compromise, setcompromise] = useState('');
-	const [message, setMessage] = useState(null);
-
-	console.log(activity);
 
 	useEffect(() => {
 		if (success) {
-			setMessage('Activity was successfully updated');
 			dispatch(getActivityDetails(activityId));
 			dispatch({ type: ACTIVITY_UPDATE_RESET });
 		} else {
@@ -47,12 +47,7 @@ const ActivityScreen = ({ match }) => {
 				setLocation(activity.location);
 				setMembers(activity.stakeholders);
 				setcompromise(activity.compromise);
-
-				if (activity.discussPoints && activity.discussPoints.legnth === 0) {
-					setDispoints([{ point: '' }]);
-				} else {
-					setDispoints(activity.discussPoints);
-				}
+				setDispoints(activity.discussPoints);
 			}
 		}
 	}, [dispatch, activity, activityId, success]);
@@ -62,7 +57,7 @@ const ActivityScreen = ({ match }) => {
 		setMembers([...members, { member: '' }]);
 	};
 
-	//filter out element i and update members
+	//filter out element i
 	const removeHandler = (i) => {
 		const stakeholderToRemove = members[i];
 		const list = members.filter((i) => i !== stakeholderToRemove);
@@ -80,22 +75,35 @@ const ActivityScreen = ({ match }) => {
 			list.includes(e.target.value) ||
 			list.some((item) => item._id === e.target.value)
 		) {
-			setMessage('Please make sure the same stakeholder is not added twice.');
+			setAlert('Please make sure the same stakeholder is not added twice.');
 		} else {
 			list[i] = e.target.value;
 			setMembers(list);
-			setMessage('');
 		}
 	};
 
 	//handle submit form
 	const submitHandler = (e) => {
 		e.preventDefault();
+
+		dispatch(
+			updateActivity(
+				{
+					activity: activityType,
+					date,
+					hours: actHours,
+					location,
+					stakeholders: members,
+					compromise,
+					discussPoints: disPoints,
+				},
+				activityId
+			)
+		);
 	};
 
 	return (
 		<BorderContainer>
-			{message && <Message variant="success">{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (

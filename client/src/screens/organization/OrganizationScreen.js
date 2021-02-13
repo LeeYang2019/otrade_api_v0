@@ -15,15 +15,6 @@ const OrganizationScreen = ({ history, match }) => {
 	const projectId = match.params.projectId;
 	const organizationId = match.params.id;
 
-	//define states
-	const [organization, setOrganization] = useState('');
-	const [division, setDivision] = useState('');
-	const [location, setLocation] = useState('');
-	const [email, setEmail] = useState('');
-	const [telephone, setTelephone] = useState('');
-	const [website, setWebsite] = useState('');
-	const [stakeholders, setStakeholders] = useState([{ stakeholder: '' }]);
-
 	const dispatch = useDispatch();
 
 	//get stakeholders
@@ -36,6 +27,15 @@ const OrganizationScreen = ({ history, match }) => {
 	//get success
 	const organizationUpdate = useSelector((state) => state.organizationUpdate);
 	const { success } = organizationUpdate;
+
+	//define states
+	const [organization, setOrganization] = useState('');
+	const [division, setDivision] = useState('');
+	const [location, setLocation] = useState('');
+	const [email, setEmail] = useState('');
+	const [telephone, setTelephone] = useState('');
+	const [website, setWebsite] = useState('');
+	const [stakeholders, setStakeholders] = useState([{ stakeholder: '' }]);
 
 	useEffect(() => {
 		if (success) {
@@ -54,11 +54,10 @@ const OrganizationScreen = ({ history, match }) => {
 				setStakeholders(orgDetails.stakeholders);
 			}
 		}
-	}, [dispatch, history, orgDetails, organizationId, success]);
+	}, [dispatch, orgDetails, organizationId, success]);
 
 	//add select field
 	const addHandler = () => {
-		//spread in existing array and add an element
 		setStakeholders([...stakeholders, { stakeholder: '' }]);
 	};
 

@@ -101,7 +101,7 @@ export const getActivityDetails = (id) => async (dispatch, getState) => {
 };
 
 // update activity
-export const updateActivity = (id, activity) => async (dispatch, getState) => {
+export const updateActivity = (activity, id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ACTIVITY_UPDATE_REQUEST });
 

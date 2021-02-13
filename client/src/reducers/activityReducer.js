@@ -9,6 +9,7 @@ import {
 	ACTIVITY_UPDATE_REQUEST,
 	ACTIVITY_UPDATE_SUCCESS,
 	ACTIVITY_UPDATE_FAIL,
+	ACTIVITY_UPDATE_RESET,
 	ACTIVITY_DELETE_REQUEST,
 	ACTIVITY_DELETE_SUCCESS,
 	ACTIVITY_DELETE_FAIL,
@@ -66,6 +67,8 @@ export const activityUpdateReducer = (state = { activity: {} }, action) => {
 			return { loading: false, success: true, activity: action.payload };
 		case ACTIVITY_UPDATE_FAIL:
 			return { loading: false, error: action.payload };
+		case ACTIVITY_UPDATE_RESET:
+			return { activity: {} };
 		default:
 			return state;
 	}

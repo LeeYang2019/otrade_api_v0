@@ -33,7 +33,22 @@ exports.getActivity = asyncHandler(async (req, res, next) => {
 // @desc    PUT an activity
 // @route   PUT /api/v1/activities/:id
 // @access  Private
-exports.updateActivity = asyncHandler(async (req, res, next) => {});
+exports.updateActivity = asyncHandler(async (req, res, next) => {
+	//find activity
+	let activity = await Activity.findById(req.params.id);
+
+	if (!activity) {
+		res.status(401);
+		throw new Error('Activity not found');
+	}
+
+	activity = await Activity.findByIdAndUpdate(req.params.id, req.body, {
+		new: true,
+		runValidators: true,
+	});
+
+	res.status(200).json({ success: true, data: activity });
+});
 
 // @desc    DELETE an activity
 // @route   DELETE /api/v1/activities/:id

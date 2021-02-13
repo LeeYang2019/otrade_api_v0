@@ -62,7 +62,10 @@ exports.updateStakeholder = asyncHandler(async (req, res, next) => {
 
 	let stakeholder = await Stakeholder.findById(req.params.id);
 
-	if (!stakeholder) throw new Error('Stakeholder not found');
+	if (!stakeholder) {
+		res.status(401);
+		throw new Error('Stakeholder not found');
+	}
 
 	req.body = this.capitalizeName(req.body);
 
